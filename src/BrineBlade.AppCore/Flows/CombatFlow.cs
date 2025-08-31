@@ -6,18 +6,11 @@ using BrineBlade.Services.Abstractions;
 
 namespace BrineBlade.AppCore.Flows;
 
-public sealed class CombatFlow
+public sealed class CombatFlow(GameState state, ICombatService combat, IEnemyCatalog enemies)
 {
-    private readonly GameState _state;
-    private readonly ICombatService _combat;
-    private readonly IEnemyCatalog _enemies;
-
-    public CombatFlow(GameState state, ICombatService combat, IEnemyCatalog enemies)
-    {
-        _state = state;
-        _combat = combat;
-        _enemies = enemies;
-    }
+    private readonly GameState _state = state;
+    private readonly ICombatService _combat = combat;
+    private readonly IEnemyCatalog _enemies = enemies;
 
     public void Run(string enemyId) => StartEncounter(enemyId);
     public void Run(EnemyDef enemy) => ExecuteCombat(enemy);

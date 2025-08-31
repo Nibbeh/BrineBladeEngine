@@ -7,17 +7,11 @@ using BrineBlade.Services.Abstractions;
 
 namespace BrineBlade.AppCore.Flows;
 
-public sealed class DialogueFlow
+    public sealed class DialogueFlow(GameState state, IContentStore content)
 {
-    private readonly GameState _state;
-    private readonly IContentStore _content;
+    private readonly GameState _state = state;
+    private readonly IContentStore _content = content;
     private bool _end;
-
-    public DialogueFlow(GameState state, IContentStore content)
-    {
-        _state = state;
-        _content = content;
-    }
 
     public void Run(string dialogueId)
     {
@@ -32,7 +26,7 @@ public sealed class DialogueFlow
             if (!dlg.Lines.TryGetValue(lineId, out var line))
             { SimpleConsoleUI.Notice($"[DIALOGUE] No line '{lineId}'."); return; }
 
-            var choices = (line.Choices ?? new()).Where(c => PassesRequires(c.Requires)).ToList();
+            var choices = (line.Choices ?? new List<DialogueChoice>()).Where(c => PassesRequires(c.Requires)).ToList();
 
             // If there are NO choices: render the line, apply any line-level effects, pause, then exit dialogue.
             if (choices.Count == 0)
@@ -49,8 +43,9 @@ public sealed class DialogueFlow
             }
 
             // Normal dialogue line with choices
-            var menu = new List<(string Key, string Label)>();
-            for (int i = 0; i < choices.Count; i++) menu.Add(((i + 1).ToString(), choices[i].Label));
+            var menu = choices
+    .Select((choice, i) => ((i + 1).ToString(), choice.Label))
+    .ToList();
 
             SimpleConsoleUI.RenderFrame(_state, $"Dialogue: {dlg.NpcId}", line.Text, menu);
 

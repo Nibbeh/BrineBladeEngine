@@ -120,7 +120,7 @@ public static class SimpleConsoleUI
     {
         Console.WriteLine();
         Console.WriteLine("Available saves:");
-        foreach (var l in lines) Console.WriteLine($"  {l.idx}. {l.label}");
+        foreach (var (idx, label) in lines) Console.WriteLine($"  {idx}. {label}");
         Console.WriteLine("  0. Cancel\n");
     }
 
