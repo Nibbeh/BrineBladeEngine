@@ -1,0 +1,38 @@
+{
+    "Id": "N_HARBOR",
+    "Title": "Outer Harbor, Brinemauth",
+    "Description": "Tar-slick water slaps the pilings. Refugees crowd the quay; a crude barricade blocks the city gate beyond the cranes. Rumor says the council closed the city at dawn.",
+    "Options": [
+        {
+            "Id": "opt_dockmaster",
+            "Label": "Approach the Dockmaster at his post",
+            "Effects": [
+                {
+                    "Op": "startDialogue",
+                    "Id": "D_DOCKMASTER"
+                },
+                {
+                    "Op": "advanceTime",
+                    "Minutes": 2
+                }
+            ]
+        },
+        {
+            "Id": "opt_chaplain",
+            "Label": "Speak with the harbor chaplain",
+            "Effects": [
+                {
+                    "Op": "startDialogue",
+                    "Id": "D_PORT_CHAPLAIN"
+                }
+            ]
+        }
+    ],
+    "Exits": [
+        { "To": "N_IMPERIAL_WHARF" },
+        { "To": "N_DOCKMASTER_OFFICE" },
+        { "To": "N_PIER_MARKET" },
+        { "To": "N_GATE_BARRICADE" },
+        { "To": "N_SEWER_OUTLET" }
+    ]
+}

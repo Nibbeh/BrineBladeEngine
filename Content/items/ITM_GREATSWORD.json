@@ -1,0 +1,12 @@
+{
+    "id": "ITM_GREATSWORD",
+    "name": "Greatsword",
+    "type": "Weapon",
+    "weight": 8.0,
+    "value": 30,
+    "stackable": false,
+    "slot": "Weapon",
+    "weaponType": "TwoHanded",
+    "allowedClasses": [ "CLASS_WARRIOR" ],
+    "bonuses": { "Strength": 1 }
+}

@@ -1,0 +1,24 @@
+{
+  "Version": 1,
+  "Player": {
+    "Id": "player",
+    "Name": "Mykhel",
+    "Race": "Human",
+    "Archetype": "Warrior"
+  },
+  "World": {
+    "Day": 1,
+    "Hour": 9,
+    "Minute": 0
+  },
+  "CurrentNodeId": "N_SEWER_OUTLET",
+  "Gold": 0,
+  "Flags": [
+    "class.warrior",
+    "spec.champion"
+  ],
+  "Inventory": [],
+  "Equipment": {},
+  "CurrentHp": 2,
+  "CurrentMana": 10
+}

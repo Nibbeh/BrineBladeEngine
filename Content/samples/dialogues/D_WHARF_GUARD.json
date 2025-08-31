@@ -1,0 +1,54 @@
+{
+    "Id": "D_WHARF_GUARD",
+    "NpcId": "Imperial Wharf Guard",
+    "StartLineId": "start",
+    "Lines": {
+        "start": {
+            "Text": "Orders are orders. The city wall stays cold iron for now.",
+            "Choices": [
+                {
+                    "Label": "Who gave the order?",
+                    "Goto": "order"
+                },
+                {
+                    "Label": "How long will this last?",
+                    "Goto": "howlong"
+                },
+                {
+                    "Label": "Leave",
+                    "Effects": [ { "Op": "endDialogue" } ]
+                }
+            ]
+        },
+        "order": {
+            "Text": "Council writ, stamped. Ask the clerk if you like paperwork.",
+            "Effects": [
+                {
+                    "Op": "setFlag",
+                    "Id": "lead.clerk"
+                }
+            ],
+            "Choices": [
+                {
+                    "Label": "Back",
+                    "Goto": "start"
+                }
+            ]
+        },
+        "howlong": {
+            "Text": "Till tempers cool. Not my choice.",
+            "Effects": [
+                {
+                    "Op": "advanceTime",
+                    "Minutes": 1
+                }
+            ],
+            "Choices": [
+                {
+                    "Label": "Back",
+                    "Goto": "start"
+                }
+            ]
+        }
+    }
+}

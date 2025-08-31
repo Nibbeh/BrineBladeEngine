@@ -1,0 +1,54 @@
+{
+    "Id": "D_PORT_CHAPLAIN",
+    "NpcId": "Port Chaplain",
+    "StartLineId": "start",
+    "Lines": {
+        "start": {
+            "Text": "Storms pass, even the ones made by men. Need a word or a blessing?",
+            "Choices": [
+                {
+                    "Label": "Ask for a blessing.",
+                    "Goto": "bless"
+                },
+                {
+                    "Label": "Any word on the gate?",
+                    "Goto": "gate"
+                },
+                {
+                    "Label": "Leave",
+                    "Effects": [ { "Op": "endDialogue" } ]
+                }
+            ]
+        },
+        "bless": {
+            "Text": "May your feet find dry planks and your purse stay uncut.",
+            "Effects": [
+                {
+                    "Op": "advanceTime",
+                    "Minutes": 1
+                }
+            ],
+            "Choices": [
+                {
+                    "Label": "Thank you",
+                    "Effects": [ { "Op": "endDialogue" } ]
+                }
+            ]
+        },
+        "gate": {
+            "Text": "Fear sours judgment. Be kind where you can—especially to those fleeing north.",
+            "Effects": [
+                {
+                    "Op": "setFlag",
+                    "Id": "counsel.kindness"
+                }
+            ],
+            "Choices": [
+                {
+                    "Label": "I’ll try.",
+                    "Effects": [ { "Op": "endDialogue" } ]
+                }
+            ]
+        }
+    }
+}

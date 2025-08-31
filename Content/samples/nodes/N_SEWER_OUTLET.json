@@ -1,0 +1,41 @@
+{
+  "Id": "N_SEWER_OUTLET",
+  "Title": "Under-Pier Runoff",
+  "Description": "A scummy channel coughs out into the bay. Ropes, rat-nests, and a lantern guttering in someone’s makes-do hideaway.",
+  "Options": [
+    {
+      "Id": "opt_call",
+      "Label": "Call into the dark under the pilings",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_SMUGGLER_BRENN"
+        }
+      ]
+    },
+    {
+      "Id": "opt_rats",
+      "Label": "Hail the city ratcatcher",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_RATCATCHER"
+        }
+      ]
+    },
+    {
+      "Id": "opt_thug",
+      "Label": "Confront the lurking thug",
+      "Effects": [
+        {
+          "Op": "startCombat",
+          "Id": "ENEMY_THUG"
+        }
+      ]
+    }
+  ],
+  "Exits": [
+    { "To": "N_HARBOR" },
+    { "To": "N_IMPERIAL_WHARF" }
+  ]
+}

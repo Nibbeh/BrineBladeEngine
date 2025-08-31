@@ -1,0 +1,35 @@
+{
+    "Id": "D_RATCATCHER",
+    "NpcId": "City Ratcatcher",
+    "StartLineId": "start",
+    "Lines": {
+        "start": {
+            "Text": "Keep your hands high and your cuts clean. Filth here bites.",
+            "Choices": [
+                {
+                    "Label": "Ask about the under-piers.",
+                    "Goto": "warn"
+                },
+                {
+                    "Label": "Leave",
+                    "Effects": [ { "Op": "endDialogue" } ]
+                }
+            ]
+        },
+        "warn": {
+            "Text": "Thieves, drowners, and worse. If you must skulk, don’t do it alone.",
+            "Effects": [
+                {
+                    "Op": "setFlag",
+                    "Id": "warned.sewer"
+                }
+            ],
+            "Choices": [
+                {
+                    "Label": "Noted.",
+                    "Effects": [ { "Op": "endDialogue" } ]
+                }
+            ]
+        }
+    }
+}

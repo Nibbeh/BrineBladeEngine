@@ -1,0 +1,7 @@
+{
+    "id": "SPEC_WARRIOR_CHAMPION",
+    "classId": "CLASS_WARRIOR",
+    "name": "Champion",
+    "startFlags": [ "spec.champion" ],
+    "tags": [ "discipline" ]
+}

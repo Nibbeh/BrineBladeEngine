@@ -1,0 +1,30 @@
+{
+    "Id": "N_GATE_BARRICADE",
+    "Title": "Dockside Gate Barricade",
+    "Description": "Timber and chained wagons choke the arch. Guards keep back a knot of travelers and shivering families. The city beyond is shut tight.",
+    "Options": [
+        {
+            "Id": "opt_refugee",
+            "Label": "Speak with the elven refugee by the cart",
+            "Effects": [
+                {
+                    "Op": "startDialogue",
+                    "Id": "D_REFUGEE_ELF"
+                }
+            ]
+        },
+        {
+            "Id": "opt_inspect",
+            "Label": "Study the barricade and postings",
+            "Effects": [
+                {
+                    "Op": "setFlag",
+                    "Id": "saw.barricade"
+                }
+            ]
+        }
+    ],
+    "Exits": [
+        { "To": "N_HARBOR" }
+    ]
+}

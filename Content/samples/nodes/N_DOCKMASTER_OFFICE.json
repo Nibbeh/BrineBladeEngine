@@ -1,0 +1,34 @@
+{
+    "Id": "N_DOCKMASTER_OFFICE",
+    "Title": "Dockmaster’s Office",
+    "Description": "Charts, stamps, and a ledger fat with names. A notice board lists embargoes and curfews in a clerk’s tidy hand.",
+    "Options": [
+        {
+            "Id": "opt_talk",
+            "Label": "Report to the Dockmaster",
+            "Effects": [
+                {
+                    "Op": "startDialogue",
+                    "Id": "D_DOCKMASTER"
+                }
+            ]
+        },
+        {
+            "Id": "opt_board",
+            "Label": "Read the posted notices",
+            "Effects": [
+                {
+                    "Op": "setFlag",
+                    "Id": "seen.notices"
+                },
+                {
+                    "Op": "advanceTime",
+                    "Minutes": 3
+                }
+            ]
+        }
+    ],
+    "Exits": [
+        { "To": "N_HARBOR" }
+    ]
+}

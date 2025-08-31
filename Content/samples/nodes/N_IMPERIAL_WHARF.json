@@ -1,0 +1,30 @@
+{
+    "Id": "N_IMPERIAL_WHARF",
+    "Title": "Imperial Wharf",
+    "Description": "Red-seal crates and spear-straight patrols. An imperial clerk argues with a caravan master while a bored guard watches the waterline.",
+    "Options": [
+        {
+            "Id": "opt_guard",
+            "Label": "Ask the wharf guard what’s going on",
+            "Effects": [
+                {
+                    "Op": "startDialogue",
+                    "Id": "D_WHARF_GUARD"
+                }
+            ]
+        },
+        {
+            "Id": "opt_clerk",
+            "Label": "Inquire with the imperial clerk",
+            "Effects": [
+                {
+                    "Op": "startDialogue",
+                    "Id": "D_IMPERIAL_CLERK"
+                }
+            ]
+        }
+    ],
+    "Exits": [
+        { "To": "N_HARBOR" }
+    ]
+}

@@ -1,0 +1,20 @@
+{
+    "Id": "N_PIER_MARKET",
+    "Title": "Pier Market",
+    "Description": "Fishwives shout across wet planks; gulls thieve and jeer. Between baskets of herring, gossip moves faster than coin.",
+    "Options": [
+        {
+            "Id": "opt_fishwife",
+            "Label": "Talk to Agnieszka the fishwife",
+            "Effects": [
+                {
+                    "Op": "startDialogue",
+                    "Id": "D_FISHWIFE_AGNIESZKA"
+                }
+            ]
+        }
+    ],
+    "Exits": [
+        { "To": "N_HARBOR" }
+    ]
+}

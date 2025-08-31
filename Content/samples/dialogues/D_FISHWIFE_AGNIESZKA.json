@@ -1,0 +1,58 @@
+{
+    "Id": "D_FISHWIFE_AGNIESZKA",
+    "NpcId": "Agnieszka the Fishwife",
+    "StartLineId": "start",
+    "Lines": {
+        "start": {
+            "Text": "Mind your boots—these planks bite. You look travel-worn.",
+            "Choices": [
+                {
+                    "Label": "Ask what she’s heard about the gate.",
+                    "Goto": "rumor"
+                },
+                {
+                    "Label": "Offer to carry baskets.",
+                    "Goto": "carry"
+                },
+                {
+                    "Label": "Leave",
+                    "Effects": [ { "Op": "endDialogue" } ]
+                }
+            ]
+        },
+        "rumor": {
+            "Text": "Council’s spooked. People blame the elves for every shadow. Not fair, but fear rarely is.",
+            "Effects": [
+                {
+                    "Op": "setFlag",
+                    "Id": "rumor.elves"
+                }
+            ],
+            "Choices": [
+                {
+                    "Label": "Back",
+                    "Goto": "start"
+                }
+            ]
+        },
+        "carry": {
+            "Text": "Strong back? Good. Take the small crate.",
+            "Effects": [
+                {
+                    "Op": "addGold",
+                    "Amount": 1
+                },
+                {
+                    "Op": "advanceTime",
+                    "Minutes": 5
+                }
+            ],
+            "Choices": [
+                {
+                    "Label": "Done.",
+                    "Effects": [ { "Op": "endDialogue" } ]
+                }
+            ]
+        }
+    }
+}

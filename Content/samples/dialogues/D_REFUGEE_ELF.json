@@ -1,0 +1,54 @@
+{
+    "Id": "D_REFUGEE_ELF",
+    "NpcId": "Elven Refugee",
+    "StartLineId": "start",
+    "Lines": {
+        "start": {
+            "Text": "She clutches a small bundle. Eyes red from salt and smoke.",
+            "Choices": [
+                {
+                    "Label": "Offer a kind word.",
+                    "Goto": "kind"
+                },
+                {
+                    "Label": "Ask what happened up north.",
+                    "Goto": "north"
+                },
+                {
+                    "Label": "Leave",
+                    "Effects": [ { "Op": "endDialogue" } ]
+                }
+            ]
+        },
+        "kind": {
+            "Text": "\"Thank you. Most look away. The city is… safer than most, but not for long.\"",
+            "Effects": [
+                {
+                    "Op": "setFlag",
+                    "Id": "met.elf"
+                }
+            ],
+            "Choices": [
+                {
+                    "Label": "Be safe.",
+                    "Effects": [ { "Op": "endDialogue" } ]
+                }
+            ]
+        },
+        "north": {
+            "Text": "“Villages burned, people scattered. We came by night to the water.”",
+            "Effects": [
+                {
+                    "Op": "advanceTime",
+                    "Minutes": 2
+                }
+            ],
+            "Choices": [
+                {
+                    "Label": "I’m sorry.",
+                    "Effects": [ { "Op": "endDialogue" } ]
+                }
+            ]
+        }
+    }
+}

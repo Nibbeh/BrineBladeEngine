@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Dialogue",
+  "type": "object",
+  "required": ["id","npcId","startLineId","lines"],
+  "properties": {
+    "version":{"type":"string"},
+    "id":{"type":"string"},
+    "npcId":{"type":"string"},
+    "startLineId":{"type":"string"},
+    "lines":{"type":"object"}
+  }
+}
