@@ -12,14 +12,16 @@ public static class TestSeed
 
         var state = new GameState(player, world, "N_START")
         {
-            // Baselines so you never enter combat at 0/0
-            CurrentHp = 20,
+            CurrentHp = 20,   // never start at 0
             CurrentMana = 10
         };
 
-        // Optional: flags so your header can humanize class/spec
+        // Show class/spec nicely in the header
         state.Flags.Add("class.warrior");
         state.Flags.Add("spec.champion");
+
+        // Give a little money for testing (Program may add Class StartGold on top)
+        state.Gold = Math.Max(state.Gold, 10);
 
         return state;
     }

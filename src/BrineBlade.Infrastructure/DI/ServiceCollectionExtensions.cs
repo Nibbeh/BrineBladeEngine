@@ -1,33 +1,48 @@
-﻿
+﻿using System.IO;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using BrineBlade.Infrastructure.Content;
 using BrineBlade.Infrastructure.Persistence;
 using BrineBlade.Infrastructure.Services;
 using BrineBlade.Services.Abstractions;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace BrineBlade.Infrastructure.DI;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddBrineBladeEngine(this IServiceCollection s, string contentRoot, string saveRoot)
-{
-    // Stores & persistence
-    s.AddSingleton<IContentStore>(_ => new JsonContentStore(contentRoot));
-    s.AddSingleton<ISaveGameService>(_ => new JsonSaveGameService(saveRoot));
+    /// <summary>
+    /// Registers all engine services and content/persistence singletons.
+    /// Idempotent: safe to call more than once.
+    /// </summary>
+    public static IServiceCollection AddBrineBladeEngine(
+        this IServiceCollection services,
+        string contentRoot,
+        string saveRoot)
+    {
+        // Ensure expected folders exist (nice-to-have)
+        Directory.CreateDirectory(saveRoot);
 
-    // Catalogs
-    s.AddSingleton(new ClassCatalog(contentRoot));
-    s.AddSingleton(new SpecCatalog(contentRoot));
-    s.AddSingleton(new ItemCatalog(contentRoot));
-    s.AddSingleton<IEnemyCatalog>(_ => new EnemyCatalog(contentRoot));
+        // Stores & persistence
+        services.TryAddSingleton<IContentStore>(_ => new JsonContentStore(contentRoot));
+        services.TryAddSingleton<ISaveGameService>(_ => new JsonSaveGameService(saveRoot));
 
-    // Services
-    s.AddSingleton<ICombatService, CombatService>();
-    s.AddSingleton<IDialogueService, DialogueService>();
-    s.AddSingleton<IInventoryService, InventoryService>();
-    s.AddSingleton<IWorldSimService, WorldSimService>();
-    s.AddSingleton<IClockService, ClockService>();
-    return s;
-}
+        // Catalogs
+        // Concrete registrations for catalogs you resolve concretely (Class/Spec/Item)
+        services.TryAddSingleton(_ => new ClassCatalog(contentRoot));
+        services.TryAddSingleton(_ => new SpecCatalog(contentRoot));
+        services.TryAddSingleton(_ => new ItemCatalog(contentRoot));
 
+        // Enemy catalog: register concrete AND map interface to the SAME instance
+        services.TryAddSingleton<EnemyCatalog>(_ => new EnemyCatalog(contentRoot));
+        services.TryAddSingleton<IEnemyCatalog>(sp => sp.GetRequiredService<EnemyCatalog>());
+
+        // Services (rules layer)
+        services.TryAddSingleton<ICombatService, CombatService>();
+        services.TryAddSingleton<IDialogueService, DialogueService>();
+        services.TryAddSingleton<IInventoryService, InventoryService>();
+        services.TryAddSingleton<IWorldSimService, WorldSimService>();
+        services.TryAddSingleton<IClockService, ClockService>();
+
+        return services;
+    }
 }
