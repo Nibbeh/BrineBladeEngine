@@ -1,0 +1,22 @@
+{
+  "Id": "N_TUT_ENTRY",
+  "Title": "Inside the Walls",
+  "Description": "The bell peals again; chains rattle. The barricade loosens just enough to bleed the crowd through. Brinemauth swallows hope and hunger alike.",
+  "Options": [
+    {
+      "Id": "opt_breathe",
+      "Label": "Breathe, take stock, and step in",
+      "Effects": [
+        {
+          "Op": "advanceTime",
+          "Minutes": 1
+        },
+        {
+          "Op": "setFlag",
+          "Id": "tut.completed"
+        }
+      ]
+    }
+  ],
+  "Exits": []
+}

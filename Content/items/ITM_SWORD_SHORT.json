@@ -1,0 +1,16 @@
+{
+  "id": "ITM_SWORD_SHORT",
+  "name": "Shortsword",
+  "type": "Weapon",
+  "weight": 3.0,
+  "value": 12,
+  "stackable": false,
+  "slot": "Weapon",
+  "weaponType": "OneHanded",
+  "allowedClasses": [
+    "CLASS_WARRIOR"
+  ],
+  "bonuses": {
+    "Strength": 1
+  }
+}

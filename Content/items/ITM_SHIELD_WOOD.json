@@ -1,0 +1,13 @@
+{
+  "id": "ITM_SHIELD_WOOD",
+  "name": "Wooden Buckler",
+  "type": "Weapon",
+  "weight": 2.5,
+  "value": 6,
+  "stackable": false,
+  "slot": "Weapon",
+  "weaponType": "OneHanded",
+  "allowedClasses": [
+    "CLASS_WARRIOR"
+  ]
+}

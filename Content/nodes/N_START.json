@@ -1,0 +1,7 @@
+{
+  "Id": "N_START",
+  "Title": "Gray Morning Outside Brinemauth",
+  "Description": "Rain-slick mud. Cart ruts brim with dark water. Gulls cry somewhere beyond the gate.",
+  "Options": [],
+  "Exits": [ { "To": "N_TUT_OUTSKIRTS" } ]
+}

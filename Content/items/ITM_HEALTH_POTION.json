@@ -1,9 +1,0 @@
-{
-    "id": "ITM_HEALTH_POTION",
-    "name": "Health Potion",
-    "type": "Consumable",
-    "weight": 0.2,
-    "value": 5,
-    "stackable": true,
-    "maxStack": 10
-}

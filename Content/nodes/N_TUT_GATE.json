@@ -1,0 +1,53 @@
+{
+  "Id": "N_TUT_GATE",
+  "Title": "Harbor Gate, Shut Fast",
+  "Description": "Timber braces and chained wagons choke the arch. Guards watch from under dripping hoods. The smell of brine mixes with tar and fear.",
+  "Options": [
+    {
+      "Id": "opt_dockmaster",
+      "Label": "Speak with the dockmaster overseeing the blockade",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_TUT_DOCKMASTER_TUT"
+        }
+      ]
+    },
+    {
+      "Id": "opt_help_cart",
+      "Label": "Help push a stuck cart clear of the puddles",
+      "Effects": [
+        {
+          "Op": "setFlag",
+          "Id": "tut.helped.cart"
+        },
+        {
+          "Op": "advanceTime",
+          "Minutes": 5
+        }
+      ]
+    },
+    {
+      "Id": "opt_wait",
+      "Label": "Wait by the gate and listen for news",
+      "Effects": [
+        {
+          "Op": "advanceTime",
+          "Minutes": 10
+        },
+        {
+          "Op": "setFlag",
+          "Id": "tut.waited"
+        }
+      ]
+    }
+  ],
+  "Exits": [
+    {
+      "To": "N_TUT_PIERS"
+    },
+    {
+      "To": "N_TUT_ALLEY"
+    }
+  ]
+}

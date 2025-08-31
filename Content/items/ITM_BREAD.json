@@ -1,0 +1,8 @@
+{
+  "id": "ITM_BREAD",
+  "name": "Crust of Bread",
+  "type": "Consumable",
+  "weight": 0.3,
+  "value": 1,
+  "stackable": true
+}

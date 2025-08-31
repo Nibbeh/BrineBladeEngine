@@ -1,0 +1,14 @@
+{
+  "id": "ITM_ARMOR_LEATHER",
+  "name": "Leather Jerkin",
+  "type": "Armor",
+  "weight": 6.0,
+  "value": 14,
+  "stackable": false,
+  "slot": "Chest",
+  "armorType": "Leather",
+  "allowedClasses": [
+    "CLASS_WARRIOR",
+    "CLASS_ROGUE"
+  ]
+}

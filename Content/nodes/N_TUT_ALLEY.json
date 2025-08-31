@@ -1,0 +1,35 @@
+{
+  "Id": "N_TUT_ALLEY",
+  "Title": "Fishbone Alley",
+  "Description": "A narrow run between salt-stained stone and leaning warehouses. Fish guts streak the cobbles; something watches from a drain.",
+  "Options": [
+    {
+      "Id": "opt_search",
+      "Label": "Pick your way past crates and keep low",
+      "Effects": [
+        {
+          "Op": "setFlag",
+          "Id": "tut.alley.scouted"
+        }
+      ]
+    },
+    {
+      "Id": "opt_back",
+      "Label": "Return to the gate",
+      "Effects": [
+        {
+          "Op": "advanceTime",
+          "Minutes": 1
+        }
+      ]
+    }
+  ],
+  "Exits": [
+    {
+      "To": "N_TUT_GATE"
+    },
+    {
+      "To": "N_TUT_PIERS"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "Id": "D_TUT_SOLDIER",
+  "NpcId": "Scarred Soldier",
+  "StartLineId": "start",
+  "Lines": {
+    "start": {
+      "Text": "Keep your purse close. The city’s shut—when folk can’t leave, tempers don’t either.",
+      "Choices": [
+        {
+          "Label": "Who shut the gate?",
+          "Goto": "gate"
+        },
+        {
+          "Label": "Thanks.",
+          "Effects": [
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        }
+      ]
+    },
+    "gate": {
+      "Text": "Council order. War sends driftwood and daggers both. Better crowded quays than a riot inside.",
+      "Effects": [
+        {
+          "Op": "setFlag",
+          "Id": "tut.heard.council"
+        }
+      ],
+      "Choices": [
+        {
+          "Label": "Back",
+          "Goto": "start"
+        }
+      ]
+    }
+  }
+}

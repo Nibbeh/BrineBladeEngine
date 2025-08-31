@@ -1,0 +1,36 @@
+{
+  "Id": "N_TUT_OUTSKIRTS",
+  "Title": "Road to Brinemauth",
+  "Description": "Rain-slick mud. Cart ruts brim with dark water. Refugees shiver under wet cloaks, eyes hollow. Somewhere ahead, gulls cry and a bell tolls from the harbor gate.",
+  "Options": [
+    {
+      "Id": "opt_observe",
+      "Label": "Observe the crowd and the road",
+      "Effects": [
+        {
+          "Op": "setFlag",
+          "Id": "tut.scouted"
+        },
+        {
+          "Op": "advanceTime",
+          "Minutes": 2
+        }
+      ]
+    },
+    {
+      "Id": "opt_soldier",
+      "Label": "Speak with the scarred soldier by the milestone",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_TUT_SOLDIER"
+        }
+      ]
+    }
+  ],
+  "Exits": [
+    {
+      "To": "N_TUT_GATE"
+    }
+  ]
+}
