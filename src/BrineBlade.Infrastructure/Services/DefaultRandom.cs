@@ -15,7 +15,7 @@ namespace BrineBlade.Infrastructure.Services
         public DefaultRandom(Random rng)
             => _rng = rng ?? throw new ArgumentNullException(nameof(rng));
 
-        // Matches usage in CombatService: Next(min, max) with exclusive upper bound (like System.Random).
+        // Exclusive upper bound (matches System.Random)
         public int Next(int minValue, int maxValue) => _rng.Next(minValue, maxValue);
 
         public double NextDouble() => _rng.NextDouble();

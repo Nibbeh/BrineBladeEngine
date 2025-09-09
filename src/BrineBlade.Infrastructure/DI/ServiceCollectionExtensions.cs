@@ -19,7 +19,7 @@ public static class ServiceCollectionExtensions
         string contentRoot,
         string saveRoot)
     {
-        // Ensure expected folders exist (nice-to-have)
+        // Ensure expected folders exist
         Directory.CreateDirectory(saveRoot);
 
         // Stores & persistence
@@ -27,7 +27,6 @@ public static class ServiceCollectionExtensions
         services.TryAddSingleton<ISaveGameService>(_ => new JsonSaveGameService(saveRoot));
 
         // Catalogs
-        // Concrete registrations for catalogs you resolve concretely (Class/Spec/Item)
         services.TryAddSingleton(_ => new ClassCatalog(contentRoot));
         services.TryAddSingleton(_ => new SpecCatalog(contentRoot));
         services.TryAddSingleton(_ => new ItemCatalog(contentRoot));
@@ -35,6 +34,9 @@ public static class ServiceCollectionExtensions
         // Enemy catalog: register concrete AND map interface to the SAME instance
         services.TryAddSingleton<EnemyCatalog>(_ => new EnemyCatalog(contentRoot));
         services.TryAddSingleton<IEnemyCatalog>(sp => sp.GetRequiredService<EnemyCatalog>());
+
+        // RNG (needed by CombatService and anywhere else that needs randomness)
+        services.TryAddSingleton<IRandom, DefaultRandom>();
 
         // Services (rules layer)
         services.TryAddSingleton<ICombatService, CombatService>();
