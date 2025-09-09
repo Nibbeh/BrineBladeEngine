@@ -67,10 +67,11 @@ public sealed class SaveGameFlow
                 $"{s.SlotId} — {s.PlayerName}, {s.CurrentNodeId}, {s.Gold}g, Day {s.Day} {s.Hour:00}:{s.Minute:00}"))
             .ToList();
 
-        SimpleConsoleUI.ShowSaves(lines);
+        // Convert lines to a list of strings for ShowSaves
+        SimpleConsoleUI.ShowSaves(lines.Select(l => l.Item2).ToList());
 
-        var choice = SimpleConsoleUI.Ask("Load which slot? (number, 0 to cancel)");
-        if (choice <= 0 || choice > lines.Count)
+        var choiceStr = SimpleConsoleUI.Ask("Load which slot? (number, 0 to cancel)");
+        if (!int.TryParse(choiceStr, out var choice) || choice <= 0 || choice > lines.Count)
         {
             SimpleConsoleUI.Notice("Load cancelled.");
             return false;

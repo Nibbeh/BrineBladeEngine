@@ -1,4 +1,4 @@
-using BrineBlade.Domain.Entities;
+ï»¿using BrineBlade.Domain.Entities;
 using System.Collections.Generic;
 using System.Runtime.Intrinsics.Arm;
 
@@ -26,7 +26,7 @@ public sealed class GameState
         World = world;
         CurrentNodeId = startNodeId;
 
-        // Default values – these will later be seeded from ClassDef/Stats
+        // Default values ï¿½ these will later be seeded from ClassDef/Stats
         CurrentHp = 20;
         CurrentMana = 10;
     }
@@ -74,4 +74,7 @@ public sealed class GameState
 
 
     }
+
+    // Back-compat shim for older flows that called state.Load(data)
+    public void Load(SaveGameData data) => ApplyFrom(data);
 }

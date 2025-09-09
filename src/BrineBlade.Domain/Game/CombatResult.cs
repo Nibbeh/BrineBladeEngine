@@ -1,4 +1,6 @@
-﻿namespace BrineBlade.Domain.Game;
+﻿using System.Collections.Generic;
+
+namespace BrineBlade.Domain.Game;
 
 public sealed record CombatResult(
     bool PlayerWon,
