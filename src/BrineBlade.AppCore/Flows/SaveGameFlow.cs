@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Collections.Generic;
 using BrineBlade.AppCore.ConsoleUI;
@@ -49,7 +49,7 @@ public sealed class SaveGameFlow
         }
 
         _saves.Save(slot, Snapshot());
-        SimpleConsoleUI.Notice($"Saved ?  ({slot})");
+        SimpleConsoleUI.Notice($"Saved ✓  ({slot})");
     }
 
     public bool LoadInteractive()
@@ -64,7 +64,7 @@ public sealed class SaveGameFlow
         var lines = list
             .OrderByDescending(s => s.LastWriteTimeUtc)
             .Select((s, i) => (i + 1,
-                $"{s.SlotId} � {s.PlayerName}, {s.CurrentNodeId}, {s.Gold}g, Day {s.Day} {s.Hour:00}:{s.Minute:00}"))
+                $"{s.SlotId} — {s.PlayerName}, {s.CurrentNodeId}, {s.Gold}g, Day {s.Day} {s.Hour:00}:{s.Minute:00}"))
             .ToList();
 
         SimpleConsoleUI.ShowSaves(lines);
@@ -87,8 +87,8 @@ public sealed class SaveGameFlow
             return false;
         }
 
-        _state.Load(data);
-        SimpleConsoleUI.Notice($"Loaded ?  ({slotId})");
+        _state.ApplyFrom(data);
+        SimpleConsoleUI.Notice($"Loaded ✓  ({slotId})");
         return true;
     }
 
