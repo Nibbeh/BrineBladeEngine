@@ -1,109 +1,90 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using BrineBlade.AppCore.ConsoleUI;
+using BrineBlade.AppCore.Rules;
 using BrineBlade.Domain.Entities;
 using BrineBlade.Domain.Game;
 using BrineBlade.Services.Abstractions;
 
-namespace BrineBlade.AppCore.Flows;
-
-    public sealed class DialogueFlow(GameState state, IContentStore content)
+namespace BrineBlade.AppCore.Flows
 {
-    private readonly GameState _state = state;
-    private readonly IContentStore _content = content;
-    private bool _end;
-
-    public void Run(string dialogueId)
+    public sealed class DialogueFlow
     {
-        var dlg = _content.GetDialogueById(dialogueId);
-        if (dlg is null) { SimpleConsoleUI.Notice($"[DIALOGUE] Missing id={dialogueId}"); return; }
+        private readonly GameState _state;
+        private readonly IContentStore _content;
+        private readonly IGameUI _ui;
+        private readonly EffectProcessor _effects;
+        private bool _end;
 
-        _end = false;
-        var lineId = dlg.StartLineId;
-
-        while (!_end)
+        public DialogueFlow(GameState state, IContentStore content, IGameUI ui, EffectProcessor effects)
         {
-            if (!dlg.Lines.TryGetValue(lineId, out var line))
-            { SimpleConsoleUI.Notice($"[DIALOGUE] No line '{lineId}'."); return; }
-
-            var choices = (line.Choices ?? new List<DialogueChoice>()).Where(c => PassesRequires(c.Requires)).ToList();
-
-            // If there are NO choices: render the line, apply any line-level effects, pause, then exit dialogue.
-            if (choices.Count == 0)
-            {
-                SimpleConsoleUI.RenderFrame(_state, $"Dialogue: {dlg.NpcId}", line.Text, new List<(string Key, string Label)>());
-                if (line.Effects is not null) ApplyEffects(line.Effects);
-
-                // Give the player a beat to read the line.
-                System.Console.Write("\n(Press Enter to continue...)");
-                System.Console.ReadLine();
-
-                // End the dialogue (either via effect or because there are no choices).
-                return;
-            }
-
-            // Normal dialogue line with choices
-            var menu = choices
-    .Select((choice, i) => ((i + 1).ToString(), choice.Label))
-    .ToList();
-
-            SimpleConsoleUI.RenderFrame(_state, $"Dialogue: {dlg.NpcId}", line.Text, menu);
-
-            var cmd = SimpleConsoleUI.ReadCommand(menu.Count);
-            if (cmd.Type == ConsoleCommandType.Quit) { _end = true; return; }
-            if (cmd.Type == ConsoleCommandType.Help) { SimpleConsoleUI.ShowHelp(); continue; }
-            if (cmd.Type != ConsoleCommandType.Choose) { continue; }
-
-            var chosen = choices[cmd.ChoiceIndex];
-
-            if (chosen.Effects is not null) ApplyEffects(chosen.Effects);
-
-            if (!string.IsNullOrWhiteSpace(chosen.Goto))
-            {
-                lineId = chosen.Goto!;
-            }
-            else if (_end)
-            {
-                return;
-            }
-            // else: loop and show the same line again (rare, but ok)
+            _state = state;
+            _content = content;
+            _ui = ui;
+            _effects = effects;
         }
-    }
 
-    private bool PassesRequires(List<string>? reqs)
-    {
-        if (reqs is null || reqs.Count == 0) return true;
-        foreach (var r in reqs)
+        public void Run(string dialogueId)
         {
-            if (r.StartsWith("flag:", System.StringComparison.OrdinalIgnoreCase))
+            var dlg = _content.GetDialogueById(dialogueId);
+            if (dlg is null) { _ui.Notice($"[DIALOGUE] Unknown dialogue '{dialogueId}'."); return; }
+
+            _end = false;
+            var lineId = dlg.StartLineId;
+
+            while (!_end)
             {
-                var flag = r[5..];
-                if (!_state.Flags.Contains(flag)) return false;
+                if (!dlg.Lines.TryGetValue(lineId, out var line))
+                { _ui.Notice($"[DIALOGUE] No line '{lineId}'."); return; }
+
+                var choices = (line.Choices ?? new List<DialogueChoice>()).Where(c => PassesRequires(c.Requires)).ToList();
+
+                // No choices: show line, apply effects, exit.
+                if (choices.Count == 0)
+                {
+                    _ui.RenderModal(_state, $"Dialogue: {dlg.NpcId}", new[] { line.Text }, waitForEnter: true);
+                    var outcome = _effects.ApplyAll(line.Effects);
+                    if (outcome.EndDialogue) return;
+                    return;
+                }
+
+                // Normal line with choices
+                var menu = choices.Select((choice, i) => ((i + 1).ToString(), choice.Label)).ToList();
+                _ui.RenderFrame(_state, $"Dialogue: {dlg.NpcId}", line.Text, menu);
+
+                var cmd = _ui.ReadCommand(menu.Count);
+                if (cmd.Type == ConsoleCommandType.Quit) { _end = true; return; }
+                if (cmd.Type == ConsoleCommandType.Help) { _ui.ShowHelp(); continue; }
+                if (cmd.Type != ConsoleCommandType.Choose) { continue; }
+
+                var chosen = choices[cmd.ChoiceIndex];
+
+                var outcome2 = _effects.ApplyAll(chosen.Effects);
+                if (outcome2.EndDialogue) return;
+
+                if (!string.IsNullOrWhiteSpace(chosen.Goto))
+                {
+                    lineId = chosen.Goto!;
+                }
+                else if (_end)
+                {
+                    return;
+                }
             }
         }
-        return true;
-    }
 
-    private void ApplyEffects(List<EffectSpec> effects)
-    {
-        foreach (var e in effects)
+        private bool PassesRequires(List<string>? reqs)
         {
-            switch (e.Op)
+            if (reqs is null || reqs.Count == 0) return true;
+            foreach (var r in reqs)
             {
-                case "endDialogue": _end = true; break;
-                case "setFlag" when !string.IsNullOrWhiteSpace(e.Id):
-                    _state.Flags.Add(e.Id!);
-                    SimpleConsoleUI.Notice($"Flag set: {e.Id}"); break;
-                case "addGold" when e.Amount is not null:
-                    _state.Gold += e.Amount!.Value;
-                    SimpleConsoleUI.Notice($"+{e.Amount} gold (total {_state.Gold})"); break;
-                case "advanceTime" when e.Minutes is not null:
-                    _state.AdvanceMinutes(e.Minutes!.Value);
-                    SimpleConsoleUI.Notice($"+{e.Minutes} min"); break;
-                case "goto" when !string.IsNullOrWhiteSpace(e.To):
-                    _state.CurrentNodeId = e.To!;
-                    SimpleConsoleUI.Notice($"Travel → {_state.CurrentNodeId}"); break;
+                if (r.StartsWith("flag:", System.StringComparison.OrdinalIgnoreCase))
+                {
+                    var flag = r[5..];
+                    if (!_state.Flags.Contains(flag)) return false;
+                }
             }
+            return true;
         }
     }
 }

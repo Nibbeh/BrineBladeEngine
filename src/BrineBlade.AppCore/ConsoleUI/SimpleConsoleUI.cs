@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -45,7 +45,7 @@ public static class SimpleConsoleUI
         // Prefer the seeded archetype; if absent, derive from the first "class.*" flag.
         var className = !string.IsNullOrWhiteSpace(state.Player.Archetype)
             ? state.Player.Archetype
-            : Humanize(FirstFlagSuffix(state.Flags, "class.") ?? "—");
+            : Humanize(FirstFlagSuffix(state.Flags, "class.") ?? "ï¿½");
 
         // Pick first "spec.*" flag and humanize it for display.
         var specSuffix = "";
@@ -53,7 +53,7 @@ public static class SimpleConsoleUI
         if (!string.IsNullOrWhiteSpace(spec))
             specSuffix = $" ({Humanize(spec!)})";
 
-        Console.WriteLine($"=== Brine & Blade — {title} ===");
+        Console.WriteLine($"=== Brine & Blade ï¿½ {title} ===");
         Console.WriteLine(
             $"Player: {state.Player.Name}  Class: {className}{specSuffix}  " +
             $"Gold: {state.Gold}  HP: {state.CurrentHp}  MP: {state.CurrentMana}  " +
@@ -76,7 +76,7 @@ public static class SimpleConsoleUI
         {
             Console.WriteLine("Recent:");
             foreach (var line in _log)
-                Console.WriteLine($"  • {line}");
+                Console.WriteLine($"  ï¿½ {line}");
         }
         Console.WriteLine();
         Console.Write("Choose (number) or command: ");

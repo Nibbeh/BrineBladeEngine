@@ -12,16 +12,23 @@ public static class TestSeed
 
         var state = new GameState(player, world, "N_START")
         {
-            CurrentHp = 20,   // never start at 0
+            CurrentHp = 20,
             CurrentMana = 10
         };
 
-        // Show class/spec nicely in the header
+        // flags you already rely on
         state.Flags.Add("class.warrior");
         state.Flags.Add("spec.champion");
-
-        // Give a little money for testing (Program may add Class StartGold on top)
         state.Gold = Math.Max(state.Gold, 10);
+
+        // --- starter kit: must match Content/items/*.json exactly ---
+        state.Inventory.Add(new ItemStack("ITM_HEALTH_POTION_MINOR", 3));
+        state.Inventory.Add(new ItemStack("ITM_BREAD", 2));
+
+        state.Equipment[EquipmentSlot.Weapon] = "ITM_SWORD_SHORT";
+        state.Equipment[EquipmentSlot.Offhand] = "ITM_SHIELD_WOOD";
+        state.Equipment[EquipmentSlot.Chest] = "ITM_ARMOR_LEATHER";
+        state.Equipment[EquipmentSlot.Head] = "ITM_CAP_CLOTH";
 
         return state;
     }

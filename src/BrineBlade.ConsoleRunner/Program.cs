@@ -8,6 +8,9 @@ using BrineBlade.AppCore.Orchestration;
 using BrineBlade.Infrastructure.DI;
 using BrineBlade.Infrastructure.Content;
 using BrineBlade.Services.Abstractions;
+using BrineBlade.AppCore.ConsoleUI;
+using BrineBlade.AppCore.Rules;
+
 
 static string FindUp(string leaf)
 {
@@ -43,13 +46,18 @@ var classCatalog = sp.GetRequiredService<ClassCatalog>();
 var specCatalog = sp.GetRequiredService<SpecCatalog>();
 // ... your class/spec flag logic (unchanged)
 
-// 4) Compose session with the same state (fine to pass it directly)
+var ui = new ConsoleGameUI();
+var effects = new EffectProcessor(state, sp.GetRequiredService<IInventoryService>(), ui);
+
 var session = new GameSession(
     state,
     sp.GetRequiredService<IContentStore>(),
     sp.GetRequiredService<ISaveGameService>(),
     sp.GetRequiredService<IInventoryService>(),
     sp.GetRequiredService<ICombatService>(),
-    sp.GetRequiredService<IEnemyCatalog>());
+    sp.GetRequiredService<IEnemyCatalog>(),
+    ui,
+    effects);
 
 session.RunConsoleLoop();
+

@@ -1,56 +1,65 @@
 ﻿// AppCore/Flows/CombatFlow.cs
+using System.Collections.Generic;
+using System.Linq;
 using BrineBlade.AppCore.ConsoleUI;
 using BrineBlade.Domain.Entities;
 using BrineBlade.Domain.Game;
 using BrineBlade.Services.Abstractions;
 
-namespace BrineBlade.AppCore.Flows;
-
-public sealed class CombatFlow(GameState state, ICombatService combat, IEnemyCatalog enemies)
+namespace BrineBlade.AppCore.Flows
 {
-    private readonly GameState _state = state;
-    private readonly ICombatService _combat = combat;
-    private readonly IEnemyCatalog _enemies = enemies;
-
-    public void Run(string enemyId) => StartEncounter(enemyId);
-    public void Run(EnemyDef enemy) => ExecuteCombat(enemy);
-    public void Run() => SimpleConsoleUI.Notice("[COMBAT] No enemy id provided by node.");
-
-    public void StartEncounter(string enemyId)
+    public sealed class CombatFlow
     {
-        var enemy = _enemies.GetRequired(enemyId);
-        ExecuteCombat(enemy);
-    }
+        private readonly GameState _state;
+        private readonly ICombatService _combat;
+        private readonly IEnemyCatalog _enemies;
+        private readonly IGameUI _ui;
 
-    private void ExecuteCombat(EnemyDef enemy)
-    {
-        // Optional safety: never start a fight at zero in dev
-        if (_state.CurrentHp <= 0) _state.CurrentHp = 20;
-        if (_state.CurrentMana < 0) _state.CurrentMana = 0;
-
-        var lines = new List<string>
+        public CombatFlow(GameState state, ICombatService combat, IEnemyCatalog enemies, IGameUI ui)
         {
-            $"Encounter: {enemy.Name} (Lv {enemy.Level})",
-            $"You: {_state.CurrentHp} HP    Foe: {(enemy.Hp ?? enemy.BaseStats.MaxHp)} HP"
-        };
-
-        var result = _combat.StartCombat(_state, enemy);
-
-        // Single writer: apply the outcome here
-        _state.CurrentHp = result.PlayerHpRemaining;
-
-        lines.Add(result.PlayerWon ? "Victory!" : "Defeat…");
-        lines.Add($"Aftermath — You: {_state.CurrentHp} HP, Foe: {result.EnemyHpRemaining} HP");
-
-        if (result.PlayerWon && result.Loot is { Count: > 0 })
-        {
-            foreach (var drop in result.Loot) lines.Add($"Loot: {drop}");
+            _state = state;
+            _combat = combat;
+            _enemies = enemies;
+            _ui = ui;
         }
 
-        // Modal screen so node redraw doesn't wipe it
-        SimpleConsoleUI.RenderModal(_state, "Combat", lines, waitForEnter: true);
+        public void Run(string enemyId)
+        {
+            if (!_enemies.TryGet(enemyId, out var enemy))
+            {
+                _ui.Notice($"[COMBAT] Unknown enemy '{enemyId}'.");
+                return;
+            }
+            ExecuteCombat(enemy);
+        }
 
-        // Also keep a short trail in the Recent log after returning
-        SimpleConsoleUI.Notice(lines.TakeLast(Math.Min(2, lines.Count)));
+        public void Run(EnemyDef enemy) => ExecuteCombat(enemy);
+
+        private void ExecuteCombat(EnemyDef enemy)
+        {
+            var result = _combat.StartCombat(_state, enemy);
+
+            // Mutate state (single-writer pattern)
+            _state.CurrentHp = result.PlayerHpRemaining;
+
+            var lines = new List<string>
+            {
+                $"Encounter: {_state.Player.Name} vs {enemy.Name}",
+                result.PlayerWon ? "You won!" : "You were defeated."
+            };
+
+            lines.Add($"Aftermath — You: {_state.CurrentHp} HP, Foe: {result.EnemyHpRemaining} HP");
+
+            if (result.PlayerWon && result.Loot is { Count: > 0 })
+            {
+                foreach (var drop in result.Loot) lines.Add($"Loot: {drop}");
+            }
+
+            // Modal screen so node redraw doesn't wipe it
+            _ui.RenderModal(_state, "Combat", lines, waitForEnter: true);
+
+            // Also keep a short trail in the Recent log after returning
+            _ui.Notice(lines.TakeLast(System.Math.Min(2, lines.Count)));
+        }
     }
 }
