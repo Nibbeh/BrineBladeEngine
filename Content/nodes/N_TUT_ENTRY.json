@@ -18,5 +18,10 @@
       ]
     }
   ],
-  "Exits": []
+  "Exits": [
+    {
+      "To": "N_ENTRY",
+      "Requires": [ "flag:tut.completed" ]
+    }
+  ]
 }

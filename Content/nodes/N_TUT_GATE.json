@@ -43,11 +43,11 @@
     }
   ],
   "Exits": [
+    { "To": "N_TUT_PIERS" },
+    { "To": "N_TUT_ALLEY" },
     {
-      "To": "N_TUT_PIERS"
-    },
-    {
-      "To": "N_TUT_ALLEY"
+      "To": "N_CITY_GATE",
+      "Requires": [ "flag:tut.scouted" ]
     }
   ]
 }
