@@ -1,6 +1,6 @@
 {
-  "Id": "ENEMY_THUG",
-  "Name": "Dockside Thug",
+  "Id": "ENEMY_BANDIT",
+  "Name": "Dockside Bandit",
   "BaseStats": {
     "Strength": 4,
     "Dexterity": 3,
