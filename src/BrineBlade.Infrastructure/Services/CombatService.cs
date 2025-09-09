@@ -1,17 +1,22 @@
-// Infrastructure/Services/CombatService.cs
 using BrineBlade.Domain.Entities;
 using BrineBlade.Domain.Game;
 using BrineBlade.Services.Abstractions;
+using System;
 
 namespace BrineBlade.Infrastructure.Services;
 
 public sealed class CombatService : ICombatService
 {
-    private readonly Random _rng = new();
+    private readonly IRandom _rng;
+
+    public CombatService(IRandom rng)
+    {
+        _rng = rng;
+    }
 
     public CombatResult StartCombat(GameState state, EnemyDef enemy)
     {
-        int playerHp = state.CurrentHp;                         // read from state
+        int playerHp = state.CurrentHp;
         int enemyHp = enemy.Hp ?? enemy.BaseStats.MaxHp;
 
         while (playerHp > 0 && enemyHp > 0)
@@ -33,7 +38,6 @@ public sealed class CombatService : ICombatService
 
         bool playerWon = playerHp > 0 && enemyHp <= 0;
 
-        // DO NOT mutate state here. Let the flow be the single writer.
         var loot = playerWon && enemy.LootTable is not null
             ? enemy.LootTable
             : new List<string>();

@@ -26,7 +26,6 @@ public sealed class JsonContentStore : IContentStore
 
     private void LoadAll(string contentRoot)
     {
-        // NEW: prefer top-level "nodes"/"dialogues", fallback to "samples/nodes|dialogues"
         var nodesDir = Directory.Exists(Path.Combine(contentRoot, "nodes"))
             ? Path.Combine(contentRoot, "nodes")
             : Path.Combine(contentRoot, "samples", "nodes");

@@ -3,67 +3,118 @@ using BrineBlade.Domain.Entities;
 
 namespace BrineBlade.Infrastructure.Content;
 
-public sealed record ContentLintReport(List<string> Warnings);
+public sealed record PreflightSummary(int NodeCount, int DialogueCount, int ItemCount, int EnemyCount);
 
 public static class ContentLinter
 {
-    static readonly JsonSerializerOptions Opts = new()
+    private static readonly JsonSerializerOptions Opts = new()
     {
         PropertyNameCaseInsensitive = true,
         ReadCommentHandling = JsonCommentHandling.Skip,
         AllowTrailingCommas = true
     };
 
-    public static ContentLintReport Analyze(string contentRoot)
+    /// <summary>
+    /// Validates content and throws ContentValidationException on any critical errors.
+    /// Returns a PreflightSummary for logging.
+    /// </summary>
+    public static PreflightSummary Preflight(string contentRoot, IReadOnlySet<string> knownOps)
     {
-        var warns = new List<string>();
+        var errors = new List<string>();
 
-        // Load nodes/dialogues exactly like JsonContentStore
         var nodes = Load<Node>(Path.Combine(contentRoot, "nodes"));
         var dialogs = Load<Dialogue>(Path.Combine(contentRoot, "dialogues"));
+        var items = Load<ItemDef>(Path.Combine(contentRoot, "items"));
+        var enemies = Load<EnemyDef>(Path.Combine(contentRoot, "enemies"));
 
         // 1) Node exits must resolve
         foreach (var n in nodes.Values)
-            if (n.Exits is not null)
-                foreach (var ex in n.Exits)
-                    if (!nodes.ContainsKey(ex.To))
-                        warns.Add($"Node '{n.Id}' exit → '{ex.To}' is missing.");
+        {
+            if (n.Exits is null) continue;
+            foreach (var ex in n.Exits)
+                if (!nodes.ContainsKey(ex.To))
+                    errors.Add($"Node '{n.Id}' exit → missing node '{ex.To}'.");
+        }
 
         // 2) Dialogue StartLineId must exist
         foreach (var d in dialogs.Values)
+        {
             if (!d.Lines.ContainsKey(d.StartLineId))
-                warns.Add($"Dialogue '{d.Id}' StartLineId '{d.StartLineId}' not in Lines.");
+                errors.Add($"Dialogue '{d.Id}' StartLineId '{d.StartLineId}' not found in Lines.");
+        }
 
-        // 3) startDialogue effects in nodes must point to real dialogues
+        // 3) Effects: unknown 'Op' / invalid refs (nodes → dialogues start)
         foreach (var n in nodes.Values)
         {
-            var effects = new List<EffectSpec>();
-            if (n.Options is not null) foreach (var o in n.Options) if (o.Effects is not null) effects.AddRange(o.Effects);
-            if (n.Exits is not null) foreach (var e in n.Exits) { /* exits build goto at runtime */ }
-            foreach (var e in effects.Where(e => string.Equals(e.Op, "startDialogue", StringComparison.OrdinalIgnoreCase)
-                                              && !string.IsNullOrWhiteSpace(e.Id)))
-                if (!dialogs.ContainsKey(e.Id!))
-                    warns.Add($"Node '{n.Id}' references missing dialogue '{e.Id}'.");
-        }
+            static IEnumerable<EffectSpec> Collect(Node nn)
+            {
+                if (nn.Options is not null)
+                    foreach (var o in nn.Options)
+                        if (o.Effects is not null)
+                            foreach (var e in o.Effects) yield return e;
+            }
 
-        return new ContentLintReport(warns);
-
-        static Dictionary<string, T> Load<T>(string dir)
-        {
-            var map = new Dictionary<string, T>(StringComparer.Ordinal);
-            if (!Directory.Exists(dir)) return map;
-            foreach (var file in Directory.EnumerateFiles(dir, "*.json", SearchOption.AllDirectories))
-                try
+            foreach (var e in Collect(n))
+            {
+                if (string.IsNullOrWhiteSpace(e.Op))
                 {
-                    var json = File.ReadAllText(file);
-                    var m = JsonSerializer.Deserialize<T>(json, Opts)!;
-                    var id = typeof(T) == typeof(Node) ? ((Node)(object)m).Id
-                           : typeof(T) == typeof(Dialogue) ? ((Dialogue)(object)m).Id
-                           : null;
-                    if (!string.IsNullOrWhiteSpace(id)) map[id!] = m;
+                    errors.Add($"Node '{n.Id}' has effect with empty Op.");
+                    continue;
                 }
-                catch { /* authoring-safe */ }
-            return map;
+
+                if (!knownOps.Contains(e.Op))
+                    errors.Add($"Node '{n.Id}' has unknown effect Op='{e.Op}'.");
+
+                if (string.Equals(e.Op, "startDialogue", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (string.IsNullOrWhiteSpace(e.Id) || !dialogs.ContainsKey(e.Id!))
+                        errors.Add($"Node '{n.Id}' startDialogue → missing dialogue '{e.Id}'.");
+                }
+
+                if (string.Equals(e.Op, "goto", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (string.IsNullOrWhiteSpace(e.To) || !nodes.ContainsKey(e.To!))
+                        errors.Add($"Node '{n.Id}' goto → missing node '{e.To}'.");
+                }
+            }
         }
+
+        if (errors.Count > 0)
+            throw new ContentValidationException(errors);
+
+        return new PreflightSummary(nodes.Count, dialogs.Count, items.Count, enemies.Count);
+    }
+
+    private static Dictionary<string, T> Load<T>(string dir)
+    {
+        var map = new Dictionary<string, T>(StringComparer.Ordinal);
+        if (!Directory.Exists(dir)) return map;
+
+        foreach (var file in Directory.EnumerateFiles(dir, "*.json", SearchOption.AllDirectories))
+        {
+            try
+            {
+                var json = File.ReadAllText(file);
+                var model = JsonSerializer.Deserialize<T>(json, Opts)!;
+                var id = GetId(model);
+                if (!string.IsNullOrWhiteSpace(id))
+                    map[id!] = model;
+            }
+            catch
+            {
+                // Fail softly here; structural issues will be caught by schema/refs checks above
+            }
+        }
+
+        return map;
+
+        static string? GetId(object model) => model switch
+        {
+            Node m => m.Id,
+            Dialogue m => m.Id,
+            ItemDef m => m.Id,
+            EnemyDef m => m.Id,
+            _ => null
+        };
     }
 }
