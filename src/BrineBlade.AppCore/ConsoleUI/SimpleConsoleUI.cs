@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using BrineBlade.Domain.Game;
 
 namespace BrineBlade.AppCore.ConsoleUI;
 
@@ -13,85 +14,107 @@ public static class SimpleConsoleUI
     private const int MaxLog = 6;
     private static readonly Queue<string> _log = new();
 
-    // --- Lightweight log API (works across screens) ---
+    // ----------------- small log shown at bottom of frames -----------------
     public static void Notice(string message)
     {
         if (string.IsNullOrWhiteSpace(message)) return;
         _log.Enqueue(message);
         while (_log.Count > MaxLog) _log.Dequeue();
     }
-    public static void Notice(IEnumerable<string> lines)
+
+    public static void Notice(IEnumerable<string> messages)
     {
-        foreach (var l in lines) Notice(l);
+        foreach (var m in messages) Notice(m);
     }
 
-    // --- Standard node frame ---
-    public static void RenderFrame(
-        BrineBlade.Domain.Game.GameState state,
-        string locationTitle,
-        string locationDesc,
-        IReadOnlyList<(string Key, string Label)> options)
+    // ----------------- core frame / modal rendering -----------------
+    public static void RenderFrame(GameState state, string title, string body, IReadOnlyList<(string Key, string Label)> options)
     {
         Console.Clear();
-        RenderHeader(state, locationTitle);
-        Console.WriteLine(locationDesc);
-        Console.WriteLine();
-        RenderOptions(options);
-        RenderFooter();
-    }
 
-    public static void RenderHeader(BrineBlade.Domain.Game.GameState state, string title)
-    {
-        // Prefer the seeded archetype; if absent, derive from the first "class.*" flag.
-        var className = !string.IsNullOrWhiteSpace(state.Player.Archetype)
-            ? state.Player.Archetype
-            : Humanize(FirstFlagSuffix(state.Flags, "class.") ?? "�");
+        // Header
+        Console.WriteLine($"== {title} ==");
+        Console.WriteLine($"Gold: {state.Gold}  |  Day {state.World.Day}  {state.World.Hour:00}:{state.World.Minute:00}");
+        Console.WriteLine(new string('-', 64));
 
-        // Pick first "spec.*" flag and humanize it for display.
-        var specSuffix = "";
-        var spec = FirstFlagSuffix(state.Flags, "spec.");
-        if (!string.IsNullOrWhiteSpace(spec))
-            specSuffix = $" ({Humanize(spec!)})";
+        // Body
+        if (!string.IsNullOrWhiteSpace(body))
+        {
+            foreach (var line in Wrap(body, 80)) Console.WriteLine(line);
+            Console.WriteLine();
+        }
 
-        Console.WriteLine($"=== Brine & Blade === {title} ===");
-        Console.WriteLine(
-            $"Player: {state.Player.Name}  Class: {className}{specSuffix}  " +
-            $"Gold: {state.Gold}  HP: {state.CurrentHp}  MP: {state.CurrentMana}  " +
-            $"Time: Day {state.World.Day} {state.World.Hour:00}:{state.World.Minute:00}");
-        Console.WriteLine(new string('-', 80));
-    }
-
-    public static void RenderOptions(IReadOnlyList<(string Key, string Label)> options)
-    {
+        // Options
         for (int i = 0; i < options.Count; i++)
-            Console.WriteLine($"  {options[i].Key}. {options[i].Label}");
-        Console.WriteLine();
-        Console.WriteLine("Commands: [H]elp  [I]nventory  [S]ave  [L]oad  [R]efresh  [Q]uit");
-    }
+        {
+            var (key, label) = options[i];
+            var hot = key.Length == 1 ? key.ToUpperInvariant() : $"{i + 1}";
+            Console.WriteLine($"{i + 1,2}. {label}  [{hot}]");
+        }
 
-    public static void RenderFooter()
-    {
-        Console.WriteLine(new string('-', 80));
+        // Footer / help
+        Console.WriteLine();
+        Console.WriteLine("[H]elp  [I]nventory  [S]ave  [L]oad  [R]efresh  [Q]uit");
+        Console.WriteLine(new string('-', 64));
+
+        // Log
         if (_log.Count > 0)
         {
-            Console.WriteLine("Recent:");
-            foreach (var line in _log)
-                Console.WriteLine($"   {line}");
+            foreach (var msg in _log) Console.WriteLine($"> {msg}");
+            Console.WriteLine(new string('-', 64));
         }
-        Console.WriteLine();
-        Console.Write("Choose (number) or command: ");
+
+        Console.Write("Choose: ");
+    }
+
+    public static void RenderModal(GameState state, string title, IReadOnlyList<string> lines, bool waitForEnter = true)
+    {
+        Console.Clear();
+        Console.WriteLine($"== {title} ==");
+        Console.WriteLine($"Gold: {state.Gold}  |  Day {state.World.Day}  {state.World.Hour:00}:{state.World.Minute:00}");
+        Console.WriteLine(new string('-', 64));
+
+        foreach (var ln in lines.SelectMany(l => Wrap(l, 80)))
+            Console.WriteLine(ln);
+
+        Console.WriteLine(new string('-', 64));
+        if (waitForEnter)
+        {
+            Console.Write("Press Enter...");
+            Console.ReadLine();
+        }
     }
 
     public static void ShowHelp()
     {
-        Console.WriteLine();
-        Console.WriteLine("Help:");
-        Console.WriteLine("  - Type the number beside an option to perform it.");
-        Console.WriteLine("  - H: Help   I: Inventory (stub)   S: Save   L: Load   R: Refresh   Q: Quit");
+        Console.Clear();
+        Console.WriteLine("Controls");
+        Console.WriteLine(new string('-', 32));
+        Console.WriteLine("  - Enter the number beside an option to choose it.");
+        Console.WriteLine("  - H: Help   I: Inventory   S: Save   L: Load   R: Refresh   Q: Quit");
         Console.WriteLine();
         Pause();
     }
 
+    // ----------------- save/load helpers -----------------
+    public static void ShowSaves(IReadOnlyList<(int Index, string Line)> lines)
+    {
+        Console.Clear();
+        Console.WriteLine("Save Slots");
+        Console.WriteLine(new string('-', 64));
+        foreach (var (idx, text) in lines)
+            Console.WriteLine($"{idx,2}. {text}");
+        Console.WriteLine(new string('-', 64));
+    }
+
+    public static int Ask(string prompt)
+    {
+        Console.Write($"{prompt} ");
+        var s = (Console.ReadLine() ?? string.Empty).Trim();
+        return int.TryParse(s, NumberStyles.Integer, CultureInfo.InvariantCulture, out var n) ? n : -1;
+    }
+
+    // ----------------- input -----------------
     public static ConsoleCommand ReadCommand(int optionsCount)
     {
         var input = (Console.ReadLine() ?? string.Empty).Trim();
@@ -103,53 +126,41 @@ public static class SimpleConsoleUI
         if (string.Equals(input, "s", StringComparison.OrdinalIgnoreCase)) return new(ConsoleCommandType.Save);
         if (string.Equals(input, "l", StringComparison.OrdinalIgnoreCase)) return new(ConsoleCommandType.Load);
 
-        if (int.TryParse(input, out var n) && n >= 1 && n <= optionsCount)
-            return new(ConsoleCommandType.Choose, n - 1);
+        if (int.TryParse(input, NumberStyles.Integer, CultureInfo.InvariantCulture, out var n))
+        {
+            var idx = n - 1;
+            if (idx >= 0 && idx < optionsCount) return new(ConsoleCommandType.Choose, idx);
+        }
 
-        Notice("Invalid input.");
         return new(ConsoleCommandType.None);
     }
 
-    public static string Ask(string prompt)
+    // ----------------- small helpers -----------------
+    private static void Pause()
     {
-        Console.Write($"{prompt}: ");
-        return (Console.ReadLine() ?? string.Empty).Trim();
-    }
-
-    public static void ShowSaves(IReadOnlyList<(int idx, string label)> lines)
-    {
-        Console.WriteLine();
-        Console.WriteLine("Available saves:");
-        foreach (var (idx, label) in lines) Console.WriteLine($"  {idx}. {label}");
-        Console.WriteLine("  0. Cancel\n");
-    }
-
-    // --- Modal helpers for flows like Combat/Dialogue that should own the screen ---
-    public static void RenderModal(
-        BrineBlade.Domain.Game.GameState state,
-        string title,
-        IEnumerable<string> bodyLines,
-        bool waitForEnter = true)
-    {
-        Console.Clear();
-        RenderHeader(state, title);
-        foreach (var line in bodyLines) Console.WriteLine(line);
-        Console.WriteLine();
-        Console.WriteLine(new string('-', 80));
-        if (waitForEnter)
-        {
-            Console.Write("Press Enter to continue...");
-            Console.ReadLine();
-        }
-    }
-
-    public static void Pause(string prompt = "Press Enter to continue...")
-    {
-        Console.Write(prompt);
+        Console.Write("Press Enter...");
         Console.ReadLine();
     }
 
-    // --- Helpers ---
+    private static IEnumerable<string> Wrap(string text, int width)
+    {
+        if (string.IsNullOrWhiteSpace(text)) yield break;
+        var words = text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        var line = "";
+        foreach (var w in words)
+        {
+            var probe = (line.Length == 0) ? w : line + " " + w;
+            if (probe.Length > width)
+            {
+                if (line.Length > 0) { yield return line; line = w; }
+                else { yield return w; line = ""; }
+            }
+            else line = probe;
+        }
+        if (line.Length > 0) yield return line;
+    }
+
+    // (kept from your older helper set; used by Node banners etc.)
     private static string? FirstFlagSuffix(IEnumerable<string> flags, string prefix)
     {
         foreach (var f in flags)

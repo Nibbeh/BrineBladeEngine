@@ -1,8 +1,10 @@
+using System;
+using System.Linq;
+using System.Collections.Generic;
 using BrineBlade.AppCore.ConsoleUI;
 using BrineBlade.Domain.Entities;
 using BrineBlade.Domain.Game;
 using BrineBlade.Services.Abstractions;
-using System.Linq;
 
 namespace BrineBlade.AppCore.Flows;
 
@@ -17,49 +19,83 @@ public sealed class SaveGameFlow
         _saves = saves;
     }
 
+    private SaveGameData Snapshot() => new(
+        Version: 1,
+        Player: _state.Player,
+        World: _state.World,
+        CurrentNodeId: _state.CurrentNodeId,
+        Gold: _state.Gold,
+        Flags: _state.Flags.ToList(),
+        Inventory: _state.Inventory.ToList(),
+        Equipment: _state.Equipment.ToDictionary(kv => kv.Key, kv => kv.Value),
+        CurrentHp: _state.CurrentHp,
+        CurrentMana: _state.CurrentMana
+    );
+
     public void SaveInteractive()
     {
-        var slot = SimpleConsoleUI.Ask("Save slot name (e.g., quick, slot1)");
-        if (string.IsNullOrWhiteSpace(slot)) { SimpleConsoleUI.Notice("Save cancelled."); return; }
+        var existing = _saves.ListSaves();
+        var suggested = existing.Count == 0
+            ? "slot1"
+            : $"slot{existing.Select(s => s.SlotId)
+                            .Select(id => int.TryParse(new string(id.Where(char.IsDigit).ToArray()), out var x) ? x : 0)
+                            .DefaultIfEmpty(0).Max() + 1}";
+
+        var slot = SuggestAndAskSlot(suggested);
+        if (string.IsNullOrWhiteSpace(slot))
+        {
+            SimpleConsoleUI.Notice("Save cancelled.");
+            return;
+        }
+
         _saves.Save(slot, Snapshot());
-        SimpleConsoleUI.Notice($"Saved ? {slot}");
+        SimpleConsoleUI.Notice($"Saved ?  ({slot})");
     }
 
     public bool LoadInteractive()
     {
         var list = _saves.ListSaves();
-        if (list.Count == 0) { SimpleConsoleUI.Notice("No save files found."); return false; }
+        if (list.Count == 0)
+        {
+            SimpleConsoleUI.Notice("No save files found.");
+            return false;
+        }
 
-        var lines = list.Select((s, i) =>
-            (i + 1, $"{s.SlotId}  —  {s.PlayerName}, {s.CurrentNodeId}, {s.Gold}g, Day {s.Day} {s.Hour:00}:{s.Minute:00}")).ToList();
+        var lines = list
+            .OrderByDescending(s => s.LastWriteTimeUtc)
+            .Select((s, i) => (i + 1,
+                $"{s.SlotId} — {s.PlayerName}, {s.CurrentNodeId}, {s.Gold}g, Day {s.Day} {s.Hour:00}:{s.Minute:00}"))
+            .ToList();
 
         SimpleConsoleUI.ShowSaves(lines);
 
-        var choice = SimpleConsoleUI.Ask("Load which number");
-        if (!int.TryParse(choice, out var n) || n < 1 || n > list.Count)
-        { SimpleConsoleUI.Notice("Load cancelled."); return false; }
+        var choice = SimpleConsoleUI.Ask("Load which slot? (number, 0 to cancel)");
+        if (choice <= 0 || choice > lines.Count)
+        {
+            SimpleConsoleUI.Notice("Load cancelled.");
+            return false;
+        }
 
-        var slotId = list[n - 1].SlotId;
+        var slotId = list
+            .OrderByDescending(s => s.LastWriteTimeUtc)
+            .ElementAt(choice - 1).SlotId;
+
         var data = _saves.Load(slotId);
-        if (data is null) { SimpleConsoleUI.Notice("Load failed (file missing or corrupt)."); return false; }
+        if (data is null)
+        {
+            SimpleConsoleUI.Notice("Failed to load (file missing or corrupt).");
+            return false;
+        }
 
-        _state.ApplyFrom(data);
-        SimpleConsoleUI.Notice($"Loaded ? {slotId} (Node={_state.CurrentNodeId})");
+        _state.Load(data);
+        SimpleConsoleUI.Notice($"Loaded ?  ({slotId})");
         return true;
     }
 
-    public SaveGameData Snapshot() => new(
-     Version: 1,
-     Player: _state.Player,
-     World: _state.World,
-     CurrentNodeId: _state.CurrentNodeId,
-     Gold: _state.Gold,
-     Flags: _state.Flags.ToList(),
-     Inventory: _state.Inventory.ToList(),
-     Equipment: new Dictionary<EquipmentSlot, string>(_state.Equipment),
-     CurrentHp: _state.CurrentHp,
-     CurrentMana: _state.CurrentMana
- );
-
-
+    private static string SuggestAndAskSlot(string suggested)
+    {
+        Console.Write($"Save slot id (default: {suggested}): ");
+        var s = (Console.ReadLine() ?? string.Empty).Trim();
+        return string.IsNullOrWhiteSpace(s) ? suggested : s;
+    }
 }
