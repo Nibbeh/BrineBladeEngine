@@ -1,0 +1,9 @@
+{
+  "Id": "ITM_WRIT_PASSAGE",
+  "Name": "Writ of Passage",
+  "Type": "Misc",
+  "Weight": 0,
+  "Value": 0,
+  "Stackable": false,
+  "MaxStack": 1
+}

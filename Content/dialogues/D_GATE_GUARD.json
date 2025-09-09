@@ -1,0 +1,58 @@
+{
+  "Id": "D_GATE_GUARD",
+  "NpcId": "Gate Guard",
+  "StartLineId": "start",
+  "Lines": {
+    "start": {
+      "Text": "Papers? Purpose? The city sleeps lighter than you look.",
+      "Choices": [
+        {
+          "Label": "Present a writ of passage.",
+          "Requires": [
+            "flag:permit.entry"
+          ],
+          "Effects": [
+            {
+              "Op": "goto",
+              "To": "N_ENTRY"
+            }
+          ]
+        },
+        {
+          "Label": "Could I run an errand for entry?",
+          "Effects": [
+            {
+              "Op": "setFlag",
+              "Id": "quest.ledger"
+            },
+            {
+              "Op": "setFlag",
+              "Id": "temp.pass"
+            }
+          ]
+        },
+        {
+          "Label": "Slip 5 gold across the sill.",
+          "Effects": [
+            {
+              "Op": "addGold",
+              "Amount": -5
+            },
+            {
+              "Op": "setFlag",
+              "Id": "permit.entry"
+            }
+          ]
+        },
+        {
+          "Label": "Never mind.",
+          "Effects": [
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

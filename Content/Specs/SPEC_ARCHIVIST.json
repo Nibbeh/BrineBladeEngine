@@ -1,0 +1,11 @@
+{
+  "Id": "SPEC_ARCHIVIST",
+  "Name": "Archivist",
+  "ClassId": "CLASS_SCRIBE",
+  "StartFlags": [
+    "trait.memory"
+  ],
+  "StartItems": [
+    "ITM_TEMPLE_CHARM"
+  ]
+}

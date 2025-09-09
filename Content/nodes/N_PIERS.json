@@ -1,0 +1,36 @@
+{
+  "Id": "N_PIERS",
+  "Title": "The Piers",
+  "Description": "Winches creak; ropes thrum. Clerks tally with chalk as casks thud along planks.",
+  "Options": [
+    {
+      "Label": "Speak with the dockmaster",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_DOCKMASTER"
+        }
+      ]
+    },
+    {
+      "Label": "Drift near the warehouses (trouble)",
+      "Effects": [
+        {
+          "Op": "combat",
+          "Id": "ENEMY_THUG"
+        }
+      ]
+    }
+  ],
+  "Exits": [
+    {
+      "To": "N_ENTRY"
+    },
+    {
+      "To": "N_CUSTOMS_HOUSE"
+    },
+    {
+      "To": "N_LONG_MARKET"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "Id": "ITM_JERKIN_LEATHER",
+  "Name": "Leather Jerkin",
+  "Type": "Armor",
+  "Slot": "Chest",
+  "Weight": 4,
+  "Value": 10,
+  "Stackable": false,
+  "MaxStack": 1
+}

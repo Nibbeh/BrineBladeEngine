@@ -1,0 +1,12 @@
+{
+  "Id": "CLASS_SCRIBE",
+  "Name": "Scribe",
+  "StartGold": 8,
+  "AllowedArmor": [
+    "Cloth"
+  ],
+  "AllowedWeapons": [
+    "Knife"
+  ],
+  "Notes": "Ink‑wise, debt‑shy."
+}

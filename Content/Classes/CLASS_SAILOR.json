@@ -1,0 +1,13 @@
+{
+  "Id": "CLASS_SAILOR",
+  "Name": "Sailor",
+  "StartGold": 5,
+  "AllowedArmor": [
+    "Light"
+  ],
+  "AllowedWeapons": [
+    "Knife",
+    "Sword"
+  ],
+  "Notes": "Tide‑hardened, rope‑sure."
+}

@@ -1,0 +1,39 @@
+{
+  "Id": "N_CITY_GATE",
+  "Title": "River Gate",
+  "Description": "Granite jaws straddle the river road. Halberds and bored eyes. Beyond, the city.",
+  "Options": [
+    {
+      "Label": "Speak to the gate guard",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_GATE_GUARD"
+        }
+      ]
+    }
+  ],
+  "Exits": [
+    {
+      "To": "N_OUTSKIRTS"
+    },
+    {
+      "To": "N_ENTRY",
+      "Requires": [
+        "flag:permit.entry"
+      ]
+    },
+    {
+      "To": "N_ENTRY",
+      "Requires": [
+        "flag:temp.pass"
+      ]
+    },
+    {
+      "To": "N_SHADOW_ALLEY",
+      "Requires": [
+        "flag:route.smugglers"
+      ]
+    }
+  ]
+}

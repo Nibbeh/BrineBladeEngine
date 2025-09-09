@@ -1,0 +1,10 @@
+{
+  "Id": "ITM_DAGGER",
+  "Name": "River Dagger",
+  "Type": "Weapon",
+  "Slot": "Weapon",
+  "Weight": 1,
+  "Value": 6,
+  "Stackable": false,
+  "MaxStack": 1
+}

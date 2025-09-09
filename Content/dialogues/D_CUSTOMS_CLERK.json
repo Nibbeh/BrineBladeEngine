@@ -1,0 +1,62 @@
+{
+  "Id": "D_CUSTOMS_CLERK",
+  "NpcId": "Customs Clerk",
+  "StartLineId": "start",
+  "Lines": {
+    "start": {
+      "Text": "Forms make order. Order makes peace. What do you require?",
+      "Choices": [
+        {
+          "Label": "I’m here for a dockside ledger.",
+          "Requires": [
+            "flag:quest.ledger"
+          ],
+          "Effects": [
+            {
+              "Op": "addGold",
+              "Amount": -2
+            },
+            {
+              "Op": "setFlag",
+              "Id": "ledger.received"
+            }
+          ]
+        },
+        {
+          "Label": "Please stamp this ledger (temple chit).",
+          "Requires": [
+            "flag:ledger.received",
+            "flag:good.deed"
+          ],
+          "Effects": [
+            {
+              "Op": "setFlag",
+              "Id": "ledger.stamped"
+            }
+          ]
+        },
+        {
+          "Label": "Please stamp this ledger (found seal).",
+          "Requires": [
+            "flag:ledger.received",
+            "flag:seal.found"
+          ],
+          "Effects": [
+            {
+              "Op": "setFlag",
+              "Id": "ledger.stamped"
+            }
+          ]
+        },
+        {
+          "Label": "That’s all.",
+          "Effects": [
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

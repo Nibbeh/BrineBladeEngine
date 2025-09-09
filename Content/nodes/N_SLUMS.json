@@ -1,0 +1,33 @@
+{
+  "Id": "N_SLUMS",
+  "Title": "The Slopes",
+  "Description": "Shanties cling to the embankment like barnacles. Everyone watches; no one helps.",
+  "Options": [
+    {
+      "Label": "Ask a street urchin for news",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_URCHIN"
+        }
+      ]
+    },
+    {
+      "Label": "Keep to the shadows (danger)",
+      "Effects": [
+        {
+          "Op": "combat",
+          "Id": "ENEMY_THUG"
+        }
+      ]
+    }
+  ],
+  "Exits": [
+    {
+      "To": "N_ENTRY"
+    },
+    {
+      "To": "N_SHADOW_ALLEY"
+    }
+  ]
+}

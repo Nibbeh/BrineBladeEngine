@@ -1,0 +1,9 @@
+{
+  "Id": "ITM_FISH_PIE",
+  "Name": "Fish Pie",
+  "Type": "Consumable",
+  "Weight": 1,
+  "Value": 1,
+  "Stackable": true,
+  "MaxStack": 5
+}

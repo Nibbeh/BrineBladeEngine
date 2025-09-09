@@ -1,0 +1,9 @@
+{
+  "Id": "ITM_GUILD_TOKEN",
+  "Name": "Guild Token",
+  "Type": "Misc",
+  "Weight": 0,
+  "Value": 5,
+  "Stackable": false,
+  "MaxStack": 1
+}

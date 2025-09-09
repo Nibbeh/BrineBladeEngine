@@ -1,0 +1,42 @@
+{
+  "Id": "N_ENTRY",
+  "Title": "River Mouth Square",
+  "Description": "A cramped wedge of square where carts jam and gulls quarrel. A timber post lists dues and fines.",
+  "Options": [
+    {
+      "Label": "Look for the dockmaster (quest turn‑in)",
+      "Requires": [
+        "flag:quest.ledger"
+      ],
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_DOCKMASTER"
+        }
+      ]
+    },
+    {
+      "Label": "Ask a street urchin for directions",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_URCHIN"
+        }
+      ]
+    }
+  ],
+  "Exits": [
+    {
+      "To": "N_PIERS"
+    },
+    {
+      "To": "N_LONG_MARKET"
+    },
+    {
+      "To": "N_TEMPLE"
+    },
+    {
+      "To": "N_SLUMS"
+    }
+  ]
+}

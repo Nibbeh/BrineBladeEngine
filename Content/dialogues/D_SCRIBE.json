@@ -1,0 +1,32 @@
+{
+  "Id": "D_SCRIBE",
+  "NpcId": "Copyist",
+  "StartLineId": "start",
+  "Lines": {
+    "start": {
+      "Text": "Mind the wet ink. Your sleeve already looks guilty.",
+      "Choices": [
+        {
+          "Label": "How do permits work here?",
+          "Effects": [
+            {
+              "Op": "setFlag",
+              "Id": "info.permits"
+            },
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        },
+        {
+          "Label": "Thanks, farewell.",
+          "Effects": [
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

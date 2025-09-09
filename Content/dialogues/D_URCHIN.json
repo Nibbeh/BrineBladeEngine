@@ -1,0 +1,45 @@
+{
+  "Id": "D_URCHIN",
+  "NpcId": "Street Urchin",
+  "StartLineId": "start",
+  "Lines": {
+    "start": {
+      "Text": "Maps cost. Smiles are extra.",
+      "Choices": [
+        {
+          "Label": "Find me a lost customs seal (1 gold).",
+          "Effects": [
+            {
+              "Op": "addGold",
+              "Amount": -1
+            },
+            {
+              "Op": "setFlag",
+              "Id": "seal.found"
+            }
+          ]
+        },
+        {
+          "Label": "Point me to the piers.",
+          "Effects": [
+            {
+              "Op": "advanceTime",
+              "Minutes": 3
+            },
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        },
+        {
+          "Label": "Never mind.",
+          "Effects": [
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

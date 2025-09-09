@@ -1,0 +1,8 @@
+{
+  "Id": "ENEMY_RAT_SWARM",
+  "Name": "Rat Swarm",
+  "BaseStats": {
+    "MaxHp": 5
+  },
+  "LootTable": []
+}

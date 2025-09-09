@@ -1,0 +1,9 @@
+{
+  "Id": "ITM_LOCKPICKS",
+  "Name": "Lockpicks",
+  "Type": "Tool",
+  "Weight": 0,
+  "Value": 8,
+  "Stackable": false,
+  "MaxStack": 1
+}

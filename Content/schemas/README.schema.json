@@ -1,0 +1,3 @@
+{
+  "Note": "Schemas are human-oriented references. The current engine does not enforce them at runtime."
+}

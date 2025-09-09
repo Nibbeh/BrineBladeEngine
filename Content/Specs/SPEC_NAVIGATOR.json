@@ -1,0 +1,11 @@
+{
+  "Id": "SPEC_NAVIGATOR",
+  "Name": "Navigator",
+  "ClassId": "CLASS_SAILOR",
+  "StartFlags": [
+    "trait.sealegs"
+  ],
+  "StartItems": [
+    "ITM_DAGGER"
+  ]
+}

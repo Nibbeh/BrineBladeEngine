@@ -1,0 +1,30 @@
+{
+  "Id": "N_TEMPLE",
+  "Title": "Temple of Wakes",
+  "Description": "Salt‑washed stone and candle smoke. A bronze bell watches with a cold eye.",
+  "Options": [
+    {
+      "Label": "Speak to an acolyte",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_TEMPLE_ACOLYTE"
+        }
+      ]
+    },
+    {
+      "Label": "Shoo rats from the offertory (gross)",
+      "Effects": [
+        {
+          "Op": "combat",
+          "Id": "ENEMY_RAT_SWARM"
+        }
+      ]
+    }
+  ],
+  "Exits": [
+    {
+      "To": "N_ENTRY"
+    }
+  ]
+}

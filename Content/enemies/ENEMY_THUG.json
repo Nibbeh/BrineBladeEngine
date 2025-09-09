@@ -1,0 +1,10 @@
+{
+  "Id": "ENEMY_THUG",
+  "Name": "Dockside Thug",
+  "BaseStats": {
+    "MaxHp": 10
+  },
+  "LootTable": [
+    "ITM_DAGGER"
+  ]
+}

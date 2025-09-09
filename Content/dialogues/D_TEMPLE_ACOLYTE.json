@@ -1,0 +1,53 @@
+{
+  "Id": "D_TEMPLE_ACOLYTE",
+  "NpcId": "Acolyte",
+  "StartLineId": "start",
+  "Lines": {
+    "start": {
+      "Text": "All wake to the tide, all sleep to its hush. Be brief—pilgrims queue.",
+      "Choices": [
+        {
+          "Label": "I’ll sweep the cloister as a small service.",
+          "Effects": [
+            {
+              "Op": "advanceTime",
+              "Minutes": 10
+            },
+            {
+              "Op": "setFlag",
+              "Id": "good.deed"
+            }
+          ]
+        },
+        {
+          "Label": "Can you stamp this ledger for the docks?",
+          "Requires": [
+            "flag:ledger.received",
+            "flag:good.deed"
+          ],
+          "Effects": [
+            {
+              "Op": "setFlag",
+              "Id": "ledger.stamped"
+            },
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        },
+        {
+          "Label": "Offer a coin and leave.",
+          "Effects": [
+            {
+              "Op": "addGold",
+              "Amount": -1
+            },
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
