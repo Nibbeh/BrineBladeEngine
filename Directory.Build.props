@@ -1,9 +1,11 @@
-﻿<Project>
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <LangVersion>latest</LangVersion>
-    <Deterministic>true</Deterministic>
-  </PropertyGroup>
+﻿<!-- Directory.Build.props -->
+<Project>
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<LangVersion>latest</LangVersion>
+		<Deterministic>true</Deterministic>
+		<AnalysisLevel>latest-recommended</AnalysisLevel>
+	</PropertyGroup>
 </Project>

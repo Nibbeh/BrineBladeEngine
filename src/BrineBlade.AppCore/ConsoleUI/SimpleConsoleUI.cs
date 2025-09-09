@@ -53,7 +53,7 @@ public static class SimpleConsoleUI
         if (!string.IsNullOrWhiteSpace(spec))
             specSuffix = $" ({Humanize(spec!)})";
 
-        Console.WriteLine($"=== Brine & Blade � {title} ===");
+        Console.WriteLine($"=== Brine & Blade === {title} ===");
         Console.WriteLine(
             $"Player: {state.Player.Name}  Class: {className}{specSuffix}  " +
             $"Gold: {state.Gold}  HP: {state.CurrentHp}  MP: {state.CurrentMana}  " +
@@ -76,7 +76,7 @@ public static class SimpleConsoleUI
         {
             Console.WriteLine("Recent:");
             foreach (var line in _log)
-                Console.WriteLine($"  � {line}");
+                Console.WriteLine($"   {line}");
         }
         Console.WriteLine();
         Console.Write("Choose (number) or command: ");
