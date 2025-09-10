@@ -21,3 +21,4 @@ namespace BrineBlade.Infrastructure.Services
         public double NextDouble() => _rng.NextDouble();
     }
 }
+

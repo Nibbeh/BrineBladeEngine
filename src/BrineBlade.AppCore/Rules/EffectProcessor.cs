@@ -101,3 +101,4 @@ public sealed class EffectProcessor
         return new Outcome(endDialogue);
     }
 }
+

@@ -10,3 +10,4 @@ public sealed record EnemyDef(
     int? Mana = null,           // optional override
     IReadOnlyList<string>? LootTable = null   // item ids for drops
 );
+

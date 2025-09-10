@@ -35,3 +35,4 @@ public sealed class SpecCatalog
         return map;
     }
 }
+

@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Linq;
 using BrineBlade.Domain.Game;
 using BrineBlade.Services.Abstractions;
@@ -71,3 +71,4 @@ public sealed class JsonSaveGameService(string saveRoot) : ISaveGameService
         return JsonSerializer.Deserialize<SaveGameData>(json, _opts);
     }
 }
+

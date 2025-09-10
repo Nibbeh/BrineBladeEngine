@@ -85,7 +85,7 @@ var effects = new EffectProcessor(state, sp.GetRequiredService<IInventoryService
 
 // --- Content sanity checks ---
 var store = sp.GetRequiredService<IContentStore>();
-string[] mustHave = { "N_START", "N_TUT_GATE", "N_TUT_ALLEY" }; // adjust to your seed/tutorial IDs
+string[] mustHave = { "N_START", "N_MAIN_GATE_BRIDGE", "N_SHANTY_ALLEY" }; // adjust to your seed/tutorial IDs
 
 foreach (var id in mustHave)
 {
@@ -110,3 +110,4 @@ var session = new GameSession(
     effects);
 
 session.RunConsoleLoop();
+

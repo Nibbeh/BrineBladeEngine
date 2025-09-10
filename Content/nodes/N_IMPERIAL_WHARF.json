@@ -1,9 +1,9 @@
-{
+﻿{
   "Id": "N_IMPERIAL_WHARF",
   "Title": "Imperial Wharf",
   "Description": "Orderly warehouses under guild seals. Elf clerks watch human foremen and silent constructs.",
   "Paragraphs": [
-    "A polished door leads to the Guild Factor’s Office. A pen of stone porters stands nearby. A cracked icon faces the tide."
+    "A polished door leads to the Guild Factorâ€™s Office. A pen of stone porters stands nearby. A cracked icon faces the tide."
   ],
   "Options": [
     {
@@ -14,7 +14,7 @@
         }
       ],
       "Id": "Enter_the_Guild_Factors_Office",
-      "Label": "Enter the Guild Factor’s Office."
+      "Label": "Enter the Guild Factorâ€™s Office."
     },
     {
       "Effects": [
@@ -49,3 +49,4 @@
   ]
 
 }
+

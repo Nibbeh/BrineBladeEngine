@@ -1,4 +1,4 @@
-using BrineBlade.Domain.Entities;
+﻿using BrineBlade.Domain.Entities;
 using BrineBlade.Domain.Game;
 
 namespace BrineBlade.Services.Abstractions;
@@ -19,3 +19,4 @@ public interface IInventoryService
     // Derived stats from equipped gear
     StatDelta ComputeEquipmentBonuses(GameState state);
 }
+

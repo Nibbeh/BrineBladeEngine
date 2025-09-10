@@ -7,3 +7,4 @@ public sealed record SpecDef(
     IReadOnlyList<string>? StartFlags = null,
     IReadOnlyList<string>? Tags = null
 );
+

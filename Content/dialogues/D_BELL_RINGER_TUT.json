@@ -1,10 +1,10 @@
-{
+﻿{
   "Id": "D_BELL_RINGER_TUT",
   "NpcId": "Ringer",
   "StartLineId": "L1",
   "Lines": {
     "L1": {
-      "Text": "Storm’s due a prayer.",
+      "Text": "Stormâ€™s due a prayer.",
       "Choices": [
         {
           "Effects": [
@@ -30,3 +30,4 @@
     }
   }
 }
+

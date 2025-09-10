@@ -1,4 +1,4 @@
-using BrineBlade.Services.Abstractions;
+﻿using BrineBlade.Services.Abstractions;
 
 namespace BrineBlade.Infrastructure.Services;
 
@@ -9,3 +9,4 @@ public sealed class ClockService : IClockService
         _ = minutes; // not used in console slice; keeps signature for API parity
     }
 }
+

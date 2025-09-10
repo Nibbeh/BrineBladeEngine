@@ -1,4 +1,4 @@
-{
+﻿{
   "Id": "ITM_SWORD_SHORT",
   "Name": "Short Sword",
   "Type": "Weapon",
@@ -11,3 +11,4 @@
   "AllowedClasses": [ "CLASS_WARRIOR" ],
   "Bonuses": { "Strength": 1 }
 }
+

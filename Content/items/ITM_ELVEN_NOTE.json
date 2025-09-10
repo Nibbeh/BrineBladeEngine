@@ -1,4 +1,4 @@
-{
+﻿{
   "Id": "ITM_ELVEN_NOTE",
   "Name": "Letter of Introduction",
   "Type": "Quest",
@@ -7,3 +7,4 @@
   "Stackable": false,
   "MaxStack": 1
 }
+

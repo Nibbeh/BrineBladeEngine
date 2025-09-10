@@ -10,3 +10,4 @@ public sealed class ContentValidationException : Exception
         Errors = errors.ToList();
     }
 }
+

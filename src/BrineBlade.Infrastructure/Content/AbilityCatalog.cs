@@ -10,3 +10,4 @@ namespace BrineBlade.Infrastructure.Content
     {
     }
 }
+

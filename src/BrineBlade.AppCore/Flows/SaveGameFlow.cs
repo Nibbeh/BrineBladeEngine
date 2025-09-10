@@ -100,3 +100,4 @@ public sealed class SaveGameFlow
         return string.IsNullOrWhiteSpace(s) ? suggested : s;
     }
 }
+

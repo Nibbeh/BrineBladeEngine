@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using BrineBlade.Domain.Entities;
 
 namespace BrineBlade.Domain.Game;
@@ -16,5 +16,6 @@ public sealed record SaveGameData(
     int? CurrentHp = null,
     int? CurrentMana = null
 );
+
 
 

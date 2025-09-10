@@ -1,4 +1,4 @@
-{
+﻿{
   "Id": "D_DOCKSIDE_CHAPEL",
   "NpcId": "Acolyte",
   "StartLineId": "L1",
@@ -34,3 +34,4 @@
     }
   }
 }
+

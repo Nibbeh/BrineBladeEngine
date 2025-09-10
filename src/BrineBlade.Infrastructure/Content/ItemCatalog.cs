@@ -6,11 +6,11 @@ namespace BrineBlade.Infrastructure.Content;
 public sealed class ItemCatalog
 {
     public IReadOnlyDictionary<string, ItemDef> All => _all;
-    private readonly Dictionary<string, ItemDef> _all = new(StringComparer.Ordinal);
+    private readonly Dictionary<string, ItemDef> _all = new(StringComparer.OrdinalIgnoreCase);
 
     public ItemCatalog(string contentRoot)
     {
-        var dir = Path.Combine(contentRoot, "items"); // standardize: lowercase
+        var dir = Path.Combine(contentRoot, "items");
         if (!Directory.Exists(dir)) return;
 
         foreach (var file in Directory.EnumerateFiles(dir, "*.json", SearchOption.AllDirectories))
@@ -18,13 +18,11 @@ public sealed class ItemCatalog
             try
             {
                 var json = File.ReadAllText(file);
-                var def = JsonSerializer.Deserialize<ItemDef>(json, JsonOpts);
-                if (def is { Id.Length: > 0 }) _all[def.Id] = def;
+                var model = JsonSerializer.Deserialize<ItemDef>(json, JsonOpts);
+                if (model is { Id.Length: > 0 })
+                    _all[model.Id] = model; // OrdinalIgnoreCase key
             }
-            catch
-            {
-                // Authoring-safe: ignore malformed files while developing content
-            }
+            catch { /* authoring-time tolerance */ }
         }
     }
 
@@ -42,3 +40,4 @@ public sealed class ItemCatalog
         AllowTrailingCommas = true
     };
 }
+

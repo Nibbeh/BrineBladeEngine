@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace BrineBlade.Domain.Game;
 
@@ -11,3 +11,4 @@ public sealed record SaveSlotInfo(
     int Gold,
     int Day, int Hour, int Minute
 );
+

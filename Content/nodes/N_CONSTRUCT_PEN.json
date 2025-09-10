@@ -1,9 +1,9 @@
-{
+﻿{
   "Id": "N_CONSTRUCT_PEN",
   "Title": "Construct Pen",
-  "Description": "Stone porters stand in ranks—chiselled faces smoothed by salt.",
+  "Description": "Stone porters stand in ranksâ€”chiselled faces smoothed by salt.",
   "Paragraphs": [
-    "A human foreman mutters that stone men don’t spend wages in taverns."
+    "A human foreman mutters that stone men donâ€™t spend wages in taverns."
   ],
   "Options": [
     {
@@ -23,3 +23,4 @@
   ],
   "Exits": []
 }
+

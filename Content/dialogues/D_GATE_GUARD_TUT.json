@@ -1,10 +1,10 @@
-{
+﻿{
   "Id": "D_GATE_GUARD_TUT",
   "NpcId": "Guard",
   "StartLineId": "L1",
   "Lines": {
     "L1": {
-      "Text": "City’s shut. No one in without papers.",
+      "Text": "Cityâ€™s shut. No one in without papers.",
       "Choices": [
         {
           "Label": "What papers would do?",
@@ -53,7 +53,7 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "(Show Pilgrim’s Writ)"
+          "Label": "(Show Pilgrimâ€™s Writ)"
         },
         {
           "Requires": [
@@ -68,7 +68,7 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "(Smuggler’s arrangement)"
+          "Label": "(Smugglerâ€™s arrangement)"
         },
         {
           "Effects": [
@@ -97,7 +97,7 @@
       ]
     },
     "L2": {
-      "Text": "Temporary pass, work permit, pilgrim’s writ—or a letter from someone richer than me.",
+      "Text": "Temporary pass, work permit, pilgrimâ€™s writâ€”or a letter from someone richer than me.",
       "Choices": [
         {
           "Effects": [
@@ -111,3 +111,4 @@
     }
   }
 }
+

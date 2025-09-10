@@ -1,4 +1,4 @@
-{
+﻿{
   "Id": "N_FISH_MARKET",
   "Title": "Fish Market Rows",
   "Description": "Brine, blood, and rotting catch. Refugees barter scraps here.",
@@ -34,3 +34,4 @@
     }
   ]
 }
+

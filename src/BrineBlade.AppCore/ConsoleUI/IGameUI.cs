@@ -17,3 +17,4 @@ namespace BrineBlade.AppCore.ConsoleUI
         void Notice(IEnumerable<string> messages);
     }
 }
+

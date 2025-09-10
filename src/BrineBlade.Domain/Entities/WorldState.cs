@@ -1,4 +1,4 @@
-namespace BrineBlade.Domain.Entities;
+﻿namespace BrineBlade.Domain.Entities;
 
 public sealed class WorldState
 {
@@ -6,3 +6,4 @@ public sealed class WorldState
     public int Hour { get; set; } = 9;
     public int Minute { get; set; } = 0;
 }
+

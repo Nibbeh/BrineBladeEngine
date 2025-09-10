@@ -9,3 +9,4 @@ public sealed record StatDelta(
         new(a.Strength + b.Strength, a.Dexterity + b.Dexterity, a.Intelligence + b.Intelligence,
             a.Vitality + b.Vitality, a.Charisma + b.Charisma, a.Perception + b.Perception, a.Luck + b.Luck);
 }
+

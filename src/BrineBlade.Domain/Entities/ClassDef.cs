@@ -11,3 +11,4 @@ public sealed record ClassDef(
     IReadOnlyList<ArmorType>? AllowedArmorTypes = null,
     IReadOnlyList<WeaponType>? AllowedWeaponTypes = null
 );
+

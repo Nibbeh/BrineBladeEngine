@@ -1,4 +1,4 @@
-{
+﻿{
   "Id": "D_CAMP_ELDER",
   "NpcId": "Elder",
   "StartLineId": "L1",
@@ -36,7 +36,7 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Lie—pretend you tried."
+          "Label": "Lieâ€”pretend you tried."
         },
         {
           "Effects": [
@@ -50,3 +50,4 @@
     }
   }
 }
+

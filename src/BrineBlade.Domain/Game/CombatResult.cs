@@ -8,3 +8,4 @@ public sealed record CombatResult(
     int EnemyHpRemaining,
     IReadOnlyList<string> Loot = null!
 );
+

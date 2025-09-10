@@ -1,4 +1,4 @@
-using BrineBlade.Domain.Entities;
+﻿using BrineBlade.Domain.Entities;
 using BrineBlade.Domain.Game;
 
 namespace BrineBlade.Services.Abstractions;
@@ -11,3 +11,4 @@ public interface ICombatService
 {
     CombatResult StartCombat(GameState state, EnemyDef enemy);
 }
+

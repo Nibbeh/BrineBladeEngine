@@ -1,10 +1,10 @@
-{
+﻿{
   "Id": "D_GUARDED_CARGO",
   "NpcId": "Mercenary",
   "StartLineId": "L1",
   "Lines": {
     "L1": {
-      "Text": "Move along unless you’re lifting crates.",
+      "Text": "Move along unless youâ€™re lifting crates.",
       "Choices": [
         {
           "Effects": [
@@ -46,3 +46,4 @@
     }
   }
 }
+

@@ -1,4 +1,4 @@
-{
+﻿{
   "Id": "D_MONK",
   "NpcId": "Monk",
   "StartLineId": "L1",
@@ -50,3 +50,4 @@
     }
   }
 }
+

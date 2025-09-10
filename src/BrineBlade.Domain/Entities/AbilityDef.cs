@@ -10,3 +10,4 @@ public sealed record AbilityDef(
     IReadOnlyList<EffectSpec>? Effects = null, // when used in narrative/combat later
     IReadOnlyList<string>? Tags = null
 );
+

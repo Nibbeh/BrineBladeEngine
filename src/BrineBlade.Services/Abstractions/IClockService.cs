@@ -1,3 +1,4 @@
-namespace BrineBlade.Services.Abstractions;
+﻿namespace BrineBlade.Services.Abstractions;
 
 public interface IClockService { void AdvanceMinutes(int minutes); }
+

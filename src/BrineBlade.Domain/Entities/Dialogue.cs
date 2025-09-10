@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace BrineBlade.Domain.Entities;
 
@@ -21,3 +21,4 @@ public sealed record DialogueChoice(
     List<string>? Requires = null,
     List<EffectSpec>? Effects = null
 );
+

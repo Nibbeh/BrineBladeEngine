@@ -11,3 +11,4 @@ public sealed class SeededRandom : IRandom
     public int Next(int minValue, int maxValue) => _rng.Next(minValue, maxValue);
     public double NextDouble() => _rng.NextDouble();
 }
+

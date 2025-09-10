@@ -1,10 +1,10 @@
-{
+﻿{
   "Id": "D_LIGHTHOUSE_KEEPER_TUT",
   "NpcId": "Keeper",
   "StartLineId": "L1",
   "Lines": {
     "L1": {
-      "Text": "Sea-beasts don’t ring bells. People do.",
+      "Text": "Sea-beasts donâ€™t ring bells. People do.",
       "Choices": [
         {
           "Effects": [
@@ -24,9 +24,10 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "I’ll go."
+          "Label": "Iâ€™ll go."
         }
       ]
     }
   }
 }
+

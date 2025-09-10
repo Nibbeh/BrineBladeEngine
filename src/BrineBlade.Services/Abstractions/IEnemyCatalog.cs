@@ -10,3 +10,4 @@ namespace BrineBlade.Services.Abstractions
         EnemyDef GetRequired(string id);
     }
 }
+

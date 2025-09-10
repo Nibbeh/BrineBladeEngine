@@ -1,4 +1,4 @@
-// Content/classes/CLASS_WARRIOR.json
+﻿// Content/classes/CLASS_WARRIOR.json
 {
   "Id": "CLASS_WARRIOR",
   "Name": "Warrior",
@@ -7,3 +7,4 @@
   "AllowedArmorTypes": [ "Leather", "Plate" ],
   "AllowedWeaponTypes": [ "OneHanded", "TwoHanded", "Dagger", "Staff" ]
 }
+

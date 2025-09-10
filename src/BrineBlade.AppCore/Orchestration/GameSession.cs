@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using BrineBlade.AppCore.ConsoleUI;
 using BrineBlade.AppCore.Flows;
 using BrineBlade.AppCore.Rules;
@@ -58,3 +58,4 @@ namespace BrineBlade.AppCore.Orchestration
         private void OpenInventory() => new InventoryFlow(_state, _inventory).Run();
     }
 }
+

@@ -68,3 +68,4 @@ public sealed class GameState
     // Back-compat shim for older flows that called state.Load(data)
     public void Load(SaveGameData data) => ApplyFrom(data);
 }
+

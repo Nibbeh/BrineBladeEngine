@@ -1,10 +1,10 @@
-{
+﻿{
   "Id": "D_SMUGGLER_HINT",
   "NpcId": "Sailor",
   "StartLineId": "L1",
   "Lines": {
     "L1": {
-      "Text": "Keel’s shadow at moonrise. Ask for Ril.",
+      "Text": "Keelâ€™s shadow at moonrise. Ask for Ril.",
       "Choices": [
         {
           "Effects": [
@@ -18,3 +18,4 @@
     }
   }
 }
+

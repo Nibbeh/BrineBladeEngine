@@ -1,4 +1,4 @@
-using BrineBlade.Domain.Entities;
+﻿using BrineBlade.Domain.Entities;
 using BrineBlade.Domain.Game;
 
 namespace BrineBlade.AppCore.Bootstrap;
@@ -33,3 +33,4 @@ public static class TestSeed
         return state;
     }
 }
+

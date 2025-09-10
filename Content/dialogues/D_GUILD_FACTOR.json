@@ -1,4 +1,4 @@
-{
+﻿{
   "Id": "D_GUILD_FACTOR",
   "NpcId": "Clerk",
   "StartLineId": "L1",
@@ -45,3 +45,4 @@
     }
   }
 }
+

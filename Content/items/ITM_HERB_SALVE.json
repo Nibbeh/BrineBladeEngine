@@ -1,4 +1,4 @@
-{
+﻿{
   "Id": "ITM_HERB_SALVE",
   "Name": "Herbal Salve",
   "Type": "Consumable",
@@ -7,3 +7,4 @@
   "Stackable": true,
   "MaxStack": 5
 }
+

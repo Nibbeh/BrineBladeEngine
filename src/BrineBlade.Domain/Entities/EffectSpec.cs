@@ -1,4 +1,4 @@
-namespace BrineBlade.Domain.Entities;
+﻿namespace BrineBlade.Domain.Entities;
 
 public sealed record EffectSpec(
     string Op,
@@ -8,3 +8,4 @@ public sealed record EffectSpec(
     int? Amount = null,
     int? Qty = null
 );
+

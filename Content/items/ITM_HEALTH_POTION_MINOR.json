@@ -1,4 +1,4 @@
-{
+﻿{
   "Id": "ITM_HEALTH_POTION_MINOR",
   "Name": "Minor Health Potion",
   "Type": "Consumable",
@@ -7,3 +7,4 @@
   "Stackable": true,
   "MaxStack": 5
 }
+

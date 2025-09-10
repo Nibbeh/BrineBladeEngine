@@ -1,4 +1,4 @@
-// src/BrineBlade.Infrastructure/Services/CombatService.cs
+Ôªø// src/BrineBlade.Infrastructure/Services/CombatService.cs
 using BrineBlade.Domain.Entities;
 using BrineBlade.Domain.Game;
 using BrineBlade.Infrastructure.Content;
@@ -76,7 +76,7 @@ namespace BrineBlade.Infrastructure.Services
                         var total = roll + eAtkBonus;
                         if (roll == 20 || total >= pAC)
                         {
-                            var dmg = RollDamage(6) + Mod(eStats.Strength); // simple enemy ìclaw/clubî
+                            var dmg = RollDamage(6) + Mod(eStats.Strength); // simple enemy ‚Äúclaw/club‚Äù
                             if (roll == 20) dmg *= 2;
                             dmg -= pDR;
                             playerHp -= Math.Max(1, dmg);
@@ -207,3 +207,4 @@ namespace BrineBlade.Infrastructure.Services
         }
     }
 }
+

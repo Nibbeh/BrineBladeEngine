@@ -1,4 +1,4 @@
-{
+﻿{
   "Id": "D_GUARD_CAPTAIN_TUT",
   "NpcId": "Captain",
   "StartLineId": "L1",
@@ -39,9 +39,10 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "I’ll go."
+          "Label": "Iâ€™ll go."
         }
       ]
     }
   }
 }
+

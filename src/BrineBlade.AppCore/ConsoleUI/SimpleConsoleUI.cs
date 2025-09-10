@@ -187,3 +187,4 @@ public static class SimpleConsoleUI
         return CultureInfo.InvariantCulture.TextInfo.ToTitleCase(s.ToLowerInvariant());
     }
 }
+

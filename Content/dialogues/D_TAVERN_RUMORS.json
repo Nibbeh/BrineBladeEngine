@@ -1,4 +1,4 @@
-{
+﻿{
   "Id": "D_TAVERN_RUMORS",
   "NpcId": "Keeper",
   "StartLineId": "L1",
@@ -18,3 +18,4 @@
     }
   }
 }
+

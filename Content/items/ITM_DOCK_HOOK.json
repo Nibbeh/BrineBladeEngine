@@ -1,4 +1,4 @@
-{
+﻿{
   "Id": "ITM_DOCK_HOOK",
   "Name": "Dock Hook",
   "Type": "Weapon",
@@ -9,3 +9,4 @@
   "Slot": "Weapon",
   "WeaponType": "OneHanded"
 }
+

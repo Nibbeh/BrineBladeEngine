@@ -1,9 +1,9 @@
-{
+﻿{
   "Id": "N_OUTER_PIER",
   "Title": "Outer Pier & Docks",
   "Description": "Chaos of sailors, refugees, and stone constructs unloading ships.",
   "Paragraphs": [
-    "The dockmaster’s ledger booth is a fortress of stamps.",
+    "The dockmasterâ€™s ledger booth is a fortress of stamps.",
     "Mercenaries watch cargo piles. A family shelters beneath patched sailcloth."
   ],
   "Options": [
@@ -50,3 +50,4 @@
   ]
 
 }
+

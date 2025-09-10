@@ -1,4 +1,4 @@
-{
+﻿{
   "Id": "ITM_SOUP_POT",
   "Name": "Big Soup Pot",
   "Type": "Quest",
@@ -7,3 +7,4 @@
   "Stackable": false,
   "MaxStack": 1
 }
+

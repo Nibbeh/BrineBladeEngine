@@ -1,10 +1,10 @@
-{
+﻿{
   "Id": "D_TAVERN_DICE",
   "NpcId": "Keeper",
   "StartLineId": "L1",
   "Lines": {
     "L1": {
-      "Text": "Bones say two coins in, five if you’re lucky.",
+      "Text": "Bones say two coins in, five if youâ€™re lucky.",
       "Choices": [
         {
           "Effects": [
@@ -34,3 +34,4 @@
     }
   }
 }
+

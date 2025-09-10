@@ -20,3 +20,4 @@ public sealed record ItemDef(
 
 // State stores IDs/qty only; resolution happens in services using catalogs.
 public sealed record ItemStack(string ItemId, int Quantity);
+

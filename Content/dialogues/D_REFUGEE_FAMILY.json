@@ -1,10 +1,10 @@
-{
+﻿{
   "Id": "D_REFUGEE_FAMILY",
   "NpcId": "Mother",
   "StartLineId": "L1",
   "Lines": {
     "L1": {
-      "Text": "Gate’s shut. We wait. The child’s hungry.",
+      "Text": "Gateâ€™s shut. We wait. The childâ€™s hungry.",
       "Choices": [
         {
           "Requires": [
@@ -44,9 +44,10 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Sorry. I can’t."
+          "Label": "Sorry. I canâ€™t."
         }
       ]
     }
   }
 }
+

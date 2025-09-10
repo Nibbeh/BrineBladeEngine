@@ -47,3 +47,4 @@ namespace BrineBlade.Infrastructure.Content
         };
     }
 }
+

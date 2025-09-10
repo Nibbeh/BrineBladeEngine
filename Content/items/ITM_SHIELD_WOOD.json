@@ -1,4 +1,4 @@
-{
+﻿{
   "Id": "ITM_SHIELD_WOOD",
   "Name": "Wooden Shield",
   "Type": "Shield",
@@ -9,3 +9,4 @@
   "Slot": "Offhand",
   "AllowedClasses": [ "CLASS_WARRIOR" ]
 }
+

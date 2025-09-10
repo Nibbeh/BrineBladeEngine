@@ -1,10 +1,10 @@
-{
+﻿{
   "Id": "D_DOCKMASTER",
   "NpcId": "Dockmaster",
   "StartLineId": "L1",
   "Lines": {
     "L1": {
-      "Text": "Permits, br—fees. Temporary ones if you’ve coin.",
+      "Text": "Permits, brâ€”fees. Temporary ones if youâ€™ve coin.",
       "Choices": [
         {
           "Effects": [
@@ -32,7 +32,7 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Claim you’re contracted crew."
+          "Label": "Claim youâ€™re contracted crew."
         },
         {
           "Effects": [
@@ -46,3 +46,4 @@
     }
   }
 }
+

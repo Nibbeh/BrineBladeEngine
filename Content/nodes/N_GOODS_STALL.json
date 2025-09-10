@@ -1,9 +1,9 @@
-{
+﻿{
   "Id": "N_GOODS_STALL",
   "Title": "General Goods Stall",
   "Description": "Bundles of rope, stale bread, battered flasks.",
   "Paragraphs": [
-    "The stallholder’s smile counts coins faster than fingers."
+    "The stallholderâ€™s smile counts coins faster than fingers."
   ],
   "Options": [
     {
@@ -39,3 +39,4 @@
     }
   ]
 }
+

@@ -1,10 +1,10 @@
-{
+﻿{
   "Id": "D_SMUGGLER_CONTACT",
   "NpcId": "Smuggler",
   "StartLineId": "L1",
   "Lines": {
     "L1": {
-      "Text": "Faster way in—costly and wet.",
+      "Text": "Faster way inâ€”costly and wet.",
       "Choices": [
         {
           "Effects": [
@@ -30,3 +30,4 @@
     }
   }
 }
+

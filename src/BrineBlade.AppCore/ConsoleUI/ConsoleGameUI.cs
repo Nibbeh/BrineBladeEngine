@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using BrineBlade.Domain.Game;
 
 namespace BrineBlade.AppCore.ConsoleUI
@@ -23,3 +23,4 @@ namespace BrineBlade.AppCore.ConsoleUI
         public void Notice(IEnumerable<string> messages) => SimpleConsoleUI.Notice(messages);
     }
 }
+
