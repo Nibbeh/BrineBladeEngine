@@ -1,7 +1,9 @@
 {
   "Id": "ITM_ELVEN_NOTE",
   "Name": "Letter of Introduction",
-  "Description": "A wax-sealed note from an elven patron to the Customs Clerk.",
+  "Type": "Quest",
+  "Weight": 0,
   "Value": 0,
-  "Stackable": false
+  "Stackable": false,
+  "MaxStack": 1
 }

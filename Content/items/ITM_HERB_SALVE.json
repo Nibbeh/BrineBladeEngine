@@ -1,7 +1,9 @@
 {
   "Id": "ITM_HERB_SALVE",
   "Name": "Herbal Salve",
-  "Description": "Pounded herbs in goose fat. Restores a little vitality when used.",
+  "Type": "Consumable",
+  "Weight": 0,
   "Value": 4,
-  "Stackable": true
+  "Stackable": true,
+  "MaxStack": 5
 }

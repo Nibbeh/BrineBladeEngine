@@ -33,7 +33,7 @@
     {
       "Effects": [
         {
-          "Op": "startCombat",
+          "Op": "combat",
           "Id": "ENEMY_RAT_SWARM"
         }
       ],
@@ -43,7 +43,7 @@
   ],
   "Exits": [
     {
-      "Text": "To Smugglers’ Den",
+      "Text": "To Smugglers\u2019 Den",
       "To": "N_SMUGGLERS_DEN"
     },
     {

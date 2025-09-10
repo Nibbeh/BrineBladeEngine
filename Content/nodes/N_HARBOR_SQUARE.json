@@ -50,6 +50,14 @@
     {
       "Text": "To Main Gate Bridge",
       "To": "N_MAIN_GATE_BRIDGE"
+    },
+    {
+      "Text": "To Refugee Camp",
+      "To": "N_REFUGEE_CAMP"
+    },
+    {
+      "Text": "To Harbor Watch",
+      "To": "N_HARBOR_WATCH"
     }
   ]
 }

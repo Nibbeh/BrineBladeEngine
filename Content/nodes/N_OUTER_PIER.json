@@ -40,16 +40,13 @@
   ],
   "Exits": [
     {
-      "Text": "Imperial Wharf",
-      "To": "N_IMPERIAL_WHARF"
-    },
-    {
-      "Text": "Harbor Town Square",
+      "Text": "Back to Harbor Square",
       "To": "N_HARBOR_SQUARE"
     },
     {
-      "Text": "Under the pier catwalk",
-      "To": "N_UNDER_PIER"
+      "Text": "To Imperial Wharf",
+      "To": "N_IMPERIAL_WHARF"
     }
   ]
+
 }

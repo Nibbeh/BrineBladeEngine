@@ -1,17 +1,18 @@
 {
   "Id": "ENEMY_CUTPURSE",
-  "Title": "Cutpurse",
-  "Hp": 10,
-  "BaseStats": {
-    "MaxHp": 10,
-    "Attack": 2,
-    "Defense": 10
+  "Name": "Cutpurse",
+  "Stats": {
+    "Strength": 6,
+    "Dexterity": 12,
+    "Intelligence": 6,
+    "Vitality": 8,
+    "Charisma": 6,
+    "Perception": 10,
+    "Luck": 8
   },
-  "Description": "A quick-fingered thief trawling the crowds.",
-  "Loot": [
-    {
-      "Gold": 8,
-      "Chance": 0.6
-    }
+  "Level": 1,
+  "Hp": 10,
+  "LootTable": [
+    "ITM_HERB_SALVE"
   ]
 }

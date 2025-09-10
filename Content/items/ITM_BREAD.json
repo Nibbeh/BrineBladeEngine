@@ -1,0 +1,9 @@
+{
+  "Id": "ITM_BREAD",
+  "Name": "Loaf of Bread",
+  "Type": "Consumable",
+  "Weight": 0,
+  "Value": 1,
+  "Stackable": true,
+  "MaxStack": 12
+}

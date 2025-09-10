@@ -39,12 +39,13 @@
   ],
   "Exits": [
     {
-      "Text": "To Harbor Town Square",
+      "Text": "Back to Harbor Square",
       "To": "N_HARBOR_SQUARE"
     },
     {
-      "Text": "To Stormlight Lighthouse",
-      "To": "N_LIGHTHOUSE"
+      "Text": "Old Sea Bell",
+      "To": "N_OLD_SEA_BELL"
     }
   ]
+
 }

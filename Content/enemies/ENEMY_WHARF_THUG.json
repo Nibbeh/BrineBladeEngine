@@ -1,22 +1,18 @@
 {
   "Id": "ENEMY_WHARF_THUG",
-  "Title": "Wharf Thug",
-  "Hp": 12,
-  "BaseStats": {
-    "MaxHp": 12,
-    "Attack": 3,
-    "Defense": 10
+  "Name": "Wharf Thug",
+  "Stats": {
+    "Strength": 10,
+    "Dexterity": 8,
+    "Intelligence": 4,
+    "Vitality": 10,
+    "Charisma": 4,
+    "Perception": 6,
+    "Luck": 5
   },
-  "Description": "A dockside enforcer with a sand-stuffed cosh.",
-  "Loot": [
-    {
-      "Gold": 6,
-      "Chance": 0.7
-    },
-    {
-      "Item": "ITM_DOCK_HOOK",
-      "Qty": 1,
-      "Chance": 0.25
-    }
+  "Level": 1,
+  "Hp": 12,
+  "LootTable": [
+    "ITM_DOCK_HOOK"
   ]
 }

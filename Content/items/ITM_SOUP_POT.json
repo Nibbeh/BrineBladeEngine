@@ -1,7 +1,9 @@
 {
   "Id": "ITM_SOUP_POT",
   "Name": "Big Soup Pot",
-  "Description": "Borrowed pot for feeding refugees. Best return it clean.",
+  "Type": "Quest",
+  "Weight": 2,
   "Value": 1,
-  "Stackable": false
+  "Stackable": false,
+  "MaxStack": 1
 }

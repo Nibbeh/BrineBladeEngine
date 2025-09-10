@@ -29,12 +29,10 @@
   ],
   "Exits": [
     {
-      "Text": "Down to Old Sea Bell",
-      "To": "N_OLD_SEA_BELL"
-    },
-    {
-      "Text": "Back to Imperial Wharf",
-      "To": "N_IMPERIAL_WHARF"
+      "Text": "Back to Harbor Square",
+      "To": "N_HARBOR_SQUARE"
     }
   ]
+
+
 }

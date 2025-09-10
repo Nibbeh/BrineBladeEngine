@@ -46,12 +46,9 @@
   ],
   "Exits": [
     {
-      "Text": "Back up to the pier",
-      "To": "N_OUTER_PIER"
-    },
-    {
-      "Text": "Along the catwalk to the Old Sea Bell",
-      "To": "N_OLD_SEA_BELL"
+      "Text": "Back to Shanty Alley",
+      "To": "N_SHANTY_ALLEY"
     }
   ]
+
 }

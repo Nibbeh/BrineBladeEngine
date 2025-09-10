@@ -1,7 +1,11 @@
 {
   "Id": "ITM_DOCK_HOOK",
   "Name": "Dock Hook",
-  "Description": "A long iron hook used to drag lines. Doubles as a crude polearm.",
+  "Type": "Weapon",
+  "Weight": 6,
   "Value": 5,
-  "Stackable": false
+  "Stackable": false,
+  "MaxStack": 1,
+  "Slot": "Weapon",
+  "WeaponType": "OneHanded"
 }

@@ -14,12 +14,12 @@
         }
       ],
       "Id": "Smugglers_cornerask_about_faster_ways",
-      "Label": "Smuggler’s corner—ask about faster ways."
+      "Label": "Smuggler\u2019s corner\u2014ask about faster ways."
     },
     {
       "Effects": [
         {
-          "Op": "startCombat",
+          "Op": "combat",
           "Id": "ENEMY_CUTPURSE"
         }
       ],

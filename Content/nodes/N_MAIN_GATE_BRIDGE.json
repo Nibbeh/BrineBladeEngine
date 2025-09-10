@@ -42,8 +42,13 @@
   ],
   "Exits": [
     {
-      "Text": "Back to Harbor Town Square",
+      "Text": "Back to Harbor Square",
       "To": "N_HARBOR_SQUARE"
+    },
+    {
+      "Text": "Enter the City (tutorial end)",
+      "To": "N_CITY_INTRO"
     }
   ]
+
 }

@@ -33,12 +33,9 @@
   ],
   "Exits": [
     {
-      "Text": "Back along the path to the lighthouse",
-      "To": "N_LIGHTHOUSE"
-    },
-    {
-      "Text": "Path back to the square",
-      "To": "N_HARBOR_SQUARE"
+      "Text": "Imperial Wharf",
+      "To": "N_IMPERIAL_WHARF"
     }
   ]
+
 }

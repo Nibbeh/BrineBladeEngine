@@ -1,7 +1,9 @@
 {
   "Id": "ITM_SMUGGLER_TOKEN",
-  "Name": "Smuggler's Token",
-  "Description": "A carved bone chip with a gull sigil—the broker's mark.",
+  "Name": "Smuggler\u2019s Mark",
+  "Type": "Quest",
+  "Weight": 0,
   "Value": 0,
-  "Stackable": false
+  "Stackable": false,
+  "MaxStack": 1
 }
