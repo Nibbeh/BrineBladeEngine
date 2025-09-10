@@ -7,32 +7,24 @@
   ],
   "Options": [
     {
-      "Text": "Speak with the keeper.",
       "Effects": [
         {
           "Op": "startDialogue",
           "Id": "D_LIGHTHOUSE_KEEPER_TUT"
         }
-      ]
+      ],
+      "Id": "Speak_with_the_keeper",
+      "Label": "Speak with the keeper."
     },
     {
-      "Text": "Climb the broken stair (cost 1hp).",
       "Effects": [
         {
           "Op": "setFlag",
-          "Name": "lore.seabeast",
-          "Value": true
+          "Id": "lore.seabeast"
         }
-      ]
-    },
-    {
-      "Text": "Down to the Old Sea Bell.",
-      "Effects": [
-        {
-          "Op": "goto",
-          "Id": "N_OLD_SEA_BELL"
-        }
-      ]
+      ],
+      "Id": "Climb_the_broken_stair_cost_1hp",
+      "Label": "Climb the broken stair (cost 1hp)."
     }
   ],
   "Exits": [

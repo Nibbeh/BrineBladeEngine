@@ -1,54 +1,47 @@
 {
   "Id": "D_GUILD_FACTOR",
-  "Speakers": [
-    "Clerk",
-    "You"
-  ],
-  "Start": "L1",
-  "Lines": [
-    {
-      "Id": "L1",
-      "Speaker": "Clerk",
+  "NpcId": "Clerk",
+  "StartLineId": "L1",
+  "Lines": {
+    "L1": {
       "Text": "Standing?",
       "Choices": [
         {
-          "Text": "Present Temporary Pass.",
           "Requires": [
             "flag:permit.temp"
           ],
           "Effects": [
             {
               "Op": "setFlag",
-              "Name": "letter.guild",
-              "Value": true
+              "Id": "letter.guild"
             },
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Label": "Present Temporary Pass."
         },
         {
-          "Text": "Ask for a letter of introduction.",
           "Effects": [
             {
               "Op": "setFlag",
-              "Name": "note.elven",
-              "Value": true
+              "Id": "note.elven"
             },
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Label": "Ask for a letter of introduction."
         },
         {
-          "Text": "Nevermind.",
           "Effects": [
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Label": "Nevermind."
         }
       ]
     }
-  ]
+  }
 }

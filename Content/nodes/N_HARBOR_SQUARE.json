@@ -8,58 +8,34 @@
   ],
   "Options": [
     {
-      "Text": "Enter the Salted Keel Tavern.",
       "Effects": [
         {
           "Op": "goto",
-          "Id": "N_TAVERN"
+          "To": "N_TAVERN"
         }
-      ]
+      ],
+      "Id": "Enter_the_Salted_Keel_Tavern",
+      "Label": "Enter the Salted Keel Tavern."
     },
     {
-      "Text": "Browse the general goods stall.",
       "Effects": [
         {
           "Op": "goto",
-          "Id": "N_GOODS_STALL"
+          "To": "N_GOODS_STALL"
         }
-      ]
+      ],
+      "Id": "Browse_the_general_goods_stall",
+      "Label": "Browse the general goods stall."
     },
     {
-      "Text": "Listen to the street preacher.",
       "Effects": [
         {
           "Op": "startDialogue",
           "Id": "D_PREACHER"
         }
-      ]
-    },
-    {
-      "Text": "Head into the Fish Market rows.",
-      "Effects": [
-        {
-          "Op": "goto",
-          "Id": "N_FISH_MARKET"
-        }
-      ]
-    },
-    {
-      "Text": "Cut through Shanty Alley.",
-      "Effects": [
-        {
-          "Op": "goto",
-          "Id": "N_SHANTY_ALLEY"
-        }
-      ]
-    },
-    {
-      "Text": "Cross to the Bridge and Gate.",
-      "Effects": [
-        {
-          "Op": "goto",
-          "Id": "N_MAIN_GATE_BRIDGE"
-        }
-      ]
+      ],
+      "Id": "Listen_to_the_street_preacher",
+      "Label": "Listen to the street preacher."
     }
   ],
   "Exits": [

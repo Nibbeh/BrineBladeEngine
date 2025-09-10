@@ -7,31 +7,34 @@
   ],
   "Options": [
     {
-      "Text": "Search the beams (find 2g).",
       "Effects": [
         {
           "Op": "addGold",
           "Amount": 2
         }
-      ]
+      ],
+      "Id": "Search_the_beams_find_2g",
+      "Label": "Search the beams (find 2g)."
     },
     {
-      "Text": "Follow gull sigils to Shanty Alley.",
       "Effects": [
         {
           "Op": "goto",
-          "Id": "N_SHANTY_ALLEY"
+          "To": "N_SHANTY_ALLEY"
         }
-      ]
+      ],
+      "Id": "Follow_gull_sigils_to_Shanty_Alley",
+      "Label": "Follow gull sigils to Shanty Alley."
     },
     {
-      "Text": "Keep low and listen (smuggler hint).",
       "Effects": [
         {
           "Op": "startDialogue",
           "Id": "D_SMUGGLER_HINT"
         }
-      ]
+      ],
+      "Id": "Keep_low_and_listen_smuggler_hint",
+      "Label": "Keep low and listen (smuggler hint)."
     }
   ],
   "Exits": [

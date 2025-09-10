@@ -7,16 +7,16 @@
   ],
   "Options": [
     {
-      "Text": "Speak to the bell ringer.",
       "Effects": [
         {
           "Op": "startDialogue",
           "Id": "D_BELL_RINGER_TUT"
         }
-      ]
+      ],
+      "Id": "Speak_to_the_bell_ringer",
+      "Label": "Speak to the bell ringer."
     },
     {
-      "Text": "Offer a coin (1g).",
       "Effects": [
         {
           "Op": "addGold",
@@ -24,19 +24,11 @@
         },
         {
           "Op": "setFlag",
-          "Name": "blessing.luck",
-          "Value": true
+          "Id": "blessing.luck"
         }
-      ]
-    },
-    {
-      "Text": "Back toward the lighthouse.",
-      "Effects": [
-        {
-          "Op": "goto",
-          "Id": "N_LIGHTHOUSE"
-        }
-      ]
+      ],
+      "Id": "Offer_a_coin_1g",
+      "Label": "Offer a coin (1g)."
     }
   ],
   "Exits": [

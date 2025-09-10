@@ -7,24 +7,19 @@
   ],
   "Options": [
     {
-      "Text": "Listen and move on.",
       "Effects": [
         {
           "Op": "setFlag",
-          "Name": "lore.constructs",
-          "Value": true
+          "Id": "lore.constructs"
         },
         {
           "Op": "goto",
-          "Id": "N_IMPERIAL_WHARF"
+          "To": "N_IMPERIAL_WHARF"
         }
-      ]
+      ],
+      "Id": "Listen_and_move_on",
+      "Label": "Listen and move on."
     }
   ],
-  "Exits": [
-    {
-      "Text": "Back to Imperial Wharf",
-      "To": "N_IMPERIAL_WHARF"
-    }
-  ]
+  "Exits": []
 }

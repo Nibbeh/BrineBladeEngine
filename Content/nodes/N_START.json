@@ -5,17 +5,7 @@
   "Paragraphs": [
     "You disembark into brine air and lantern fog. Refugees huddle under tarps. A ledger booth watches it all."
   ],
-  "Options": [
-    {
-      "Text": "Step onto the pier.",
-      "Effects": [
-        {
-          "Op": "goto",
-          "Id": "N_OUTER_PIER"
-        }
-      ]
-    }
-  ],
+  "Options": [],
   "Exits": [
     {
       "Text": "To the Outer Pier",

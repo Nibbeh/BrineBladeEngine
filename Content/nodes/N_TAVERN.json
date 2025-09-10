@@ -7,31 +7,24 @@
   ],
   "Options": [
     {
-      "Text": "Play knucklebones (stake 2g).",
       "Effects": [
         {
           "Op": "startDialogue",
           "Id": "D_TAVERN_DICE"
         }
-      ]
+      ],
+      "Id": "Play_knucklebones_stake_2g",
+      "Label": "Play knucklebones (stake 2g)."
     },
     {
-      "Text": "Ask for rumors.",
       "Effects": [
         {
           "Op": "startDialogue",
           "Id": "D_TAVERN_RUMORS"
         }
-      ]
-    },
-    {
-      "Text": "Back to the square.",
-      "Effects": [
-        {
-          "Op": "goto",
-          "Id": "N_HARBOR_SQUARE"
-        }
-      ]
+      ],
+      "Id": "Ask_for_rumors",
+      "Label": "Ask for rumors."
     }
   ],
   "Exits": [

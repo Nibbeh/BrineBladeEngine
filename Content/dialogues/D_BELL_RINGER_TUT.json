@@ -1,38 +1,32 @@
 {
   "Id": "D_BELL_RINGER_TUT",
-  "Speakers": [
-    "Ringer",
-    "You"
-  ],
-  "Start": "L1",
-  "Lines": [
-    {
-      "Id": "L1",
-      "Speaker": "Ringer",
+  "NpcId": "Ringer",
+  "StartLineId": "L1",
+  "Lines": {
+    "L1": {
       "Text": "Storm’s due a prayer.",
       "Choices": [
         {
-          "Text": "Ring the bell.",
           "Effects": [
             {
               "Op": "setFlag",
-              "Name": "bell.rung",
-              "Value": true
+              "Id": "bell.rung"
             },
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Label": "Ring the bell."
         },
         {
-          "Text": "Not today.",
           "Effects": [
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Label": "Not today."
         }
       ]
     }
-  ]
+  }
 }

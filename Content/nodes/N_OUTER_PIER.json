@@ -8,49 +8,34 @@
   ],
   "Options": [
     {
-      "Text": "Approach the dockmaster.",
       "Effects": [
         {
           "Op": "startDialogue",
           "Id": "D_DOCKMASTER"
         }
-      ]
+      ],
+      "Id": "Approach_the_dockmaster",
+      "Label": "Approach the dockmaster."
     },
     {
-      "Text": "Speak with the refugee family.",
       "Effects": [
         {
           "Op": "startDialogue",
           "Id": "D_REFUGEE_FAMILY"
         }
-      ]
+      ],
+      "Id": "Speak_with_the_refugee_family",
+      "Label": "Speak with the refugee family."
     },
     {
-      "Text": "Poke around the guarded cargo.",
       "Effects": [
         {
           "Op": "startDialogue",
           "Id": "D_GUARDED_CARGO"
         }
-      ]
-    },
-    {
-      "Text": "Head toward Imperial Wharf.",
-      "Effects": [
-        {
-          "Op": "goto",
-          "Id": "N_IMPERIAL_WHARF"
-        }
-      ]
-    },
-    {
-      "Text": "Make for Harbor Town Square.",
-      "Effects": [
-        {
-          "Op": "goto",
-          "Id": "N_HARBOR_SQUARE"
-        }
-      ]
+      ],
+      "Id": "Poke_around_the_guarded_cargo",
+      "Label": "Poke around the guarded cargo."
     }
   ],
   "Exits": [

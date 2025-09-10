@@ -1,18 +1,12 @@
 {
   "Id": "D_CAMP_ELDER",
-  "Speakers": [
-    "Elder",
-    "You"
-  ],
-  "Start": "L1",
-  "Lines": [
-    {
-      "Id": "L1",
-      "Speaker": "Elder",
+  "NpcId": "Elder",
+  "StartLineId": "L1",
+  "Lines": {
+    "L1": {
       "Text": "If you have bread, share it. If not, keep your promises.",
       "Choices": [
         {
-          "Text": "Distribute bread.",
           "Requires": [
             "flag:inv.ITM_BREAD"
           ],
@@ -24,36 +18,35 @@
             },
             {
               "Op": "setFlag",
-              "Name": "help.camp",
-              "Value": true
+              "Id": "help.camp"
             },
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Label": "Distribute bread."
         },
         {
-          "Text": "Lie—pretend you tried.",
           "Effects": [
             {
               "Op": "setFlag",
-              "Name": "lie.camp",
-              "Value": true
+              "Id": "lie.camp"
             },
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Label": "Lie—pretend you tried."
         },
         {
-          "Text": "Leave.",
           "Effects": [
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Label": "Leave."
         }
       ]
     }
-  ]
+  }
 }

@@ -1,86 +1,76 @@
 {
   "Id": "D_GATE_GUARD_TUT",
-  "Speakers": [
-    "Guard",
-    "You"
-  ],
-  "Start": "L1",
-  "Lines": [
-    {
-      "Id": "L1",
-      "Speaker": "Guard",
+  "NpcId": "Guard",
+  "StartLineId": "L1",
+  "Lines": {
+    "L1": {
       "Text": "City’s shut. No one in without papers.",
       "Choices": [
         {
-          "Text": "What papers would do?",
-          "Next": "L2"
+          "Label": "What papers would do?",
+          "Goto": "L2"
         },
         {
-          "Text": "(Show Temporary Pass)",
           "Requires": [
             "flag:permit.temp"
           ],
           "Effects": [
             {
               "Op": "setFlag",
-              "Name": "pass.accepted",
-              "Value": true
+              "Id": "pass.accepted"
             },
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Label": "(Show Temporary Pass)"
         },
         {
-          "Text": "(Show Work Permit)",
           "Requires": [
             "flag:permit.worker"
           ],
           "Effects": [
             {
               "Op": "setFlag",
-              "Name": "pass.accepted",
-              "Value": true
+              "Id": "pass.accepted"
             },
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Label": "(Show Work Permit)"
         },
         {
-          "Text": "(Show Pilgrim’s Writ)",
           "Requires": [
             "flag:writ.pilgrim"
           ],
           "Effects": [
             {
               "Op": "setFlag",
-              "Name": "pass.accepted",
-              "Value": true
+              "Id": "pass.accepted"
             },
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Label": "(Show Pilgrim’s Writ)"
         },
         {
-          "Text": "(Smuggler’s arrangement)",
           "Requires": [
             "flag:route.smuggler"
           ],
           "Effects": [
             {
               "Op": "setFlag",
-              "Name": "pass.accepted",
-              "Value": true
+              "Id": "pass.accepted"
             },
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Label": "(Smuggler’s arrangement)"
         },
         {
-          "Text": "(Bribe) 20g.",
           "Effects": [
             {
               "Op": "addGold",
@@ -88,38 +78,36 @@
             },
             {
               "Op": "setFlag",
-              "Name": "pass.accepted",
-              "Value": true
+              "Id": "pass.accepted"
             },
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Label": "(Bribe) 20g."
         },
         {
-          "Text": "Nevermind.",
           "Effects": [
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Label": "Nevermind."
         }
       ]
     },
-    {
-      "Id": "L2",
-      "Speaker": "Guard",
+    "L2": {
       "Text": "Temporary pass, work permit, pilgrim’s writ—or a letter from someone richer than me.",
       "Choices": [
         {
-          "Text": "Thanks.",
           "Effects": [
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Label": "Thanks."
         }
       ]
     }
-  ]
+  }
 }

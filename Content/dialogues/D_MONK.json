@@ -1,18 +1,12 @@
 {
   "Id": "D_MONK",
-  "Speakers": [
-    "Monk",
-    "You"
-  ],
-  "Start": "L1",
-  "Lines": [
-    {
-      "Id": "L1",
-      "Speaker": "Monk",
+  "NpcId": "Monk",
+  "StartLineId": "L1",
+  "Lines": {
+    "L1": {
       "Text": "The sea tests us.",
       "Choices": [
         {
-          "Text": "Ask for mercy of passage.",
           "Requires": [
             "flag:help.camp",
             "flag:piety"
@@ -20,16 +14,15 @@
           "Effects": [
             {
               "Op": "setFlag",
-              "Name": "writ.pilgrim",
-              "Value": true
+              "Id": "writ.pilgrim"
             },
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Label": "Ask for mercy of passage."
         },
         {
-          "Text": "Accept bread.",
           "Requires": [
             "flag:moral.kind.refugee"
           ],
@@ -42,17 +35,18 @@
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Label": "Accept bread."
         },
         {
-          "Text": "Thank him.",
           "Effects": [
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Label": "Thank him."
         }
       ]
     }
-  ]
+  }
 }

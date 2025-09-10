@@ -7,7 +7,6 @@
   ],
   "Options": [
     {
-      "Text": "Pay 15g for the mark.",
       "Effects": [
         {
           "Op": "addGold",
@@ -15,32 +14,34 @@
         },
         {
           "Op": "setFlag",
-          "Name": "token.smuggler",
-          "Value": true
+          "Id": "token.smuggler"
         }
-      ]
+      ],
+      "Id": "Pay_15g_for_the_mark",
+      "Label": "Pay 15g for the mark."
     },
     {
-      "Text": "Flash the mark to arrange passage.",
       "Requires": [
         "flag:token.smuggler"
       ],
       "Effects": [
         {
           "Op": "setFlag",
-          "Name": "route.smuggler",
-          "Value": true
+          "Id": "route.smuggler"
         }
-      ]
+      ],
+      "Id": "Flash_the_mark_to_arrange_passage",
+      "Label": "Flash the mark to arrange passage."
     },
     {
-      "Text": "Back to Shanty Alley.",
       "Effects": [
         {
           "Op": "goto",
-          "Id": "N_SHANTY_ALLEY"
+          "To": "N_SHANTY_ALLEY"
         }
-      ]
+      ],
+      "Id": "Back_to_Shanty_Alley",
+      "Label": "Back to Shanty Alley."
     }
   ],
   "Exits": [

@@ -7,43 +7,37 @@
   ],
   "Options": [
     {
-      "Text": "Speak to the Gate Guard.",
       "Effects": [
         {
           "Op": "startDialogue",
           "Id": "D_GATE_GUARD_TUT"
         }
-      ]
+      ],
+      "Id": "Speak_to_the_Gate_Guard",
+      "Label": "Speak to the Gate Guard."
     },
     {
-      "Text": "(If accepted) Enter the city.",
       "Requires": [
         "flag:pass.accepted"
       ],
       "Effects": [
         {
           "Op": "goto",
-          "Id": "N_CITY_INTRO"
+          "To": "N_CITY_INTRO"
         }
-      ]
+      ],
+      "Id": "If_accepted_Enter_the_city",
+      "Label": "(If accepted) Enter the city."
     },
     {
-      "Text": "If all else fails: work a dock shift (earn 10g) and try again.",
       "Effects": [
         {
           "Op": "addGold",
           "Amount": 10
         }
-      ]
-    },
-    {
-      "Text": "Back to the square.",
-      "Effects": [
-        {
-          "Op": "goto",
-          "Id": "N_HARBOR_SQUARE"
-        }
-      ]
+      ],
+      "Id": "If_all_else_fails_work_a_dock_shift_earn",
+      "Label": "If all else fails: work a dock shift (earn 10g) and try again."
     }
   ],
   "Exits": [

@@ -7,13 +7,14 @@
   ],
   "Options": [
     {
-      "Text": "Continue...",
       "Effects": [
         {
           "Op": "goto",
-          "Id": "N_CITY_INTRO"
+          "To": "N_CITY_INTRO"
         }
-      ]
+      ],
+      "Id": "Continue",
+      "Label": "Continue..."
     }
   ],
   "Exits": []

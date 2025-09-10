@@ -1,38 +1,32 @@
 {
   "Id": "D_LIGHTHOUSE_KEEPER_TUT",
-  "Speakers": [
-    "Keeper",
-    "You"
-  ],
-  "Start": "L1",
-  "Lines": [
-    {
-      "Id": "L1",
-      "Speaker": "Keeper",
+  "NpcId": "Keeper",
+  "StartLineId": "L1",
+  "Lines": {
+    "L1": {
       "Text": "Sea-beasts don’t ring bells. People do.",
       "Choices": [
         {
-          "Text": "Any pilgrims pass?",
           "Effects": [
             {
               "Op": "setFlag",
-              "Name": "lore.pilgrims",
-              "Value": true
+              "Id": "lore.pilgrims"
             },
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Label": "Any pilgrims pass?"
         },
         {
-          "Text": "I’ll go.",
           "Effects": [
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Label": "I’ll go."
         }
       ]
     }
-  ]
+  }
 }

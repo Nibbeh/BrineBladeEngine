@@ -1,18 +1,12 @@
 {
   "Id": "D_REFUGEE_FAMILY",
-  "Speakers": [
-    "Mother",
-    "You"
-  ],
-  "Start": "L1",
-  "Lines": [
-    {
-      "Id": "L1",
-      "Speaker": "Mother",
+  "NpcId": "Mother",
+  "StartLineId": "L1",
+  "Lines": {
+    "L1": {
       "Text": "Gate’s shut. We wait. The child’s hungry.",
       "Choices": [
         {
-          "Text": "Give bread.",
           "Requires": [
             "flag:inv.ITM_BREAD"
           ],
@@ -24,36 +18,35 @@
             },
             {
               "Op": "setFlag",
-              "Name": "moral.kind.refugee",
-              "Value": true
+              "Id": "moral.kind.refugee"
             },
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Label": "Give bread."
         },
         {
-          "Text": "Promise to help later.",
           "Effects": [
             {
               "Op": "setFlag",
-              "Name": "promise.bread",
-              "Value": true
+              "Id": "promise.bread"
             },
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Label": "Promise to help later."
         },
         {
-          "Text": "Sorry. I can’t.",
           "Effects": [
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Label": "Sorry. I can’t."
         }
       ]
     }
-  ]
+  }
 }

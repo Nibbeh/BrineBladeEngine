@@ -7,7 +7,6 @@
   ],
   "Options": [
     {
-      "Text": "Buy a loaf of bread (1g).",
       "Effects": [
         {
           "Op": "addGold",
@@ -18,26 +17,19 @@
           "Id": "ITM_BREAD",
           "Qty": 1
         }
-      ]
+      ],
+      "Id": "Buy_a_loaf_of_bread_1g",
+      "Label": "Buy a loaf of bread (1g)."
     },
     {
-      "Text": "Ask about the gates.",
       "Effects": [
         {
           "Op": "setFlag",
-          "Name": "hint.gates",
-          "Value": true
+          "Id": "hint.gates"
         }
-      ]
-    },
-    {
-      "Text": "Back to the square.",
-      "Effects": [
-        {
-          "Op": "goto",
-          "Id": "N_HARBOR_SQUARE"
-        }
-      ]
+      ],
+      "Id": "Ask_about_the_gates",
+      "Label": "Ask about the gates."
     }
   ],
   "Exits": [

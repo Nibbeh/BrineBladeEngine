@@ -7,31 +7,24 @@
   ],
   "Options": [
     {
-      "Text": "Speak with the Camp Elder.",
       "Effects": [
         {
           "Op": "startDialogue",
           "Id": "D_CAMP_ELDER"
         }
-      ]
+      ],
+      "Id": "Speak_with_the_Camp_Elder",
+      "Label": "Speak with the Camp Elder."
     },
     {
-      "Text": "Speak with the monk.",
       "Effects": [
         {
           "Op": "startDialogue",
           "Id": "D_MONK"
         }
-      ]
-    },
-    {
-      "Text": "Back to the square.",
-      "Effects": [
-        {
-          "Op": "goto",
-          "Id": "N_HARBOR_SQUARE"
-        }
-      ]
+      ],
+      "Id": "Speak_with_the_monk",
+      "Label": "Speak with the monk."
     }
   ],
   "Exits": [

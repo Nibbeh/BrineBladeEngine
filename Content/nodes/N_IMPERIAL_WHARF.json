@@ -7,40 +7,34 @@
   ],
   "Options": [
     {
-      "Text": "Enter the Guild Factor’s Office.",
       "Effects": [
         {
           "Op": "startDialogue",
           "Id": "D_GUILD_FACTOR"
         }
-      ]
+      ],
+      "Id": "Enter_the_Guild_Factors_Office",
+      "Label": "Enter the Guild Factor’s Office."
     },
     {
-      "Text": "Inspect the construct pen.",
       "Effects": [
         {
           "Op": "goto",
-          "Id": "N_CONSTRUCT_PEN"
+          "To": "N_CONSTRUCT_PEN"
         }
-      ]
+      ],
+      "Id": "Inspect_the_construct_pen",
+      "Label": "Inspect the construct pen."
     },
     {
-      "Text": "Visit the dockside chapel.",
       "Effects": [
         {
           "Op": "startDialogue",
           "Id": "D_DOCKSIDE_CHAPEL"
         }
-      ]
-    },
-    {
-      "Text": "Return to Harbor Town Square.",
-      "Effects": [
-        {
-          "Op": "goto",
-          "Id": "N_HARBOR_SQUARE"
-        }
-      ]
+      ],
+      "Id": "Visit_the_dockside_chapel",
+      "Label": "Visit the dockside chapel."
     }
   ],
   "Exits": [

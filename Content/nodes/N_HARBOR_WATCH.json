@@ -7,32 +7,24 @@
   ],
   "Options": [
     {
-      "Text": "Talk to the Guard Captain.",
       "Effects": [
         {
           "Op": "startDialogue",
           "Id": "D_GUARD_CAPTAIN_TUT"
         }
-      ]
+      ],
+      "Id": "Talk_to_the_Guard_Captain",
+      "Label": "Talk to the Guard Captain."
     },
     {
-      "Text": "Study the recruitment board.",
       "Effects": [
         {
           "Op": "setFlag",
-          "Name": "hook.mercenary",
-          "Value": true
+          "Id": "hook.mercenary"
         }
-      ]
-    },
-    {
-      "Text": "Head to the Main Gate Bridge.",
-      "Effects": [
-        {
-          "Op": "goto",
-          "Id": "N_MAIN_GATE_BRIDGE"
-        }
-      ]
+      ],
+      "Id": "Study_the_recruitment_board",
+      "Label": "Study the recruitment board."
     }
   ],
   "Exits": [

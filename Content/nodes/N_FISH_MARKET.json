@@ -7,31 +7,24 @@
   ],
   "Options": [
     {
-      "Text": "Smuggler’s corner—ask about faster ways.",
       "Effects": [
         {
           "Op": "startDialogue",
           "Id": "D_SMUGGLER_CONTACT"
         }
-      ]
+      ],
+      "Id": "Smugglers_cornerask_about_faster_ways",
+      "Label": "Smuggler’s corner—ask about faster ways."
     },
     {
-      "Text": "Break up the brawl (scripted combat).",
       "Effects": [
         {
           "Op": "startCombat",
           "Id": "ENEMY_CUTPURSE"
         }
-      ]
-    },
-    {
-      "Text": "Back to the square.",
-      "Effects": [
-        {
-          "Op": "goto",
-          "Id": "N_HARBOR_SQUARE"
-        }
-      ]
+      ],
+      "Id": "Break_up_the_brawl_scripted_combat",
+      "Label": "Break up the brawl (scripted combat)."
     }
   ],
   "Exits": [

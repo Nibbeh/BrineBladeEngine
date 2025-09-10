@@ -7,7 +7,6 @@
   ],
   "Options": [
     {
-      "Text": "Let the child keep the coin (-1g).",
       "Effects": [
         {
           "Op": "addGold",
@@ -15,47 +14,31 @@
         },
         {
           "Op": "setFlag",
-          "Name": "moral.kind.child",
-          "Value": true
+          "Id": "moral.kind.child"
         }
-      ]
+      ],
+      "Id": "Let_the_child_keep_the_coin_1g",
+      "Label": "Let the child keep the coin (-1g)."
     },
     {
-      "Text": "Scold and take it back.",
       "Effects": [
         {
           "Op": "setFlag",
-          "Name": "moral.harsh.child",
-          "Value": true
+          "Id": "moral.harsh.child"
         }
-      ]
+      ],
+      "Id": "Scold_and_take_it_back",
+      "Label": "Scold and take it back."
     },
     {
-      "Text": "Face the footfalls (ambush).",
       "Effects": [
         {
           "Op": "startCombat",
           "Id": "ENEMY_RAT_SWARM"
         }
-      ]
-    },
-    {
-      "Text": "Enter the Smugglers’ Den.",
-      "Effects": [
-        {
-          "Op": "goto",
-          "Id": "N_SMUGGLERS_DEN"
-        }
-      ]
-    },
-    {
-      "Text": "Back to the square.",
-      "Effects": [
-        {
-          "Op": "goto",
-          "Id": "N_HARBOR_SQUARE"
-        }
-      ]
+      ],
+      "Id": "Face_the_footfalls_ambush",
+      "Label": "Face the footfalls (ambush)."
     }
   ],
   "Exits": [

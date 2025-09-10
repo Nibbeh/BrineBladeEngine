@@ -1,38 +1,32 @@
 {
   "Id": "D_SMUGGLER_CONTACT",
-  "Speakers": [
-    "Smuggler",
-    "You"
-  ],
-  "Start": "L1",
-  "Lines": [
-    {
-      "Id": "L1",
-      "Speaker": "Smuggler",
+  "NpcId": "Smuggler",
+  "StartLineId": "L1",
+  "Lines": {
+    "L1": {
       "Text": "Faster way in—costly and wet.",
       "Choices": [
         {
-          "Text": "Deal.",
           "Effects": [
             {
               "Op": "setFlag",
-              "Name": "token.smuggler",
-              "Value": true
+              "Id": "token.smuggler"
             },
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Label": "Deal."
         },
         {
-          "Text": "No thanks.",
           "Effects": [
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Label": "No thanks."
         }
       ]
     }
-  ]
+  }
 }
