@@ -1,0 +1,13 @@
+{
+  "Id": "ITM_SWORD_SHORT",
+  "Name": "Short Sword",
+  "Type": "Weapon",
+  "Weight": 3,
+  "Value": 10,
+  "Stackable": false,
+  "MaxStack": 1,
+  "Slot": "Weapon",
+  "WeaponType": "OneHanded",
+  "AllowedClasses": [ "CLASS_WARRIOR" ],
+  "Bonuses": { "Strength": 1 }
+}

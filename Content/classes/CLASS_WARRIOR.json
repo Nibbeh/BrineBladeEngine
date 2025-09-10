@@ -1,0 +1,9 @@
+// Content/classes/CLASS_WARRIOR.json
+{
+  "Id": "CLASS_WARRIOR",
+  "Name": "Warrior",
+  "Resource": "Stamina",
+  "StartGold": 10,
+  "AllowedArmorTypes": [ "Leather", "Plate" ],
+  "AllowedWeaponTypes": [ "OneHanded", "TwoHanded", "Dagger", "Staff" ]
+}

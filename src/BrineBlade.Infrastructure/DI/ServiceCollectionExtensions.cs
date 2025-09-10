@@ -39,7 +39,12 @@ public static class ServiceCollectionExtensions
         services.TryAddSingleton<IRandom, DefaultRandom>();
 
         // Services (rules layer)
-        services.TryAddSingleton<ICombatService, CombatService>();
+        // src/BrineBlade.Infrastructure/DI/ServiceCollectionExtensions.cs
+        // ...
+        // services.TryAddSingleton<ICombatService, CombatService>();
+        services.TryAddSingleton<ICombatService>(sp =>
+            new CombatService(sp.GetRequiredService<IRandom>(), sp.GetRequiredService<ItemCatalog>()));
+
         services.TryAddSingleton<IDialogueService, DialogueService>();
         services.TryAddSingleton<IInventoryService, InventoryService>();
         services.TryAddSingleton<IWorldSimService, WorldSimService>();

@@ -1,0 +1,11 @@
+{
+  "Id": "ITM_SHIELD_WOOD",
+  "Name": "Wooden Shield",
+  "Type": "Shield",
+  "Weight": 5,
+  "Value": 5,
+  "Stackable": false,
+  "MaxStack": 1,
+  "Slot": "Offhand",
+  "AllowedClasses": [ "CLASS_WARRIOR" ]
+}
