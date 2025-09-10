@@ -1,7 +1,7 @@
-{
+﻿{
   "Id": "ENEMY_CUTPURSE",
   "Name": "Cutpurse",
-  "Stats": {
+  "BaseStats": {
     "Strength": 6,
     "Dexterity": 12,
     "Intelligence": 6,

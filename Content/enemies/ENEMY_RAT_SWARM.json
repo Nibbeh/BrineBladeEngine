@@ -1,7 +1,7 @@
-{
+﻿{
   "Id": "ENEMY_RAT_SWARM",
   "Name": "Rat Swarm",
-  "Stats": {
+  "BaseStats": {
     "Strength": 4,
     "Dexterity": 10,
     "Intelligence": 2,

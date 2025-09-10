@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 using BrineBlade.AppCore.ConsoleUI;
 using BrineBlade.Domain.Entities;
 using BrineBlade.Domain.Game;
@@ -7,57 +9,85 @@ using BrineBlade.Services.Abstractions;
 namespace BrineBlade.AppCore.Flows;
 
 // AppCore should not depend on Infrastructure. Keep it UI-only + services.
-public sealed class InventoryFlow(GameState state, IInventoryService inv)
+public sealed class InventoryFlow
 {
-    private readonly GameState _state = state;
-    private readonly IInventoryService _inv = inv;
+    private readonly GameState _state;
+    private readonly IInventoryService _inv;
+
+    public InventoryFlow(GameState state, IInventoryService inv)
+    {
+        _state = state;
+        _inv = inv;
+    }
 
     public void Run()
     {
         while (true)
         {
-            var rows = _inv.BuildInventoryView(_state);
+            var rows = _inv.BuildInventoryView(_state)
+                .Select(r =>
+                {
+                    var equipped = _state.Equipment.Values.Any(v => string.Equals(v, r.ItemId, StringComparison.Ordinal));
+                    return (r.ItemId, r.Name, r.Qty, r.Equipable, Equipped: equipped);
+                })
+                .ToList();
 
-            Console.Clear();
-            Console.WriteLine("== Inventory ==");
+            var lines = new List<string>
+            {
+                "Inventory:",
+                "  #  Name                              Qty   Notes",
+                "  -- --------------------------------- ----- -------------------------"
+            };
+
             for (int i = 0; i < rows.Count; i++)
-                Console.WriteLine($"{i + 1}. {rows[i].Name} x{rows[i].Qty} {(rows[i].Equipable ? "[E]" : "")}");
-
-            Console.WriteLine("\n== Equipment ==");
-            foreach (var slot in Enum.GetValues<EquipmentSlot>())
             {
-                var has = _state.Equipment.TryGetValue(slot, out var id);
-                Console.WriteLine($"{slot,-8} : {(has ? id : "(empty)")}");
+                var r = rows[i];
+                var notes = new List<string>();
+                if (r.Equipable) notes.Add("[E]");
+                if (r.Equipped) notes.Add("(equipped)");
+                lines.Add($"  {i + 1,2}  {r.Name,-33} {r.Qty,5}  {string.Join(' ', notes)}");
             }
 
-            var bonus = _inv.ComputeEquipmentBonuses(_state);
-            Console.WriteLine($"\nBonuses: STR {bonus.Strength:+#;-#;0}  DEX {bonus.Dexterity:+#;-#;0}  INT {bonus.Intelligence:+#;-#;0}  VIT {bonus.Vitality:+#;-#;0}");
+            lines.Add("");
+            lines.Add("Equipment:");
+            foreach (var kv in _state.Equipment.OrderBy(k => k.Key))
+            {
+                var id = string.IsNullOrWhiteSpace(kv.Value) ? "-" : kv.Value;
+                lines.Add($"  {kv.Key,-10} : {id}");
+            }
 
-            Console.WriteLine("\nCommands: E <#> equip, U <slot> unequip, D <#> drop 1, Q back");
+            lines.Add("");
+            lines.Add("Commands:  e N = equip item N   |  u SLOT = unequip slot   |  d N = drop 1   |  q = close");
+            SimpleConsoleUI.RenderModal(_state, "Inventory", lines, waitForEnter: false);
+
             Console.Write("> ");
-            var line = (Console.ReadLine() ?? "").Trim();
-            if (string.Equals(line, "q", StringComparison.OrdinalIgnoreCase)) return;
-            if (string.IsNullOrWhiteSpace(line)) continue;
+            var input = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(input)) continue;
 
-            var parts = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            var parts = input.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+            var op = parts[0].ToLowerInvariant();
 
-            if (parts.Length == 2 && string.Equals(parts[0], "e", StringComparison.OrdinalIgnoreCase)
-                && int.TryParse(parts[1], out var n) && n >= 1 && n <= rows.Count)
+            if (op == "q") break;
+
+            if (op == "e" && parts.Length == 2 && int.TryParse(parts[1], out var idx) && idx >= 1 && idx <= rows.Count)
             {
-                var res = _inv.TryEquip(_state, rows[n - 1].ItemId);
-                SimpleConsoleUI.Notice(res.Success ? "Equipped." : $"Cannot equip: {res.Reason}");
+                var sel = rows[idx - 1];
+                var res = _inv.TryEquip(_state, sel.ItemId);
+                SimpleConsoleUI.Notice(res.Success ? $"Equipped {sel.Name}." : $"Cannot equip: {res.Reason}");
             }
-            else if (parts.Length == 2 && string.Equals(parts[0], "u", StringComparison.OrdinalIgnoreCase)
-                     && Enum.TryParse<EquipmentSlot>(parts[1], true, out var slot))
+            else if (op == "u" && parts.Length == 2 && Enum.TryParse<EquipmentSlot>(parts[1], true, out var slot))
             {
                 var res = _inv.TryUnequip(_state, slot);
                 SimpleConsoleUI.Notice(res.Success ? "Unequipped." : $"Cannot unequip: {res.Reason}");
             }
-            else if (parts.Length == 2 && string.Equals(parts[0], "d", StringComparison.OrdinalIgnoreCase)
-                     && int.TryParse(parts[1], out var di) && di >= 1 && di <= rows.Count)
+            else if (op == "d" && parts.Length == 2 && int.TryParse(parts[1], out var di) && di >= 1 && di <= rows.Count)
             {
                 var res = _inv.TryRemove(_state, rows[di - 1].ItemId, 1);
                 SimpleConsoleUI.Notice(res.Success ? "Dropped 1." : $"Cannot drop: {res.Reason}");
+            }
+            else
+            {
+                SimpleConsoleUI.Notice("Unknown command. Use: e N | u SLOT | d N | q");
             }
         }
     }

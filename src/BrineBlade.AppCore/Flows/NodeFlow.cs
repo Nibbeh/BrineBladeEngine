@@ -122,16 +122,28 @@ namespace BrineBlade.AppCore.Flows
         private bool PassesRequires(List<string>? reqs)
         {
             if (reqs is null || reqs.Count == 0) return true;
+
             foreach (var r in reqs)
             {
                 if (r.StartsWith("flag:", StringComparison.OrdinalIgnoreCase))
                 {
                     var flag = r[5..];
-                    if (!_state.Flags.Contains(flag)) return false;
+                    if (flag.StartsWith("inv.", StringComparison.OrdinalIgnoreCase))
+                    {
+                        var id = flag[4..];
+                        var hasInBag = _state.Inventory.Any(s => s.ItemId == id && s.Quantity > 0);
+                        var equipped = _state.Equipment.Values.Any(v => string.Equals(v, id, StringComparison.Ordinal));
+                        if (!hasInBag && !equipped) return false;
+                    }
+                    else
+                    {
+                        if (!_state.Flags.Contains(flag)) return false;
+                    }
                 }
             }
             return true;
         }
+
 
         private void ApplyEffects(List<EffectSpec>? effects)
         {

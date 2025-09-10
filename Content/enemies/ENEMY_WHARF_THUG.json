@@ -1,7 +1,7 @@
-{
+﻿{
   "Id": "ENEMY_WHARF_THUG",
   "Name": "Wharf Thug",
-  "Stats": {
+  "BaseStats": {
     "Strength": 10,
     "Dexterity": 8,
     "Intelligence": 4,

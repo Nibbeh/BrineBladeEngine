@@ -41,7 +41,7 @@ namespace BrineBlade.AppCore.Orchestration
 
             _saveFlow = new SaveGameFlow(_state, _saves);
             _dialogueFlow = new DialogueFlow(_state, _content, _ui, effects);
-            _combatFlow = new CombatFlow(_state, _combatSvc, _enemies, _ui);
+            _combatFlow = new CombatFlow(_state, _combatSvc, _enemies, _inventory, _ui);
             _nodeFlow = new NodeFlow(_state, _content, _dialogueFlow, _saveFlow, OpenInventory, _combatFlow, _ui, effects);
         }
 
