@@ -1,9 +1,0 @@
-{
-  "Id": "ITM_AMBER_SHARD",
-  "Name": "Rough Amber Shard",
-  "Type": "Misc",
-  "Weight": 0,
-  "Value": 3,
-  "Stackable": true,
-  "MaxStack": 20
-}

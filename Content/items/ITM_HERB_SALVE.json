@@ -1,0 +1,7 @@
+{
+  "Id": "ITM_HERB_SALVE",
+  "Name": "Herbal Salve",
+  "Description": "Pounded herbs in goose fat. Restores a little vitality when used.",
+  "Value": 4,
+  "Stackable": true
+}

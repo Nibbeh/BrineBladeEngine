@@ -1,0 +1,57 @@
+{
+  "Id": "D_DOCK_FOREMAN",
+  "Speakers": [
+    "Foreman",
+    "You"
+  ],
+  "Start": "L1",
+  "Lines": [
+    {
+      "Id": "L1",
+      "Speaker": "Foreman",
+      "Text": "You work? Or you watch?",
+      "Choices": [
+        {
+          "Text": "Work. Point me.",
+          "Next": "L2"
+        },
+        {
+          "Text": "Just watching.",
+          "Effects": [
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "L2",
+      "Speaker": "Foreman",
+      "Text": "Shift crates to the wharf, then get my chit stamped by the Clerk.",
+      "Choices": [
+        {
+          "Text": "On it.",
+          "Effects": [
+            {
+              "Op": "setFlag",
+              "Name": "work.crates",
+              "Value": true
+            },
+            {
+              "Op": "advanceTime",
+              "Minutes": 30
+            },
+            {
+              "Op": "addGold",
+              "Amount": 5
+            },
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

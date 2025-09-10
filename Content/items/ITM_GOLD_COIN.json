@@ -1,6 +1,0 @@
-{
-  "Id": "ITEM_GOLD_COIN",
-  "Name": "Gold Coin",
-  "MaxStack": 9999,
-  "Tags": [ "currency" ]
-}

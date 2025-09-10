@@ -1,0 +1,47 @@
+{
+  "Id": "N_SMUGGLERS_DEN",
+  "Title": "Backroom, Shanty Den",
+  "Description": "A lopsided table, bone chips, candle ends—the economy of secrets.",
+  "Options": [
+    {
+      "Text": "Play along, flash the token.",
+      "Requires": [
+        "flag:token.smuggler"
+      ],
+      "Effects": [
+        {
+          "Op": "setFlag",
+          "Name": "route.smuggler",
+          "Value": true
+        }
+      ]
+    },
+    {
+      "Text": "Hire passage under the bridge (if you have token).",
+      "Requires": [
+        "flag:token.smuggler"
+      ],
+      "Effects": [
+        {
+          "Op": "setFlag",
+          "Name": "pass.accepted",
+          "Value": true
+        },
+        {
+          "Op": "setFlag",
+          "Name": "tutorial.complete",
+          "Value": true
+        }
+      ]
+    }
+  ],
+  "Exits": [
+    {
+      "Text": "Back to Shanty Alley",
+      "To": "N_SHANTY_ALLEY"
+    }
+  ],
+  "Paragraphs": [
+    "A lopsided table, bone chips, candle ends—the economy of secrets."
+  ]
+}

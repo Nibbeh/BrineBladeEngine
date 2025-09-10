@@ -1,0 +1,38 @@
+{
+  "Id": "N_FISH_MARKET",
+  "Title": "Fisk Market",
+  "Description": "Fish heads grin from buckets. The air is knives of cold brine.",
+  "Options": [
+    {
+      "Text": "Talk to the fishmonger.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_FISHMONGER"
+        }
+      ]
+    },
+    {
+      "Text": "Watch for thieves.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_CUTPURSE"
+        }
+      ]
+    }
+  ],
+  "Exits": [
+    {
+      "Text": "To Harbor Town Square",
+      "To": "N_HARBOR_SQUARE"
+    },
+    {
+      "Text": "To Imperial Wharf",
+      "To": "N_IMPERIAL_WHARF"
+    }
+  ],
+  "Paragraphs": [
+    "Fish heads grin from buckets. The air is knives of cold brine."
+  ]
+}

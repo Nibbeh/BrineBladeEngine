@@ -1,0 +1,42 @@
+{
+  "Id": "N_OLD_SEA_BELL",
+  "Title": "The Old Sea Bell",
+  "Description": "A green-bronze bell on a salt-bitten frame. It tastes of storms and oaths.\n\nAn old ringer eyes you like a gull eyes bread.",
+  "Options": [
+    {
+      "Text": "Talk to the bell ringer.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_BELL_RINGER"
+        }
+      ]
+    },
+    {
+      "Text": "(If rung) Take the cliff path toward the lighthouse.",
+      "Requires": [
+        "flag:bell.rung"
+      ],
+      "Effects": [
+        {
+          "Op": "goto",
+          "Id": "N_LIGHTHOUSE"
+        }
+      ]
+    }
+  ],
+  "Exits": [
+    {
+      "Text": "Back along the catwalk",
+      "To": "N_UNDER_PIER"
+    },
+    {
+      "Text": "Up to Harbor Town Square",
+      "To": "N_HARBOR_SQUARE"
+    }
+  ],
+  "Paragraphs": [
+    "A green-bronze bell on a salt-bitten frame. It tastes of storms and oaths.",
+    "An old ringer eyes you like a gull eyes bread."
+  ]
+}

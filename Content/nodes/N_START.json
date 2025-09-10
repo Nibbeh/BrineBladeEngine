@@ -1,7 +1,26 @@
 {
   "Id": "N_START",
-  "Title": "Gray Morning Outside Brinemauth",
-  "Description": "Rain-slick mud. Cart ruts brim with dark water. Gulls cry somewhere beyond the gate.",
-  "Options": [],
-  "Exits": [ { "To": "N_TUT_OUTSKIRTS" } ]
+  "Title": "Docks: Arrival",
+  "Paragraphs": [
+    "Night air tastes of brine and woodsmoke. Refugees queue beneath the city walls.",
+    "A harbormaster waves you toward the square."
+  ],
+  "Description": "Night air tastes of brine and woodsmoke. Refugees queue beneath the city walls.\n\nA harbormaster waves you toward the square.",
+  "Options": [
+    {
+      "Text": "Continue...",
+      "Effects": [
+        {
+          "Op": "goto",
+          "Id": "N_HARBOR_SQUARE"
+        }
+      ]
+    }
+  ],
+  "Exits": [
+    {
+      "Text": "Continue...",
+      "To": "N_HARBOR_SQUARE"
+    }
+  ]
 }

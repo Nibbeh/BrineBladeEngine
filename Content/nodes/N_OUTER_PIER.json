@@ -1,0 +1,42 @@
+{
+  "Id": "N_OUTER_PIER",
+  "Title": "Outer Pier",
+  "Description": "Timbers groan; the sea answers. Kelp sticks like old coins. Beneath, something moves.\n\nA crooked ladder descends into the dark—if you had a light.",
+  "Options": [
+    {
+      "Text": "Peer under the pier (fight rats).",
+      "Effects": [
+        {
+          "Op": "startCombat",
+          "Id": "ENEMY_RAT_SWARM"
+        }
+      ]
+    },
+    {
+      "Text": "Climb down with a lantern.",
+      "Requires": [
+        "flag:borrow.lantern"
+      ],
+      "Effects": [
+        {
+          "Op": "goto",
+          "Id": "N_UNDER_PIER"
+        }
+      ]
+    }
+  ],
+  "Exits": [
+    {
+      "Text": "To Harbor Town Square",
+      "To": "N_HARBOR_SQUARE"
+    },
+    {
+      "Text": "To Imperial Wharf",
+      "To": "N_IMPERIAL_WHARF"
+    }
+  ],
+  "Paragraphs": [
+    "Timbers groan; the sea answers. Kelp sticks like old coins. Beneath, something moves.",
+    "A crooked ladder descends into the dark—if you had a light."
+  ]
+}

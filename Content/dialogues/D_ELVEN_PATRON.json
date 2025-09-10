@@ -1,0 +1,65 @@
+{
+  "Id": "D_ELVEN_PATRON",
+  "Speakers": [
+    "Elven Trader",
+    "You"
+  ],
+  "Start": "L1",
+  "Lines": [
+    {
+      "Id": "L1",
+      "Speaker": "Elven Trader",
+      "Text": "You smell of road and woodsmoke. Not Dheowryth steel. Good. My shipment rots until the gate opens.",
+      "Choices": [
+        {
+          "Text": "Can we help each other?",
+          "Next": "L2"
+        },
+        {
+          "Text": "You seem well-off for a hated kin.",
+          "Next": "L3"
+        }
+      ]
+    },
+    {
+      "Id": "L2",
+      "Speaker": "Elven Trader",
+      "Text": "Take this note to the Clerk. I’ll owe you one when the city remembers profit.",
+      "Choices": [
+        {
+          "Text": "I’ll take it.",
+          "Effects": [
+            {
+              "Op": "addItem",
+              "Id": "ITM_ELVEN_NOTE",
+              "Qty": 1
+            },
+            {
+              "Op": "setFlag",
+              "Name": "note.elven",
+              "Value": true
+            },
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "L3",
+      "Speaker": "Elven Trader",
+      "Text": "Hatred is a tax. We pay it in coin—until someone else pays in blood. Go swiftly.",
+      "Choices": [
+        {
+          "Text": "Understood.",
+          "Effects": [
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "Id": "N_BRIDGE_BOOTH_PATH",
+  "Title": "Bridge Approach",
+  "Description": "Queues braid around the clerks. A side-door leads to a cramped booth.",
+  "Options": [],
+  "Exits": [
+    {
+      "Text": "To Main Gate Bridge",
+      "To": "N_MAIN_GATE_BRIDGE"
+    },
+    {
+      "Text": "To Customs Booth",
+      "To": "N_CUSTOMS_BOOTH"
+    }
+  ],
+  "Paragraphs": [
+    "Queues braid around the clerks. A side-door leads to a cramped booth."
+  ]
+}

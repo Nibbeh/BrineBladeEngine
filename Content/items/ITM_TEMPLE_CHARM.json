@@ -1,9 +1,0 @@
-{
-  "Id": "ITM_TEMPLE_CHARM",
-  "Name": "Temple Charm",
-  "Type": "Misc",
-  "Weight": 0,
-  "Value": 2,
-  "Stackable": false,
-  "MaxStack": 1
-}

@@ -1,0 +1,50 @@
+{
+  "Id": "N_REFUGEE_CAMP",
+  "Title": "Refugee Camp",
+  "Description": "Canvas and driftwood. Soot-black kettles crowd a communal fire. Children sleep like bundles of rope.",
+  "Options": [
+    {
+      "Text": "Speak to a worried mother.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_REFUGEE_MOTHER"
+        }
+      ]
+    },
+    {
+      "Text": "Bring stew from the tavern (if you took the pot).",
+      "Requires": [
+        "flag:quest.soup"
+      ],
+      "Effects": [
+        {
+          "Op": "advanceTime",
+          "Minutes": 30
+        },
+        {
+          "Op": "addGold",
+          "Amount": 3
+        },
+        {
+          "Op": "setFlag",
+          "Name": "aid.soup",
+          "Value": true
+        }
+      ]
+    }
+  ],
+  "Exits": [
+    {
+      "Text": "To Shanty Alley",
+      "To": "N_SHANTY_ALLEY"
+    },
+    {
+      "Text": "To Harbor Town Square",
+      "To": "N_HARBOR_SQUARE"
+    }
+  ],
+  "Paragraphs": [
+    "Canvas and driftwood. Soot-black kettles crowd a communal fire. Children sleep like bundles of rope."
+  ]
+}

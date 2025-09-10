@@ -1,0 +1,7 @@
+{
+  "Id": "ITM_LANTERN",
+  "Name": "Dock Lantern",
+  "Description": "A dented brass lantern, smells of fish oil. Useful in dark places.",
+  "Value": 3,
+  "Stackable": false
+}

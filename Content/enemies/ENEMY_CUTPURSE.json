@@ -1,0 +1,17 @@
+{
+  "Id": "ENEMY_CUTPURSE",
+  "Title": "Cutpurse",
+  "Hp": 10,
+  "BaseStats": {
+    "MaxHp": 10,
+    "Attack": 2,
+    "Defense": 10
+  },
+  "Description": "A quick-fingered thief trawling the crowds.",
+  "Loot": [
+    {
+      "Gold": 8,
+      "Chance": 0.6
+    }
+  ]
+}

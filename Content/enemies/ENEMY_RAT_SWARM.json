@@ -1,8 +1,22 @@
 {
   "Id": "ENEMY_RAT_SWARM",
-  "Name": "Rat Swarm",
+  "Title": "Rat Swarm",
+  "Hp": 8,
   "BaseStats": {
-    "MaxHp": 5
+    "MaxHp": 8,
+    "Attack": 1,
+    "Defense": 8
   },
-  "LootTable": []
+  "Description": "A seething knot of slick, salt-wet rats under the pier.",
+  "Loot": [
+    {
+      "Gold": 2,
+      "Chance": 0.4
+    },
+    {
+      "Item": "ITM_HERB_SALVE",
+      "Qty": 1,
+      "Chance": 0.2
+    }
+  ]
 }

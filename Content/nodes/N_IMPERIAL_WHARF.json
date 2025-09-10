@@ -1,0 +1,42 @@
+{
+  "Id": "N_IMPERIAL_WHARF",
+  "Title": "Imperial Wharf",
+  "Description": "Amber crates and silk bales under a painted awning. A pair of elves ignore insults with professional grace.",
+  "Options": [
+    {
+      "Text": "Speak with the elven trader.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_ELVEN_PATRON"
+        }
+      ]
+    },
+    {
+      "Text": "Ask about work.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_DOCK_FOREMAN"
+        }
+      ]
+    }
+  ],
+  "Exits": [
+    {
+      "Text": "To Outer Pier",
+      "To": "N_OUTER_PIER"
+    },
+    {
+      "Text": "To Main Gate Bridge",
+      "To": "N_MAIN_GATE_BRIDGE"
+    },
+    {
+      "Text": "To Harbor Town Square",
+      "To": "N_HARBOR_SQUARE"
+    }
+  ],
+  "Paragraphs": [
+    "Amber crates and silk bales under a painted awning. A pair of elves ignore insults with professional grace."
+  ]
+}

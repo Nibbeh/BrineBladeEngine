@@ -1,56 +1,86 @@
 {
   "Id": "D_CUSTOMS_CLERK",
-  "NpcId": "Customs Clerk",
-  "StartLineId": "start",
-  "Lines": {
-    "start": {
-      "Text": "Forms make order. Order makes peace. What do you require?",
+  "Speakers": [
+    "Clerk",
+    "You"
+  ],
+  "Start": "L1",
+  "Lines": [
+    {
+      "Id": "L1",
+      "Speaker": "Clerk",
+      "Text": "Forms, forms… name and purpose?",
       "Choices": [
         {
-          "Label": "I’m here for a dockside ledger.",
+          "Text": "I need a temporary pass.",
+          "Next": "L2"
+        },
+        {
+          "Text": "I’m looking for dock work.",
+          "Next": "L3"
+        },
+        {
+          "Text": "I have a letter.",
           "Requires": [
-            "flag:quest.ledger"
+            "flag:note.elven"
           ],
+          "Next": "L5"
+        }
+      ]
+    },
+    {
+      "Id": "L2",
+      "Speaker": "Clerk",
+      "Text": "Passes require cause. Help the Foreman shift crates, and I’ll stamp you in.",
+      "Choices": [
+        {
+          "Text": "Deal.",
           "Effects": [
             {
-              "Op": "addGold",
-              "Amount": -2
+              "Op": "setFlag",
+              "Name": "task.crates",
+              "Value": true
             },
             {
-              "Op": "setFlag",
-              "Id": "ledger.received"
+              "Op": "endDialogue"
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "Id": "L3",
+      "Speaker": "Clerk",
+      "Text": "Foreman’s in the market. Come back with a chit.",
+      "Choices": [
         {
-          "Label": "Please stamp this ledger (temple chit).",
-          "Requires": [
-            "flag:ledger.received",
-            "flag:good.deed"
-          ],
+          "Text": "On my way.",
           "Effects": [
             {
               "Op": "setFlag",
-              "Id": "ledger.stamped"
+              "Name": "task.crates",
+              "Value": true
+            },
+            {
+              "Op": "endDialogue"
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "Id": "L5",
+      "Speaker": "Clerk",
+      "Text": "Ah. Wax and weight. That will do.",
+      "Choices": [
         {
-          "Label": "Please stamp this ledger (found seal).",
-          "Requires": [
-            "flag:ledger.received",
-            "flag:seal.found"
-          ],
+          "Text": "Thank you.",
           "Effects": [
             {
               "Op": "setFlag",
-              "Id": "ledger.stamped"
-            }
-          ]
-        },
-        {
-          "Label": "That’s all.",
-          "Effects": [
+              "Name": "permit.temp",
+              "Value": true
+            },
             {
               "Op": "endDialogue"
             }
@@ -58,5 +88,5 @@
         }
       ]
     }
-  }
+  ]
 }

@@ -1,0 +1,7 @@
+{
+  "Id": "ITM_DOCK_HOOK",
+  "Name": "Dock Hook",
+  "Description": "A long iron hook used to drag lines. Doubles as a crude polearm.",
+  "Value": 5,
+  "Stackable": false
+}

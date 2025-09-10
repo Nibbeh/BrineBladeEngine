@@ -1,0 +1,56 @@
+{
+  "Id": "N_HARBOR_SQUARE",
+  "Title": "Harbor Town Square",
+  "Description": "Crates as altars to trade; gulls as choirboys. The square is a knot of shouting, salt, and steam.\n\nRefugees huddle around borrowed pots. Elven factors argue under lacquered awnings while militia watch from the bridge.",
+  "Options": [
+    {
+      "Text": "Enter the Gull’s Rest tavern.",
+      "Effects": [
+        {
+          "Op": "goto",
+          "Id": "N_TAVERN_GULLS_REST"
+        }
+      ]
+    },
+    {
+      "Text": "Ask the urchin about shortcuts.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_URCHIN_GUIDE"
+        }
+      ]
+    },
+    {
+      "Text": "Keep an eye on your purse.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_CUTPURSE"
+        }
+      ]
+    }
+  ],
+  "Exits": [
+    {
+      "Text": "To Outer Pier",
+      "To": "N_OUTER_PIER"
+    },
+    {
+      "Text": "To Fish Market",
+      "To": "N_FISH_MARKET"
+    },
+    {
+      "Text": "To Refugee Camp",
+      "To": "N_REFUGEE_CAMP"
+    },
+    {
+      "Text": "To Main Gate Bridge",
+      "To": "N_MAIN_GATE_BRIDGE"
+    }
+  ],
+  "Paragraphs": [
+    "Crates as altars to trade; gulls as choirboys. The square is a knot of shouting, salt, and steam.",
+    "Refugees huddle around borrowed pots. Elven factors argue under lacquered awnings while militia watch from the bridge."
+  ]
+}

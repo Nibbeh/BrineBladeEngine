@@ -1,51 +1,77 @@
 {
   "Id": "D_GATE_GUARD",
-  "NpcId": "Gate Guard",
-  "StartLineId": "start",
-  "Lines": {
-    "start": {
-      "Text": "Papers? Purpose? The city sleeps lighter than you look.",
+  "Speakers": [
+    "Guard",
+    "You"
+  ],
+  "Start": "L1",
+  "Lines": [
+    {
+      "Id": "L1",
+      "Speaker": "Guard",
+      "Text": "City’s shut. Refugees at the camp; no one in without papers.",
       "Choices": [
         {
-          "Label": "Present a writ of passage.",
+          "Text": "What papers would do?",
+          "Next": "L2"
+        },
+        {
+          "Text": "(Show Temporary Pass)",
           "Requires": [
-            "flag:permit.entry"
+            "flag:permit.temp"
           ],
           "Effects": [
             {
-              "Op": "goto",
-              "To": "N_ENTRY"
-            }
-          ]
-        },
-        {
-          "Label": "Could I run an errand for entry?",
-          "Effects": [
-            {
-              "Op": "setFlag",
-              "Id": "quest.ledger"
+              "Op": "endDialogue"
             },
             {
               "Op": "setFlag",
-              "Id": "temp.pass"
+              "Name": "pass.accepted",
+              "Value": true
             }
           ]
         },
         {
-          "Label": "Slip 5 gold across the sill.",
+          "Text": "(Show Work Permit)",
+          "Requires": [
+            "flag:permit.worker"
+          ],
           "Effects": [
             {
-              "Op": "addGold",
-              "Amount": -5
+              "Op": "endDialogue"
             },
             {
               "Op": "setFlag",
-              "Id": "permit.entry"
+              "Name": "pass.accepted",
+              "Value": true
             }
           ]
         },
         {
-          "Label": "Never mind.",
+          "Text": "(Show Pilgrim’s Writ)",
+          "Requires": [
+            "flag:writ.pilgrim"
+          ],
+          "Effects": [
+            {
+              "Op": "endDialogue"
+            },
+            {
+              "Op": "setFlag",
+              "Name": "pass.accepted",
+              "Value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "L2",
+      "Speaker": "Guard",
+      "Text": "Temporary pass, work permit, pilgrim’s writ—or a letter from someone richer than me.",
+      "Choices": [
+        {
+          "Text": "Thanks.",
           "Effects": [
             {
               "Op": "endDialogue"
@@ -54,5 +80,5 @@
         }
       ]
     }
-  }
+  ]
 }

@@ -1,0 +1,30 @@
+{
+  "Id": "D_URCHIN_GUIDE",
+  "Speakers": [
+    "Urchin",
+    "You"
+  ],
+  "Start": "L1",
+  "Lines": [
+    {
+      "Id": "L1",
+      "Speaker": "Urchin",
+      "Text": "Path ‘neath the pier if you’ve got a lamp. Smells like king’s breath.",
+      "Choices": [
+        {
+          "Text": "Thanks, kid.",
+          "Effects": [
+            {
+              "Op": "setFlag",
+              "Name": "hint.underpier",
+              "Value": true
+            },
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

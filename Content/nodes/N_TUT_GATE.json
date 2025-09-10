@@ -1,53 +1,26 @@
 {
   "Id": "N_TUT_GATE",
-  "Title": "Harbor Gate, Shut Fast",
-  "Description": "Timber braces and chained wagons choke the arch. Guards watch from under dripping hoods. The smell of brine mixes with tar and fear.",
+  "Title": "Harbor Gate (Closed)",
+  "Paragraphs": [
+    "Chains span the bridge and the militia count heads like coin.",
+    "Papers will be needed—or another way."
+  ],
+  "Description": "Chains span the bridge and the militia count heads like coin.\n\nPapers will be needed—or another way.",
   "Options": [
     {
-      "Id": "opt_dockmaster",
-      "Label": "Speak with the dockmaster overseeing the blockade",
+      "Text": "Continue...",
       "Effects": [
         {
-          "Op": "startDialogue",
-          "Id": "D_TUT_DOCKMASTER_TUT"
-        }
-      ]
-    },
-    {
-      "Id": "opt_help_cart",
-      "Label": "Help push a stuck cart clear of the puddles",
-      "Effects": [
-        {
-          "Op": "setFlag",
-          "Id": "tut.helped.cart"
-        },
-        {
-          "Op": "advanceTime",
-          "Minutes": 5
-        }
-      ]
-    },
-    {
-      "Id": "opt_wait",
-      "Label": "Wait by the gate and listen for news",
-      "Effects": [
-        {
-          "Op": "advanceTime",
-          "Minutes": 10
-        },
-        {
-          "Op": "setFlag",
-          "Id": "tut.waited"
+          "Op": "goto",
+          "Id": "N_MAIN_GATE_BRIDGE"
         }
       ]
     }
   ],
   "Exits": [
-    { "To": "N_TUT_PIERS" },
-    { "To": "N_TUT_ALLEY" },
     {
-      "To": "N_CITY_GATE",
-      "Requires": [ "flag:tut.scouted" ]
+      "Text": "Continue...",
+      "To": "N_MAIN_GATE_BRIDGE"
     }
   ]
 }

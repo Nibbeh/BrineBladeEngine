@@ -1,0 +1,44 @@
+{
+  "Id": "N_UNDER_PIER",
+  "Title": "Under-Pier Catwalk",
+  "Description": "Tar-sticky beams and rope hairs. The lantern pushes the dark back just enough to regret.\n\nSomeone has carved gull sigils into the posts.",
+  "Options": [
+    {
+      "Text": "Search the beams.",
+      "Effects": [
+        {
+          "Op": "addGold",
+          "Amount": 2
+        }
+      ]
+    },
+    {
+      "Text": "Follow the gull sigils toward Shanty Alley.",
+      "Effects": [
+        {
+          "Op": "setFlag",
+          "Name": "route.smuggler",
+          "Value": true
+        },
+        {
+          "Op": "goto",
+          "Id": "N_SHANTY_ALLEY"
+        }
+      ]
+    }
+  ],
+  "Exits": [
+    {
+      "Text": "Back up to the pier",
+      "To": "N_OUTER_PIER"
+    },
+    {
+      "Text": "Along the slick catwalk to the Old Sea Bell",
+      "To": "N_OLD_SEA_BELL"
+    }
+  ],
+  "Paragraphs": [
+    "Tar-sticky beams and rope hairs. The lantern pushes the dark back just enough to regret.",
+    "Someone has carved gull sigils into the posts."
+  ]
+}

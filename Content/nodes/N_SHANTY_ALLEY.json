@@ -1,0 +1,39 @@
+{
+  "Id": "N_SHANTY_ALLEY",
+  "Title": "Shanty Alley",
+  "Description": "Shacks lean together like conspirators. The mud remembers everyone.\n\nEyes watch from rag curtains.",
+  "Options": [
+    {
+      "Text": "Ask for the Broker.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_SMUGGLER_BROKER"
+        }
+      ]
+    },
+    {
+      "Text": "Follow the battered door to a den.",
+      "Effects": [
+        {
+          "Op": "goto",
+          "Id": "N_SMUGGLERS_DEN"
+        }
+      ]
+    }
+  ],
+  "Exits": [
+    {
+      "Text": "To Harbor Town Square",
+      "To": "N_HARBOR_SQUARE"
+    },
+    {
+      "Text": "To Refugee Camp",
+      "To": "N_REFUGEE_CAMP"
+    }
+  ],
+  "Paragraphs": [
+    "Shacks lean together like conspirators. The mud remembers everyone.",
+    "Eyes watch from rag curtains."
+  ]
+}

@@ -1,35 +1,26 @@
 {
   "Id": "N_TUT_ALLEY",
-  "Title": "Fishbone Alley",
-  "Description": "A narrow run between salt-stained stone and leaning warehouses. Fish guts streak the cobbles; something watches from a drain.",
+  "Title": "Shanty Cut-through",
+  "Paragraphs": [
+    "Ramshackle shacks shoulder each other, hiding a narrow run of mud and rope.",
+    "Whispers say smugglers keep a den nearby."
+  ],
+  "Description": "Ramshackle shacks shoulder each other, hiding a narrow run of mud and rope.\n\nWhispers say smugglers keep a den nearby.",
   "Options": [
     {
-      "Id": "opt_search",
-      "Label": "Pick your way past crates and keep low",
+      "Text": "Continue...",
       "Effects": [
         {
-          "Op": "setFlag",
-          "Id": "tut.alley.scouted"
-        }
-      ]
-    },
-    {
-      "Id": "opt_back",
-      "Label": "Return to the gate",
-      "Effects": [
-        {
-          "Op": "advanceTime",
-          "Minutes": 1
+          "Op": "goto",
+          "Id": "N_SHANTY_ALLEY"
         }
       ]
     }
   ],
   "Exits": [
     {
-      "To": "N_TUT_GATE"
-    },
-    {
-      "To": "N_TUT_PIERS"
+      "Text": "Continue...",
+      "To": "N_SHANTY_ALLEY"
     }
   ]
 }

@@ -1,0 +1,7 @@
+{
+  "Id": "ITM_TEMP_PASS",
+  "Name": "Temporary Gate Pass",
+  "Description": "Issued by the Gate Clerk. Expires by dawn.",
+  "Value": 0,
+  "Stackable": false
+}

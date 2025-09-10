@@ -1,0 +1,7 @@
+{
+  "Id": "ITM_WORK_PERMIT",
+  "Name": "Harbor Work Permit",
+  "Description": "Stamped by Customs to let the bearer pass for dock work.",
+  "Value": 0,
+  "Stackable": false
+}

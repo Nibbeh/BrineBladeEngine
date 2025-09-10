@@ -1,0 +1,64 @@
+{
+  "Id": "D_BELL_RINGER",
+  "Speakers": [
+    "Old Ringer",
+    "You"
+  ],
+  "Start": "L1",
+  "Lines": [
+    {
+      "Id": "L1",
+      "Speaker": "Old Ringer",
+      "Text": "Hands off unless you’ve a reason. The bell calls storms and saints.",
+      "Choices": [
+        {
+          "Text": "The lighthouse keeper sent me.",
+          "Next": "L2"
+        },
+        {
+          "Text": "I just like bells.",
+          "Next": "L3"
+        }
+      ]
+    },
+    {
+      "Id": "L2",
+      "Speaker": "Old Ringer",
+      "Text": "One pull, honest and true. Then take the cliff path.",
+      "Choices": [
+        {
+          "Text": "(Ring the bell)",
+          "Effects": [
+            {
+              "Op": "setFlag",
+              "Name": "bell.rung",
+              "Value": true
+            },
+            {
+              "Op": "advanceTime",
+              "Minutes": 15
+            },
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "L3",
+      "Speaker": "Old Ringer",
+      "Text": "Then you’ll like leaving.",
+      "Choices": [
+        {
+          "Text": "Fair.",
+          "Effects": [
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
