@@ -1,0 +1,20 @@
+{
+  "Id": "N_CITY_INTRO",
+  "Title": "Brinemauth — City Proper",
+  "Description": "Stone streets swallow the sea’s roar. You are in.",
+  "Paragraphs": [
+    "The harbor fades behind the walls; the city opens ahead."
+  ],
+  "Options": [
+    {
+      "Text": "Continue...",
+      "Effects": [
+        {
+          "Op": "goto",
+          "Id": "N_CITY_INTRO"
+        }
+      ]
+    }
+  ],
+  "Exits": []
+}

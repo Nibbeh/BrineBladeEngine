@@ -1,0 +1,25 @@
+{
+  "Id": "D_TAVERN_RUMORS",
+  "Speakers": [
+    "Keeper",
+    "You"
+  ],
+  "Start": "L1",
+  "Lines": [
+    {
+      "Id": "L1",
+      "Speaker": "Keeper",
+      "Text": "Gates choke with bribes. Smugglers move like eels.",
+      "Choices": [
+        {
+          "Text": "Right.",
+          "Effects": [
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

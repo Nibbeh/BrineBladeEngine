@@ -1,0 +1,41 @@
+{
+  "Id": "D_TAVERN_DICE",
+  "Speakers": [
+    "Keeper",
+    "You"
+  ],
+  "Start": "L1",
+  "Lines": [
+    {
+      "Id": "L1",
+      "Speaker": "Keeper",
+      "Text": "Bones say two coins in, five if you’re lucky.",
+      "Choices": [
+        {
+          "Text": "Play (pay 2g, sometimes win 5g).",
+          "Effects": [
+            {
+              "Op": "addGold",
+              "Amount": -2
+            },
+            {
+              "Op": "addGold",
+              "Amount": 5
+            },
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        },
+        {
+          "Text": "Not today.",
+          "Effects": [
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

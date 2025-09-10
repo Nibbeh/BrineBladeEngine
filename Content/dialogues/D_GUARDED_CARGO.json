@@ -1,0 +1,55 @@
+{
+  "Id": "D_GUARDED_CARGO",
+  "Speakers": [
+    "Mercenary",
+    "You"
+  ],
+  "Start": "L1",
+  "Lines": [
+    {
+      "Id": "L1",
+      "Speaker": "Mercenary",
+      "Text": "Move along unless you’re lifting crates.",
+      "Choices": [
+        {
+          "Text": "Work a shift for 5g.",
+          "Effects": [
+            {
+              "Op": "addGold",
+              "Amount": 5
+            },
+            {
+              "Op": "setFlag",
+              "Name": "work.crates",
+              "Value": true
+            },
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        },
+        {
+          "Text": "Report skimming to the Watch later.",
+          "Effects": [
+            {
+              "Op": "setFlag",
+              "Name": "report.mercs",
+              "Value": true
+            },
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        },
+        {
+          "Text": "Walk away.",
+          "Effects": [
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

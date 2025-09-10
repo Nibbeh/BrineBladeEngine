@@ -1,39 +1,71 @@
 {
   "Id": "N_SHANTY_ALLEY",
   "Title": "Shanty Alley",
-  "Description": "Shacks lean together like conspirators. The mud remembers everyone.\n\nEyes watch from rag curtains.",
+  "Description": "Lean-tos and whisper-trades. A chalk fishbone marks a back door.",
+  "Paragraphs": [
+    "A child brushes your belt. Footsteps gather behind you."
+  ],
   "Options": [
     {
-      "Text": "Ask for the Broker.",
+      "Text": "Let the child keep the coin (-1g).",
       "Effects": [
         {
-          "Op": "startDialogue",
-          "Id": "D_SMUGGLER_BROKER"
+          "Op": "addGold",
+          "Amount": -1
+        },
+        {
+          "Op": "setFlag",
+          "Name": "moral.kind.child",
+          "Value": true
         }
       ]
     },
     {
-      "Text": "Follow the battered door to a den.",
+      "Text": "Scold and take it back.",
+      "Effects": [
+        {
+          "Op": "setFlag",
+          "Name": "moral.harsh.child",
+          "Value": true
+        }
+      ]
+    },
+    {
+      "Text": "Face the footfalls (ambush).",
+      "Effects": [
+        {
+          "Op": "startCombat",
+          "Id": "ENEMY_RAT_SWARM"
+        }
+      ]
+    },
+    {
+      "Text": "Enter the Smugglers’ Den.",
       "Effects": [
         {
           "Op": "goto",
           "Id": "N_SMUGGLERS_DEN"
         }
       ]
+    },
+    {
+      "Text": "Back to the square.",
+      "Effects": [
+        {
+          "Op": "goto",
+          "Id": "N_HARBOR_SQUARE"
+        }
+      ]
     }
   ],
   "Exits": [
     {
-      "Text": "To Harbor Town Square",
-      "To": "N_HARBOR_SQUARE"
+      "Text": "To Smugglers’ Den",
+      "To": "N_SMUGGLERS_DEN"
     },
     {
-      "Text": "To Refugee Camp",
-      "To": "N_REFUGEE_CAMP"
+      "Text": "Back to Harbor Town Square",
+      "To": "N_HARBOR_SQUARE"
     }
-  ],
-  "Paragraphs": [
-    "Shacks lean together like conspirators. The mud remembers everyone.",
-    "Eyes watch from rag curtains."
   ]
 }

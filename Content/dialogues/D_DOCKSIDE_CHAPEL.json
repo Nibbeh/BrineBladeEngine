@@ -1,0 +1,42 @@
+{
+  "Id": "D_DOCKSIDE_CHAPEL",
+  "Speakers": [
+    "Acolyte",
+    "You"
+  ],
+  "Start": "L1",
+  "Lines": [
+    {
+      "Id": "L1",
+      "Speaker": "Acolyte",
+      "Text": "Dheowryth sees the honest tide.",
+      "Choices": [
+        {
+          "Text": "Leave a coin (1g).",
+          "Effects": [
+            {
+              "Op": "addGold",
+              "Amount": -1
+            },
+            {
+              "Op": "setFlag",
+              "Name": "piety",
+              "Value": true
+            },
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        },
+        {
+          "Text": "Nod and depart.",
+          "Effects": [
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

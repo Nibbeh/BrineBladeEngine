@@ -1,42 +1,70 @@
 {
   "Id": "N_OUTER_PIER",
-  "Title": "Outer Pier",
-  "Description": "Timbers groan; the sea answers. Kelp sticks like old coins. Beneath, something moves.\n\nA crooked ladder descends into the dark—if you had a light.",
+  "Title": "Outer Pier & Docks",
+  "Description": "Chaos of sailors, refugees, and stone constructs unloading ships.",
+  "Paragraphs": [
+    "The dockmaster’s ledger booth is a fortress of stamps.",
+    "Mercenaries watch cargo piles. A family shelters beneath patched sailcloth."
+  ],
   "Options": [
     {
-      "Text": "Peer under the pier (fight rats).",
+      "Text": "Approach the dockmaster.",
       "Effects": [
         {
-          "Op": "startCombat",
-          "Id": "ENEMY_RAT_SWARM"
+          "Op": "startDialogue",
+          "Id": "D_DOCKMASTER"
         }
       ]
     },
     {
-      "Text": "Climb down with a lantern.",
-      "Requires": [
-        "flag:borrow.lantern"
-      ],
+      "Text": "Speak with the refugee family.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_REFUGEE_FAMILY"
+        }
+      ]
+    },
+    {
+      "Text": "Poke around the guarded cargo.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_GUARDED_CARGO"
+        }
+      ]
+    },
+    {
+      "Text": "Head toward Imperial Wharf.",
       "Effects": [
         {
           "Op": "goto",
-          "Id": "N_UNDER_PIER"
+          "Id": "N_IMPERIAL_WHARF"
+        }
+      ]
+    },
+    {
+      "Text": "Make for Harbor Town Square.",
+      "Effects": [
+        {
+          "Op": "goto",
+          "Id": "N_HARBOR_SQUARE"
         }
       ]
     }
   ],
   "Exits": [
     {
-      "Text": "To Harbor Town Square",
+      "Text": "Imperial Wharf",
+      "To": "N_IMPERIAL_WHARF"
+    },
+    {
+      "Text": "Harbor Town Square",
       "To": "N_HARBOR_SQUARE"
     },
     {
-      "Text": "To Imperial Wharf",
-      "To": "N_IMPERIAL_WHARF"
+      "Text": "Under the pier catwalk",
+      "To": "N_UNDER_PIER"
     }
-  ],
-  "Paragraphs": [
-    "Timbers groan; the sea answers. Kelp sticks like old coins. Beneath, something moves.",
-    "A crooked ladder descends into the dark—if you had a light."
   ]
 }

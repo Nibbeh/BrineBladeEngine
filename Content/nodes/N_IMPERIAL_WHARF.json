@@ -1,42 +1,56 @@
 {
   "Id": "N_IMPERIAL_WHARF",
   "Title": "Imperial Wharf",
-  "Description": "Amber crates and silk bales under a painted awning. A pair of elves ignore insults with professional grace.",
+  "Description": "Orderly warehouses under guild seals. Elf clerks watch human foremen and silent constructs.",
+  "Paragraphs": [
+    "A polished door leads to the Guild Factor’s Office. A pen of stone porters stands nearby. A cracked icon faces the tide."
+  ],
   "Options": [
     {
-      "Text": "Speak with the elven trader.",
+      "Text": "Enter the Guild Factor’s Office.",
       "Effects": [
         {
           "Op": "startDialogue",
-          "Id": "D_ELVEN_PATRON"
+          "Id": "D_GUILD_FACTOR"
         }
       ]
     },
     {
-      "Text": "Ask about work.",
+      "Text": "Inspect the construct pen.",
+      "Effects": [
+        {
+          "Op": "goto",
+          "Id": "N_CONSTRUCT_PEN"
+        }
+      ]
+    },
+    {
+      "Text": "Visit the dockside chapel.",
       "Effects": [
         {
           "Op": "startDialogue",
-          "Id": "D_DOCK_FOREMAN"
+          "Id": "D_DOCKSIDE_CHAPEL"
+        }
+      ]
+    },
+    {
+      "Text": "Return to Harbor Town Square.",
+      "Effects": [
+        {
+          "Op": "goto",
+          "Id": "N_HARBOR_SQUARE"
         }
       ]
     }
   ],
   "Exits": [
     {
-      "Text": "To Outer Pier",
-      "To": "N_OUTER_PIER"
-    },
-    {
-      "Text": "To Main Gate Bridge",
-      "To": "N_MAIN_GATE_BRIDGE"
-    },
-    {
       "Text": "To Harbor Town Square",
       "To": "N_HARBOR_SQUARE"
+    },
+    {
+      "Text": "To Stormlight Lighthouse",
+      "To": "N_LIGHTHOUSE"
     }
-  ],
-  "Paragraphs": [
-    "Amber crates and silk bales under a painted awning. A pair of elves ignore insults with professional grace."
   ]
 }

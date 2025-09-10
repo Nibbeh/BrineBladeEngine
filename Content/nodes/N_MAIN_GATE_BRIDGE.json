@@ -1,46 +1,55 @@
 {
   "Id": "N_MAIN_GATE_BRIDGE",
-  "Title": "Main Gate Bridge",
-  "Description": "Stone lions spit chain across the river mouth. Militia crowd the chokepoint; clerks count souls like coins.",
+  "Title": "Main Gate Bridge (Closed)",
+  "Description": "Towering walls loom. The line crawls.",
+  "Paragraphs": [
+    "The Guard Captain triages bribes, threats, and paperwork."
+  ],
   "Options": [
     {
-      "Text": "Approach the guard.",
+      "Text": "Speak to the Gate Guard.",
       "Effects": [
         {
           "Op": "startDialogue",
-          "Id": "D_GATE_GUARD"
+          "Id": "D_GATE_GUARD_TUT"
         }
       ]
     },
     {
-      "Text": "Present accepted papers and enter the city.",
+      "Text": "(If accepted) Enter the city.",
       "Requires": [
         "flag:pass.accepted"
       ],
       "Effects": [
         {
-          "Op": "setFlag",
-          "Name": "tutorial.complete",
-          "Value": true
+          "Op": "goto",
+          "Id": "N_CITY_INTRO"
+        }
+      ]
+    },
+    {
+      "Text": "If all else fails: work a dock shift (earn 10g) and try again.",
+      "Effects": [
+        {
+          "Op": "addGold",
+          "Amount": 10
+        }
+      ]
+    },
+    {
+      "Text": "Back to the square.",
+      "Effects": [
+        {
+          "Op": "goto",
+          "Id": "N_HARBOR_SQUARE"
         }
       ]
     }
   ],
   "Exits": [
     {
-      "Text": "To Harbor Town Square",
+      "Text": "Back to Harbor Town Square",
       "To": "N_HARBOR_SQUARE"
-    },
-    {
-      "Text": "To Imperial Wharf",
-      "To": "N_IMPERIAL_WHARF"
-    },
-    {
-      "Text": "To Bridge Approach",
-      "To": "N_BRIDGE_BOOTH_PATH"
     }
-  ],
-  "Paragraphs": [
-    "Stone lions spit chain across the river mouth. Militia crowd the chokepoint; clerks count souls like coins."
   ]
 }

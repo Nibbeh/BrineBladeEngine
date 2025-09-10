@@ -1,0 +1,30 @@
+{
+  "Id": "N_CONSTRUCT_PEN",
+  "Title": "Construct Pen",
+  "Description": "Stone porters stand in ranks—chiselled faces smoothed by salt.",
+  "Paragraphs": [
+    "A human foreman mutters that stone men don’t spend wages in taverns."
+  ],
+  "Options": [
+    {
+      "Text": "Listen and move on.",
+      "Effects": [
+        {
+          "Op": "setFlag",
+          "Name": "lore.constructs",
+          "Value": true
+        },
+        {
+          "Op": "goto",
+          "Id": "N_IMPERIAL_WHARF"
+        }
+      ]
+    }
+  ],
+  "Exits": [
+    {
+      "Text": "Back to Imperial Wharf",
+      "To": "N_IMPERIAL_WHARF"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "Id": "D_LIGHTHOUSE_KEEPER_TUT",
+  "Speakers": [
+    "Keeper",
+    "You"
+  ],
+  "Start": "L1",
+  "Lines": [
+    {
+      "Id": "L1",
+      "Speaker": "Keeper",
+      "Text": "Sea-beasts don’t ring bells. People do.",
+      "Choices": [
+        {
+          "Text": "Any pilgrims pass?",
+          "Effects": [
+            {
+              "Op": "setFlag",
+              "Name": "lore.pilgrims",
+              "Value": true
+            },
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        },
+        {
+          "Text": "I’ll go.",
+          "Effects": [
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

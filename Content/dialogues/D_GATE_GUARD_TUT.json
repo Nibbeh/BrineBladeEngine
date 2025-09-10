@@ -1,5 +1,5 @@
 {
-  "Id": "D_GATE_GUARD",
+  "Id": "D_GATE_GUARD_TUT",
   "Speakers": [
     "Guard",
     "You"
@@ -9,7 +9,7 @@
     {
       "Id": "L1",
       "Speaker": "Guard",
-      "Text": "City’s shut. Refugees at the camp; no one in without papers.",
+      "Text": "City’s shut. No one in without papers.",
       "Choices": [
         {
           "Text": "What papers would do?",
@@ -22,12 +22,12 @@
           ],
           "Effects": [
             {
-              "Op": "endDialogue"
-            },
-            {
               "Op": "setFlag",
               "Name": "pass.accepted",
               "Value": true
+            },
+            {
+              "Op": "endDialogue"
             }
           ]
         },
@@ -38,12 +38,12 @@
           ],
           "Effects": [
             {
-              "Op": "endDialogue"
-            },
-            {
               "Op": "setFlag",
               "Name": "pass.accepted",
               "Value": true
+            },
+            {
+              "Op": "endDialogue"
             }
           ]
         },
@@ -54,12 +54,53 @@
           ],
           "Effects": [
             {
+              "Op": "setFlag",
+              "Name": "pass.accepted",
+              "Value": true
+            },
+            {
               "Op": "endDialogue"
+            }
+          ]
+        },
+        {
+          "Text": "(Smuggler’s arrangement)",
+          "Requires": [
+            "flag:route.smuggler"
+          ],
+          "Effects": [
+            {
+              "Op": "setFlag",
+              "Name": "pass.accepted",
+              "Value": true
+            },
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        },
+        {
+          "Text": "(Bribe) 20g.",
+          "Effects": [
+            {
+              "Op": "addGold",
+              "Amount": -20
             },
             {
               "Op": "setFlag",
               "Name": "pass.accepted",
               "Value": true
+            },
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        },
+        {
+          "Text": "Nevermind.",
+          "Effects": [
+            {
+              "Op": "endDialogue"
             }
           ]
         }

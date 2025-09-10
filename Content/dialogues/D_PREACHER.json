@@ -1,0 +1,51 @@
+{
+  "Id": "D_PREACHER",
+  "Speakers": [
+    "Preacher",
+    "You"
+  ],
+  "Start": "L1",
+  "Lines": [
+    {
+      "Id": "L1",
+      "Speaker": "Preacher",
+      "Text": "Elves fill coffers while our children starve!",
+      "Choices": [
+        {
+          "Text": "Challenge him.",
+          "Effects": [
+            {
+              "Op": "setFlag",
+              "Name": "stance.preacher.anti",
+              "Value": true
+            },
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        },
+        {
+          "Text": "Agree loudly.",
+          "Effects": [
+            {
+              "Op": "setFlag",
+              "Name": "stance.preacher.pro",
+              "Value": true
+            },
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        },
+        {
+          "Text": "Slip away.",
+          "Effects": [
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

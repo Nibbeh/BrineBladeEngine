@@ -1,0 +1,54 @@
+{
+  "Id": "D_GUARD_CAPTAIN_TUT",
+  "Speakers": [
+    "Captain",
+    "You"
+  ],
+  "Start": "L1",
+  "Lines": [
+    {
+      "Id": "L1",
+      "Speaker": "Captain",
+      "Text": "Queues, smugglers, and not enough boots.",
+      "Choices": [
+        {
+          "Text": "Report merc skimming at the docks.",
+          "Requires": [
+            "flag:report.mercs"
+          ],
+          "Effects": [
+            {
+              "Op": "setFlag",
+              "Name": "guard.favor",
+              "Value": true
+            },
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        },
+        {
+          "Text": "Any legal way through?",
+          "Effects": [
+            {
+              "Op": "setFlag",
+              "Name": "hint.gates",
+              "Value": true
+            },
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        },
+        {
+          "Text": "I’ll go.",
+          "Effects": [
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

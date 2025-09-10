@@ -1,0 +1,59 @@
+{
+  "Id": "D_REFUGEE_FAMILY",
+  "Speakers": [
+    "Mother",
+    "You"
+  ],
+  "Start": "L1",
+  "Lines": [
+    {
+      "Id": "L1",
+      "Speaker": "Mother",
+      "Text": "Gate’s shut. We wait. The child’s hungry.",
+      "Choices": [
+        {
+          "Text": "Give bread.",
+          "Requires": [
+            "flag:inv.ITM_BREAD"
+          ],
+          "Effects": [
+            {
+              "Op": "addItem",
+              "Id": "ITM_BREAD",
+              "Qty": -1
+            },
+            {
+              "Op": "setFlag",
+              "Name": "moral.kind.refugee",
+              "Value": true
+            },
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        },
+        {
+          "Text": "Promise to help later.",
+          "Effects": [
+            {
+              "Op": "setFlag",
+              "Name": "promise.bread",
+              "Value": true
+            },
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        },
+        {
+          "Text": "Sorry. I can’t.",
+          "Effects": [
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

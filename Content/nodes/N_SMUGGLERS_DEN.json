@@ -1,10 +1,27 @@
 {
   "Id": "N_SMUGGLERS_DEN",
   "Title": "Backroom, Shanty Den",
-  "Description": "A lopsided table, bone chips, candle ends—the economy of secrets.",
+  "Description": "Bone chips and candle ends—the economy of secrets.",
+  "Paragraphs": [
+    "The captain smiles without warmth."
+  ],
   "Options": [
     {
-      "Text": "Play along, flash the token.",
+      "Text": "Pay 15g for the mark.",
+      "Effects": [
+        {
+          "Op": "addGold",
+          "Amount": -15
+        },
+        {
+          "Op": "setFlag",
+          "Name": "token.smuggler",
+          "Value": true
+        }
+      ]
+    },
+    {
+      "Text": "Flash the mark to arrange passage.",
       "Requires": [
         "flag:token.smuggler"
       ],
@@ -17,31 +34,23 @@
       ]
     },
     {
-      "Text": "Hire passage under the bridge (if you have token).",
-      "Requires": [
-        "flag:token.smuggler"
-      ],
+      "Text": "Back to Shanty Alley.",
       "Effects": [
         {
-          "Op": "setFlag",
-          "Name": "pass.accepted",
-          "Value": true
-        },
-        {
-          "Op": "setFlag",
-          "Name": "tutorial.complete",
-          "Value": true
+          "Op": "goto",
+          "Id": "N_SHANTY_ALLEY"
         }
       ]
     }
   ],
   "Exits": [
     {
-      "Text": "Back to Shanty Alley",
-      "To": "N_SHANTY_ALLEY"
+      "Text": "Back up to the pier",
+      "To": "N_OUTER_PIER"
+    },
+    {
+      "Text": "Along the catwalk to the Old Sea Bell",
+      "To": "N_OLD_SEA_BELL"
     }
-  ],
-  "Paragraphs": [
-    "A lopsided table, bone chips, candle ends—the economy of secrets."
   ]
 }

@@ -1,26 +1,26 @@
 {
-  "Id": "N_FISH_MARKET",
-  "Title": "Fish Market Rows",
-  "Description": "Brine, blood, and rotting catch. Refugees barter scraps here.",
+  "Id": "N_TAVERN",
+  "Title": "The Salted Keel Tavern",
+  "Description": "Warm air, spilled ale, a knucklebones game rattling on a barrel.",
   "Paragraphs": [
-    "A shady corner whispers of faster ways in. An enforcer shakes down a debtor."
+    "The tavernkeeper sizes you up like a debt."
   ],
   "Options": [
     {
-      "Text": "Smuggler’s corner—ask about faster ways.",
+      "Text": "Play knucklebones (stake 2g).",
       "Effects": [
         {
           "Op": "startDialogue",
-          "Id": "D_SMUGGLER_CONTACT"
+          "Id": "D_TAVERN_DICE"
         }
       ]
     },
     {
-      "Text": "Break up the brawl (scripted combat).",
+      "Text": "Ask for rumors.",
       "Effects": [
         {
-          "Op": "startCombat",
-          "Id": "ENEMY_CUTPURSE"
+          "Op": "startDialogue",
+          "Id": "D_TAVERN_RUMORS"
         }
       ]
     },

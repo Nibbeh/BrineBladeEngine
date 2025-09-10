@@ -1,22 +1,36 @@
 {
   "Id": "N_OLD_SEA_BELL",
-  "Title": "The Old Sea Bell",
-  "Description": "A green-bronze bell on a salt-bitten frame. It tastes of storms and oaths.\n\nAn old ringer eyes you like a gull eyes bread.",
+  "Title": "Old Sea Bell Shrine",
+  "Description": "A weathered bell over an altar crusted with coin and salt.",
+  "Paragraphs": [
+    "An old ringer eyes you like a gull eyes bread."
+  ],
   "Options": [
     {
-      "Text": "Talk to the bell ringer.",
+      "Text": "Speak to the bell ringer.",
       "Effects": [
         {
           "Op": "startDialogue",
-          "Id": "D_BELL_RINGER"
+          "Id": "D_BELL_RINGER_TUT"
         }
       ]
     },
     {
-      "Text": "(If rung) Take the cliff path toward the lighthouse.",
-      "Requires": [
-        "flag:bell.rung"
-      ],
+      "Text": "Offer a coin (1g).",
+      "Effects": [
+        {
+          "Op": "addGold",
+          "Amount": -1
+        },
+        {
+          "Op": "setFlag",
+          "Name": "blessing.luck",
+          "Value": true
+        }
+      ]
+    },
+    {
+      "Text": "Back toward the lighthouse.",
       "Effects": [
         {
           "Op": "goto",
@@ -27,16 +41,12 @@
   ],
   "Exits": [
     {
-      "Text": "Back along the catwalk",
-      "To": "N_UNDER_PIER"
+      "Text": "Back along the path to the lighthouse",
+      "To": "N_LIGHTHOUSE"
     },
     {
-      "Text": "Up to Harbor Town Square",
+      "Text": "Path back to the square",
       "To": "N_HARBOR_SQUARE"
     }
-  ],
-  "Paragraphs": [
-    "A green-bronze bell on a salt-bitten frame. It tastes of storms and oaths.",
-    "An old ringer eyes you like a gull eyes bread."
   ]
 }

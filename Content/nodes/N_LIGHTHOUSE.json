@@ -1,29 +1,48 @@
 {
   "Id": "N_LIGHTHOUSE",
   "Title": "Stormlight Tower",
-  "Description": "The lighthouse stands like a finger scolding the sea. Salt climbs its stones in white veins.",
+  "Description": "Wind lashes the tower. The keeper peers like he hears the sea think.",
+  "Paragraphs": [
+    "Broken stairs spiral into dark."
+  ],
   "Options": [
     {
-      "Text": "Speak to the keeper.",
+      "Text": "Speak with the keeper.",
       "Effects": [
         {
           "Op": "startDialogue",
-          "Id": "D_LIGHTHOUSE_KEEPER"
+          "Id": "D_LIGHTHOUSE_KEEPER_TUT"
+        }
+      ]
+    },
+    {
+      "Text": "Climb the broken stair (cost 1hp).",
+      "Effects": [
+        {
+          "Op": "setFlag",
+          "Name": "lore.seabeast",
+          "Value": true
+        }
+      ]
+    },
+    {
+      "Text": "Down to the Old Sea Bell.",
+      "Effects": [
+        {
+          "Op": "goto",
+          "Id": "N_OLD_SEA_BELL"
         }
       ]
     }
   ],
   "Exits": [
     {
-      "Text": "Down the cliff path to the Old Sea Bell",
+      "Text": "Down to Old Sea Bell",
       "To": "N_OLD_SEA_BELL"
     },
     {
-      "Text": "Back toward Imperial Wharf",
+      "Text": "Back to Imperial Wharf",
       "To": "N_IMPERIAL_WHARF"
     }
-  ],
-  "Paragraphs": [
-    "The lighthouse stands like a finger scolding the sea. Salt climbs its stones in white veins."
   ]
 }

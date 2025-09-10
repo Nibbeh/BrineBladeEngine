@@ -1,0 +1,58 @@
+{
+  "Id": "D_MONK",
+  "Speakers": [
+    "Monk",
+    "You"
+  ],
+  "Start": "L1",
+  "Lines": [
+    {
+      "Id": "L1",
+      "Speaker": "Monk",
+      "Text": "The sea tests us.",
+      "Choices": [
+        {
+          "Text": "Ask for mercy of passage.",
+          "Requires": [
+            "flag:help.camp",
+            "flag:piety"
+          ],
+          "Effects": [
+            {
+              "Op": "setFlag",
+              "Name": "writ.pilgrim",
+              "Value": true
+            },
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        },
+        {
+          "Text": "Accept bread.",
+          "Requires": [
+            "flag:moral.kind.refugee"
+          ],
+          "Effects": [
+            {
+              "Op": "addItem",
+              "Id": "ITM_BREAD",
+              "Qty": 1
+            },
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        },
+        {
+          "Text": "Thank him.",
+          "Effects": [
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

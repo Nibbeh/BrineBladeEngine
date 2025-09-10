@@ -1,0 +1,38 @@
+{
+  "Id": "D_SMUGGLER_CONTACT",
+  "Speakers": [
+    "Smuggler",
+    "You"
+  ],
+  "Start": "L1",
+  "Lines": [
+    {
+      "Id": "L1",
+      "Speaker": "Smuggler",
+      "Text": "Faster way in—costly and wet.",
+      "Choices": [
+        {
+          "Text": "Deal.",
+          "Effects": [
+            {
+              "Op": "setFlag",
+              "Name": "token.smuggler",
+              "Value": true
+            },
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        },
+        {
+          "Text": "No thanks.",
+          "Effects": [
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

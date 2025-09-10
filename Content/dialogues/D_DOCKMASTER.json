@@ -1,0 +1,55 @@
+{
+  "Id": "D_DOCKMASTER",
+  "Speakers": [
+    "Dockmaster",
+    "You"
+  ],
+  "Start": "L1",
+  "Lines": [
+    {
+      "Id": "L1",
+      "Speaker": "Dockmaster",
+      "Text": "Permits, br—fees. Temporary ones if you’ve coin.",
+      "Choices": [
+        {
+          "Text": "Pay 10g for a Temporary Pass.",
+          "Effects": [
+            {
+              "Op": "addGold",
+              "Amount": -10
+            },
+            {
+              "Op": "setFlag",
+              "Name": "permit.temp",
+              "Value": true
+            },
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        },
+        {
+          "Text": "Claim you’re contracted crew.",
+          "Effects": [
+            {
+              "Op": "setFlag",
+              "Name": "dockmaster.suspicious",
+              "Value": true
+            },
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        },
+        {
+          "Text": "Leave.",
+          "Effects": [
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

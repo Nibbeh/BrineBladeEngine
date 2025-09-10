@@ -1,0 +1,48 @@
+{
+  "Id": "N_HARBOR_WATCH",
+  "Title": "Harbor Watch Barracks",
+  "Description": "Orderly bunks, scarred shields, a bored sergeant.",
+  "Paragraphs": [
+    "A small board lists mercenary postings."
+  ],
+  "Options": [
+    {
+      "Text": "Talk to the Guard Captain.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_GUARD_CAPTAIN_TUT"
+        }
+      ]
+    },
+    {
+      "Text": "Study the recruitment board.",
+      "Effects": [
+        {
+          "Op": "setFlag",
+          "Name": "hook.mercenary",
+          "Value": true
+        }
+      ]
+    },
+    {
+      "Text": "Head to the Main Gate Bridge.",
+      "Effects": [
+        {
+          "Op": "goto",
+          "Id": "N_MAIN_GATE_BRIDGE"
+        }
+      ]
+    }
+  ],
+  "Exits": [
+    {
+      "Text": "To Main Gate Bridge",
+      "To": "N_MAIN_GATE_BRIDGE"
+    },
+    {
+      "Text": "Back to Harbor Town Square",
+      "To": "N_HARBOR_SQUARE"
+    }
+  ]
+}

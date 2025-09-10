@@ -1,56 +1,79 @@
 {
   "Id": "N_HARBOR_SQUARE",
   "Title": "Harbor Town Square",
-  "Description": "Crates as altars to trade; gulls as choirboys. The square is a knot of shouting, salt, and steam.\n\nRefugees huddle around borrowed pots. Elven factors argue under lacquered awnings while militia watch from the bridge.",
+  "Description": "A crush of stalls and voices. The watch keeps half an eye from the bridge.",
+  "Paragraphs": [
+    "A tavern sign creaks: The Salted Keel. A general goods stall stacks bread and rope.",
+    "A street preacher sours the air with fury."
+  ],
   "Options": [
     {
-      "Text": "Enter the Gull’s Rest tavern.",
+      "Text": "Enter the Salted Keel Tavern.",
       "Effects": [
         {
           "Op": "goto",
-          "Id": "N_TAVERN_GULLS_REST"
+          "Id": "N_TAVERN"
         }
       ]
     },
     {
-      "Text": "Ask the urchin about shortcuts.",
+      "Text": "Browse the general goods stall.",
       "Effects": [
         {
-          "Op": "startDialogue",
-          "Id": "D_URCHIN_GUIDE"
+          "Op": "goto",
+          "Id": "N_GOODS_STALL"
         }
       ]
     },
     {
-      "Text": "Keep an eye on your purse.",
+      "Text": "Listen to the street preacher.",
       "Effects": [
         {
           "Op": "startDialogue",
-          "Id": "D_CUTPURSE"
+          "Id": "D_PREACHER"
+        }
+      ]
+    },
+    {
+      "Text": "Head into the Fish Market rows.",
+      "Effects": [
+        {
+          "Op": "goto",
+          "Id": "N_FISH_MARKET"
+        }
+      ]
+    },
+    {
+      "Text": "Cut through Shanty Alley.",
+      "Effects": [
+        {
+          "Op": "goto",
+          "Id": "N_SHANTY_ALLEY"
+        }
+      ]
+    },
+    {
+      "Text": "Cross to the Bridge and Gate.",
+      "Effects": [
+        {
+          "Op": "goto",
+          "Id": "N_MAIN_GATE_BRIDGE"
         }
       ]
     }
   ],
   "Exits": [
     {
-      "Text": "To Outer Pier",
-      "To": "N_OUTER_PIER"
-    },
-    {
       "Text": "To Fish Market",
       "To": "N_FISH_MARKET"
     },
     {
-      "Text": "To Refugee Camp",
-      "To": "N_REFUGEE_CAMP"
+      "Text": "To Shanty Alley",
+      "To": "N_SHANTY_ALLEY"
     },
     {
       "Text": "To Main Gate Bridge",
       "To": "N_MAIN_GATE_BRIDGE"
     }
-  ],
-  "Paragraphs": [
-    "Crates as altars to trade; gulls as choirboys. The square is a knot of shouting, salt, and steam.",
-    "Refugees huddle around borrowed pots. Elven factors argue under lacquered awnings while militia watch from the bridge."
   ]
 }

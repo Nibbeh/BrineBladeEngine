@@ -1,0 +1,25 @@
+{
+  "Id": "D_SMUGGLER_HINT",
+  "Speakers": [
+    "Sailor",
+    "You"
+  ],
+  "Start": "L1",
+  "Lines": [
+    {
+      "Id": "L1",
+      "Speaker": "Sailor",
+      "Text": "Keel’s shadow at moonrise. Ask for Ril.",
+      "Choices": [
+        {
+          "Text": "You never saw me.",
+          "Effects": [
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

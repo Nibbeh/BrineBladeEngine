@@ -1,26 +1,25 @@
 {
   "Id": "N_START",
-  "Title": "Docks: Arrival",
+  "Title": "Arrival: Outer Pier",
+  "Description": "Gulls circle a forest of masts. Dockhands curse while stone constructs lift cargo without complaint.",
   "Paragraphs": [
-    "Night air tastes of brine and woodsmoke. Refugees queue beneath the city walls.",
-    "A harbormaster waves you toward the square."
+    "You disembark into brine air and lantern fog. Refugees huddle under tarps. A ledger booth watches it all."
   ],
-  "Description": "Night air tastes of brine and woodsmoke. Refugees queue beneath the city walls.\n\nA harbormaster waves you toward the square.",
   "Options": [
     {
-      "Text": "Continue...",
+      "Text": "Step onto the pier.",
       "Effects": [
         {
           "Op": "goto",
-          "Id": "N_HARBOR_SQUARE"
+          "Id": "N_OUTER_PIER"
         }
       ]
     }
   ],
   "Exits": [
     {
-      "Text": "Continue...",
-      "To": "N_HARBOR_SQUARE"
+      "Text": "To the Outer Pier",
+      "To": "N_OUTER_PIER"
     }
   ]
 }
