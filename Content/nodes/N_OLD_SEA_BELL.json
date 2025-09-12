@@ -1,54 +1,51 @@
+// N_OLD_SEA_BELL.json
 {
   "Id": "N_OLD_SEA_BELL",
   "Title": "Old Sea Bell Shrine",
-  "Description": "A weathered bell over an altar crusted with coin and salt.",
+  "Description": "An iron bell older than the harbor itself, bolted to a post of petrified oak.",
   "Paragraphs": [
-    "An old ringer eyes you like a gull eyes bread.",
-    "Salt, tar, and wet timber mix on the air; gulls quarrel above the swell while merchants count coin with red fingers."
+    "The bell's tone is said to carry through fog when voices cannot.",
+    "Offerings of rope scraps and amber chips hang from the rail."
   ],
   "Options": [
     {
-      "Effects": [
-        {
-          "Op": "startDialogue",
-          "Id": "D_BELL_RINGER_TUT"
-        }
-      ],
       "Id": "Speak_to_the_bell_ringer",
-      "Label": "Speak to the bell ringer.",
       "Text": "Speak to the bell ringer."
     },
     {
+      "Id": "Offer_a_coin_1g",
+      "Text": "Offer a coin (1g)."
+    },
+    {
+      "Id": "O_LISTEN_PREACHER",
+      "Text": "Listen to the street preacher by the bell.",
       "Effects": [
         {
-          "Op": "addGold",
-          "Amount": -1
-        },
-        {
-          "Op": "setFlag",
-          "Id": "blessing.luck"
+          "Op": "startDialogue",
+          "Id": "D_PREACHER"
         }
-      ],
-      "Id": "Offer_a_coin_1g",
-      "Label": "Offer a coin (1g).",
-      "Text": "Offer a coin (1g)."
+      ]
+    },
+    {
+      "Id": "O_TALK_MONK_AT_BELL",
+      "Text": "Speak with the visiting monk.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_MONK"
+        }
+      ]
     },
     {
       "Id": "O_EAVESDROP",
       "Label": "Eavesdrop on the crowd.",
-      "Text": "Eavesdrop on the crowd.",
-      "Effects": [
-        {
-          "Op": "startDialogue",
-          "Id": "D_LORE_N_OLD_SEA_BELL"
-        }
-      ]
+      "Text": "Eavesdrop on the crowd."
     }
   ],
   "Exits": [
     {
-      "Text": "Imperial Wharf",
-      "To": "N_IMPERIAL_WHARF"
+      "Text": "Back to Harbor Square",
+      "To": "N_HARBOR_SQUARE"
     }
   ]
 }

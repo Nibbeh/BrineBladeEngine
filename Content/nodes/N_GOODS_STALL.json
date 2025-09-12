@@ -1,27 +1,32 @@
+// N_GOODS_STALL.json
 {
   "Id": "N_GOODS_STALL",
   "Title": "Peddler's Goods Stall",
-  "Description": "A striped awning flaps; trinkets and dry rations are stacked in neat rows.",
+  "Description": "A chorus of haggling rises under patched awnings.",
   "Paragraphs": [
-    "The prices rise with the wind. The peddler swears it is all fair trade.",
-    "Salt, tar, and wet timber mix on the air; gulls quarrel above the swell while merchants count coin with red fingers."
+    "Strings of trinkets tangle with honest tools; everything smells faintly of resin.",
+    "A factor's clerk prowls the aisle taking notes on who is late with dues."
   ],
   "Options": [
     {
       "Id": "O_EAVESDROP",
       "Label": "Eavesdrop on the crowd.",
-      "Text": "Eavesdrop on the crowd.",
+      "Text": "Eavesdrop on the crowd."
+    },
+    {
+      "Id": "O_TALK_GUILD_FACTOR_MARKET",
+      "Text": "Ask the Factor about market dues.",
       "Effects": [
         {
           "Op": "startDialogue",
-          "Id": "D_LORE_N_GOODS_STALL"
+          "Id": "D_GUILD_FACTOR"
         }
       ]
     }
   ],
   "Exits": [
     {
-      "Text": "To Harbor Town Square",
+      "Text": "Back to Harbor Square",
       "To": "N_HARBOR_SQUARE"
     }
   ]
