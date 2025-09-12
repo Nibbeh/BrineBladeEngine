@@ -1,55 +1,48 @@
 ﻿{
   "Id": "N_SHANTY_ALLEY",
   "Title": "Shanty Alley",
-  "Description": "Lean-tos and whisper-trades. A chalk fishbone marks a back door.",
+  "Description": "Canvas lean-tos crowd a narrow lane. Someone whistles from the shade.",
   "Paragraphs": [
-    "A child brushes your belt. Footsteps gather behind you."
+    "A cutpurse sizes you up, hand on a rusty blade. You could face him—or drift away before things turn ugly."
   ],
   "Options": [
     {
-      "Effects": [
-        {
-          "Op": "addGold",
-          "Amount": -1
-        },
-        {
-          "Op": "setFlag",
-          "Id": "moral.kind.child"
-        }
-      ],
-      "Id": "Let_the_child_keep_the_coin_1g",
-      "Label": "Let the child keep the coin (-1g)."
-    },
-    {
-      "Effects": [
-        {
-          "Op": "setFlag",
-          "Id": "moral.harsh.child"
-        }
-      ],
-      "Id": "Scold_and_take_it_back",
-      "Label": "Scold and take it back."
-    },
-    {
+      "Id": "O_FIGHT_CUTPURSE",
+      "Label": "Stand your ground (combat: cutpurse)",
       "Effects": [
         {
           "Op": "combat",
-          "Id": "ENEMY_RAT_SWARM"
+          "Id": "ENEMY_CUTPURSE"
+        },
+        {
+          "Op": "goto",
+          "To": "N_MAIN_GATE_BRIDGE"
         }
-      ],
-      "Id": "Face_the_footfalls_ambush",
-      "Label": "Face the footfalls (ambush)."
+      ]
+    },
+    {
+      "Id": "O_FALLBACK_CITY",
+      "Label": "Avoid trouble and head for the Main Gate Bridge",
+      "Effects": [
+        {
+          "Op": "advanceTime",
+          "Minutes": 10
+        },
+        {
+          "Op": "goto",
+          "To": "N_MAIN_GATE_BRIDGE"
+        }
+      ]
     }
   ],
   "Exits": [
     {
-      "Text": "To Smugglers\u2019 Den",
-      "To": "N_SMUGGLERS_DEN"
+      "Text": "Back to the Outer Pier",
+      "To": "N_OUTER_PIER"
     },
     {
-      "Text": "Back to Harbor Town Square",
-      "To": "N_HARBOR_SQUARE"
+      "Text": "Slip toward the Main Gate Bridge",
+      "To": "N_MAIN_GATE_BRIDGE"
     }
   ]
 }
-

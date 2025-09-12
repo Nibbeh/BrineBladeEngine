@@ -6,11 +6,17 @@ public sealed record Node(
     string Id,
     string Title,
     string Description,
+    List<string>? Paragraphs = null,          // NEW: supports Content JSON "Paragraphs"
     List<NodeExit>? Exits = null,
     List<NodeOption>? Options = null
 );
 
-public sealed record NodeExit(string To, List<string>? Requires = null);
+// NEW: optional "Text" lets Content label exits explicitly
+public sealed record NodeExit(
+    string To,
+    List<string>? Requires = null,
+    string? Text = null
+);
 
 public sealed record NodeOption(
     string Id,
@@ -18,4 +24,3 @@ public sealed record NodeOption(
     List<string>? Requires = null,
     List<EffectSpec>? Effects = null
 );
-

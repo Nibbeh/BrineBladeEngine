@@ -9,6 +9,7 @@ using BrineBlade.AppCore.ConsoleUI;
 using BrineBlade.AppCore.Orchestration;
 using BrineBlade.AppCore.Rules;
 using BrineBlade.Domain.Game;
+using BrineBlade.Infrastructure.Content; // NEW: ContentLinter
 using BrineBlade.Infrastructure.DI;
 using BrineBlade.Services.Abstractions;
 
@@ -55,6 +56,22 @@ if (!Directory.Exists(contentRoot))
 Console.WriteLine($"[INFO] Using Content: {contentRoot}");
 Console.WriteLine($"[INFO] Using Saves:   {saveRoot}");
 
+// --- Content preflight (fail fast during authoring) ---
+try
+{
+    var summary = ContentLinter.Preflight(
+        contentRoot,
+        EffectProcessor.KnownOps // central list of allowed effect ops
+    );
+    Console.WriteLine($"[CHK] Nodes={summary.NodeCount} Dialogues={summary.DialogueCount} Items={summary.ItemCount} Enemies={summary.EnemyCount}");
+}
+catch (Exception ex)
+{
+    Console.Error.WriteLine("[FATAL] Content validation failed.");
+    Console.Error.WriteLine(ex.Message);
+    return;
+}
+
 // DI (use the engine extension for one source of truth)
 var services = new ServiceCollection()
     .AddBrineBladeEngine(contentRoot, saveRoot); // also registers IRandom via DefaultRandom
@@ -83,7 +100,7 @@ var state = mode switch
 IGameUI ui = new ConsoleGameUI();
 var effects = new EffectProcessor(state, sp.GetRequiredService<IInventoryService>(), ui);
 
-// --- Content sanity checks ---
+// --- Quick must-have spot-checks (optional; keeps your previous checks) ---
 var store = sp.GetRequiredService<IContentStore>();
 string[] mustHave = { "N_START", "N_MAIN_GATE_BRIDGE", "N_SHANTY_ALLEY" }; // adjust to your seed/tutorial IDs
 
@@ -110,4 +127,3 @@ var session = new GameSession(
     effects);
 
 session.RunConsoleLoop();
-

@@ -44,6 +44,12 @@ namespace BrineBlade.AppCore.Flows
             var node = _content.GetNodeById(_state.CurrentNodeId);
             if (node is null) { _ui.Notice($"Unknown node '{_state.CurrentNodeId}'."); return false; }
 
+            // Build the display body = Description + Paragraphs (if any)
+            var body = node.Description +
+                       ((node.Paragraphs is { Count: > 0 })
+                           ? "\n\n" + string.Join("\n\n", node.Paragraphs)
+                           : string.Empty);
+
             var runtime = new List<(string key, string label, List<EffectSpec>? effects)>();
             int index = 1;
 
@@ -62,14 +68,26 @@ namespace BrineBlade.AppCore.Flows
                 foreach (var ex in node.Exits)
                 {
                     if (!PassesRequires(ex.Requires)) continue;
-                    var label = $"Travel to [{ex.To}]";
+
+                    // Prefer author-specified label; else derive from target node; else fallback
+                    string label;
+                    if (!string.IsNullOrWhiteSpace(ex.Text))
+                    {
+                        label = ex.Text!;
+                    }
+                    else
+                    {
+                        var target = _content.GetNodeById(ex.To);
+                        label = (target is not null) ? $"To {target.Title}" : $"Travel to [{ex.To}]";
+                    }
+
                     var fx = new List<EffectSpec> { new("goto", To: ex.To) };
                     runtime.Add((index.ToString(), label, fx));
                     index++;
                 }
             }
 
-            _ui.RenderFrame(_state, node.Title, node.Description,
+            _ui.RenderFrame(_state, node.Title, body,
                 runtime.Select(r => (r.key, r.label)).ToList());
 
             while (true)
@@ -86,33 +104,33 @@ namespace BrineBlade.AppCore.Flows
 
                     case ConsoleCommandType.Help:
                         _ui.ShowHelp();
-                        _ui.RenderFrame(_state, node.Title, node.Description,
+                        _ui.RenderFrame(_state, node.Title, body,
                             runtime.Select(r => (r.key, r.label)).ToList());
                         break;
 
                     case ConsoleCommandType.Inventory:
                         _showInventory();
-                        _ui.RenderFrame(_state, node.Title, node.Description,
+                        _ui.RenderFrame(_state, node.Title, body,
                             runtime.Select(r => (r.key, r.label)).ToList());
                         break;
 
                     case ConsoleCommandType.Save:
                         _save.SaveInteractive();
                         _ui.Notice("Game saved.");
-                        _ui.RenderFrame(_state, node.Title, node.Description,
+                        _ui.RenderFrame(_state, node.Title, body,
                             runtime.Select(r => (r.key, r.label)).ToList());
                         break;
 
                     case ConsoleCommandType.Load:
                         if (_save.LoadInteractive()) return true;
-                        _ui.RenderFrame(_state, node.Title, node.Description,
+                        _ui.RenderFrame(_state, node.Title, body,
                             runtime.Select(r => (r.key, r.label)).ToList());
                         break;
 
                     case ConsoleCommandType.Refresh:
                     case ConsoleCommandType.None:
                     default:
-                        _ui.RenderFrame(_state, node.Title, node.Description,
+                        _ui.RenderFrame(_state, node.Title, body,
                             runtime.Select(r => (r.key, r.label)).ToList());
                         break;
                 }
@@ -144,7 +162,6 @@ namespace BrineBlade.AppCore.Flows
             return true;
         }
 
-
         private void ApplyEffects(List<EffectSpec>? effects)
         {
             _effects.ApplyAll(effects,
@@ -153,4 +170,3 @@ namespace BrineBlade.AppCore.Flows
         }
     }
 }
-

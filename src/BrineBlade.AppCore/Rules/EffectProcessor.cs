@@ -19,7 +19,9 @@ public sealed class EffectProcessor
         "startDialogue",
         "combat",
         "addItem",
-        "removeItemByName"
+        "removeItemByName",
+        "equip",            // NEW
+        "unequip"           // NEW
     };
 
     private readonly GameState _state;
@@ -95,10 +97,34 @@ public sealed class EffectProcessor
                         _ui.Notice(r.Success ? $"Removed {e.Id} x{qty}." : $"Cannot remove item: {r.Reason}");
                         break;
                     }
+
+                // ---------- NEW ----------
+                case "equip" when !string.IsNullOrWhiteSpace(e.Id):
+                    {
+                        var slot = TryParseSlot(e.Slot);
+                        var r = _inv.TryEquip(_state, e.Id!, slot);
+                        _ui.Notice(r.Success ? $"Equipped {e.Id}." : $"Cannot equip: {r.Reason}");
+                        break;
+                    }
+
+                case "unequip" when !string.IsNullOrWhiteSpace(e.Slot):
+                    {
+                        var slot = TryParseSlot(e.Slot);
+                        if (slot is null) { _ui.Notice("Cannot unequip: unknown slot"); break; }
+                        var r = _inv.TryUnequip(_state, slot.Value);
+                        _ui.Notice(r.Success ? $"Unequipped {slot}." : $"Cannot unequip: {r.Reason}");
+                        break;
+                    }
+                    // -------------------------
             }
         }
 
         return new Outcome(endDialogue);
     }
-}
 
+    private static EquipmentSlot? TryParseSlot(string? s)
+    {
+        if (string.IsNullOrWhiteSpace(s)) return null;
+        return Enum.TryParse<EquipmentSlot>(s, ignoreCase: true, out var slot) ? slot : null;
+    }
+}

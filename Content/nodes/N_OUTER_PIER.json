@@ -1,53 +1,62 @@
 ﻿{
   "Id": "N_OUTER_PIER",
-  "Title": "Outer Pier & Docks",
-  "Description": "Chaos of sailors, refugees, and stone constructs unloading ships.",
+  "Title": "Outer Pier",
+  "Description": "Gulls scream over tarred ropes and creaking timbers. Dockhands curse while a stone construct hoists a crate.",
   "Paragraphs": [
-    "The dockmasterâ€™s ledger booth is a fortress of stamps.",
-    "Mercenaries watch cargo piles. A family shelters beneath patched sailcloth."
+    "A bored quartermaster shrugs: 'Tutorial kits on the barrel. Take what you need. Press [I] in-game to open your inventory.'"
   ],
   "Options": [
     {
+      "Id": "O_SUPPLIES",
+      "Label": "Pick up dockside supplies (potions and bread)",
       "Effects": [
         {
-          "Op": "startDialogue",
-          "Id": "D_DOCKMASTER"
+          "Op": "addItem",
+          "Id": "ITM_HEALTH_POTION_MINOR",
+          "Qty": 2
+        },
+        {
+          "Op": "addItem",
+          "Id": "ITM_BREAD",
+          "Qty": 3
         }
-      ],
-      "Id": "Approach_the_dockmaster",
-      "Label": "Approach the dockmaster."
+      ]
     },
     {
+      "Id": "O_CAP_AUTOEQUIP",
+      "Label": "Take a cloth cap and auto-equip it",
       "Effects": [
         {
-          "Op": "startDialogue",
-          "Id": "D_REFUGEE_FAMILY"
+          "Op": "addItem",
+          "Id": "ITM_CAP_CLOTH",
+          "Qty": 1
+        },
+        {
+          "Op": "equip",
+          "Id": "ITM_CAP_CLOTH",
+          "Slot": "Head"
         }
-      ],
-      "Id": "Speak_with_the_refugee_family",
-      "Label": "Speak with the refugee family."
+      ]
     },
     {
+      "Id": "O_CAP_UNEQUIP",
+      "Label": "Unequip your head slot (for demo)",
       "Effects": [
         {
-          "Op": "startDialogue",
-          "Id": "D_GUARDED_CARGO"
+          "Op": "unequip",
+          "Slot": "Head"
         }
-      ],
-      "Id": "Poke_around_the_guarded_cargo",
-      "Label": "Poke around the guarded cargo."
+      ]
     }
   ],
   "Exits": [
     {
-      "Text": "Back to Harbor Square",
-      "To": "N_HARBOR_SQUARE"
+      "Text": "Head toward the Shanty Alley",
+      "To": "N_SHANTY_ALLEY"
     },
     {
-      "Text": "To Imperial Wharf",
-      "To": "N_IMPERIAL_WHARF"
+      "Text": "Cross to the Main Gate Bridge (city entrance)",
+      "To": "N_MAIN_GATE_BRIDGE"
     }
   ]
-
 }
-
