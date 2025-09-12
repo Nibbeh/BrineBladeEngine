@@ -1,0 +1,66 @@
+{
+  "Id": "D_LORE_N_SHANTY_ALLEY",
+  "NpcId": "Onlookers",
+  "StartLineId": "L1",
+  "Lines": {
+    "L1": {
+      "Text": "You listen without seeming to. Snatches of talk weave a picture of Brinemauth—amber tariffs, guild feuds, and a storm-bent fleet.",
+      "Choices": [
+        {
+          "Label": "Ask about the amber trade.",
+          "Effects": [
+            {
+              "Op": "gotoLine",
+              "To": "L_AMBER"
+            }
+          ]
+        },
+        {
+          "Label": "Ask about the Watch.",
+          "Effects": [
+            {
+              "Op": "gotoLine",
+              "To": "L_WATCH"
+            }
+          ]
+        },
+        {
+          "Label": "Enough for now.",
+          "Effects": [
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        }
+      ]
+    },
+    "L_AMBER": {
+      "Text": "Amber from the northern shoals fetches jeweler prices when clear, priestly prices when it traps things with eyes.",
+      "Choices": [
+        {
+          "Label": "Back.",
+          "Effects": [
+            {
+              "Op": "gotoLine",
+              "To": "L1"
+            }
+          ]
+        }
+      ]
+    },
+    "L_WATCH": {
+      "Text": "The Watch writes orders neat and bleeds messy. Night shifts thin since the bell-tower lightning strike.",
+      "Choices": [
+        {
+          "Label": "Back.",
+          "Effects": [
+            {
+              "Op": "gotoLine",
+              "To": "L1"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,11 +1,20 @@
-﻿{
+{
   "Id": "D_LIGHTHOUSE_KEEPER_TUT",
   "NpcId": "Keeper",
   "StartLineId": "L1",
   "Lines": {
     "L1": {
-      "Text": "Sea-beasts donâ€™t ring bells. People do.",
+      "Text": "Sea-beasts don't ring bells. People do.",
       "Choices": [
+        {
+          "Label": "Ask about the city.",
+          "Effects": [
+            {
+              "Op": "gotoLine",
+              "To": "L_INFO"
+            }
+          ]
+        },
         {
           "Effects": [
             {
@@ -24,10 +33,44 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Iâ€™ll go."
+          "Label": "I'll go."
+        },
+        {
+          "Label": "Any honest work going?",
+          "Effects": [
+            {
+              "Op": "gotoLine",
+              "To": "L_WORK"
+            }
+          ]
+        }
+      ]
+    },
+    "L_INFO": {
+      "Text": "Harbor winds carry gossip: guild dues rising, amber ships late, and the Watch thin after night storms.",
+      "Choices": [
+        {
+          "Label": "Thanks. That helps.",
+          "Effects": [
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        }
+      ]
+    },
+    "L_WORK": {
+      "Text": "Loaders at Imperial Wharf pay fair coin for strong backs. The ropewalk hires patient hands by the hour.",
+      "Choices": [
+        {
+          "Label": "I'll keep that in mind.",
+          "Effects": [
+            {
+              "Op": "endDialogue"
+            }
+          ]
         }
       ]
     }
   }
 }
-

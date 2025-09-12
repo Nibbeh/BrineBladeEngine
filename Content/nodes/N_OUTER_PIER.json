@@ -3,7 +3,8 @@
   "Title": "Outer Pier",
   "Description": "Tarred ropes sing in the wind. Lanterns draw wet halos over timber and salt.",
   "Paragraphs": [
-    "A bored quartermaster jerks his chin toward a barrel: \"Tutorial kits. Take what you need. Then get out of the way.\""
+    "A bored quartermaster jerks his chin toward a barrel: \"Tutorial kits. Take what you need. Then get out of the way.\"",
+    "Salt, tar, and wet timber mix on the air; gulls quarrel above the swell while merchants count coin with red fingers."
   ],
   "Options": [
     {
@@ -44,6 +45,17 @@
         }
       ],
       "Text": "Ask around for quiet work (smugglers?)"
+    },
+    {
+      "Id": "O_EAVESDROP",
+      "Label": "Eavesdrop on the crowd.",
+      "Text": "Eavesdrop on the crowd.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_LORE_N_OUTER_PIER"
+        }
+      ]
     }
   ],
   "Exits": [

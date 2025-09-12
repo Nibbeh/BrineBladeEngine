@@ -1,11 +1,24 @@
-﻿{
+{
   "Id": "N_START",
   "Title": "Arrival: Outer Pier",
   "Description": "Gulls circle a forest of masts. Dockhands curse while stone constructs lift cargo without complaint.",
   "Paragraphs": [
-    "You disembark into brine air and lantern fog. Refugees huddle under tarps. A ledger booth watches it all."
+    "You disembark into brine air and lantern fog. Refugees huddle under tarps. A ledger booth watches it all.",
+    "Salt, tar, and wet timber mix on the air; gulls quarrel above the swell while merchants count coin with red fingers."
   ],
-  "Options": [],
+  "Options": [
+    {
+      "Id": "O_EAVESDROP",
+      "Label": "Eavesdrop on the crowd.",
+      "Text": "Eavesdrop on the crowd.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_LORE_N_START"
+        }
+      ]
+    }
+  ],
   "Exits": [
     {
       "Text": "To the Outer Pier",

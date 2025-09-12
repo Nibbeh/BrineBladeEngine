@@ -3,7 +3,8 @@
   "Title": "Watch Training Yard",
   "Description": "A ring of battered dummies and scarred shields.",
   "Paragraphs": [
-    "A sergeant barks, \"Show me you can hold your own.\""
+    "A sergeant barks, \"Show me you can hold your own.\"",
+    "Salt, tar, and wet timber mix on the air; gulls quarrel above the swell while merchants count coin with red fingers."
   ],
   "Options": [
     {
@@ -16,6 +17,17 @@
         }
       ],
       "Text": "Spar a practice dummy"
+    },
+    {
+      "Id": "O_EAVESDROP",
+      "Label": "Eavesdrop on the crowd.",
+      "Text": "Eavesdrop on the crowd.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_LORE_N_TRAINING_YARD"
+        }
+      ]
     }
   ],
   "Exits": [

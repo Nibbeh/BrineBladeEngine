@@ -1,4 +1,4 @@
-﻿{
+{
   "Id": "N_SMUGGLERS_DEN",
   "Title": "Smugglers' Den (Net Loft)",
   "EnterText": "Netting hangs like cobwebs; a whispering ladder dips into shadow.",
@@ -36,6 +36,17 @@
         {
           "Op": "setFlag",
           "Flag": "smuggler.msg"
+        }
+      ]
+    },
+    {
+      "Id": "O_EAVESDROP",
+      "Label": "Eavesdrop on the crowd.",
+      "Text": "Eavesdrop on the crowd.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_LORE_N_SMUGGLERS_DEN"
         }
       ]
     }

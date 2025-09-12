@@ -1,11 +1,20 @@
-﻿{
+{
   "Id": "D_DOCKMASTER",
   "NpcId": "Dockmaster",
   "StartLineId": "L1",
   "Lines": {
     "L1": {
-      "Text": "Permits, brâ€”fees. Temporary ones if youâ€™ve coin.",
+      "Text": "Permits, br—fees. Temporary ones if you've coin.",
       "Choices": [
+        {
+          "Label": "Ask about the city.",
+          "Effects": [
+            {
+              "Op": "gotoLine",
+              "To": "L_INFO"
+            }
+          ]
+        },
         {
           "Effects": [
             {
@@ -32,7 +41,7 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Claim youâ€™re contracted crew."
+          "Label": "Claim you're contracted crew."
         },
         {
           "Effects": [
@@ -41,9 +50,43 @@
             }
           ],
           "Label": "Leave."
+        },
+        {
+          "Label": "Any honest work going?",
+          "Effects": [
+            {
+              "Op": "gotoLine",
+              "To": "L_WORK"
+            }
+          ]
+        }
+      ]
+    },
+    "L_INFO": {
+      "Text": "Harbor winds carry gossip: guild dues rising, amber ships late, and the Watch thin after night storms.",
+      "Choices": [
+        {
+          "Label": "Thanks. That helps.",
+          "Effects": [
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        }
+      ]
+    },
+    "L_WORK": {
+      "Text": "Loaders at Imperial Wharf pay fair coin for strong backs. The ropewalk hires patient hands by the hour.",
+      "Choices": [
+        {
+          "Label": "I'll keep that in mind.",
+          "Effects": [
+            {
+              "Op": "endDialogue"
+            }
+          ]
         }
       ]
     }
   }
 }
-

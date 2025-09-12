@@ -3,7 +3,8 @@
   "Title": "Under-Pier Catwalk",
   "Description": "Tar-sticky beams and rope hairs. Lantern light barely keeps the dark from biting back.",
   "Paragraphs": [
-    "Gull sigils cut into posts point toward Shanty Alley."
+    "Gull sigils cut into posts point toward Shanty Alley.",
+    "Salt, tar, and wet timber mix on the air; gulls quarrel above the swell while merchants count coin with red fingers."
   ],
   "Options": [
     {
@@ -38,6 +39,17 @@
       "Id": "Keep_low_and_listen_smuggler_hint",
       "Label": "Keep low and listen (smuggler hint).",
       "Text": "Keep low and listen (smuggler hint)."
+    },
+    {
+      "Id": "O_EAVESDROP",
+      "Label": "Eavesdrop on the crowd.",
+      "Text": "Eavesdrop on the crowd.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_LORE_N_UNDER_PIER"
+        }
+      ]
     }
   ],
   "Exits": [

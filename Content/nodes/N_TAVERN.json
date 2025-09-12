@@ -3,7 +3,8 @@
   "Title": "The Salted Keel Tavern",
   "Description": "Warm air, spilled ale, a knucklebones game rattling on a barrel.",
   "Paragraphs": [
-    "The tavernkeeper sizes you up like a debt."
+    "The tavernkeeper sizes you up like a debt.",
+    "Salt, tar, and wet timber mix on the air; gulls quarrel above the swell while merchants count coin with red fingers."
   ],
   "Options": [
     {
@@ -27,6 +28,17 @@
       "Id": "Ask_for_rumors",
       "Label": "Ask for rumors.",
       "Text": "Ask for rumors."
+    },
+    {
+      "Id": "O_EAVESDROP",
+      "Label": "Eavesdrop on the crowd.",
+      "Text": "Eavesdrop on the crowd.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_LORE_N_TAVERN"
+        }
+      ]
     }
   ],
   "Exits": [

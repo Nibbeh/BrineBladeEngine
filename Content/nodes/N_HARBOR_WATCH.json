@@ -3,7 +3,8 @@
   "Title": "Harbor Watch Barracks",
   "Description": "Orderly bunks, scarred shields, a bored sergeant.",
   "Paragraphs": [
-    "A small board lists mercenary postings."
+    "A small board lists mercenary postings.",
+    "Salt, tar, and wet timber mix on the air; gulls quarrel above the swell while merchants count coin with red fingers."
   ],
   "Options": [
     {
@@ -27,6 +28,17 @@
       "Id": "Study_the_recruitment_board",
       "Label": "Study the recruitment board.",
       "Text": "Study the recruitment board."
+    },
+    {
+      "Id": "O_EAVESDROP",
+      "Label": "Eavesdrop on the crowd.",
+      "Text": "Eavesdrop on the crowd.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_LORE_N_HARBOR_WATCH"
+        }
+      ]
     }
   ],
   "Exits": [

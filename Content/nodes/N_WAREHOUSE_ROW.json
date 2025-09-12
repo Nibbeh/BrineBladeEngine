@@ -1,11 +1,24 @@
-﻿{
+{
   "Id": "N_WAREHOUSE_ROW",
   "Title": "Warehouse Row",
   "Description": "Boarded doors, pitch-smeared caulking, and bored guards swapping dice.",
   "Paragraphs": [
-    "The river brings cargo and trouble by the same current."
+    "The river brings cargo and trouble by the same current.",
+    "Salt, tar, and wet timber mix on the air; gulls quarrel above the swell while merchants count coin with red fingers."
   ],
-  "Options": [],
+  "Options": [
+    {
+      "Id": "O_EAVESDROP",
+      "Label": "Eavesdrop on the crowd.",
+      "Text": "Eavesdrop on the crowd.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_LORE_N_WAREHOUSE_ROW"
+        }
+      ]
+    }
+  ],
   "Exits": [
     {
       "Text": "To Ropewalk Lane",

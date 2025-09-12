@@ -3,9 +3,22 @@
   "Title": "Imperial Wharf",
   "Description": "Heavy timber quays reserved for taxed goods; a clerk watches with ink-stained fingers.",
   "Paragraphs": [
-    "Armored constructs shoulder crates stamped with foreign crests. A chain ferry clanks somewhere upriver."
+    "Armored constructs shoulder crates stamped with foreign crests. A chain ferry clanks somewhere upriver.",
+    "Salt, tar, and wet timber mix on the air; gulls quarrel above the swell while merchants count coin with red fingers."
   ],
-  "Options": [],
+  "Options": [
+    {
+      "Id": "O_EAVESDROP",
+      "Label": "Eavesdrop on the crowd.",
+      "Text": "Eavesdrop on the crowd.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_LORE_N_IMPERIAL_WHARF"
+        }
+      ]
+    }
+  ],
   "Exits": [
     {
       "Text": "To Construct Pen (Dock Gantries)",

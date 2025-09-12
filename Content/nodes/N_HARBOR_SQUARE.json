@@ -3,9 +3,22 @@
   "Title": "Harbor Town Square",
   "Description": "Guild barkers, fishmongers, and pilgrims knot the cobbles beneath a salt-streaked statue.",
   "Paragraphs": [
-    "This is the city's noisy hinge. From here, streets split toward watch-barracks, taverns, markets, and the river."
+    "This is the city's noisy hinge. From here, streets split toward watch-barracks, taverns, markets, and the river.",
+    "Salt, tar, and wet timber mix on the air; gulls quarrel above the swell while merchants count coin with red fingers."
   ],
-  "Options": [],
+  "Options": [
+    {
+      "Id": "O_EAVESDROP",
+      "Label": "Eavesdrop on the crowd.",
+      "Text": "Eavesdrop on the crowd.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_LORE_N_HARBOR_SQUARE"
+        }
+      ]
+    }
+  ],
   "Exits": [
     {
       "Text": "To Construct Pen (Dock Gantries)",

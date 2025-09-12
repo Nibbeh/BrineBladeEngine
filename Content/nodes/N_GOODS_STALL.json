@@ -1,11 +1,24 @@
-﻿{
+{
   "Id": "N_GOODS_STALL",
   "Title": "Peddler's Goods Stall",
   "Description": "A striped awning flaps; trinkets and dry rations are stacked in neat rows.",
   "Paragraphs": [
-    "The prices rise with the wind. The peddler swears it is all fair trade."
+    "The prices rise with the wind. The peddler swears it is all fair trade.",
+    "Salt, tar, and wet timber mix on the air; gulls quarrel above the swell while merchants count coin with red fingers."
   ],
-  "Options": [],
+  "Options": [
+    {
+      "Id": "O_EAVESDROP",
+      "Label": "Eavesdrop on the crowd.",
+      "Text": "Eavesdrop on the crowd.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_LORE_N_GOODS_STALL"
+        }
+      ]
+    }
+  ],
   "Exits": [
     {
       "Text": "To Harbor Town Square",

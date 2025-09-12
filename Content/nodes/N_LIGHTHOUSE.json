@@ -3,7 +3,8 @@
   "Title": "Stormlight Tower",
   "Description": "Wind lashes the tower. The keeper peers like he hears the sea think.",
   "Paragraphs": [
-    "Broken stairs spiral into dark."
+    "Broken stairs spiral into dark.",
+    "Salt, tar, and wet timber mix on the air; gulls quarrel above the swell while merchants count coin with red fingers."
   ],
   "Options": [
     {
@@ -27,6 +28,17 @@
       "Id": "Climb_the_broken_stair_cost_1hp",
       "Label": "Climb the broken stair (cost 1hp).",
       "Text": "Climb the broken stair (cost 1hp)."
+    },
+    {
+      "Id": "O_EAVESDROP",
+      "Label": "Eavesdrop on the crowd.",
+      "Text": "Eavesdrop on the crowd.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_LORE_N_LIGHTHOUSE"
+        }
+      ]
     }
   ],
   "Exits": [

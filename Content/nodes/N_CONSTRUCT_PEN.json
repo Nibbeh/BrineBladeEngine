@@ -42,6 +42,17 @@
           "Flag": "smuggler.msg"
         }
       ]
+    },
+    {
+      "Id": "O_EAVESDROP",
+      "Label": "Eavesdrop on the crowd.",
+      "Text": "Eavesdrop on the crowd.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_LORE_N_CONSTRUCT_PEN"
+        }
+      ]
     }
   ],
   "Exits": [

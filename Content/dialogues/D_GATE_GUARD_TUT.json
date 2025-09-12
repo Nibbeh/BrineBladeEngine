@@ -1,11 +1,20 @@
-﻿{
+{
   "Id": "D_GATE_GUARD_TUT",
   "NpcId": "Guard",
   "StartLineId": "L1",
   "Lines": {
     "L1": {
-      "Text": "Cityâ€™s shut. No one in without papers.",
+      "Text": "City's shut. No one in without papers.",
       "Choices": [
+        {
+          "Label": "Ask about the city.",
+          "Effects": [
+            {
+              "Op": "gotoLine",
+              "To": "L_INFO"
+            }
+          ]
+        },
         {
           "Label": "What papers would do?",
           "Goto": "L2"
@@ -53,7 +62,7 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "(Show Pilgrimâ€™s Writ)"
+          "Label": "(Show Pilgrim's Writ)"
         },
         {
           "Requires": [
@@ -68,7 +77,7 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "(Smugglerâ€™s arrangement)"
+          "Label": "(Smuggler's arrangement)"
         },
         {
           "Effects": [
@@ -93,11 +102,20 @@
             }
           ],
           "Label": "Nevermind."
+        },
+        {
+          "Label": "Any honest work going?",
+          "Effects": [
+            {
+              "Op": "gotoLine",
+              "To": "L_WORK"
+            }
+          ]
         }
       ]
     },
     "L2": {
-      "Text": "Temporary pass, work permit, pilgrimâ€™s writâ€”or a letter from someone richer than me.",
+      "Text": "Temporary pass, work permit, pilgrim's writ—or a letter from someone richer than me.",
       "Choices": [
         {
           "Effects": [
@@ -108,7 +126,32 @@
           "Label": "Thanks."
         }
       ]
+    },
+    "L_INFO": {
+      "Text": "Harbor winds carry gossip: guild dues rising, amber ships late, and the Watch thin after night storms.",
+      "Choices": [
+        {
+          "Label": "Thanks. That helps.",
+          "Effects": [
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        }
+      ]
+    },
+    "L_WORK": {
+      "Text": "Loaders at Imperial Wharf pay fair coin for strong backs. The ropewalk hires patient hands by the hour.",
+      "Choices": [
+        {
+          "Label": "I'll keep that in mind.",
+          "Effects": [
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        }
+      ]
     }
   }
 }
-

@@ -1,4 +1,4 @@
-﻿{
+{
   "Id": "D_GUILD_FACTOR",
   "NpcId": "Clerk",
   "StartLineId": "L1",
@@ -6,6 +6,15 @@
     "L1": {
       "Text": "Standing?",
       "Choices": [
+        {
+          "Label": "Ask about the city.",
+          "Effects": [
+            {
+              "Op": "gotoLine",
+              "To": "L_INFO"
+            }
+          ]
+        },
         {
           "Requires": [
             "flag:permit.temp"
@@ -40,9 +49,43 @@
             }
           ],
           "Label": "Nevermind."
+        },
+        {
+          "Label": "Any honest work going?",
+          "Effects": [
+            {
+              "Op": "gotoLine",
+              "To": "L_WORK"
+            }
+          ]
+        }
+      ]
+    },
+    "L_INFO": {
+      "Text": "Harbor winds carry gossip: guild dues rising, amber ships late, and the Watch thin after night storms.",
+      "Choices": [
+        {
+          "Label": "Thanks. That helps.",
+          "Effects": [
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        }
+      ]
+    },
+    "L_WORK": {
+      "Text": "Loaders at Imperial Wharf pay fair coin for strong backs. The ropewalk hires patient hands by the hour.",
+      "Choices": [
+        {
+          "Label": "I'll keep that in mind.",
+          "Effects": [
+            {
+              "Op": "endDialogue"
+            }
+          ]
         }
       ]
     }
   }
 }
-

@@ -1,4 +1,4 @@
-﻿{
+{
   "Id": "N_FISH_MARKET",
   "Title": "Fish Market Rows",
   "EnterText": "Slabs drip; gulls argue from beam to beam.",
@@ -20,6 +20,17 @@
         {
           "Op": "combat",
           "Id": "ENEMY_WHARF_THUG"
+        }
+      ]
+    },
+    {
+      "Id": "O_EAVESDROP",
+      "Label": "Eavesdrop on the crowd.",
+      "Text": "Eavesdrop on the crowd.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_LORE_N_FISH_MARKET"
         }
       ]
     }

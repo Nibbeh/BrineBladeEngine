@@ -3,9 +3,22 @@
   "Title": "Ropewalk Lane",
   "Description": "A long straight shed where hemp strands twist into ropes that creak like rigging.",
   "Paragraphs": [
-    "Tar stink hangs in the air. Workers nod as they pull, step, pull - endlessly."
+    "Tar stink hangs in the air. Workers nod as they pull, step, pull - endlessly.",
+    "Salt, tar, and wet timber mix on the air; gulls quarrel above the swell while merchants count coin with red fingers."
   ],
-  "Options": [],
+  "Options": [
+    {
+      "Id": "O_EAVESDROP",
+      "Label": "Eavesdrop on the crowd.",
+      "Text": "Eavesdrop on the crowd.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_LORE_N_ROPEWALK"
+        }
+      ]
+    }
+  ],
   "Exits": [
     {
       "Text": "To Warehouse Row",

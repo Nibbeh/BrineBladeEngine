@@ -3,7 +3,8 @@
   "Title": "Gate Clerk's Stamp",
   "Description": "Ink, chalk, and the rule of the ledger.",
   "Paragraphs": [
-    "A clerk stamps your entry chit and waves you through. Whatever route you took in, Brinemauth yawns ahead - wet stone and promise."
+    "A clerk stamps your entry chit and waves you through. Whatever route you took in, Brinemauth yawns ahead - wet stone and promise.",
+    "Salt, tar, and wet timber mix on the air; gulls quarrel above the swell while merchants count coin with red fingers."
   ],
   "Options": [
     {
@@ -14,6 +15,17 @@
         {
           "Op": "goto",
           "To": "N_HARBOR_SQUARE"
+        }
+      ]
+    },
+    {
+      "Id": "O_EAVESDROP",
+      "Label": "Eavesdrop on the crowd.",
+      "Text": "Eavesdrop on the crowd.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_LORE_N_CITY_INTRO"
         }
       ]
     }

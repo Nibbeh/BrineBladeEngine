@@ -3,7 +3,8 @@
   "Title": "Old Sea Bell Shrine",
   "Description": "A weathered bell over an altar crusted with coin and salt.",
   "Paragraphs": [
-    "An old ringer eyes you like a gull eyes bread."
+    "An old ringer eyes you like a gull eyes bread.",
+    "Salt, tar, and wet timber mix on the air; gulls quarrel above the swell while merchants count coin with red fingers."
   ],
   "Options": [
     {
@@ -31,6 +32,17 @@
       "Id": "Offer_a_coin_1g",
       "Label": "Offer a coin (1g).",
       "Text": "Offer a coin (1g)."
+    },
+    {
+      "Id": "O_EAVESDROP",
+      "Label": "Eavesdrop on the crowd.",
+      "Text": "Eavesdrop on the crowd.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_LORE_N_OLD_SEA_BELL"
+        }
+      ]
     }
   ],
   "Exits": [

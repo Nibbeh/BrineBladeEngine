@@ -1,11 +1,24 @@
-﻿{
+{
   "Id": "N_CUSTOMS_HOUSE",
   "Title": "Customs House",
   "Description": "Ledger smell and the tap of abacus beads. A clerk posts tariffs by candle soot.",
   "Paragraphs": [
-    "The rules change with the tide and the governor's mood. Today, they seem merely greedy."
+    "The rules change with the tide and the governor's mood. Today, they seem merely greedy.",
+    "Salt, tar, and wet timber mix on the air; gulls quarrel above the swell while merchants count coin with red fingers."
   ],
-  "Options": [],
+  "Options": [
+    {
+      "Id": "O_EAVESDROP",
+      "Label": "Eavesdrop on the crowd.",
+      "Text": "Eavesdrop on the crowd.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_LORE_N_CUSTOMS_HOUSE"
+        }
+      ]
+    }
+  ],
   "Exits": [
     {
       "Text": "To Harbor Town Square",
