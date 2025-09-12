@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using Microsoft.Extensions.DependencyInjection;
 using BrineBlade.AppCore.Bootstrap;
 using BrineBlade.AppCore.Config;       // StartMode enum
@@ -9,7 +10,7 @@ using BrineBlade.AppCore.ConsoleUI;
 using BrineBlade.AppCore.Orchestration;
 using BrineBlade.AppCore.Rules;
 using BrineBlade.Domain.Game;
-using BrineBlade.Infrastructure.Content; // NEW: ContentLinter
+using BrineBlade.Infrastructure.Content; // ContentLinter
 using BrineBlade.Infrastructure.DI;
 using BrineBlade.Services.Abstractions;
 
@@ -24,6 +25,31 @@ static string FindUp(string leaf)
         dir = Path.GetFullPath(Path.Combine(dir, ".."));
     }
     return Path.Combine(AppContext.BaseDirectory, leaf);
+}
+
+// --- Read-only scanner for smart punctuation / BOM (never edits files) ---
+static void ScanContentForEncodingIssues(string root)
+{
+    int flagged = 0;
+    foreach (var file in Directory.EnumerateFiles(root, "*.json", SearchOption.AllDirectories))
+    {
+        var bytes = File.ReadAllBytes(file);
+        bool hasBom = bytes.Length >= 3 && bytes[0] == 0xEF && bytes[1] == 0xBB && bytes[2] == 0xBF;
+        string text = File.ReadAllText(file, Encoding.UTF8);
+        var bad = Regex.Matches(text, "[\u2018\u2019\u201C\u201D\u2013\u2014]");
+        if (hasBom || bad.Count > 0)
+        {
+            Console.WriteLine($"[SCAN] {file}");
+            if (hasBom) Console.WriteLine("       - UTF-8 BOM detected");
+            if (bad.Count > 0)
+            {
+                var uniques = bad.Select(m => m.Value[0]).Distinct().Select(ch => $"U+{(int)ch:X4}");
+                Console.WriteLine("       - Smart chars: " + string.Join(" ", uniques));
+            }
+            flagged++;
+        }
+    }
+    Console.WriteLine(flagged == 0 ? "[SCAN] No issues found." : $"[SCAN] {flagged} file(s) flagged.");
 }
 
 Console.OutputEncoding = Encoding.UTF8;
@@ -53,6 +79,13 @@ if (!Directory.Exists(contentRoot))
     return;
 }
 
+if (cli.Any(a => a.Equals("--scan-encoding", StringComparison.OrdinalIgnoreCase)))
+{
+    Console.WriteLine($"[INFO] Scanning Content for encoding/punctuation issues: {contentRoot}");
+    ScanContentForEncodingIssues(contentRoot);
+    return;
+}
+
 Console.WriteLine($"[INFO] Using Content: {contentRoot}");
 Console.WriteLine($"[INFO] Using Saves:   {saveRoot}");
 
@@ -65,10 +98,16 @@ try
     );
     Console.WriteLine($"[CHK] Nodes={summary.NodeCount} Dialogues={summary.DialogueCount} Items={summary.ItemCount} Enemies={summary.EnemyCount}");
 }
+catch (ContentValidationException ex)
+{
+    Console.Error.WriteLine("[FATAL] Content validation failed:");
+    foreach (var err in ex.Errors) Console.Error.WriteLine(" - " + err);
+    return;
+}
 catch (Exception ex)
 {
-    Console.Error.WriteLine("[FATAL] Content validation failed.");
-    Console.Error.WriteLine(ex.Message);
+    Console.Error.WriteLine("[FATAL] Content validation crashed:");
+    Console.Error.WriteLine(ex.ToString());
     return;
 }
 
@@ -100,7 +139,7 @@ var state = mode switch
 IGameUI ui = new ConsoleGameUI();
 var effects = new EffectProcessor(state, sp.GetRequiredService<IInventoryService>(), ui);
 
-// --- Quick must-have spot-checks (optional; keeps your previous checks) ---
+// --- Quick must-have spot-checks (keeps your previous checks) ---
 var store = sp.GetRequiredService<IContentStore>();
 string[] mustHave = { "N_START", "N_MAIN_GATE_BRIDGE", "N_SHANTY_ALLEY" }; // adjust to your seed/tutorial IDs
 
