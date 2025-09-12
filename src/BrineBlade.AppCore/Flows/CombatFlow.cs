@@ -15,25 +15,18 @@ namespace BrineBlade.AppCore.Flows
         private readonly ICombatService _combat;
         private readonly IEnemyCatalog _enemies;
         private readonly IGameUI _ui;
-        private readonly IInventoryService? _inventory; // optional for backward-compat
+        private readonly IInventoryService? _inventory;
 
-        // Backward-compatible ctor (no inventory auto-pickup)
+        // Old ctor (no auto-pickup)
         public CombatFlow(GameState state, ICombatService combat, IEnemyCatalog enemies, IGameUI ui)
         {
-            _state = state;
-            _combat = combat;
-            _enemies = enemies;
-            _ui = ui;
-            _inventory = null;
+            _state = state; _combat = combat; _enemies = enemies; _ui = ui; _inventory = null;
         }
 
-        // New ctor enabling auto-pickup of loot
+        // New ctor with auto-pickup
         public CombatFlow(GameState state, ICombatService combat, IEnemyCatalog enemies, IInventoryService inventory, IGameUI ui)
         {
-            _state = state;
-            _combat = combat;
-            _enemies = enemies;
-            _ui = ui;
+            _state = state; _combat = combat; _enemies = enemies; _ui = ui;
             _inventory = inventory ?? throw new ArgumentNullException(nameof(inventory));
         }
 
@@ -51,9 +44,10 @@ namespace BrineBlade.AppCore.Flows
 
         private void ExecuteCombat(EnemyDef enemy)
         {
-            var result = _combat.StartCombat(_state, enemy);
+            var callbacks = new ConsoleCombatCallbacks(_state, _ui, _inventory);
+            var result = _combat.StartCombatInteractive(_state, enemy, callbacks);
 
-            // Mutate state (single-writer pattern)
+            // write-back HP
             _state.CurrentHp = result.PlayerHpRemaining;
 
             var lines = new List<string>
@@ -63,41 +57,86 @@ namespace BrineBlade.AppCore.Flows
                 $"Aftermath — You: {_state.CurrentHp} HP, Foe: {result.EnemyHpRemaining} HP"
             };
 
-            // Use only loot reported by the combat result; type as IReadOnlyList for Count
-            IReadOnlyList<string> loot = (result.PlayerWon && result.Loot is { Count: > 0 })
-                ? result.Loot
-                : Array.Empty<string>();
-
+            // Loot handling (auto-add if service present)
+            IReadOnlyList<string> loot = (result.PlayerWon && result.Loot is { Count: > 0 }) ? result.Loot : Array.Empty<string>();
             if (loot.Count > 0)
             {
                 foreach (var itemId in loot)
                 {
-                    if (_inventory is null)
-                    {
-                        // Old path: just list the loot
-                        lines.Add($"Loot: {itemId}");
-                        continue;
-                    }
-
-                    try
-                    {
-                        // We don’t assume a bool return; just invoke it and report success optimistically.
-                        _inventory.TryAdd(_state, itemId, 1);
-                        lines.Add($"Loot: {itemId} (added to inventory)");
-                    }
-                    catch
-                    {
-                        lines.Add($"Loot: {itemId} (couldn’t add)");
-                    }
+                    if (_inventory is null) { lines.Add($"Loot: {itemId}"); continue; }
+                    try { _inventory.TryAdd(_state, itemId, 1); lines.Add($"Loot: {itemId} (added to inventory)"); }
+                    catch { lines.Add($"Loot: {itemId} (couldn’t add)"); }
                 }
             }
 
-            // Modal screen so node redraw doesn't wipe it
             _ui.RenderModal(_state, "Combat", lines, waitForEnter: true);
-
-            // Keep a short trail in the Recent log after returning
             _ui.Notice(lines.TakeLast(Math.Min(2, lines.Count)));
         }
     }
-}
 
+    internal sealed class ConsoleCombatCallbacks : ICombatCallbacks
+    {
+        private readonly GameState _state;
+        private readonly IGameUI _ui;
+        private readonly IInventoryService? _inv;
+        private readonly Queue<string> _log = new();
+
+        public ConsoleCombatCallbacks(GameState state, IGameUI ui, IInventoryService? inv)
+        { _state = state; _ui = ui; _inv = inv; }
+
+        public CombatAction ChooseAction(int round, int playerHp, int playerMaxHp, int enemyHp, bool canSecondWind, bool hasUsableItem)
+        {
+            var body = string.Join(Environment.NewLine, _log);
+            var options = new List<(string Key, string Label)>
+            {
+                ("1","Attack"),
+                ("2","Guard (+2 AC)"),
+                ("3", canSecondWind ? "Second Wind (heal)" : "Second Wind (unavailable)"),
+                ("4","Use Item"),
+                ("5","Flee"),
+            };
+
+            _ui.RenderFrame(_state,
+                $"Combat — {_state.Player.Name} vs (foe) (Round {round})",
+                $"You: {playerHp}/{playerMaxHp} HP   |   Foe: {enemyHp} HP" + Environment.NewLine +
+                (body.Length == 0 ? "(no events yet)" : body),
+                options);
+
+            while (true)
+            {
+                var cmd = _ui.ReadCommand(options.Count);
+                if (cmd.Type == ConsoleCommandType.Choose && cmd.ChoiceIndex >= 0 && cmd.ChoiceIndex < options.Count)
+                    return (CombatAction)(cmd.ChoiceIndex + 1);
+                if (cmd.Type == ConsoleCommandType.Help) { _ui.ShowHelp(); continue; }
+                if (cmd.Type == ConsoleCommandType.Quit) return CombatAction.Flee;
+            }
+        }
+
+        public void Show(string message)
+        {
+            if (string.IsNullOrWhiteSpace(message)) return;
+            _log.Enqueue("• " + message);
+            while (_log.Count > 8) _log.Dequeue();
+        }
+
+        public bool TryUseHealingItem(out int healAmount, out string label)
+        {
+            healAmount = 0; label = "";
+            if (_inv is null) return false;
+
+            // Priority: Minor Potion → Herbal Salve
+            if (Consume("ITM_HEALTH_POTION_MINOR")) { healAmount = 8; label = "Minor Health Potion"; return true; }
+            if (Consume("ITM_HERB_SALVE")) { healAmount = 5; label = "Herbal Salve"; return true; }
+            return false;
+
+            bool Consume(string id)
+            {
+                var have = _state.Inventory.Where(s => s.ItemId.Equals(id, StringComparison.OrdinalIgnoreCase)).Sum(s => s.Quantity);
+                if (have <= 0) return false;
+                var r = _inv.TryRemove(_state, id, 1);
+                if (!r.Success) return false;
+                return true;
+            }
+        }
+    }
+}

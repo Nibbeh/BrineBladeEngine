@@ -1,0 +1,24 @@
+﻿{
+  "Id": "N_TRAINING_YARD",
+  "Title": "Watch Training Yard",
+  "Description": "A ring of battered dummies and scarred shields.",
+  "Paragraphs": [ "A sergeant barks, \"Show me you can hold your own.\"" ],
+  "Options": [
+    {
+      "Id": "SPAR_DUMMY",
+      "Label": "Spar a practice dummy",
+      "Effects": [
+        {
+          "Op": "combat",
+          "Id": "ENEMY_PRACTICE_DUMMY"
+        }
+      ]
+    }
+  ],
+  "Exits": [
+    {
+      "Text": "Back to Harbor Town Square",
+      "To": "N_HARBOR_SQUARE"
+    }
+  ]
+}

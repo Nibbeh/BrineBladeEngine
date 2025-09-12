@@ -1,0 +1,16 @@
+﻿{
+  "Id": "ENEMY_PRACTICE_DUMMY",
+  "Name": "Practice Dummy",
+  "BaseStats": {
+    "Strength": 1,
+    "Dexterity": 1,
+    "Intelligence": 1,
+    "Vitality": 6,
+    "Charisma": 0,
+    "Perception": 0,
+    "Luck": 0
+  },
+  "Level": 0,
+  "Hp": 6,
+  "LootTable": []
+}
