@@ -8,12 +8,9 @@
       "Choices": [
         {
           "Label": "Ask about the city.",
-          "Effects": [
-            {
-              "Op": "gotoLine",
-              "To": "L_INFO"
-            }
-          ]
+          "Effects": [],
+          "Text": "Ask about the city.",
+          "Goto": "L_INFO"
         },
         {
           "Effects": [
@@ -29,7 +26,8 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Pay 10g for a Temporary Pass."
+          "Label": "Pay 10g for a Temporary Pass.",
+          "Text": "Pay 10g for a Temporary Pass."
         },
         {
           "Effects": [
@@ -41,7 +39,8 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Claim you're contracted crew."
+          "Label": "Claim you're contracted crew.",
+          "Text": "Claim you're contracted crew."
         },
         {
           "Effects": [
@@ -49,16 +48,14 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Leave."
+          "Label": "Leave.",
+          "Text": "Leave."
         },
         {
           "Label": "Any honest work going?",
-          "Effects": [
-            {
-              "Op": "gotoLine",
-              "To": "L_WORK"
-            }
-          ]
+          "Effects": [],
+          "Text": "Any honest work going?",
+          "Goto": "L_WORK"
         }
       ]
     },
@@ -71,7 +68,8 @@
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Text": "Thanks. That helps."
         }
       ]
     },
@@ -84,7 +82,8 @@
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Text": "I'll keep that in mind."
         }
       ]
     }

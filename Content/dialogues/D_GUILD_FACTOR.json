@@ -8,12 +8,9 @@
       "Choices": [
         {
           "Label": "Ask about the city.",
-          "Effects": [
-            {
-              "Op": "gotoLine",
-              "To": "L_INFO"
-            }
-          ]
+          "Effects": [],
+          "Text": "Ask about the city.",
+          "Goto": "L_INFO"
         },
         {
           "Requires": [
@@ -28,7 +25,8 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Present Temporary Pass."
+          "Label": "Present Temporary Pass.",
+          "Text": "Present Temporary Pass."
         },
         {
           "Effects": [
@@ -40,7 +38,8 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Ask for a letter of introduction."
+          "Label": "Ask for a letter of introduction.",
+          "Text": "Ask for a letter of introduction."
         },
         {
           "Effects": [
@@ -48,16 +47,14 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Nevermind."
+          "Label": "Nevermind.",
+          "Text": "Nevermind."
         },
         {
           "Label": "Any honest work going?",
-          "Effects": [
-            {
-              "Op": "gotoLine",
-              "To": "L_WORK"
-            }
-          ]
+          "Effects": [],
+          "Text": "Any honest work going?",
+          "Goto": "L_WORK"
         }
       ]
     },
@@ -70,7 +67,8 @@
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Text": "Thanks. That helps."
         }
       ]
     },
@@ -83,7 +81,8 @@
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Text": "I'll keep that in mind."
         }
       ]
     }

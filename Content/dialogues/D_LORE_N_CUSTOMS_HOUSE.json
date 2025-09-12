@@ -8,21 +8,15 @@
       "Choices": [
         {
           "Label": "Ask about the amber trade.",
-          "Effects": [
-            {
-              "Op": "gotoLine",
-              "To": "L_AMBER"
-            }
-          ]
+          "Effects": [],
+          "Text": "Ask about the amber trade.",
+          "Goto": "L_AMBER"
         },
         {
           "Label": "Ask about the Watch.",
-          "Effects": [
-            {
-              "Op": "gotoLine",
-              "To": "L_WATCH"
-            }
-          ]
+          "Effects": [],
+          "Text": "Ask about the Watch.",
+          "Goto": "L_WATCH"
         },
         {
           "Label": "Enough for now.",
@@ -30,7 +24,8 @@
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Text": "Enough for now."
         }
       ]
     },
@@ -39,12 +34,9 @@
       "Choices": [
         {
           "Label": "Back.",
-          "Effects": [
-            {
-              "Op": "gotoLine",
-              "To": "L1"
-            }
-          ]
+          "Effects": [],
+          "Text": "Back.",
+          "Goto": "L1"
         }
       ]
     },
@@ -53,12 +45,9 @@
       "Choices": [
         {
           "Label": "Back.",
-          "Effects": [
-            {
-              "Op": "gotoLine",
-              "To": "L1"
-            }
-          ]
+          "Effects": [],
+          "Text": "Back.",
+          "Goto": "L1"
         }
       ]
     }

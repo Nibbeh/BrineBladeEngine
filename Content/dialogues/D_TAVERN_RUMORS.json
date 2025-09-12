@@ -8,12 +8,9 @@
       "Choices": [
         {
           "Label": "Ask about the city.",
-          "Effects": [
-            {
-              "Op": "gotoLine",
-              "To": "L_INFO"
-            }
-          ]
+          "Effects": [],
+          "Text": "Ask about the city.",
+          "Goto": "L_INFO"
         },
         {
           "Effects": [
@@ -21,16 +18,14 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Right."
+          "Label": "Right.",
+          "Text": "Right."
         },
         {
           "Label": "Any honest work going?",
-          "Effects": [
-            {
-              "Op": "gotoLine",
-              "To": "L_WORK"
-            }
-          ]
+          "Effects": [],
+          "Text": "Any honest work going?",
+          "Goto": "L_WORK"
         }
       ]
     },
@@ -43,7 +38,8 @@
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Text": "Thanks. That helps."
         }
       ]
     },
@@ -56,7 +52,8 @@
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Text": "I'll keep that in mind."
         }
       ]
     }

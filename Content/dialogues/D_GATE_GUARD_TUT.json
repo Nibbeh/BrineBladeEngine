@@ -8,16 +8,15 @@
       "Choices": [
         {
           "Label": "Ask about the city.",
-          "Effects": [
-            {
-              "Op": "gotoLine",
-              "To": "L_INFO"
-            }
-          ]
+          "Effects": [],
+          "Text": "Ask about the city.",
+          "Goto": "L_INFO"
         },
         {
           "Label": "What papers would do?",
-          "Goto": "L2"
+          "Goto": "L2",
+          "Text": "What papers would do?",
+          "Effects": []
         },
         {
           "Requires": [
@@ -32,7 +31,8 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "(Show Temporary Pass)"
+          "Label": "(Show Temporary Pass)",
+          "Text": "(Show Temporary Pass)"
         },
         {
           "Requires": [
@@ -47,7 +47,8 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "(Show Work Permit)"
+          "Label": "(Show Work Permit)",
+          "Text": "(Show Work Permit)"
         },
         {
           "Requires": [
@@ -62,7 +63,8 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "(Show Pilgrim's Writ)"
+          "Label": "(Show Pilgrim's Writ)",
+          "Text": "(Show Pilgrim's Writ)"
         },
         {
           "Requires": [
@@ -77,7 +79,8 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "(Smuggler's arrangement)"
+          "Label": "(Smuggler's arrangement)",
+          "Text": "(Smuggler's arrangement)"
         },
         {
           "Effects": [
@@ -93,7 +96,8 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "(Bribe) 20g."
+          "Label": "(Bribe) 20g.",
+          "Text": "(Bribe) 20g."
         },
         {
           "Effects": [
@@ -101,16 +105,14 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Nevermind."
+          "Label": "Nevermind.",
+          "Text": "Nevermind."
         },
         {
           "Label": "Any honest work going?",
-          "Effects": [
-            {
-              "Op": "gotoLine",
-              "To": "L_WORK"
-            }
-          ]
+          "Effects": [],
+          "Text": "Any honest work going?",
+          "Goto": "L_WORK"
         }
       ]
     },
@@ -123,7 +125,8 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Thanks."
+          "Label": "Thanks.",
+          "Text": "Thanks."
         }
       ]
     },
@@ -136,7 +139,8 @@
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Text": "Thanks. That helps."
         }
       ]
     },
@@ -149,7 +153,8 @@
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Text": "I'll keep that in mind."
         }
       ]
     }

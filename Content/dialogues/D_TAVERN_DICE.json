@@ -8,12 +8,9 @@
       "Choices": [
         {
           "Label": "Ask about the city.",
-          "Effects": [
-            {
-              "Op": "gotoLine",
-              "To": "L_INFO"
-            }
-          ]
+          "Effects": [],
+          "Text": "Ask about the city.",
+          "Goto": "L_INFO"
         },
         {
           "Effects": [
@@ -29,7 +26,8 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Play (pay 2g, sometimes win 5g)."
+          "Label": "Play (pay 2g, sometimes win 5g).",
+          "Text": "Play (pay 2g, sometimes win 5g)."
         },
         {
           "Effects": [
@@ -37,16 +35,14 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Not today."
+          "Label": "Not today.",
+          "Text": "Not today."
         },
         {
           "Label": "Any honest work going?",
-          "Effects": [
-            {
-              "Op": "gotoLine",
-              "To": "L_WORK"
-            }
-          ]
+          "Effects": [],
+          "Text": "Any honest work going?",
+          "Goto": "L_WORK"
         }
       ]
     },
@@ -59,7 +55,8 @@
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Text": "Thanks. That helps."
         }
       ]
     },
@@ -72,7 +69,8 @@
             {
               "Op": "endDialogue"
             }
-          ]
+          ],
+          "Text": "I'll keep that in mind."
         }
       ]
     }
