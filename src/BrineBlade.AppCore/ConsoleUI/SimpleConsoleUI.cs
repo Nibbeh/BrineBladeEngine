@@ -46,8 +46,8 @@ public static class SimpleConsoleUI
         }
 
         Console.WriteLine();
-        // Footer commands
-        Console.WriteLine("[1..N]=choose   [I]nventory   [S]ave   [L]oad   [H]elp   [R]efresh   [Q]uit");
+        // Footer commands  (renamed [I] to Player Menu)
+        Console.WriteLine("[1..N]=choose   [I] Player Menu   [S]ave   [L]oad   [H]elp   [R]efresh   [Q]uit");
         Console.WriteLine();
 
         // Message log
@@ -61,37 +61,20 @@ public static class SimpleConsoleUI
 
     public static void RenderModal(GameState state, string title, IReadOnlyList<string> lines, bool waitForEnter = true)
     {
-        Console.Clear();
+        Console.OutputEncoding = Encoding.UTF8;
         Console.WriteLine($"=== {title} ===");
-        Console.WriteLine($"Day {state.World.Day}  {state.World.Hour:00}:{state.World.Minute:00}");
-        Console.WriteLine();
-
-        foreach (var line in lines)
-            WriteWrapped(line);
-
+        foreach (var l in lines) WriteWrapped(l);
         if (waitForEnter)
         {
             Console.WriteLine();
-            Console.WriteLine("(press Enter to continue)");
+            Console.Write("[enter] ");
             Console.ReadLine();
         }
     }
 
-    public static void ShowHelp()
+    // Original method name kept
+    public static void ShowSavedGames(IEnumerable<string> lines)
     {
-        Console.WriteLine();
-        Console.WriteLine("Help:");
-        Console.WriteLine("  Type a number (1..N) to choose an option.");
-        Console.WriteLine("  I = Inventory, S = Save, L = Load, H = Help, R = Refresh, Q = Quit.");
-        Console.WriteLine();
-    }
-
-    /// <summary>
-    /// Lists save slots in a simple numbered table (used by SaveGameFlow).
-    /// </summary>
-    public static void ShowSaves(IReadOnlyList<string> lines)
-    {
-        Console.WriteLine();
         Console.WriteLine("Saved Games:");
         Console.WriteLine(new string('-', 40));
         int i = 1;
@@ -103,9 +86,19 @@ public static class SimpleConsoleUI
         Console.WriteLine(new string('-', 40));
     }
 
-    /// <summary>
-    /// Ask for a free-form input line with a prompt and return the entered string.
-    /// </summary>
+    // ✅ Back-compat alias for older call sites expecting ShowSaves(...)
+    public static void ShowSaves(IEnumerable<string> lines) => ShowSavedGames(lines);
+
+    // (Optional) defensive zero-arg alias; harmless if never used
+    public static void ShowSaves()
+    {
+        Console.WriteLine("Saved Games:");
+        Console.WriteLine(new string('-', 40));
+        Console.WriteLine(" (none found)");
+        Console.WriteLine(new string('-', 40));
+    }
+
+    /// <summary>Ask for a free-form input line with a prompt and return the text.</summary>
     public static string Ask(string prompt)
     {
         Console.Write(prompt.EndsWith(" ") ? prompt : prompt + " ");
@@ -125,27 +118,25 @@ public static class SimpleConsoleUI
         {
             if (n >= 1 && n <= optionsCount)
                 return new ConsoleCommand(ConsoleCommandType.Choose, n - 1);
-            return new ConsoleCommand(ConsoleCommandType.None);
         }
 
-        var token = input.ToLowerInvariant();
-        return token switch
+        var lower = input.ToLowerInvariant();
+        return lower switch
         {
             "q" or "quit" or "exit" => new ConsoleCommand(ConsoleCommandType.Quit),
-            "h" or "help" => new ConsoleCommand(ConsoleCommandType.Help),
+            "?" or "h" or "help" => new ConsoleCommand(ConsoleCommandType.Help),
             "r" or "refresh" => new ConsoleCommand(ConsoleCommandType.Refresh),
-            "i" or "inv" or "inventory" => new ConsoleCommand(ConsoleCommandType.Inventory),
+            "i" or "inv" or "/inv" => new ConsoleCommand(ConsoleCommandType.Inventory), // now opens Player Menu
             "s" or "save" => new ConsoleCommand(ConsoleCommandType.Save),
             "l" or "load" => new ConsoleCommand(ConsoleCommandType.Load),
-            _ => new ConsoleCommand(ConsoleCommandType.None),
+            _ => new ConsoleCommand(ConsoleCommandType.None)
         };
     }
 
     public static void Notice(string message)
     {
-        if (string.IsNullOrWhiteSpace(message)) return;
+        if (_log.Count >= MaxLog) _log.Dequeue();
         _log.Enqueue(message);
-        while (_log.Count > MaxLog) _log.Dequeue();
     }
 
     public static void Notice(IEnumerable<string> messages)
@@ -153,27 +144,45 @@ public static class SimpleConsoleUI
         foreach (var m in messages) Notice(m);
     }
 
-    private static void WriteWrapped(string text, int width = 72)
+    private static void WriteWrapped(string text)
     {
-        if (string.IsNullOrEmpty(text)) { Console.WriteLine(); return; }
-        var words = text.Split(new[] { ' ', '\t', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-        var line = "";
-        foreach (var w in words)
+        if (string.IsNullOrEmpty(text)) return;
+
+        foreach (var para in text.Split(new[] { "\n\n" }, StringSplitOptions.None))
         {
-            if (line.Length + w.Length + 1 > width)
+            var words = para.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            var line = new StringBuilder();
+            foreach (var w in words)
             {
-                Console.WriteLine(line);
-                line = w;
+                if (line.Length + 1 + w.Length > 72)
+                {
+                    Console.WriteLine(line.ToString());
+                    line.Clear();
+                }
+                if (line.Length > 0) line.Append(' ');
+                line.Append(w);
             }
-            else
-            {
-                line = line.Length == 0 ? w : line + " " + w;
-            }
+            if (line.Length > 0) Console.WriteLine(line.ToString());
+            Console.WriteLine();
         }
-        if (line.Length > 0) Console.WriteLine(line);
     }
 
-    private static string? FirstFlagSuffix(IEnumerable<string> flags, string prefix)
+    public static void ShowHelp()
+    {
+        Console.WriteLine("Commands:");
+        Console.WriteLine("  [1..N] choose option");
+        Console.WriteLine("  [I]    open Player Menu (Character / Inventory / Equipment)");
+        Console.WriteLine("  [S]    save    [L] load    [H] help    [R] refresh    [Q] quit/back");
+    }
+
+    public static void ShowSlots(string caption, IEnumerable<string> flags, string prefix)
+    {
+        Console.WriteLine($"== {caption} ==");
+        foreach (var f in flags.Where(f => f.StartsWith(prefix, StringComparison.Ordinal)))
+            Console.WriteLine(" • " + Humanize(f[prefix.Length..]));
+    }
+
+    public static string? GetFlagValue(IEnumerable<string> flags, string prefix)
     {
         foreach (var f in flags)
             if (f.StartsWith(prefix, StringComparison.Ordinal))
@@ -187,4 +196,3 @@ public static class SimpleConsoleUI
         return CultureInfo.InvariantCulture.TextInfo.ToTitleCase(s.ToLowerInvariant());
     }
 }
-

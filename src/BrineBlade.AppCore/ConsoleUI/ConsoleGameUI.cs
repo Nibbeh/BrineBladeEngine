@@ -42,7 +42,6 @@ namespace BrineBlade.AppCore.ConsoleUI
         )
         {
             Console.Clear();
-            Console.OutputEncoding = Encoding.UTF8;
 
             int width = Clamp(Console.WindowWidth - 2, 78, 120);
             int inner = width - 4; // content width inside borders
@@ -66,7 +65,7 @@ namespace BrineBlade.AppCore.ConsoleUI
 
             // Footer
             DrawBottomBorder(width);
-            WriteHints();
+            WriteHints(); // <- updated text to say [I] Player Menu
             Console.Write("> ");
         }
 
@@ -74,44 +73,25 @@ namespace BrineBlade.AppCore.ConsoleUI
             GameState state,
             string title,
             IReadOnlyList<string> lines,
-            bool waitForEnter = true
-        )
+            bool waitForEnter = true)
         {
-            Console.OutputEncoding = Encoding.UTF8;
+            Console.Clear();
 
-            int width = Clamp(Console.WindowWidth - 2, 70, 120);
-            int inner = width - 4;
+            int width = Clamp(Console.WindowWidth - 2, 78, 120);
 
             DrawTopBorder(width);
             DrawTitle(title, width);
             DrawSep(width);
 
-            // Preserve table-like lines; wrap prose
-            foreach (var raw in lines ?? Array.Empty<string>())
-            {
-                if (string.IsNullOrEmpty(raw))
-                {
-                    BoxLine(string.Empty, width);
-                    continue;
-                }
-
-                if (IsPreformatted(raw))
-                {
-                    BoxLine(Truncate(raw, inner), width);
-                }
-                else
-                {
-                    foreach (var w in Wrap(raw, inner))
-                        BoxLine(w, width);
-                }
-            }
+            var inner = width - 4;
+            foreach (var line in lines ?? Array.Empty<string>())
+                BoxLine(line, width);
 
             DrawBottomBorder(width);
-
             if (waitForEnter)
             {
                 Console.ForegroundColor = HintFg;
-                Console.WriteLine("Press Enter...");
+                Console.Write("Press Enter...");
                 Console.ResetColor();
                 Console.ReadLine();
             }
@@ -121,20 +101,32 @@ namespace BrineBlade.AppCore.ConsoleUI
         {
             while (true)
             {
-                string input = Console.ReadLine()?.Trim() ?? string.Empty;
-
-                // global hotkeys
-                if (string.Equals(input, "?", StringComparison.OrdinalIgnoreCase))
-                    return new ConsoleCommand(ConsoleCommandType.Help, -1);
+                var input = Console.ReadLine()?.Trim() ?? string.Empty;
+                if (string.IsNullOrEmpty(input))
+                    return new ConsoleCommand(ConsoleCommandType.Refresh);
 
                 if (string.Equals(input, "q", StringComparison.OrdinalIgnoreCase) ||
-                    string.Equals(input, "quit", StringComparison.OrdinalIgnoreCase))
-                    return new ConsoleCommand(ConsoleCommandType.Quit, -1);
+                    string.Equals(input, "quit", StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(input, "exit", StringComparison.OrdinalIgnoreCase))
+                    return new ConsoleCommand(ConsoleCommandType.Quit);
+
+                if (string.Equals(input, "?", StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(input, "h", StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(input, "help", StringComparison.OrdinalIgnoreCase))
+                    return new ConsoleCommand(ConsoleCommandType.Help);
 
                 if (string.Equals(input, "i", StringComparison.OrdinalIgnoreCase) ||
                     string.Equals(input, "inv", StringComparison.OrdinalIgnoreCase) ||
-                    string.Equals(input, "inventory", StringComparison.OrdinalIgnoreCase))
-                    return new ConsoleCommand(ConsoleCommandType.Inventory, -1);
+                    string.Equals(input, "/inv", StringComparison.OrdinalIgnoreCase))
+                    return new ConsoleCommand(ConsoleCommandType.Inventory); // now opens Player Menu
+
+                if (string.Equals(input, "s", StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(input, "save", StringComparison.OrdinalIgnoreCase))
+                    return new ConsoleCommand(ConsoleCommandType.Save);
+
+                if (string.Equals(input, "l", StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(input, "load", StringComparison.OrdinalIgnoreCase))
+                    return new ConsoleCommand(ConsoleCommandType.Load);
 
                 // numbered choices
                 if (int.TryParse(input, out int n) && n >= 1 && n <= optionCount)
@@ -142,7 +134,7 @@ namespace BrineBlade.AppCore.ConsoleUI
 
                 // gentle re-prompt
                 Console.ForegroundColor = HintFg;
-                Console.WriteLine("Enter a valid number, 'i' for inventory, '?' for help, or 'q' to quit.");
+                Console.WriteLine("Enter a valid number, 'i' for player menu, '?' for help, or 'q' to quit.");
                 Console.ResetColor();
                 Console.Write("> ");
             }
@@ -151,7 +143,7 @@ namespace BrineBlade.AppCore.ConsoleUI
         public void ShowHelp()
         {
             Console.ForegroundColor = HintFg;
-            Console.WriteLine("Hotkeys: [1..N] choose  •  [I] inventory  •  [?] help  •  [Q] quit/back");
+            Console.WriteLine("Hotkeys: [1..N] choose  •  [I] player menu  •  [?] help  •  [Q] quit/back");
             Console.ResetColor();
             Console.Write("> ");
         }
@@ -176,6 +168,21 @@ namespace BrineBlade.AppCore.ConsoleUI
             Console.ResetColor();
         }
 
+        private static void DrawTitle(string title, int width)
+        {
+            Console.ForegroundColor = BorderFg;
+            Console.Write($"{V} ");
+            Console.ResetColor();
+
+            Console.ForegroundColor = TitleFg;
+            Console.Write(PadCenter(title ?? string.Empty, width - 4));
+            Console.ResetColor();
+
+            Console.ForegroundColor = BorderFg;
+            Console.WriteLine($" {V}");
+            Console.ResetColor();
+        }
+
         private static void DrawSep(int width)
         {
             Console.ForegroundColor = BorderFg;
@@ -183,30 +190,10 @@ namespace BrineBlade.AppCore.ConsoleUI
             Console.ResetColor();
         }
 
-        private static void DrawTitle(string title, int width)
+        private static void DrawHud(GameState state, int width)
         {
-            string txt = PadCenter(title ?? string.Empty, width - 4);
-
-            Console.ForegroundColor = BorderFg;
-            Console.Write($"{V} ");
-            Console.ForegroundColor = TitleFg;
-            Console.Write(txt);
-            Console.ForegroundColor = BorderFg;
-            Console.WriteLine($" {V}");
-            Console.ResetColor();
-        }
-
-        private static void DrawHud(GameState s, int width)
-        {
-            // All from GameState; no new logic.
-            string day = $"Day: {s.World.Day}";
-            string time = $"Time: {s.World.Hour:00}:{s.World.Minute:00}";
-            string name = $"Name: {s.Player?.Name ?? "Hero"}";
-            string hp = $"HP: {s.CurrentHp}";
-            string gold = $"Gold: {s.Gold}";
-
-            string left = $"{day}   {time}   {name}";
-            string right = $"{hp}   {gold}";
+            string left = $"Day: {state.World.Day}   Time: {state.World.Hour:00}:{state.World.Minute:00}";
+            string right = $"Name: {state.Player.Name}   HP: {state.CurrentHp}   Gold: {state.Gold}";
 
             int inner = width - 4;
             int gap = Math.Max(2, inner - left.Length - right.Length);
@@ -228,7 +215,6 @@ namespace BrineBlade.AppCore.ConsoleUI
 
             static void WriteHudPart(string s)
             {
-                // Label:value coloring (simple heuristic)
                 var parts = s.Split("   ", StringSplitOptions.None);
                 for (int i = 0; i < parts.Length; i++)
                 {
@@ -239,7 +225,7 @@ namespace BrineBlade.AppCore.ConsoleUI
                         Console.ForegroundColor = HudLabelFg;
                         Console.Write(p.Substring(0, idx + 2)); // "Label: "
                         Console.ForegroundColor = HudValueFg;
-                        Console.Write(p.Substring(idx + 2));
+                        Console.Write(p[(idx + 2)..]);
                     }
                     else
                     {
@@ -254,60 +240,56 @@ namespace BrineBlade.AppCore.ConsoleUI
 
         private static void WriteBody(string body, int inner, int width)
         {
-            // Preserve tables/ASCII art; wrap plain prose
-            foreach (var rawLine in (body ?? string.Empty).Replace("\r", "").Split('\n'))
+            if (string.IsNullOrEmpty(body))
             {
-                if (string.IsNullOrEmpty(rawLine))
-                {
-                    BoxLine(string.Empty, width);
-                    continue;
-                }
+                BoxLine(string.Empty, width);
+                return;
+            }
 
-                if (IsPreformatted(rawLine))
-                {
-                    BoxLine(Truncate(rawLine, inner), width);
-                }
-                else
-                {
-                    foreach (var w in Wrap(rawLine, inner))
-                        BoxLine(w, width);
-                }
+            // Preserve preformatted tables: if a line contains '│' or '┼' or '─', print verbatim
+            var lines = body.Replace("\r\n", "\n").Split('\n');
+            bool isTableBlock = lines.Any(l => l.Contains('│') || l.Contains('┼') || l.Contains('─'));
+
+            if (isTableBlock)
+            {
+                foreach (var l in lines) BoxLine(l, width);
+                return;
+            }
+
+            foreach (var para in body.Split(new[] { "\n\n" }, StringSplitOptions.None))
+            {
+                foreach (var wrapped in Wrap(para, inner))
+                    BoxLine(wrapped, width);
+                BoxLine(string.Empty, width);
             }
         }
 
         private static void WriteOptions(IReadOnlyList<(string Key, string Label)> options, int inner, int width)
         {
-            // Build display strings like "[1] Attack"
-            var display = options.Select((o, i) => $"[{i + 1}] {o.Label}").ToList();
-            int maxLen = display.Max(s => s.Length);
-
-            // Choose layout: 2 columns when it fits nicely and there are enough choices
-            bool twoCols = options.Count >= 4 && (maxLen * 2 + 4) <= inner;
-            int cols = twoCols ? 2 : 1;
-            int colWidth = twoCols ? (inner / 2) : inner;
-            int rows = (int)Math.Ceiling(display.Count / (double)cols);
-
-            for (int r = 0; r < rows; r++)
+            // 2-column layout if enough width; else 1-column
+            bool twoCol = inner >= 70 && options.Count >= 4;
+            if (!twoCol)
             {
-                string left = (r < display.Count) ? display[r] : string.Empty;
-                string right = twoCols && (r + rows) < display.Count ? display[r + rows] : string.Empty;
-
-                // Keep nicely padded columns
-                string line = twoCols
-                    ? left.PadRight(colWidth) + right.PadRight(inner - colWidth)
-                    : left.PadRight(inner);
-
-                BoxLine(line, width);
+                foreach (var (k, l) in options)
+                    BoxLine($" {k}. {l}", width);
             }
-
-            // Add a small breathing space after options when box ends
+            else
+            {
+                int half = (inner - 2) / 2;
+                for (int i = 0; i < options.Count; i += 2)
+                {
+                    var left = $" {options[i].Key}. {options[i].Label}";
+                    var right = (i + 1 < options.Count) ? $" {options[i + 1].Key}. {options[i + 1].Label}" : string.Empty;
+                    BoxLine(left.PadRight(half) + "  " + right, width);
+                }
+            }
         }
 
         private static void WriteHints()
         {
             Console.ForegroundColor = HintFg;
             Console.WriteLine();
-            Console.WriteLine("Tips: [1..N]=choose   [I]nventory   [?] help   [Q] quit/back");
+            Console.WriteLine("Tips: [1..N]=choose   [I] Player Menu   [?] help   [Q] quit/back");
             Console.ResetColor();
             Console.WriteLine();
         }
@@ -337,47 +319,20 @@ namespace BrineBlade.AppCore.ConsoleUI
                 yield break;
             }
 
-            // Paragraph-aware wrapping
-            var paragraphs = text.Split(new[] { "\\n\\n" }, StringSplitOptions.None); // keep lightweight; callers already split lines
-            foreach (var para in new[] { text }) // single-line fallback
+            var words = text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            var line = new StringBuilder();
+            foreach (var w in words)
             {
-                var words = para.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-                var line = new StringBuilder();
-
-                foreach (var w in words)
+                if (line.Length + (line.Length > 0 ? 1 : 0) + w.Length > maxWidth)
                 {
-                    if (line.Length == 0)
-                    {
-                        line.Append(w);
-                        continue;
-                    }
-
-                    if (line.Length + 1 + w.Length > maxWidth)
-                    {
-                        yield return line.ToString();
-                        line.Clear();
-                        line.Append(w);
-                    }
-                    else
-                    {
-                        line.Append(' ').Append(w);
-                    }
+                    yield return line.ToString();
+                    line.Clear();
                 }
-
-                if (line.Length > 0) yield return line.ToString();
+                if (line.Length > 0) line.Append(' ');
+                line.Append(w);
             }
+            if (line.Length > 0) yield return line.ToString();
         }
-
-        private static bool IsPreformatted(string s)
-        {
-            // Heuristic: if line uses box-drawing or table glyphs, don't wrap it.
-            return s.IndexOfAny(new[] { '│', '─', '┼', '┬', '┴', '┌', '┐', '└', '┘' }) >= 0
-                   || s.Contains("  #") // our inventory table header
-                   || s.Contains("Actions:");
-        }
-
-        private static string Truncate(string s, int max) =>
-            s.Length <= max ? s : s.Substring(0, Math.Max(0, max - 1));
 
         private static string PadCenter(string s, int width)
         {
