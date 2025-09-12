@@ -1,16 +1,55 @@
-// N_SMUGGLERS_DEN.json
 {
   "Id": "N_SMUGGLERS_DEN",
   "Title": "Smugglers' Den (Net Loft)",
   "EnterText": "Netting hangs like cobwebs; a whispering ladder dips into shadow.",
-  "Description": "A net loft that smells of pitch, tar, and quiet arrangements.",
-  "Paragraphs": [
-    "The rafters are a forest of ropes and hooks; lantern light beads on the lines like amber caught in webbing.",
-    "Conversations run under the floorboards - soft as the tide, sharp as a hook. A ladder vanishes into a slit that leads nowhere anyone speaks of openly."
-  ],
   "Options": [
-    { "Text": "Buy a gull-token (5g)." },
-    { "Text": "Hand over a construct bolt (they pay in coin)." },
+    {
+      "Text": "Buy a gull-token (5g).",
+      "Effects": [
+        {
+          "Op": "addGold",
+          "Amount": -5
+        },
+        {
+          "Op": "addItem",
+          "Item": "ITM_SMUGGLER_TOKEN",
+          "Amount": 1
+        },
+        {
+          "Op": "setFlag",
+          "Flag": "route.smuggler"
+        }
+      ]
+    },
+    {
+      "Text": "Hand over a construct bolt (they pay in coin).",
+      "Effects": [
+        {
+          "Op": "removeItemByName",
+          "Item": "ITM_CONSTRUCT_BOLT",
+          "Amount": 1
+        },
+        {
+          "Op": "addGold",
+          "Amount": 1
+        },
+        {
+          "Op": "setFlag",
+          "Flag": "smuggler.msg"
+        }
+      ]
+    },
+    {
+      "Id": "O_EAVESDROP",
+      "Label": "Eavesdrop on the crowd.",
+      "Text": "Eavesdrop on the crowd.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_LORE_N_SMUGGLERS_DEN"
+        }
+      ]
+    },
     {
       "Id": "O_CONTACT_SMUGGLER",
       "Text": "Give the dock-sign and ask for a contact.",
@@ -20,11 +59,6 @@
           "Id": "D_SMUGGLER_CONTACT"
         }
       ]
-    },
-    {
-      "Id": "O_EAVESDROP",
-      "Label": "Eavesdrop on the crowd.",
-      "Text": "Eavesdrop on the crowd."
     }
   ],
   "Exits": [
@@ -36,5 +70,10 @@
       "Text": "To Harbor Town Square",
       "To": "N_HARBOR_SQUARE"
     }
+  ],
+  "Description": "A net loft that smells of pitch, tar, and quiet arrangements.",
+  "Paragraphs": [
+    "The rafters are a forest of ropes and hooks; lantern light beads on the lines like amber caught in webbing.",
+    "Conversations run under the floorboards - soft as the tide, sharp as a hook. A ladder vanishes into a slit that leads nowhere anyone speaks of openly."
   ]
 }

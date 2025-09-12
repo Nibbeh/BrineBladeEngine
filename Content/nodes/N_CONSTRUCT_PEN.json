@@ -1,21 +1,58 @@
-// N_CONSTRUCT_PEN.json
 {
   "Id": "N_CONSTRUCT_PEN",
   "Title": "Construct Pen (Dock Gantries)",
   "EnterText": "Stone constructs stand in rows like patient oxen; yokes bite into gouged shoulders while a foreman stamps chits.",
-  "Description": "The construct pens thrum with iron patience and the creak of brine-slick gantries.",
-  "Paragraphs": [
-    "Stone-boned laborers stand yoked along the rail, chiselled faces unreadable as tides. Grease, pitch, and amber dust make a paste that darkens every groove.",
-    "A foreman in a split leather coat stamps chits and barks quotas; docklings scurry between pallets as the harbor bell marks another hour sold to the sea."
-  ],
   "Options": [
-    { "Text": "Carry crates under the foreman's eye (earn coin)." },
-    { "Text": "Adjust a jammed gantry (help the dock crew)." },
-    { "Text": "Carry a note to the Ropewalk foreman (future favor)." },
+    {
+      "Text": "Carry crates under the foreman's eye (earn coin).",
+      "Effects": [
+        {
+          "Op": "addGold",
+          "Amount": 5
+        },
+        {
+          "Op": "setFlag",
+          "Flag": "work.crates"
+        },
+        {
+          "Op": "advanceTime",
+          "Amount": 1
+        }
+      ]
+    },
+    {
+      "Text": "Adjust a jammed gantry (help the dock crew).",
+      "Effects": [
+        {
+          "Op": "setFlag",
+          "Flag": "construct.helped"
+        },
+        {
+          "Op": "addItem",
+          "Item": "ITM_CONSTRUCT_BOLT",
+          "Amount": 1
+        }
+      ]
+    },
+    {
+      "Text": "Carry a note to the Ropewalk foreman (future favor).",
+      "Effects": [
+        {
+          "Op": "setFlag",
+          "Flag": "smuggler.msg"
+        }
+      ]
+    },
     {
       "Id": "O_EAVESDROP",
       "Label": "Eavesdrop on the crowd.",
-      "Text": "Eavesdrop on the crowd."
+      "Text": "Eavesdrop on the crowd.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_LORE_N_CONSTRUCT_PEN"
+        }
+      ]
     }
   ],
   "Exits": [
@@ -27,5 +64,10 @@
       "Text": "To Harbor Town Square",
       "To": "N_HARBOR_SQUARE"
     }
+  ],
+  "Description": "The construct pens thrum with iron patience and the creak of brine-slick gantries.",
+  "Paragraphs": [
+    "Stone-boned laborers stand yoked along the rail, chiselled faces unreadable as tides. Grease, pitch, and amber dust make a paste that darkens every groove.",
+    "A foreman in a split leather coat stamps chits and barks quotas; docklings scurry between pallets as the harbor bell marks another hour sold to the sea."
   ]
 }

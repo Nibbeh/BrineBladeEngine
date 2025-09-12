@@ -1,17 +1,22 @@
-// N_ROPEWALK.json
 {
   "Id": "N_ROPEWALK",
   "Title": "Ropewalk Lane",
-  "Description": "A long shed where fibers become lines strong enough to hold ships and secrets.",
+  "Description": "A long straight shed where hemp strands twist into ropes that creak like rigging.",
   "Paragraphs": [
-    "The air is full of lint and rhythm; spinners pace backwards as if unwinding time.",
-    "Bundles of hemp itch through your coat; foremen count coils with a gambler's stare."
+    "Tar stink hangs in the air. Workers nod as they pull, step, pull - endlessly.",
+    "Salt, tar, and wet timber mix on the air; gulls quarrel above the swell while merchants count coin with red fingers."
   ],
   "Options": [
     {
       "Id": "O_EAVESDROP",
       "Label": "Eavesdrop on the crowd.",
-      "Text": "Eavesdrop on the crowd."
+      "Text": "Eavesdrop on the crowd.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_LORE_N_ROPEWALK"
+        }
+      ]
     },
     {
       "Id": "O_TALK_ROPEWALK_FOREMAN",
@@ -26,7 +31,15 @@
   ],
   "Exits": [
     {
-      "Text": "Back to Harbor Square",
+      "Text": "To Warehouse Row",
+      "To": "N_WAREHOUSE_ROW"
+    },
+    {
+      "Text": "To Refugee Camp (Quayside Tents)",
+      "To": "N_REFUGEE_CAMP"
+    },
+    {
+      "Text": "To Harbor Town Square",
       "To": "N_HARBOR_SQUARE"
     }
   ]

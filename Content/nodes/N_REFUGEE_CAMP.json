@@ -1,17 +1,58 @@
-// N_REFUGEE_CAMP.json
 {
   "Id": "N_REFUGEE_CAMP",
   "Title": "Refugee Camp (Quayside Tents)",
   "EnterText": "Canvas groans and stove-smoke stings. A bell rings somewhere up the quay.",
-  "Description": "Canvas lanes, cookfire smoke, and the patience of people with nowhere left to go.",
-  "Paragraphs": [
-    "Ropes creak in the wind and tin stoves tick as they cool. Children chalk games in the dust; a bell somewhere upriver counts the day's last bread.",
-    "Aid wagons rattle through with thin blankets and thinner mercy. Between tents, a grey-bearded elder keeps a ledger of names that is mostly crossings-out."
-  ],
   "Options": [
-    { "Text": "Share a little coin for bread (1g)." },
-    { "Text": "Trade odd jobs for a hot drink." },
-    { "Text": "Spar with the roughs to pass the time." },
+    {
+      "Text": "Share a little coin for bread (1g).",
+      "Effects": [
+        {
+          "Op": "addGold",
+          "Amount": -1
+        },
+        {
+          "Op": "setFlag",
+          "Flag": "camp.helped"
+        },
+        {
+          "Op": "advanceTime",
+          "Amount": 1
+        }
+      ]
+    },
+    {
+      "Text": "Trade odd jobs for a hot drink.",
+      "Effects": [
+        {
+          "Op": "addGold",
+          "Amount": 1
+        },
+        {
+          "Op": "setFlag",
+          "Flag": "camp.traded"
+        }
+      ]
+    },
+    {
+      "Text": "Spar with the roughs to pass the time.",
+      "Effects": [
+        {
+          "Op": "combat",
+          "Id": "ENEMY_WHARF_THUG"
+        }
+      ]
+    },
+    {
+      "Id": "O_EAVESDROP",
+      "Label": "Eavesdrop on the crowd.",
+      "Text": "Eavesdrop on the crowd.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_LORE_N_REFUGEE_CAMP"
+        }
+      ]
+    },
     {
       "Id": "O_TALK_CAMP_ELDER",
       "Text": "Speak with the camp elder.",
@@ -31,11 +72,6 @@
           "Id": "D_REFUGEE_FAMILY"
         }
       ]
-    },
-    {
-      "Id": "O_EAVESDROP",
-      "Label": "Eavesdrop on the crowd.",
-      "Text": "Eavesdrop on the crowd."
     }
   ],
   "Exits": [
@@ -51,5 +87,10 @@
       "Text": "To Shanty Alley",
       "To": "N_SHANTY_ALLEY"
     }
+  ],
+  "Description": "Canvas lanes, cookfire smoke, and the patience of people with nowhere left to go.",
+  "Paragraphs": [
+    "Ropes creak in the wind and tin stoves tick as they cool. Children chalk games in the dust; a bell somewhere upriver counts the day's last bread.",
+    "Aid wagons rattle through with thin blankets and thinner mercy. Between tents, a grey-bearded elder keeps a ledger of names that is mostly crossings-out."
   ]
 }

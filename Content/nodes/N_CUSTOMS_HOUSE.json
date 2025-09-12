@@ -1,17 +1,22 @@
-// N_CUSTOMS_HOUSE.json
 {
   "Id": "N_CUSTOMS_HOUSE",
   "Title": "Customs House",
-  "Description": "Tariffs in ink, favors in whispers.",
+  "Description": "Ledger smell and the tap of abacus beads. A clerk posts tariffs by candle soot.",
   "Paragraphs": [
-    "Clerks tally by lantern-light, their fingers as quick as pickpockets.",
-    "Petitioners lean on polished rails worn by generations of paperwork."
+    "The rules change with the tide and the governor's mood. Today, they seem merely greedy.",
+    "Salt, tar, and wet timber mix on the air; gulls quarrel above the swell while merchants count coin with red fingers."
   ],
   "Options": [
     {
       "Id": "O_EAVESDROP",
       "Label": "Eavesdrop on the crowd.",
-      "Text": "Eavesdrop on the crowd."
+      "Text": "Eavesdrop on the crowd.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_LORE_N_CUSTOMS_HOUSE"
+        }
+      ]
     },
     {
       "Id": "O_TALK_GUILD_FACTOR",
@@ -26,8 +31,12 @@
   ],
   "Exits": [
     {
-      "Text": "Back to Harbor Square",
+      "Text": "To Harbor Town Square",
       "To": "N_HARBOR_SQUARE"
+    },
+    {
+      "Text": "To Main Gate Bridge",
+      "To": "N_MAIN_GATE_BRIDGE"
     }
   ]
 }

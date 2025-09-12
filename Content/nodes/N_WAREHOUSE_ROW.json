@@ -1,17 +1,22 @@
-// N_WAREHOUSE_ROW.json
 {
   "Id": "N_WAREHOUSE_ROW",
   "Title": "Warehouse Row",
-  "Description": "Ramshackle sheds and stout counting-houses watch one another like cats.",
+  "Description": "Boarded doors, pitch-smeared caulking, and bored guards swapping dice.",
   "Paragraphs": [
-    "Winches squeal, shutters slam, and the cobbles smell of salt and spilled grain.",
-    "A cordon of watchmen has made a little island of quiet around one heavy crate."
+    "The river brings cargo and trouble by the same current.",
+    "Salt, tar, and wet timber mix on the air; gulls quarrel above the swell while merchants count coin with red fingers."
   ],
   "Options": [
     {
       "Id": "O_EAVESDROP",
       "Label": "Eavesdrop on the crowd.",
-      "Text": "Eavesdrop on the crowd."
+      "Text": "Eavesdrop on the crowd.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_LORE_N_WAREHOUSE_ROW"
+        }
+      ]
     },
     {
       "Id": "O_CHECK_GUARDED_CARGO",
@@ -26,8 +31,16 @@
   ],
   "Exits": [
     {
+      "Text": "To Ropewalk Lane",
+      "To": "N_ROPEWALK"
+    },
+    {
       "Text": "To Harbor Town Square",
       "To": "N_HARBOR_SQUARE"
+    },
+    {
+      "Text": "To Shanty Alley",
+      "To": "N_SHANTY_ALLEY"
     }
   ]
 }

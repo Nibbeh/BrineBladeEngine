@@ -1,26 +1,38 @@
-// N_FISH_MARKET.json
 {
   "Id": "N_FISH_MARKET",
   "Title": "Fish Market Rows",
   "EnterText": "Slabs drip; gulls argue from beam to beam.",
-  "Description": "Fishmongers trade news and knives with equal quickness.",
-  "Paragraphs": [
-    "Rows of slabs shine with scales and ice. Gulls argue from beam to beam while boys swab guts into wicker baskets.",
-    "Hand-bells ring prices; a sharper ring marks the start of a brawl that stalls as fast as it starts - no one wants to buy from a broken jaw."
-  ],
   "Options": [
     {
       "Label": "Smuggler's corner—ask about faster ways.",
-      "Text": "Smuggler's corner—ask about faster ways."
+      "Text": "Smuggler's corner—ask about faster ways.",
+      "Effects": [
+        {
+          "Op": "setFlag",
+          "Flag": "route.smuggler"
+        }
+      ]
     },
     {
       "Label": "Break up the brawl.",
-      "Text": "Break up the brawl."
+      "Text": "Break up the brawl.",
+      "Effects": [
+        {
+          "Op": "combat",
+          "Id": "ENEMY_WHARF_THUG"
+        }
+      ]
     },
     {
       "Id": "O_EAVESDROP",
       "Label": "Eavesdrop on the crowd.",
-      "Text": "Eavesdrop on the crowd."
+      "Text": "Eavesdrop on the crowd.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_LORE_N_FISH_MARKET"
+        }
+      ]
     }
   ],
   "Exits": [
@@ -28,5 +40,10 @@
       "Text": "To Harbor Town Square",
       "To": "N_HARBOR_SQUARE"
     }
+  ],
+  "Description": "Fishmongers trade news and knives with equal quickness.",
+  "Paragraphs": [
+    "Rows of slabs shine with scales and ice. Gulls argue from beam to beam while boys swab guts into wicker baskets.",
+    "Hand-bells ring prices; a sharper ring marks the start of a brawl that stalls as fast as it starts - no one wants to buy from a broken jaw."
   ]
 }

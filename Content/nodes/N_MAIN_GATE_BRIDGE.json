@@ -1,17 +1,58 @@
-// N_MAIN_GATE_BRIDGE.json
 {
   "Id": "N_MAIN_GATE_BRIDGE",
   "Title": "Main Gate Bridge",
   "EnterText": "Bridge chains creak; Watch-halberds glitter in the mist. A clerk's desk squats beneath a salt-faded banner.",
-  "Description": "The city's throat: steel, stamps, and watchful halberds.",
-  "Paragraphs": [
-    "Chains bite into the draw as the river yawns below. A clerk's desk, scarred by rain and ink, sits beneath a salt-faded banner.",
-    "Queue lines knot with carters, pilgrims, and old soldiers. The Watch read faces like writs; the wrong expression costs more than twenty coin."
-  ],
   "Options": [
-    { "Text": "(Show Work Permit) - enter as a hired hand." },
-    { "Text": "(Pay 20g) - bribe the clerk for a fast stamp." },
-    { "Text": "(Smuggler's wave) - take the river-gate side stair." },
+    {
+      "Text": "(Show Work Permit) — enter as a hired hand.",
+      "Effects": [
+        {
+          "Op": "setFlag",
+          "Flag": "permit.worker"
+        },
+        {
+          "Op": "goto",
+          "To": "N_CITY_INTRO"
+        }
+      ]
+    },
+    {
+      "Text": "(Pay 20g) — bribe the clerk for a fast stamp.",
+      "Effects": [
+        {
+          "Op": "addGold",
+          "Amount": -20
+        },
+        {
+          "Op": "goto",
+          "To": "N_CITY_INTRO"
+        }
+      ]
+    },
+    {
+      "Text": "(Smuggler's wave) — take the river-gate side stair.",
+      "Effects": [
+        {
+          "Op": "setFlag",
+          "Flag": "route.smuggler"
+        },
+        {
+          "Op": "goto",
+          "To": "N_CITY_INTRO"
+        }
+      ]
+    },
+    {
+      "Id": "O_EAVESDROP",
+      "Label": "Eavesdrop on the crowd.",
+      "Text": "Eavesdrop on the crowd.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_LORE_N_MAIN_GATE_BRIDGE"
+        }
+      ]
+    },
     {
       "Id": "O_TALK_GATE_GUARD",
       "Text": "Speak to the gate guard.",
@@ -21,11 +62,6 @@
           "Id": "D_GATE_GUARD_TUT"
         }
       ]
-    },
-    {
-      "Id": "O_EAVESDROP",
-      "Label": "Eavesdrop on the crowd.",
-      "Text": "Eavesdrop on the crowd."
     }
   ],
   "Exits": [
@@ -33,5 +69,10 @@
       "Text": "To Harbor Town Square",
       "To": "N_HARBOR_SQUARE"
     }
+  ],
+  "Description": "The city's throat: steel, stamps, and watchful halberds.",
+  "Paragraphs": [
+    "Chains bite into the draw as the river yawns below. A clerk's desk, scarred by rain and ink, sits beneath a salt-faded banner.",
+    "Queue lines knot with carters, pilgrims, and old soldiers. The Watch read faces like writs; the wrong expression costs more than twenty coin."
   ]
 }

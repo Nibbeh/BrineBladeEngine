@@ -1,24 +1,55 @@
-// N_UNDER_PIER.json
 {
   "Id": "N_UNDER_PIER",
   "Title": "Under-Pier Catwalk",
-  "Description": "Wet planks, whispering water, and the memory of every coin dropped through the boards.",
+  "Description": "Tar-sticky beams and rope hairs. Lantern light barely keeps the dark from biting back.",
   "Paragraphs": [
-    "Barnacles scribble prayers along the pilings. The tide keeps its own counsel.",
-    "Footsteps here learn to be careful. Voices, too."
+    "Gull sigils cut into posts point toward Shanty Alley.",
+    "Salt, tar, and wet timber mix on the air; gulls quarrel above the swell while merchants count coin with red fingers."
   ],
   "Options": [
     {
+      "Effects": [
+        {
+          "Op": "addGold",
+          "Amount": 2
+        }
+      ],
       "Id": "Search_the_beams_find_2g",
-      "Text": "Search the beams - find 2g."
+      "Label": "Search the beams (find 2g).",
+      "Text": "Search the beams (find 2g)."
     },
     {
-      "Id": "Follow_gu...anty_Alley",
-      "Text": "Follow a shadowed path toward Shanty Alley."
+      "Effects": [
+        {
+          "Op": "goto",
+          "To": "N_SHANTY_ALLEY"
+        }
+      ],
+      "Id": "Follow_gull_sigils_to_Shanty_Alley",
+      "Label": "Follow gull sigils to Shanty Alley.",
+      "Text": "Follow gull sigils to Shanty Alley."
     },
     {
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_SMUGGLER_HINT"
+        }
+      ],
       "Id": "Keep_low_and_listen_smuggler_hint",
-      "Text": "Keep low and listen - smuggler hint."
+      "Label": "Keep low and listen (smuggler hint).",
+      "Text": "Keep low and listen (smuggler hint)."
+    },
+    {
+      "Id": "O_EAVESDROP",
+      "Label": "Eavesdrop on the crowd.",
+      "Text": "Eavesdrop on the crowd.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_LORE_N_UNDER_PIER"
+        }
+      ]
     },
     {
       "Id": "O_CONTACT_SMUGGLER_UNDERPIER",
@@ -29,21 +60,16 @@
           "Id": "D_SMUGGLER_CONTACT"
         }
       ]
-    },
-    {
-      "Id": "O_EAVESDROP",
-      "Label": "Eavesdrop on the crowd.",
-      "Text": "Eavesdrop on the crowd."
     }
   ],
   "Exits": [
     {
-      "Text": "Back to Outer Pier",
+      "Text": "Up to the Outer Pier",
       "To": "N_OUTER_PIER"
     },
     {
-      "Text": "Up to Harbor Square",
-      "To": "N_HARBOR_SQUARE"
+      "Text": "Along the slick catwalk to the Old Sea Bell",
+      "To": "N_OLD_SEA_BELL"
     }
   ]
 }

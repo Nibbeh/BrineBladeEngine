@@ -1,20 +1,48 @@
-// N_OLD_SEA_BELL.json
 {
   "Id": "N_OLD_SEA_BELL",
   "Title": "Old Sea Bell Shrine",
-  "Description": "An iron bell older than the harbor itself, bolted to a post of petrified oak.",
+  "Description": "A weathered bell over an altar crusted with coin and salt.",
   "Paragraphs": [
-    "The bell's tone is said to carry through fog when voices cannot.",
-    "Offerings of rope scraps and amber chips hang from the rail."
+    "An old ringer eyes you like a gull eyes bread.",
+    "Salt, tar, and wet timber mix on the air; gulls quarrel above the swell while merchants count coin with red fingers."
   ],
   "Options": [
     {
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_BELL_RINGER_TUT"
+        }
+      ],
       "Id": "Speak_to_the_bell_ringer",
+      "Label": "Speak to the bell ringer.",
       "Text": "Speak to the bell ringer."
     },
     {
+      "Effects": [
+        {
+          "Op": "addGold",
+          "Amount": -1
+        },
+        {
+          "Op": "setFlag",
+          "Id": "blessing.luck"
+        }
+      ],
       "Id": "Offer_a_coin_1g",
+      "Label": "Offer a coin (1g).",
       "Text": "Offer a coin (1g)."
+    },
+    {
+      "Id": "O_EAVESDROP",
+      "Label": "Eavesdrop on the crowd.",
+      "Text": "Eavesdrop on the crowd.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_LORE_N_OLD_SEA_BELL"
+        }
+      ]
     },
     {
       "Id": "O_LISTEN_PREACHER",
@@ -35,17 +63,12 @@
           "Id": "D_MONK"
         }
       ]
-    },
-    {
-      "Id": "O_EAVESDROP",
-      "Label": "Eavesdrop on the crowd.",
-      "Text": "Eavesdrop on the crowd."
     }
   ],
   "Exits": [
     {
-      "Text": "Back to Harbor Square",
-      "To": "N_HARBOR_SQUARE"
+      "Text": "Imperial Wharf",
+      "To": "N_IMPERIAL_WHARF"
     }
   ]
 }

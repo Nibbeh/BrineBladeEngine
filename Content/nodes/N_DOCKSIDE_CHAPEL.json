@@ -1,16 +1,73 @@
-// N_DOCKSIDE_CHAPEL.json
 {
   "Id": "N_DOCKSIDE_CHAPEL",
   "Title": "Dockside Chapel",
   "EnterText": "Candles gutter in cracked glass; a salt-stained icon watches.",
-  "Description": "A salt-stained chapel where sailors bargain with saints and the sea.",
-  "Paragraphs": [
-    "Candles gutter in cracked glass before a weathered icon; wax tears pool like pale shells. The air tastes of brine and old rope.",
-    "A monk tends the votives with red-knuckled hands, murmuring blessings for safe tide and clean conscience. On the steps, hungry eyes watch every clink of coin."
-  ],
   "Options": [
-    { "Text": "Light a votive candle (2g)." },
-    { "Text": "Ask the monk for a pilgrim's writ." },
+    {
+      "Text": "Light a votive candle (2g).",
+      "Effects": [
+        {
+          "Op": "addGold",
+          "Amount": -2
+        },
+        {
+          "Op": "advanceTime",
+          "Amount": 1
+        }
+      ]
+    },
+    {
+      "Text": "Ask the monk for a pilgrim's writ.",
+      "Effects": [
+        {
+          "Op": "addItem",
+          "Item": "ITM_PILGRIM_WRIT",
+          "Amount": 1
+        },
+        {
+          "Op": "setFlag",
+          "Flag": "writ.pilgrim"
+        }
+      ]
+    },
+    {
+      "Text": "Seek a quiet blessing (smugglers' route).",
+      "Effects": [
+        {
+          "Op": "setFlag",
+          "Flag": "route.smuggler"
+        },
+        {
+          "Op": "addItem",
+          "Item": "ITM_SMUGGLER_TOKEN",
+          "Amount": 1
+        },
+        {
+          "Op": "advanceTime",
+          "Amount": 1
+        }
+      ]
+    },
+    {
+      "Text": "Confront a wharf thug menacing a penitent.",
+      "Effects": [
+        {
+          "Op": "combat",
+          "Id": "ENEMY_WHARF_THUG"
+        }
+      ]
+    },
+    {
+      "Id": "O_EAVESDROP",
+      "Label": "Eavesdrop on the crowd.",
+      "Text": "Eavesdrop on the crowd.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_LORE_N_DOCKSIDE_CHAPEL"
+        }
+      ]
+    },
     {
       "Id": "O_TALK_CHAPEL_KEEPER",
       "Text": "Ask the chapel keeper about deeds and writs.",
@@ -30,11 +87,6 @@
           "Id": "D_MONK"
         }
       ]
-    },
-    {
-      "Id": "O_EAVESDROP",
-      "Label": "Eavesdrop on the crowd.",
-      "Text": "Eavesdrop on the crowd."
     }
   ],
   "Exits": [
@@ -43,12 +95,13 @@
       "To": "N_HARBOR_SQUARE"
     },
     {
-      "Text": "To Ropewalk Lane",
-      "To": "N_ROPEWALK"
-    },
-    {
-      "Text": "To Shanty Alley",
-      "To": "N_SHANTY_ALLEY"
+      "Text": "To Main Gate Bridge",
+      "To": "N_MAIN_GATE_BRIDGE"
     }
+  ],
+  "Description": "A salt-stained chapel where sailors bargain with saints and the sea.",
+  "Paragraphs": [
+    "Candles gutter in cracked glass before a weathered icon; wax tears pool like pale shells. The air tastes of brine and old rope.",
+    "A monk tends the votives with red-knuckled hands, murmuring blessings for safe tide and clean conscience. On the steps, hungry eyes watch every clink of coin."
   ]
 }

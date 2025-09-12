@@ -1,23 +1,12 @@
-// N_HARBOR_SQUARE.json
 {
   "Id": "N_HARBOR_SQUARE",
   "Title": "Harbor Town Square",
-  "Description": "The beating heart of the quay - deals struck, rumors traded, pockets picked.",
+  "Description": "Guild barkers, fishmongers, and pilgrims knot the cobbles beneath a salt-streaked statue.",
   "Paragraphs": [
-    "Fishwives and factors argue under flapping pennons. The Watch keep a careful distance from the loudest arguments.",
-    "From here, every alley smells like a different story waiting to happen."
+    "This is the city's noisy hinge. From here, streets split toward watch-barracks, taverns, markets, and the river.",
+    "Salt, tar, and wet timber mix on the air; gulls quarrel above the swell while merchants count coin with red fingers."
   ],
   "Options": [
-    {
-      "Id": "O_PREACHER_SQUARE",
-      "Text": "Hear a preacher railing about the coming tide.",
-      "Effects": [
-        {
-          "Op": "startDialogue",
-          "Id": "D_PREACHER"
-        }
-      ]
-    },
     {
       "Id": "O_EAVESDROP",
       "Label": "Eavesdrop on the crowd.",
@@ -28,28 +17,42 @@
           "Id": "D_LORE_N_HARBOR_SQUARE"
         }
       ]
+    },
+    {
+      "Id": "O_PREACHER_SQUARE",
+      "Text": "Hear a preacher railing about the coming tide.",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_PREACHER"
+        }
+      ]
     }
   ],
   "Exits": [
     {
-      "Text": "To Outer Pier",
-      "To": "N_OUTER_PIER"
+      "Text": "To Construct Pen (Dock Gantries)",
+      "To": "N_CONSTRUCT_PEN"
     },
     {
       "Text": "To Customs House",
       "To": "N_CUSTOMS_HOUSE"
     },
     {
-      "Text": "To Ropewalk Lane",
-      "To": "N_ROPEWALK"
+      "Text": "To Dockside Chapel",
+      "To": "N_DOCKSIDE_CHAPEL"
     },
     {
-      "Text": "To Watch Barracks",
+      "Text": "To Fish Market Rows",
+      "To": "N_FISH_MARKET"
+    },
+    {
+      "Text": "To Goods Stall",
+      "To": "N_GOODS_STALL"
+    },
+    {
+      "Text": "To Harbor Watch Barracks",
       "To": "N_HARBOR_WATCH"
-    },
-    {
-      "Text": "To Tavern",
-      "To": "N_TAVERN"
     },
     {
       "Text": "To Lighthouse",
@@ -60,28 +63,28 @@
       "To": "N_MAIN_GATE_BRIDGE"
     },
     {
-      "Text": "To Refugee Camp",
+      "Text": "To Outer Pier",
+      "To": "N_OUTER_PIER"
+    },
+    {
+      "Text": "To Refugee Camp (Quayside Tents)",
       "To": "N_REFUGEE_CAMP"
+    },
+    {
+      "Text": "To Smugglers' Den (Net Loft)",
+      "To": "N_SMUGGLERS_DEN"
+    },
+    {
+      "Text": "To The Salted Keel Tavern",
+      "To": "N_TAVERN"
+    },
+    {
+      "Text": "To Watch Training Yard",
+      "To": "N_TRAINING_YARD"
     },
     {
       "Text": "To Warehouse Row",
       "To": "N_WAREHOUSE_ROW"
-    },
-    {
-      "Text": "To Peddler's Goods Stall",
-      "To": "N_GOODS_STALL"
-    },
-    {
-      "Text": "To Construct Pen",
-      "To": "N_CONSTRUCT_PEN"
-    },
-    {
-      "Text": "To Fish Market",
-      "To": "N_FISH_MARKET"
-    },
-    {
-      "Text": "To Smugglers' Den",
-      "To": "N_SMUGGLERS_DEN"
     }
   ]
 }
