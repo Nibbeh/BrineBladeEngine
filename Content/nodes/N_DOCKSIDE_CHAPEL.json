@@ -1,0 +1,32 @@
+﻿{
+  "Id": "N_DOCKSIDE_CHAPEL",
+  "Title": "Dockside Chapel",
+  "Description": "A stone niche for sailors' bargains. Tithes bought with fear of the deep.",
+  "Paragraphs": [
+    "Candles gutter in shells. Someone has carved prayers into the pews with a fish knife."
+  ],
+  "Options": [
+    {
+      "Id": "O_ACOLYTE",
+      "Label": "Speak to the acolyte",
+      "Effects": [
+        {
+          "Op": "startDialogue",
+          "Id": "D_DOCKSIDE_CHAPEL"
+        }
+      ]
+    }
+  ],
+  "Exits": [
+    {
+      "Text": "Back to Harbor Square",
+      "To": "N_HARBOR_SQUARE"
+    },
+    {
+      "Text": "Toward the Old Sea Bell",
+      "To": "N_OLD_SEA_BELL"
+    }
+  ]
+}
+
+

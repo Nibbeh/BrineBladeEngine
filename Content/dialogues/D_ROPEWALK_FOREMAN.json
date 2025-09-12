@@ -1,0 +1,42 @@
+﻿{
+  "Id": "D_ROPEWALK_FOREMAN",
+  "NpcId": "Foreman",
+  "StartLineId": "L1",
+  "Lines": {
+    "L1": {
+      "Text": "Hands look honest enough. You want coin or standing?",
+      "Choices": [
+        {
+          "Label": "Coin. No questions.",
+          "Effects": [
+            {
+              "Op": "advanceTime",
+              "Minutes": 20
+            },
+            {
+              "Op": "addGold",
+              "Amount": 2
+            },
+            { "Op": "endDialogue" }
+          ]
+        },
+        {
+          "Label": "Standing. Speak for me at Customs.",
+          "Effects": [
+            {
+              "Op": "setFlag",
+              "Id": "permit.temp"
+            },
+            { "Op": "endDialogue" }
+          ]
+        },
+        {
+          "Label": "Another time.",
+          "Effects": [ { "Op": "endDialogue" } ]
+        }
+      ]
+    }
+  }
+}
+
+
