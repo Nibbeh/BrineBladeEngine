@@ -1,64 +1,57 @@
 {
   "Id": "N_CONSTRUCT_PEN",
   "Title": "Construct Pen (Dock Gantries)",
-  "EnterText": "Stone constructs stand in rows like patient oxen, slate faces blank. Iron yokes bite into gouged shoulders while a foreman stamps chits.",
+  "EnterText": "Stone constructs stand in rows like patient oxen; yokes bite into gouged shoulders while a foreman stamps chits.",
   "Options": [
     {
-      "Text": "Carry crates under the foreman’s eye (earn coin).",
+      "Text": "Carry crates under the foreman's eye (earn coin).",
       "Effects": [
         {
-          "addGold": 5
+          "Op": "addGold",
+          "Amount": 5
         },
         {
-          "setFlag": "work.crates"
+          "Op": "setFlag",
+          "Flag": "work.crates"
         },
         {
-          "advanceTime": 1
+          "Op": "advanceTime",
+          "Amount": 1
         }
       ]
     },
     {
-      "Text": "Ask the foreman to sponsor a temporary worker permit.",
+      "Text": "Adjust a jammed gantry (help the dock crew).",
       "Effects": [
         {
-          "setFlag": "permit.worker"
+          "Op": "setFlag",
+          "Flag": "construct.helped"
         },
         {
-          "addItem": {
-            "Id": "ITM_WORK_PERMIT",
-            "Amount": 1
-          }
+          "Op": "addItem",
+          "Item": "ITM_CONSTRUCT_BOLT",
+          "Amount": 1
         }
       ]
     },
     {
-      "Text": "Calibrate a construct’s shoulder pin.",
+      "Text": "Carry a note to the Ropewalk foreman (future favor).",
       "Effects": [
         {
-          "addItem": {
-            "Id": "ITM_CONSTRUCT_BOLT",
-            "Amount": 1
-          }
-        },
-        {
-          "setFlag": "construct.helped"
-        }
-      ]
-    },
-    {
-      "Text": "Loosen a harness at a smuggler’s request (grey).",
-      "Effects": [
-        {
-          "setFlag": "smuggler.aid"
-        },
-        {
-          "addGold": 3
+          "Op": "setFlag",
+          "Flag": "smuggler.msg"
         }
       ]
     }
   ],
   "Exits": [
-    "N_IMPERIAL_WHARF",
-    "N_HARBOR_SQUARE"
+    {
+      "Text": "To Under-Pier Catwalk",
+      "To": "N_UNDER_PIER"
+    },
+    {
+      "Text": "To Harbor Town Square",
+      "To": "N_HARBOR_SQUARE"
+    }
   ]
 }

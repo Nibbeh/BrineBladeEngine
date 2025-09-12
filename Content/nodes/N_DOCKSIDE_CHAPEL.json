@@ -1,47 +1,71 @@
 {
   "Id": "N_DOCKSIDE_CHAPEL",
-  "Title": "Dockside Chapel of St. Tidemar",
-  "EnterText": "A narrow nave of salt-stained oak. Prayer-strips flutter above a bowl of seawater. The priest writes for those who cannot.",
+  "Title": "Dockside Chapel",
+  "EnterText": "Candles gutter in cracked glass; a salt-stained icon watches.",
   "Options": [
     {
-      "Text": "Donate for a pilgrim’s writ.",
+      "Text": "Light a votive candle (2g).",
       "Effects": [
         {
-          "spendGold": 2
+          "Op": "addGold",
+          "Amount": -2
         },
         {
-          "addItem": {
-            "Id": "ITM_PILGRIM_WRIT",
-            "Amount": 1
-          }
-        },
-        {
-          "setFlag": "writ.pilgrim"
+          "Op": "advanceTime",
+          "Amount": 1
         }
       ]
     },
     {
-      "Text": "Light a taper for Dheworyth’s fallen.",
+      "Text": "Ask the monk for a pilgrim's writ.",
       "Effects": [
         {
-          "setFlag": "elf.favor"
+          "Op": "addItem",
+          "Item": "ITM_PILGRIM_WRIT",
+          "Amount": 1
         },
         {
-          "advanceTime": 1
+          "Op": "setFlag",
+          "Flag": "writ.pilgrim"
         }
       ]
     },
     {
-      "Text": "Ask the priest to speak to the gate-sergeant.",
+      "Text": "Seek a quiet blessing (smugglers' route).",
       "Effects": [
         {
-          "setFlag": "guard.favor"
+          "Op": "setFlag",
+          "Flag": "route.smuggler"
+        },
+        {
+          "Op": "addItem",
+          "Item": "ITM_SMUGGLER_TOKEN",
+          "Amount": 1
+        },
+        {
+          "Op": "advanceTime",
+          "Amount": 1
+        }
+      ]
+    },
+    {
+      "Text": "Confront a wharf thug menacing a penitent.",
+      "Effects": [
+        {
+          "Op": "combat",
+          "Id": "ENEMY_WHARF_THUG"
         }
       ]
     }
   ],
   "Exits": [
-    "N_HARBOR_SQUARE",
-    "N_MAIN_GATE_BRIDGE"
+    {
+      "Text": "To Harbor Town Square",
+      "To": "N_HARBOR_SQUARE"
+    },
+    {
+      "Text": "To Main Gate Bridge",
+      "To": "N_MAIN_GATE_BRIDGE"
+    }
   ]
 }

@@ -1,0 +1,23 @@
+{
+  "Id": "N_ROPEWALK",
+  "Title": "Ropewalk Lane",
+  "Description": "A long straight shed where hemp strands twist into ropes that creak like rigging.",
+  "Paragraphs": [
+    "Tar stink hangs in the air. Workers nod as they pull, step, pull—endlessly."
+  ],
+  "Options": [],
+  "Exits": [
+    {
+      "Text": "To Warehouse Row",
+      "To": "N_WAREHOUSE_ROW"
+    },
+    {
+      "Text": "To Refugee Camp (Quayside Tents)",
+      "To": "N_REFUGEE_CAMP"
+    },
+    {
+      "Text": "To Harbor Town Square",
+      "To": "N_HARBOR_SQUARE"
+    }
+  ]
+}

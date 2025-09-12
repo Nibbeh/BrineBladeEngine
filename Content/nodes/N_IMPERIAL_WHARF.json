@@ -1,0 +1,23 @@
+{
+  "Id": "N_IMPERIAL_WHARF",
+  "Title": "Imperial Wharf",
+  "Description": "Heavy timber quays reserved for taxed goods; a clerk watches with ink-stained fingers.",
+  "Paragraphs": [
+    "Armored constructs shoulder crates stamped with foreign crests. A chain ferry clanks somewhere upriver."
+  ],
+  "Options": [],
+  "Exits": [
+    {
+      "Text": "To Construct Pen (Dock Gantries)",
+      "To": "N_CONSTRUCT_PEN"
+    },
+    {
+      "Text": "To Old Sea Bell Shrine",
+      "To": "N_OLD_SEA_BELL"
+    },
+    {
+      "Text": "To Harbor Town Square",
+      "To": "N_HARBOR_SQUARE"
+    }
+  ]
+}

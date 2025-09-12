@@ -1,54 +1,52 @@
 {
   "Id": "N_MAIN_GATE_BRIDGE",
   "Title": "Main Gate Bridge",
-  "EnterText": "Bridge chains creak; Watch-halberds glitter in the mist. A clerk’s desk squats beneath a salt-faded banner.",
+  "EnterText": "Bridge chains creak; Watch-halberds glitter in the mist. A clerk's desk squats beneath a salt-faded banner.",
   "Options": [
     {
       "Text": "(Show Work Permit) — enter as a hired hand.",
       "Effects": [
         {
-          "setFlag": "permit.worker"
+          "Op": "setFlag",
+          "Flag": "permit.worker"
         },
         {
-          "goto": "N_CITY_INTRO"
+          "Op": "goto",
+          "To": "N_CITY_INTRO"
         }
       ]
     },
     {
-      "Text": "(Show Pilgrim’s Writ) — enter as a penitent.",
+      "Text": "(Pay 20g) — bribe the clerk for a fast stamp.",
       "Effects": [
         {
-          "setFlag": "writ.pilgrim"
+          "Op": "addGold",
+          "Amount": -20
         },
         {
-          "goto": "N_CITY_INTRO"
+          "Op": "goto",
+          "To": "N_CITY_INTRO"
         }
       ]
     },
     {
-      "Text": "(Slip a bribe) — coin smooths rough iron.",
+      "Text": "(Smuggler's wave) — take the river-gate side stair.",
       "Effects": [
         {
-          "spendGold": 20
+          "Op": "setFlag",
+          "Flag": "route.smuggler"
         },
         {
-          "goto": "N_CITY_INTRO"
-        }
-      ]
-    },
-    {
-      "Text": "(Smuggler’s wave) — take the river-gate side stair.",
-      "Effects": [
-        {
-          "setFlag": "route.smuggler"
-        },
-        {
-          "goto": "N_CITY_INTRO"
+          "Op": "goto",
+          "To": "N_CITY_INTRO"
         }
       ]
     }
   ],
   "Exits": [
-    "N_HARBOR_SQUARE"
+    {
+      "Text": "To Harbor Town Square",
+      "To": "N_HARBOR_SQUARE"
+    }
   ]
 }

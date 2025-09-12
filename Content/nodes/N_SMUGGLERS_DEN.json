@@ -1,42 +1,53 @@
 ﻿{
   "Id": "N_SMUGGLERS_DEN",
-  "Title": "Smugglers’ Den (Net Loft)",
-  "EnterText": "Tar, pitch, and whispered deals. A figure with a split lip counts coins beside a coiled hawser.",
+  "Title": "Smugglers' Den (Net Loft)",
+  "EnterText": "Netting hangs like cobwebs; a whispering ladder dips into shadow.",
   "Options": [
     {
-      "Text": "Buy a token that gets you waved past the river gate (no questions).",
+      "Text": "Buy a gull-token (5g).",
       "Effects": [
-        { "spendGold": 5 },
         {
-          "addItem": {
-            "Id": "ITM_SMUGGLER_TOKEN",
-            "Amount": 1
-          }
+          "Op": "addGold",
+          "Amount": -5
         },
-        { "setFlag": "route.smuggler" }
+        {
+          "Op": "addItem",
+          "Item": "ITM_SMUGGLER_TOKEN",
+          "Amount": 1
+        },
+        {
+          "Op": "setFlag",
+          "Flag": "route.smuggler"
+        }
       ]
     },
     {
-      "Text": "Fence a spare construct bolt.",
+      "Text": "Hand over a construct bolt (they pay in coin).",
       "Effects": [
         {
-          "removeItemByName": {
-            "Item": "ITM_CONSTRUCT_BOLT",
-            "Amount": 1
-          }
+          "Op": "removeItemByName",
+          "Item": "ITM_CONSTRUCT_BOLT",
+          "Amount": 1
         },
-        { "addGold": 1 }
-      ]
-    },
-    {
-      "Text": "Carry a note to the Ropewalk foreman (future favor).",
-      "Effects": [
-        { "setFlag": "smuggler.msg" }
+        {
+          "Op": "addGold",
+          "Amount": 1
+        },
+        {
+          "Op": "setFlag",
+          "Flag": "smuggler.msg"
+        }
       ]
     }
   ],
   "Exits": [
-    "N_UNDER_PIER",
-    "N_HARBOR_SQUARE"
+    {
+      "Text": "To Under-Pier Catwalk",
+      "To": "N_UNDER_PIER"
+    },
+    {
+      "Text": "To Harbor Town Square",
+      "To": "N_HARBOR_SQUARE"
+    }
   ]
 }

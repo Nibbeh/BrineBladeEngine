@@ -1,0 +1,27 @@
+{
+  "Id": "N_SHANTY_ALLEY",
+  "Title": "Shanty Alley",
+  "Description": "Leaning shacks, laundry lines, and a thread of ditch-water running to the river.",
+  "Paragraphs": [
+    "Gull sigils are daubed on posts—smugglers’ marks if you know how to read them."
+  ],
+  "Options": [],
+  "Exits": [
+    {
+      "Text": "To Warehouse Row",
+      "To": "N_WAREHOUSE_ROW"
+    },
+    {
+      "Text": "To Refugee Camp (Quayside Tents)",
+      "To": "N_REFUGEE_CAMP"
+    },
+    {
+      "Text": "To Under-Pier Catwalk",
+      "To": "N_UNDER_PIER"
+    },
+    {
+      "Text": "To Harbor Town Square",
+      "To": "N_HARBOR_SQUARE"
+    }
+  ]
+}

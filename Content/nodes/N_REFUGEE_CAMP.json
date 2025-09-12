@@ -1,79 +1,60 @@
 {
   "Id": "N_REFUGEE_CAMP",
   "Title": "Refugee Camp (Quayside Tents)",
-  "EnterText": "Canvas flaps whisper in the brine-wind. Elven families from Dheworyth huddle by low braziers, eyes down when the Watch passes.",
+  "EnterText": "Canvas groans and stove-smoke stings. A bell rings somewhere up the quay.",
   "Options": [
     {
-      "Text": "Offer a coin for stew and share a quiet word.",
+      "Text": "Share a little coin for bread (1g).",
       "Effects": [
         {
-          "spendGold": 1
+          "Op": "addGold",
+          "Amount": -1
         },
         {
-          "setFlag": "help.camp"
+          "Op": "setFlag",
+          "Flag": "camp.helped"
         },
         {
-          "addItem": {
-            "Id": "ITM_ELF_BROOCH",
-            "Amount": 1
-          }
-        },
-        {
-          "advanceTime": 1
+          "Op": "advanceTime",
+          "Amount": 1
         }
       ]
     },
     {
-      "Text": "Mediate with a patrolling Watchman about rations.",
+      "Text": "Trade odd jobs for a hot drink.",
       "Effects": [
         {
-          "setFlag": "guard.favor"
+          "Op": "addGold",
+          "Amount": 1
         },
         {
-          "advanceTime": 1
+          "Op": "setFlag",
+          "Flag": "camp.traded"
         }
       ]
     },
     {
-      "Text": "Escort an elder to the Ropewalk after dusk (shady).",
+      "Text": "Spar with the roughs to pass the time.",
       "Effects": [
         {
-          "setFlag": "route.smuggler"
-        },
-        {
-          "addItem": {
-            "Id": "ITM_SMUGGLER_TOKEN",
-            "Amount": 1
-          }
-        },
-        {
-          "advanceTime": 1
-        }
-      ]
-    },
-    {
-      "Text": "Break up louts harassing refugees.",
-      "Effects": [
-        {
-          "startCombat": "ENEMY_WHARF_THUG"
-        }
-      ]
-    },
-    {
-      "Text": "Report the camp’s ‘disorder’ to the Harbor Watch.",
-      "Effects": [
-        {
-          "setFlag": "elf.denounced"
-        },
-        {
-          "addGold": 2
+          "Op": "combat",
+          "Id": "ENEMY_WHARF_THUG"
         }
       ]
     }
   ],
   "Exits": [
-    "N_HARBOR_SQUARE",
-    "N_ROPEWALK",
-    "N_SHANTY_ALLEY"
+    {
+      "Text": "To Harbor Town Square",
+      "To": "N_HARBOR_SQUARE"
+    },
+    {
+      "Text": "To Ropewalk Lane",
+      "To": "N_ROPEWALK"
+    },
+    {
+      "Text": "To Shanty Alley",
+      "To": "N_SHANTY_ALLEY"
+    }
   ]
 }
