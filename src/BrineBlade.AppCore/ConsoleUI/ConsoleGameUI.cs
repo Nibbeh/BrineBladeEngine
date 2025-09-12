@@ -9,17 +9,15 @@ using BrineBlade.Domain.Game;
 namespace BrineBlade.AppCore.ConsoleUI
 {
     /// <summary>
-    /// Visual-only console skin. Same API, nicer presentation:
-    /// - Colored title/header bars
-    /// - Compact HUD (day/time, name, gold, HP)
-    /// - Clean body box with graceful word-wrap
-    /// - Polished options row and hotkey footer
-    /// Logic and signatures remain untouched.
+    /// Visual-only console skin. Same API, nicer presentation & spacing.
+    /// - Crisp box with consistent padding
+    /// - Stable HUD (Day/Time | Name | HP | Gold)
+    /// - Body renderer that preserves preformatted tables (inventory/equipment)
+    /// - Options grid with auto 1- or 2-column layout, evenly spaced
     /// </summary>
     public sealed class ConsoleGameUI : IGameUI
     {
-        // Box characters (rounded/triple for a premium feel)
-        private const string H = "─";
+        // Box glyphs
         private const string V = "│";
         private const string TL = "┌";
         private const string TR = "┐";
@@ -28,14 +26,12 @@ namespace BrineBlade.AppCore.ConsoleUI
         private const string SEP_L = "├";
         private const string SEP_R = "┤";
 
-        // Theme
+        // Theme (foreground only; background left default for readability)
         private static readonly ConsoleColor TitleFg = ConsoleColor.Cyan;
+        private static readonly ConsoleColor BorderFg = ConsoleColor.DarkGray;
+        private static readonly ConsoleColor BodyFg = ConsoleColor.Gray;
         private static readonly ConsoleColor HudLabelFg = ConsoleColor.DarkGray;
         private static readonly ConsoleColor HudValueFg = ConsoleColor.White;
-        private static readonly ConsoleColor BodyFg = ConsoleColor.Gray;
-        private static readonly ConsoleColor BorderFg = ConsoleColor.DarkGray;
-        private static readonly ConsoleColor OptionKeyFg = ConsoleColor.Yellow;
-        private static readonly ConsoleColor OptionFg = ConsoleColor.White;
         private static readonly ConsoleColor HintFg = ConsoleColor.DarkGray;
 
         public void RenderFrame(
@@ -48,9 +44,8 @@ namespace BrineBlade.AppCore.ConsoleUI
             Console.Clear();
             Console.OutputEncoding = Encoding.UTF8;
 
-            // Sizing
             int width = Clamp(Console.WindowWidth - 2, 78, 120);
-            int inner = width - 4; // inside of the box (two borders + one space each side)
+            int inner = width - 4; // content width inside borders
 
             // Header
             DrawTopBorder(width);
@@ -59,17 +54,17 @@ namespace BrineBlade.AppCore.ConsoleUI
             DrawHud(state, width);
             DrawSep(width);
 
-            // Body
+            // Body (smart wrap with table preservation)
             WriteBody(body ?? string.Empty, inner, width);
 
-            // Options
+            // Options (auto 1- or 2-column)
             if (options is { Count: > 0 })
             {
                 DrawSep(width);
                 WriteOptions(options, inner, width);
             }
 
-            // Footer / prompt
+            // Footer
             DrawBottomBorder(width);
             WriteHints();
             Console.Write("> ");
@@ -91,13 +86,25 @@ namespace BrineBlade.AppCore.ConsoleUI
             DrawTitle(title, width);
             DrawSep(width);
 
-            Console.ForegroundColor = BodyFg;
+            // Preserve table-like lines; wrap prose
             foreach (var raw in lines ?? Array.Empty<string>())
             {
-                foreach (var line in Wrap(raw ?? string.Empty, inner))
-                    BoxLine(line, width);
+                if (string.IsNullOrEmpty(raw))
+                {
+                    BoxLine(string.Empty, width);
+                    continue;
+                }
+
+                if (IsPreformatted(raw))
+                {
+                    BoxLine(Truncate(raw, inner), width);
+                }
+                else
+                {
+                    foreach (var w in Wrap(raw, inner))
+                        BoxLine(w, width);
+                }
             }
-            Console.ResetColor();
 
             DrawBottomBorder(width);
 
@@ -116,7 +123,7 @@ namespace BrineBlade.AppCore.ConsoleUI
             {
                 string input = Console.ReadLine()?.Trim() ?? string.Empty;
 
-                // globals
+                // global hotkeys
                 if (string.Equals(input, "?", StringComparison.OrdinalIgnoreCase))
                     return new ConsoleCommand(ConsoleCommandType.Help, -1);
 
@@ -133,9 +140,9 @@ namespace BrineBlade.AppCore.ConsoleUI
                 if (int.TryParse(input, out int n) && n >= 1 && n <= optionCount)
                     return new ConsoleCommand(ConsoleCommandType.Choose, n - 1);
 
-                // soft error re-prompt
+                // gentle re-prompt
                 Console.ForegroundColor = HintFg;
-                Console.WriteLine("Enter a valid option number, 'i' for inventory, '?' for help, or 'q' to quit.");
+                Console.WriteLine("Enter a valid number, 'i' for inventory, '?' for help, or 'q' to quit.");
                 Console.ResetColor();
                 Console.Write("> ");
             }
@@ -149,10 +156,11 @@ namespace BrineBlade.AppCore.ConsoleUI
             Console.Write("> ");
         }
 
+        // Bubble to your existing rolling log
         public void Notice(string message) => SimpleConsoleUI.Notice(message);
         public void Notice(IEnumerable<string> messages) => SimpleConsoleUI.Notice(messages);
 
-        // ───────────────────────────────── helpers ─────────────────────────────────
+        // ───────────────────────────── visual helpers ─────────────────────────────
 
         private static void DrawTopBorder(int width)
         {
@@ -190,89 +198,109 @@ namespace BrineBlade.AppCore.ConsoleUI
 
         private static void DrawHud(GameState s, int width)
         {
-            // We only use fields available on GameState to avoid changing logic.
-            string day = $"Day {s.World.Day}";
-            string time = $"{s.World.Hour:00}:{s.World.Minute:00}";
-            string name = s.Player?.Name ?? "Hero";
-            string gold = $"{s.Gold}";
-            string hp = $"{s.CurrentHp}";
+            // All from GameState; no new logic.
+            string day = $"Day: {s.World.Day}";
+            string time = $"Time: {s.World.Hour:00}:{s.World.Minute:00}";
+            string name = $"Name: {s.Player?.Name ?? "Hero"}";
+            string hp = $"HP: {s.CurrentHp}";
+            string gold = $"Gold: {s.Gold}";
 
-            // Compose: Day/Time | Name | HP | Gold
-            var left = new StringBuilder();
-            left.Append("⏳ "); ColorLabelValue(day, time, out string dayTime);
-            left.Append(dayTime);
-            left.Append("   ");
+            string left = $"{day}   {time}   {name}";
+            string right = $"{hp}   {gold}";
 
-            left.Append("🧝 "); ColorLabelValue("Name", name, out string namePair);
-            left.Append(namePair);
-            left.Append("   ");
+            int inner = width - 4;
+            int gap = Math.Max(2, inner - left.Length - right.Length);
 
-            ColorLabelValue("HP", hp, out string hpPair);
-            left.Append(hpPair);
-            left.Append("   ");
-
-            ColorLabelValue("Gold", gold, out string goldPair);
-            left.Append(goldPair);
-
-            // render line inside the box
             Console.ForegroundColor = BorderFg;
             Console.Write($"{V} ");
-            int inner = width - 4;
-
-            // We already applied colors within pairs; just write and pad.
-            int visibleLen = StripAnsiLength(left.ToString());
-            Console.Write(left.ToString());
             Console.ResetColor();
 
-            // pad remainder (safe padding; no ANSI length here)
-            int pad = Math.Max(0, inner - visibleLen);
-            Console.Write(new string(' ', pad));
+            WriteHudPart(left);
+            Console.Write(new string(' ', gap));
+            WriteHudPart(right);
+
+            int used = left.Length + gap + right.Length;
+            if (used < inner) Console.Write(new string(' ', inner - used));
 
             Console.ForegroundColor = BorderFg;
             Console.WriteLine($" {V}");
             Console.ResetColor();
+
+            static void WriteHudPart(string s)
+            {
+                // Label:value coloring (simple heuristic)
+                var parts = s.Split("   ", StringSplitOptions.None);
+                for (int i = 0; i < parts.Length; i++)
+                {
+                    var p = parts[i];
+                    int idx = p.IndexOf(':');
+                    if (idx > 0)
+                    {
+                        Console.ForegroundColor = HudLabelFg;
+                        Console.Write(p.Substring(0, idx + 2)); // "Label: "
+                        Console.ForegroundColor = HudValueFg;
+                        Console.Write(p.Substring(idx + 2));
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = HudValueFg;
+                        Console.Write(p);
+                    }
+                    Console.ResetColor();
+                    if (i < parts.Length - 1) Console.Write("   ");
+                }
+            }
         }
 
         private static void WriteBody(string body, int inner, int width)
         {
-            Console.ForegroundColor = BodyFg;
-            foreach (var line in Wrap(body, inner))
-                BoxLine(line, width);
-            Console.ResetColor();
+            // Preserve tables/ASCII art; wrap plain prose
+            foreach (var rawLine in (body ?? string.Empty).Replace("\r", "").Split('\n'))
+            {
+                if (string.IsNullOrEmpty(rawLine))
+                {
+                    BoxLine(string.Empty, width);
+                    continue;
+                }
+
+                if (IsPreformatted(rawLine))
+                {
+                    BoxLine(Truncate(rawLine, inner), width);
+                }
+                else
+                {
+                    foreach (var w in Wrap(rawLine, inner))
+                        BoxLine(w, width);
+                }
+            }
         }
 
         private static void WriteOptions(IReadOnlyList<(string Key, string Label)> options, int inner, int width)
         {
-            // Render as:  [1] Attack   [2] Guard   ...
-            var sb = new StringBuilder("  ");
-            for (int i = 0; i < options.Count; i++)
+            // Build display strings like "[1] Attack"
+            var display = options.Select((o, i) => $"[{i + 1}] {o.Label}").ToList();
+            int maxLen = display.Max(s => s.Length);
+
+            // Choose layout: 2 columns when it fits nicely and there are enough choices
+            bool twoCols = options.Count >= 4 && (maxLen * 2 + 4) <= inner;
+            int cols = twoCols ? 2 : 1;
+            int colWidth = twoCols ? (inner / 2) : inner;
+            int rows = (int)Math.Ceiling(display.Count / (double)cols);
+
+            for (int r = 0; r < rows; r++)
             {
-                var (_, label) = options[i];
+                string left = (r < display.Count) ? display[r] : string.Empty;
+                string right = twoCols && (r + rows) < display.Count ? display[r + rows] : string.Empty;
 
-                sb.Append("[");
-                Console.ForegroundColor = OptionKeyFg;
-                // number is i+1 for display; the Key value is informational
-                BoxInline(sb.ToString(), width); sb.Clear();
+                // Keep nicely padded columns
+                string line = twoCols
+                    ? left.PadRight(colWidth) + right.PadRight(inner - colWidth)
+                    : left.PadRight(inner);
 
-                Console.Write($"{i + 1}");
-                Console.ResetColor();
-
-                Console.ForegroundColor = OptionFg;
-                Console.Write("] ");
-                Console.Write(label);
-
-                if (i < options.Count - 1) Console.Write("   ");
-                Console.ResetColor();
+                BoxLine(line, width);
             }
 
-            // close the options line inside the box
-            int textLen = Console.CursorLeft - 2; // rough on same line
-            if (textLen < inner)
-                Console.Write(new string(' ', inner - textLen));
-
-            Console.ForegroundColor = BorderFg;
-            Console.WriteLine($" {V}");
-            Console.ResetColor();
+            // Add a small breathing space after options when box ends
         }
 
         private static void WriteHints()
@@ -290,20 +318,17 @@ namespace BrineBlade.AppCore.ConsoleUI
             Console.Write($"{V} ");
             Console.ResetColor();
 
+            Console.ForegroundColor = BodyFg;
             Console.Write(text.PadRight(width - 4));
+            Console.ResetColor();
 
             Console.ForegroundColor = BorderFg;
             Console.WriteLine($" {V}");
             Console.ResetColor();
         }
 
-        private static void BoxInline(string prefixWritten, int width)
-        {
-            // Helper to flush any pending prefix within option line with box left border already accounted for.
-            // No-op: alignment is handled by caller. Exists to keep code intention clear.
-        }
+        // ───────────────────────────── util helpers ─────────────────────────────
 
-        // Formatting utils
         private static IEnumerable<string> Wrap(string text, int maxWidth)
         {
             if (string.IsNullOrEmpty(text))
@@ -312,13 +337,14 @@ namespace BrineBlade.AppCore.ConsoleUI
                 yield break;
             }
 
-            var words = text.Replace("\r", "").Split('\n');
-            foreach (var para in words)
+            // Paragraph-aware wrapping
+            var paragraphs = text.Split(new[] { "\\n\\n" }, StringSplitOptions.None); // keep lightweight; callers already split lines
+            foreach (var para in new[] { text }) // single-line fallback
             {
-                var tokens = para.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                var words = para.Split(' ', StringSplitOptions.RemoveEmptyEntries);
                 var line = new StringBuilder();
 
-                foreach (var w in tokens)
+                foreach (var w in words)
                 {
                     if (line.Length == 0)
                     {
@@ -342,6 +368,17 @@ namespace BrineBlade.AppCore.ConsoleUI
             }
         }
 
+        private static bool IsPreformatted(string s)
+        {
+            // Heuristic: if line uses box-drawing or table glyphs, don't wrap it.
+            return s.IndexOfAny(new[] { '│', '─', '┼', '┬', '┴', '┌', '┐', '└', '┘' }) >= 0
+                   || s.Contains("  #") // our inventory table header
+                   || s.Contains("Actions:");
+        }
+
+        private static string Truncate(string s, int max) =>
+            s.Length <= max ? s : s.Substring(0, Math.Max(0, max - 1));
+
         private static string PadCenter(string s, int width)
         {
             s ??= string.Empty;
@@ -351,26 +388,5 @@ namespace BrineBlade.AppCore.ConsoleUI
         }
 
         private static int Clamp(int value, int min, int max) => Math.Max(min, Math.Min(max, value));
-
-        private static void ColorLabelValue(string label, string value, out string formatted)
-        {
-            // Produces colored label:value and returns raw (for width calc) while also writing live colored text.
-            var raw = $"{label}: {value}";
-            formatted = raw;
-
-            Console.ForegroundColor = HudLabelFg;
-            Console.Write(label + ": ");
-            Console.ForegroundColor = HudValueFg;
-            Console.Write(value);
-            Console.ResetColor();
-        }
-
-        private static int StripAnsiLength(string s)
-        {
-            // Console.Write with colors doesn't inject ANSI on Windows Console,
-            // but just in case (cross shells), approximate by plain length.
-            // We only use this for padding; being conservative is fine.
-            return s.Length;
-        }
     }
 }
