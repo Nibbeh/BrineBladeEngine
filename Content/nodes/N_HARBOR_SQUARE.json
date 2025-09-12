@@ -3,50 +3,42 @@
   "Title": "Harbor Town Square",
   "Description": "A crush of stalls and voices. The watch keeps half an eye from the bridge.",
   "Paragraphs": [
-    "A tavern sign creaks: The Salted Keel. A general goods stall stacks bread and rope.",
-    "A street preacher sours the air with fury."
+    "The Salted Keel creaks in the gusts; the sign is a ship’s rib cage swung on rusty hooks.",
+    "A preacher hammers the air with omens while traders count quiet profits."
   ],
   "Options": [
     {
+      "Id": "O_TAVERN",
+      "Label": "Step into The Salted Keel",
       "Effects": [
         {
           "Op": "goto",
           "To": "N_TAVERN"
         }
-      ],
-      "Id": "Enter_the_Salted_Keel_Tavern",
-      "Label": "Enter the Salted Keel Tavern."
+      ]
     },
     {
+      "Id": "O_GOODS",
+      "Label": "Browse the general goods stall",
       "Effects": [
         {
           "Op": "goto",
           "To": "N_GOODS_STALL"
         }
-      ],
-      "Id": "Browse_the_general_goods_stall",
-      "Label": "Browse the general goods stall."
+      ]
     },
     {
+      "Id": "O_PREACHER",
+      "Label": "Listen to the street preacher",
       "Effects": [
         {
           "Op": "startDialogue",
           "Id": "D_PREACHER"
         }
-      ],
-      "Id": "Listen_to_the_street_preacher",
-      "Label": "Listen to the street preacher."
+      ]
     }
   ],
   "Exits": [
-    {
-      "Text": "To Fish Market",
-      "To": "N_FISH_MARKET"
-    },
-    {
-      "Text": "To Shanty Alley",
-      "To": "N_SHANTY_ALLEY"
-    },
     {
       "Text": "To Main Gate Bridge",
       "To": "N_MAIN_GATE_BRIDGE"
@@ -56,9 +48,28 @@
       "To": "N_REFUGEE_CAMP"
     },
     {
-      "Text": "To Harbor Watch",
+      "Text": "To Harbor Watch Post",
       "To": "N_HARBOR_WATCH"
+    },
+    {
+      "Text": "To Customs House",
+      "To": "N_CUSTOMS_HOUSE"
+    },
+    {
+      "Text": "To Dockside Chapel",
+      "To": "N_DOCKSIDE_CHAPEL"
+    },
+    {
+      "Text": "To Ropewalk",
+      "To": "N_ROPEWALK"
+    },
+    {
+      "Text": "To Warehouse Row",
+      "To": "N_WAREHOUSE_ROW"
+    },
+    {
+      "Text": "Back to the Outer Pier",
+      "To": "N_OUTER_PIER"
     }
   ]
 }
-

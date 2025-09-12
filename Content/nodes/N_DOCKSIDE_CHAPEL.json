@@ -1,7 +1,7 @@
 ﻿{
   "Id": "N_DOCKSIDE_CHAPEL",
   "Title": "Dockside Chapel",
-  "Description": "A stone niche for sailors' bargains. Tithes bought with fear of the deep.",
+  "Description": "A stone niche for sailors’ bargains. Tithes bought with fear of the deep.",
   "Paragraphs": [
     "Candles gutter in shells. Someone has carved prayers into the pews with a fish knife."
   ],
@@ -28,5 +28,3 @@
     }
   ]
 }
-
-

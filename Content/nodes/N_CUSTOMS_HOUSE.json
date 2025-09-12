@@ -1,9 +1,9 @@
 ﻿{
   "Id": "N_CUSTOMS_HOUSE",
   "Title": "Customs House",
-  "Description": "Ink, ledgers, and the damp patience of men paid to say ‘no'.",
+  "Description": "Ink, ledgers, and the damp patience of men paid to say ‘no’.",
   "Paragraphs": [
-    "Clerks with sea-salt cuffs parade stamps like medals. The Dockmaster's window watches everything."
+    "Clerks with sea-salt cuffs parade stamps like medals. The Dockmaster’s window watches everything."
   ],
   "Options": [
     {
@@ -38,5 +38,3 @@
     }
   ]
 }
-
-

@@ -7,49 +7,31 @@
   ],
   "Options": [
     {
+      "Id": "Speak_to_the_Guard",
+      "Label": "Speak to the Gate Guard",
       "Effects": [
         {
           "Op": "startDialogue",
           "Id": "D_GATE_GUARD_TUT"
         }
-      ],
-      "Id": "Speak_to_the_Gate_Guard",
-      "Label": "Speak to the Gate Guard."
+      ]
     },
     {
-      "Requires": [
-        "flag:pass.accepted"
-      ],
+      "Id": "If_accepted_Enter_the_city",
+      "Label": "(If accepted) Present papers and enter",
+      "Requires": [ "flag:pass.accepted" ],
       "Effects": [
         {
           "Op": "goto",
           "To": "N_CITY_INTRO"
         }
-      ],
-      "Id": "If_accepted_Enter_the_city",
-      "Label": "(If accepted) Enter the city."
-    },
-    {
-      "Effects": [
-        {
-          "Op": "addGold",
-          "Amount": 10
-        }
-      ],
-      "Id": "If_all_else_fails_work_a_dock_shift_earn",
-      "Label": "If all else fails: work a dock shift (earn 10g) and try again."
+      ]
     }
   ],
   "Exits": [
     {
       "Text": "Back to Harbor Square",
       "To": "N_HARBOR_SQUARE"
-    },
-    {
-      "Text": "Enter the City (tutorial end)",
-      "To": "N_CITY_INTRO"
     }
   ]
-
 }
-

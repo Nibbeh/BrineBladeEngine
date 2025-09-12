@@ -13,16 +13,12 @@
         {
           "Op": "combat",
           "Id": "ENEMY_CUTPURSE"
-        },
-        {
-          "Op": "goto",
-          "To": "N_MAIN_GATE_BRIDGE"
         }
       ]
     },
     {
-      "Id": "O_FALLBACK_CITY",
-      "Label": "Avoid trouble and head for the Main Gate Bridge",
+      "Id": "O_BACK_OFF",
+      "Label": "Back away, eyes open (lose 10 minutes)",
       "Effects": [
         {
           "Op": "advanceTime",
@@ -30,7 +26,7 @@
         },
         {
           "Op": "goto",
-          "To": "N_MAIN_GATE_BRIDGE"
+          "To": "N_HARBOR_SQUARE"
         }
       ]
     }

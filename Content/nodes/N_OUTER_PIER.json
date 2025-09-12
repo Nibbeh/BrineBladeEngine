@@ -1,14 +1,14 @@
 ﻿{
   "Id": "N_OUTER_PIER",
   "Title": "Outer Pier",
-  "Description": "Gulls scream over tarred ropes and creaking timbers. Dockhands curse while a stone construct hoists a crate.",
+  "Description": "Tarred ropes sing in the wind. Lanterns draw wet halos over timber and salt.",
   "Paragraphs": [
-    "A bored quartermaster shrugs: 'Tutorial kits on the barrel. Take what you need. Press [I] in-game to open your inventory.'"
+    "A bored quartermaster jerks his chin toward a barrel: \"Tutorial kits. Take what you need. Then get out of the way.\""
   ],
   "Options": [
     {
       "Id": "O_SUPPLIES",
-      "Label": "Pick up dockside supplies (potions and bread)",
+      "Label": "Collect dockside supplies (2x minor potion, 2x bread)",
       "Effects": [
         {
           "Op": "addItem",
@@ -18,45 +18,43 @@
         {
           "Op": "addItem",
           "Id": "ITM_BREAD",
-          "Qty": 3
+          "Qty": 2
         }
       ]
     },
     {
-      "Id": "O_CAP_AUTOEQUIP",
-      "Label": "Take a cloth cap and auto-equip it",
+      "Id": "O_DOCKMASTER",
+      "Label": "Speak to the Dockmaster about papers",
       "Effects": [
         {
-          "Op": "addItem",
-          "Id": "ITM_CAP_CLOTH",
-          "Qty": 1
-        },
-        {
-          "Op": "equip",
-          "Id": "ITM_CAP_CLOTH",
-          "Slot": "Head"
+          "Op": "startDialogue",
+          "Id": "D_DOCKMASTER"
         }
       ]
     },
     {
-      "Id": "O_CAP_UNEQUIP",
-      "Label": "Unequip your head slot (for demo)",
+      "Id": "O_SMUGGLER_HINT",
+      "Label": "Ask around for quiet work (smugglers?)",
       "Effects": [
         {
-          "Op": "unequip",
-          "Slot": "Head"
+          "Op": "startDialogue",
+          "Id": "D_SMUGGLER_HINT"
         }
       ]
     }
   ],
   "Exits": [
     {
-      "Text": "Head toward the Shanty Alley",
-      "To": "N_SHANTY_ALLEY"
+      "Text": "Up into Harbor Town Square",
+      "To": "N_HARBOR_SQUARE"
     },
     {
-      "Text": "Cross to the Main Gate Bridge (city entrance)",
-      "To": "N_MAIN_GATE_BRIDGE"
+      "Text": "Down to the slick catwalk under the pier",
+      "To": "N_UNDER_PIER"
+    },
+    {
+      "Text": "Toward the fish market",
+      "To": "N_FISH_MARKET"
     }
   ]
 }
