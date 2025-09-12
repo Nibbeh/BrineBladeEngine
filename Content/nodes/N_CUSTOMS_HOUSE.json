@@ -1,39 +1,18 @@
 ﻿{
   "Id": "N_CUSTOMS_HOUSE",
   "Title": "Customs House",
-  "Description": "Ink, ledgers, and the damp patience of men paid to say ‘no’.",
+  "Description": "Ledger smell and the tap of abacus beads. A clerk posts tariffs by candle soot.",
   "Paragraphs": [
-    "Clerks with sea-salt cuffs parade stamps like medals. The Dockmaster’s window watches everything."
+    "The rules change with the tide and the governor's mood. Today, they seem merely greedy."
   ],
-  "Options": [
-    {
-      "Id": "O_DOCKMASTER",
-      "Label": "Queue for the Dockmaster",
-      "Effects": [
-        {
-          "Op": "startDialogue",
-          "Id": "D_DOCKMASTER"
-        }
-      ]
-    },
-    {
-      "Id": "O_GUILD_FACTOR",
-      "Label": "Ask about guild endorsements",
-      "Effects": [
-        {
-          "Op": "startDialogue",
-          "Id": "D_GUILD_FACTOR"
-        }
-      ]
-    }
-  ],
+  "Options": [],
   "Exits": [
     {
-      "Text": "Back to Harbor Square",
+      "Text": "To Harbor Town Square",
       "To": "N_HARBOR_SQUARE"
     },
     {
-      "Text": "Toward Main Gate Bridge",
+      "Text": "To Main Gate Bridge",
       "To": "N_MAIN_GATE_BRIDGE"
     }
   ]

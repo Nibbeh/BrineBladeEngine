@@ -1,43 +1,22 @@
 ﻿{
   "Id": "N_WAREHOUSE_ROW",
   "Title": "Warehouse Row",
-  "Description": "Blocky silhouettes that smell of rope tar and old grain.",
+  "Description": "Boarded doors, pitch-smeared caulking, and bored guards swapping dice.",
   "Paragraphs": [
-    "A private crew loiters by a sealed door; their coats don’t match their boots."
+    "The river brings cargo and trouble by the same current."
   ],
-  "Options": [
-    {
-      "Id": "O_GUARDED_CARGO",
-      "Label": "Approach the guarded cargo",
-      "Effects": [
-        {
-          "Op": "startDialogue",
-          "Id": "D_GUARDED_CARGO"
-        }
-      ]
-    },
-    {
-      "Id": "O_SMUGGLER_CONTACT",
-      "Label": "Ask about alternative routes (quietly)",
-      "Effects": [
-        {
-          "Op": "startDialogue",
-          "Id": "D_SMUGGLER_CONTACT"
-        }
-      ]
-    }
-  ],
+  "Options": [],
   "Exits": [
     {
-      "Text": "Back to Ropewalk",
+      "Text": "To Ropewalk Lane",
       "To": "N_ROPEWALK"
     },
     {
-      "Text": "Back to Harbor Square",
+      "Text": "To Harbor Town Square",
       "To": "N_HARBOR_SQUARE"
     },
     {
-      "Text": "Down Shanty Alley",
+      "Text": "To Shanty Alley",
       "To": "N_SHANTY_ALLEY"
     }
   ]
