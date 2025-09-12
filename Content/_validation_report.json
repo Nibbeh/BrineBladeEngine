@@ -1,0 +1,79 @@
+{
+  "summary": {
+    "PatchedNodes": [
+      "N_MAIN_GATE_BRIDGE",
+      "N_REFUGEE_CAMP",
+      "N_DOCKSIDE_CHAPEL",
+      "N_CONSTRUCT_PEN"
+    ],
+    "PatchedItems": [
+      "ITM_ELF_BROOCH",
+      "ITM_CONSTRUCT_BOLT"
+    ],
+    "MissingNodeRefs": 8,
+    "MissingItemRefs": 3,
+    "MissingEnemyRefs": 1
+  },
+  "missing_nodes": [
+    {
+      "RefType": "exit",
+      "FromNode": "N_CONSTRUCT_PEN",
+      "MissingNode": "N_HARBOR_SQUARE"
+    },
+    {
+      "RefType": "exit",
+      "FromNode": "N_CONSTRUCT_PEN",
+      "MissingNode": "N_IMPERIAL_WHARF"
+    },
+    {
+      "RefType": "exit",
+      "FromNode": "N_DOCKSIDE_CHAPEL",
+      "MissingNode": "N_HARBOR_SQUARE"
+    },
+    {
+      "RefType": "exit",
+      "FromNode": "N_MAIN_GATE_BRIDGE",
+      "MissingNode": "N_HARBOR_SQUARE"
+    },
+    {
+      "RefType": "exit",
+      "FromNode": "N_REFUGEE_CAMP",
+      "MissingNode": "N_HARBOR_SQUARE"
+    },
+    {
+      "RefType": "exit",
+      "FromNode": "N_REFUGEE_CAMP",
+      "MissingNode": "N_ROPEWALK"
+    },
+    {
+      "RefType": "exit",
+      "FromNode": "N_REFUGEE_CAMP",
+      "MissingNode": "N_SHANTY_ALLEY"
+    },
+    {
+      "RefType": "goto",
+      "FromNode": "N_MAIN_GATE_BRIDGE",
+      "MissingNode": "N_CITY_INTRO"
+    }
+  ],
+  "missing_items": [
+    {
+      "FromNode": "N_CONSTRUCT_PEN",
+      "MissingItem": "ITM_WORK_PERMIT"
+    },
+    {
+      "FromNode": "N_DOCKSIDE_CHAPEL",
+      "MissingItem": "ITM_PILGRIM_WRIT"
+    },
+    {
+      "FromNode": "N_REFUGEE_CAMP",
+      "MissingItem": "ITM_SMUGGLER_TOKEN"
+    }
+  ],
+  "missing_enemies": [
+    {
+      "FromNode": "N_REFUGEE_CAMP",
+      "MissingEnemy": "ENEMY_WHARF_THUG"
+    }
+  ]
+}

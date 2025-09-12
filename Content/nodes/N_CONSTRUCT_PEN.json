@@ -1,4 +1,4 @@
-﻿{
+{
   "Id": "N_CONSTRUCT_PEN",
   "Title": "Construct Pen (Dock Gantries)",
   "EnterText": "Stone constructs stand in rows like patient oxen, slate faces blank. Iron yokes bite into gouged shoulders while a foreman stamps chits.",
@@ -6,15 +6,23 @@
     {
       "Text": "Carry crates under the foreman’s eye (earn coin).",
       "Effects": [
-        { "addGold": 5 },
-        { "setFlag": "work.crates" },
-        { "advanceTime": 1 }
+        {
+          "addGold": 5
+        },
+        {
+          "setFlag": "work.crates"
+        },
+        {
+          "advanceTime": 1
+        }
       ]
     },
     {
       "Text": "Ask the foreman to sponsor a temporary worker permit.",
       "Effects": [
-        { "setFlag": "permit.worker" },
+        {
+          "setFlag": "permit.worker"
+        },
         {
           "addItem": {
             "Id": "ITM_WORK_PERMIT",
@@ -32,14 +40,20 @@
             "Amount": 1
           }
         },
-        { "setFlag": "construct.helped" }
+        {
+          "setFlag": "construct.helped"
+        }
       ]
     },
     {
       "Text": "Loosen a harness at a smuggler’s request (grey).",
       "Effects": [
-        { "setFlag": "smuggler.aid" },
-        { "addGold": 3 }
+        {
+          "setFlag": "smuggler.aid"
+        },
+        {
+          "addGold": 3
+        }
       ]
     }
   ],

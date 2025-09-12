@@ -1,4 +1,4 @@
-﻿{
+{
   "Id": "N_MAIN_GATE_BRIDGE",
   "Title": "Main Gate Bridge",
   "EnterText": "Bridge chains creak; Watch-halberds glitter in the mist. A clerk’s desk squats beneath a salt-faded banner.",
@@ -6,29 +6,45 @@
     {
       "Text": "(Show Work Permit) — enter as a hired hand.",
       "Effects": [
-        { "setFlag": "permit.worker" },
-        { "goto": "N_CITY_INTRO" }
+        {
+          "setFlag": "permit.worker"
+        },
+        {
+          "goto": "N_CITY_INTRO"
+        }
       ]
     },
     {
       "Text": "(Show Pilgrim’s Writ) — enter as a penitent.",
       "Effects": [
-        { "setFlag": "writ.pilgrim" },
-        { "goto": "N_CITY_INTRO" }
+        {
+          "setFlag": "writ.pilgrim"
+        },
+        {
+          "goto": "N_CITY_INTRO"
+        }
       ]
     },
     {
       "Text": "(Slip a bribe) — coin smooths rough iron.",
       "Effects": [
-        { "spendGold": 20 },
-        { "goto": "N_CITY_INTRO" }
+        {
+          "spendGold": 20
+        },
+        {
+          "goto": "N_CITY_INTRO"
+        }
       ]
     },
     {
       "Text": "(Smuggler’s wave) — take the river-gate side stair.",
       "Effects": [
-        { "setFlag": "route.smuggler" },
-        { "goto": "N_CITY_INTRO" }
+        {
+          "setFlag": "route.smuggler"
+        },
+        {
+          "goto": "N_CITY_INTRO"
+        }
       ]
     }
   ],

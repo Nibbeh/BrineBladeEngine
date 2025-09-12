@@ -1,4 +1,4 @@
-﻿{
+{
   "Id": "N_DOCKSIDE_CHAPEL",
   "Title": "Dockside Chapel of St. Tidemar",
   "EnterText": "A narrow nave of salt-stained oak. Prayer-strips flutter above a bowl of seawater. The priest writes for those who cannot.",
@@ -6,27 +6,37 @@
     {
       "Text": "Donate for a pilgrim’s writ.",
       "Effects": [
-        { "spendGold": 2 },
+        {
+          "spendGold": 2
+        },
         {
           "addItem": {
             "Id": "ITM_PILGRIM_WRIT",
             "Amount": 1
           }
         },
-        { "setFlag": "writ.pilgrim" }
+        {
+          "setFlag": "writ.pilgrim"
+        }
       ]
     },
     {
       "Text": "Light a taper for Dheworyth’s fallen.",
       "Effects": [
-        { "setFlag": "elf.favor" },
-        { "advanceTime": 1 }
+        {
+          "setFlag": "elf.favor"
+        },
+        {
+          "advanceTime": 1
+        }
       ]
     },
     {
       "Text": "Ask the priest to speak to the gate-sergeant.",
       "Effects": [
-        { "setFlag": "guard.favor" }
+        {
+          "setFlag": "guard.favor"
+        }
       ]
     }
   ],

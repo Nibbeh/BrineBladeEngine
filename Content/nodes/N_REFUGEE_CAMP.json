@@ -1,4 +1,4 @@
-﻿{
+{
   "Id": "N_REFUGEE_CAMP",
   "Title": "Refugee Camp (Quayside Tents)",
   "EnterText": "Canvas flaps whisper in the brine-wind. Elven families from Dheworyth huddle by low braziers, eyes down when the Watch passes.",
@@ -6,42 +6,74 @@
     {
       "Text": "Offer a coin for stew and share a quiet word.",
       "Effects": [
-        { "spendGold": 1 },
-        { "setFlag": "help.camp" },
+        {
+          "spendGold": 1
+        },
+        {
+          "setFlag": "help.camp"
+        },
         {
           "addItem": {
             "Id": "ITM_ELF_BROOCH",
             "Amount": 1
           }
         },
-        { "advanceTime": 1 }
+        {
+          "advanceTime": 1
+        }
       ]
     },
     {
       "Text": "Mediate with a patrolling Watchman about rations.",
       "Effects": [
-        { "setFlag": "guard.favor" },
-        { "advanceTime": 1 }
+        {
+          "setFlag": "guard.favor"
+        },
+        {
+          "advanceTime": 1
+        }
       ]
     },
     {
       "Text": "Escort an elder to the Ropewalk after dusk (shady).",
       "Effects": [
-        { "setFlag": "route.smuggler" },
+        {
+          "setFlag": "route.smuggler"
+        },
         {
           "addItem": {
             "Id": "ITM_SMUGGLER_TOKEN",
             "Amount": 1
           }
         },
-        { "advanceTime": 1 }
+        {
+          "advanceTime": 1
+        }
       ]
     },
     {
       "Text": "Break up louts harassing refugees.",
       "Effects": [
-        { "startCombat": "ENEMY_WHARF_THUG" }
+        {
+          "startCombat": "ENEMY_WHARF_THUG"
+        }
       ]
     },
     {
-      "
+      "Text": "Report the camp’s ‘disorder’ to the Harbor Watch.",
+      "Effects": [
+        {
+          "setFlag": "elf.denounced"
+        },
+        {
+          "addGold": 2
+        }
+      ]
+    }
+  ],
+  "Exits": [
+    "N_HARBOR_SQUARE",
+    "N_ROPEWALK",
+    "N_SHANTY_ALLEY"
+  ]
+}
