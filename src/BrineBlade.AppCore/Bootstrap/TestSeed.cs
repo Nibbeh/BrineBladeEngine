@@ -1,4 +1,5 @@
-﻿using BrineBlade.Domain.Entities;
+﻿// REPLACE ENTIRE FILE WITH THIS
+using BrineBlade.Domain.Entities;
 using BrineBlade.Domain.Game;
 
 namespace BrineBlade.AppCore.Bootstrap;
@@ -16,12 +17,13 @@ public static class TestSeed
             CurrentMana = 10
         };
 
-        // flags you already rely on
+        // Class/spec flags so combat traits (e.g., Champion crit) are active
         state.Flags.Add("class.warrior");
         state.Flags.Add("spec.champion");
+
         state.Gold = Math.Max(state.Gold, 10);
 
-        // --- starter kit: must match Content/items/*.json exactly ---
+        // --- starter kit ---
         state.Inventory.Add(new ItemStack("ITM_HEALTH_POTION_MINOR", 3));
         state.Inventory.Add(new ItemStack("ITM_BREAD", 2));
 
@@ -33,4 +35,3 @@ public static class TestSeed
         return state;
     }
 }
-

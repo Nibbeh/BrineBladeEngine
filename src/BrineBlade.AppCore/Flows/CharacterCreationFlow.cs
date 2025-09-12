@@ -1,4 +1,5 @@
-﻿using BrineBlade.Domain.Entities;
+﻿// REPLACE ENTIRE FILE WITH THIS
+using BrineBlade.Domain.Entities;
 using BrineBlade.Domain.Game;
 
 namespace BrineBlade.AppCore.Flows;
@@ -17,8 +18,10 @@ public static class CharacterCreationFlow
             CurrentMana = 10
         };
 
+        // Default to Warrior/Champion for now
         state.Flags.Add("class.warrior");
         state.Flags.Add("spec.champion");
+
         state.Gold = Math.Max(state.Gold, 10);
 
         state.Inventory.Add(new ItemStack("ITM_HEALTH_POTION_MINOR", 3));
@@ -32,4 +35,3 @@ public static class CharacterCreationFlow
         return state;
     }
 }
-
