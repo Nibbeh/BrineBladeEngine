@@ -1,0 +1,9 @@
+﻿{
+  "Id": "ITM_CONSTRUCT_BOLT",
+  "Name": "Stone-Worker Bolt",
+  "Type": "Misc",
+  "Weight": 1,
+  "Value": 1,
+  "Stackable": true,
+  "MaxStack": 12
+}

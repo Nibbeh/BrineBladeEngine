@@ -1,26 +1,50 @@
 ﻿{
   "Id": "N_CONSTRUCT_PEN",
-  "Title": "Construct Pen",
-  "Description": "Stone porters stand in ranksâ€”chiselled faces smoothed by salt.",
-  "Paragraphs": [
-    "A human foreman mutters that stone men donâ€™t spend wages in taverns."
-  ],
+  "Title": "Construct Pen (Dock Gantries)",
+  "EnterText": "Stone constructs stand in rows like patient oxen, slate faces blank. Iron yokes bite into gouged shoulders while a foreman stamps chits.",
   "Options": [
     {
+      "Text": "Carry crates under the foreman’s eye (earn coin).",
+      "Effects": [
+        { "addGold": 5 },
+        { "setFlag": "work.crates" },
+        { "advanceTime": 1 }
+      ]
+    },
+    {
+      "Text": "Ask the foreman to sponsor a temporary worker permit.",
+      "Effects": [
+        { "setFlag": "permit.worker" },
+        {
+          "addItem": {
+            "Id": "ITM_WORK_PERMIT",
+            "Amount": 1
+          }
+        }
+      ]
+    },
+    {
+      "Text": "Calibrate a construct’s shoulder pin.",
       "Effects": [
         {
-          "Op": "setFlag",
-          "Id": "lore.constructs"
+          "addItem": {
+            "Id": "ITM_CONSTRUCT_BOLT",
+            "Amount": 1
+          }
         },
-        {
-          "Op": "goto",
-          "To": "N_IMPERIAL_WHARF"
-        }
-      ],
-      "Id": "Listen_and_move_on",
-      "Label": "Listen and move on."
+        { "setFlag": "construct.helped" }
+      ]
+    },
+    {
+      "Text": "Loosen a harness at a smuggler’s request (grey).",
+      "Effects": [
+        { "setFlag": "smuggler.aid" },
+        { "addGold": 3 }
+      ]
     }
   ],
-  "Exits": []
+  "Exits": [
+    "N_IMPERIAL_WHARF",
+    "N_HARBOR_SQUARE"
+  ]
 }
-

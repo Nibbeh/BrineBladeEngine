@@ -1,37 +1,38 @@
 ﻿{
   "Id": "N_MAIN_GATE_BRIDGE",
-  "Title": "Main Gate Bridge (Closed)",
-  "Description": "Towering walls loom. The line crawls.",
-  "Paragraphs": [
-    "The Guard Captain triages bribes, threats, and paperwork."
-  ],
+  "Title": "Main Gate Bridge",
+  "EnterText": "Bridge chains creak; Watch-halberds glitter in the mist. A clerk’s desk squats beneath a salt-faded banner.",
   "Options": [
     {
-      "Id": "Speak_to_the_Guard",
-      "Label": "Speak to the Gate Guard",
+      "Text": "(Show Work Permit) — enter as a hired hand.",
       "Effects": [
-        {
-          "Op": "startDialogue",
-          "Id": "D_GATE_GUARD_TUT"
-        }
+        { "setFlag": "permit.worker" },
+        { "goto": "N_CITY_INTRO" }
       ]
     },
     {
-      "Id": "If_accepted_Enter_the_city",
-      "Label": "(If accepted) Present papers and enter",
-      "Requires": [ "flag:pass.accepted" ],
+      "Text": "(Show Pilgrim’s Writ) — enter as a penitent.",
       "Effects": [
-        {
-          "Op": "goto",
-          "To": "N_CITY_INTRO"
-        }
+        { "setFlag": "writ.pilgrim" },
+        { "goto": "N_CITY_INTRO" }
+      ]
+    },
+    {
+      "Text": "(Slip a bribe) — coin smooths rough iron.",
+      "Effects": [
+        { "spendGold": 20 },
+        { "goto": "N_CITY_INTRO" }
+      ]
+    },
+    {
+      "Text": "(Smuggler’s wave) — take the river-gate side stair.",
+      "Effects": [
+        { "setFlag": "route.smuggler" },
+        { "goto": "N_CITY_INTRO" }
       ]
     }
   ],
   "Exits": [
-    {
-      "Text": "Back to Harbor Square",
-      "To": "N_HARBOR_SQUARE"
-    }
+    "N_HARBOR_SQUARE"
   ]
 }

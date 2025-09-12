@@ -1,30 +1,37 @@
 ﻿{
   "Id": "N_DOCKSIDE_CHAPEL",
-  "Title": "Dockside Chapel",
-  "Description": "A stone niche for sailors’ bargains. Tithes bought with fear of the deep.",
-  "Paragraphs": [
-    "Candles gutter in shells. Someone has carved prayers into the pews with a fish knife."
-  ],
+  "Title": "Dockside Chapel of St. Tidemar",
+  "EnterText": "A narrow nave of salt-stained oak. Prayer-strips flutter above a bowl of seawater. The priest writes for those who cannot.",
   "Options": [
     {
-      "Id": "O_ACOLYTE",
-      "Label": "Speak to the acolyte",
+      "Text": "Donate for a pilgrim’s writ.",
       "Effects": [
+        { "spendGold": 2 },
         {
-          "Op": "startDialogue",
-          "Id": "D_DOCKSIDE_CHAPEL"
-        }
+          "addItem": {
+            "Id": "ITM_PILGRIM_WRIT",
+            "Amount": 1
+          }
+        },
+        { "setFlag": "writ.pilgrim" }
+      ]
+    },
+    {
+      "Text": "Light a taper for Dheworyth’s fallen.",
+      "Effects": [
+        { "setFlag": "elf.favor" },
+        { "advanceTime": 1 }
+      ]
+    },
+    {
+      "Text": "Ask the priest to speak to the gate-sergeant.",
+      "Effects": [
+        { "setFlag": "guard.favor" }
       ]
     }
   ],
   "Exits": [
-    {
-      "Text": "Back to Harbor Square",
-      "To": "N_HARBOR_SQUARE"
-    },
-    {
-      "Text": "Toward the Old Sea Bell",
-      "To": "N_OLD_SEA_BELL"
-    }
+    "N_HARBOR_SQUARE",
+    "N_MAIN_GATE_BRIDGE"
   ]
 }

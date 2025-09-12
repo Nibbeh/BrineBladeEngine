@@ -1,38 +1,47 @@
 ﻿{
   "Id": "N_REFUGEE_CAMP",
-  "Title": "Refugee Encampment",
-  "Description": "Mud, tents, and smoke. Weariness clings like fog.",
-  "Paragraphs": [
-    "The camp elder watches you with tired curiosity; a Dheowryth monk shares bread."
-  ],
+  "Title": "Refugee Camp (Quayside Tents)",
+  "EnterText": "Canvas flaps whisper in the brine-wind. Elven families from Dheworyth huddle by low braziers, eyes down when the Watch passes.",
   "Options": [
     {
+      "Text": "Offer a coin for stew and share a quiet word.",
       "Effects": [
+        { "spendGold": 1 },
+        { "setFlag": "help.camp" },
         {
-          "Op": "startDialogue",
-          "Id": "D_CAMP_ELDER"
-        }
-      ],
-      "Id": "Speak_with_the_Camp_Elder",
-      "Label": "Speak with the Camp Elder."
+          "addItem": {
+            "Id": "ITM_ELF_BROOCH",
+            "Amount": 1
+          }
+        },
+        { "advanceTime": 1 }
+      ]
     },
     {
+      "Text": "Mediate with a patrolling Watchman about rations.",
       "Effects": [
-        {
-          "Op": "startDialogue",
-          "Id": "D_MONK"
-        }
-      ],
-      "Id": "Speak_with_the_monk",
-      "Label": "Speak with the monk."
-    }
-  ],
-  "Exits": [
+        { "setFlag": "guard.favor" },
+        { "advanceTime": 1 }
+      ]
+    },
     {
-      "Text": "Back to Harbor Square",
-      "To": "N_HARBOR_SQUARE"
-    }
-  ]
-
-}
-
+      "Text": "Escort an elder to the Ropewalk after dusk (shady).",
+      "Effects": [
+        { "setFlag": "route.smuggler" },
+        {
+          "addItem": {
+            "Id": "ITM_SMUGGLER_TOKEN",
+            "Amount": 1
+          }
+        },
+        { "advanceTime": 1 }
+      ]
+    },
+    {
+      "Text": "Break up louts harassing refugees.",
+      "Effects": [
+        { "startCombat": "ENEMY_WHARF_THUG" }
+      ]
+    },
+    {
+      "

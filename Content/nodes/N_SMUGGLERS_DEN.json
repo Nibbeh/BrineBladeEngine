@@ -1,55 +1,42 @@
 ﻿{
   "Id": "N_SMUGGLERS_DEN",
-  "Title": "Backroom, Shanty Den",
-  "Description": "Bone chips and candle endsâ€”the economy of secrets.",
-  "Paragraphs": [
-    "The captain smiles without warmth."
-  ],
+  "Title": "Smugglers’ Den (Net Loft)",
+  "EnterText": "Tar, pitch, and whispered deals. A figure with a split lip counts coins beside a coiled hawser.",
   "Options": [
     {
+      "Text": "Buy a token that gets you waved past the river gate (no questions).",
       "Effects": [
+        { "spendGold": 5 },
         {
-          "Op": "addGold",
-          "Amount": -15
+          "addItem": {
+            "Id": "ITM_SMUGGLER_TOKEN",
+            "Amount": 1
+          }
         },
-        {
-          "Op": "setFlag",
-          "Id": "token.smuggler"
-        }
-      ],
-      "Id": "Pay_15g_for_the_mark",
-      "Label": "Pay 15g for the mark."
+        { "setFlag": "route.smuggler" }
+      ]
     },
     {
-      "Requires": [
-        "flag:token.smuggler"
-      ],
+      "Text": "Fence a spare construct bolt.",
       "Effects": [
         {
-          "Op": "setFlag",
-          "Id": "route.smuggler"
-        }
-      ],
-      "Id": "Flash_the_mark_to_arrange_passage",
-      "Label": "Flash the mark to arrange passage."
+          "removeItemByName": {
+            "Item": "ITM_CONSTRUCT_BOLT",
+            "Amount": 1
+          }
+        },
+        { "addGold": 1 }
+      ]
     },
     {
+      "Text": "Carry a note to the Ropewalk foreman (future favor).",
       "Effects": [
-        {
-          "Op": "goto",
-          "To": "N_SHANTY_ALLEY"
-        }
-      ],
-      "Id": "Back_to_Shanty_Alley",
-      "Label": "Back to Shanty Alley."
+        { "setFlag": "smuggler.msg" }
+      ]
     }
   ],
   "Exits": [
-    {
-      "Text": "Back to Shanty Alley",
-      "To": "N_SHANTY_ALLEY"
-    }
+    "N_UNDER_PIER",
+    "N_HARBOR_SQUARE"
   ]
-
 }
-

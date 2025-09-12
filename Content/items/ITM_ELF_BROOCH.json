@@ -1,0 +1,9 @@
+﻿{
+  "Id": "ITM_ELF_BROOCH",
+  "Name": "Willowleaf Brooch",
+  "Type": "Misc",
+  "Weight": 0,
+  "Value": 3,
+  "Stackable": false,
+  "MaxStack": 1
+}
