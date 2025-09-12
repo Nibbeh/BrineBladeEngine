@@ -1,4 +1,4 @@
-﻿{
+{
   "Id": "N_UNDER_PIER",
   "Title": "Under-Pier Catwalk",
   "Description": "Tar-sticky beams and rope hairs. Lantern light barely keeps the dark from biting back.",
@@ -14,7 +14,8 @@
         }
       ],
       "Id": "Search_the_beams_find_2g",
-      "Label": "Search the beams (find 2g)."
+      "Label": "Search the beams (find 2g).",
+      "Text": "Search the beams (find 2g)."
     },
     {
       "Effects": [
@@ -24,7 +25,8 @@
         }
       ],
       "Id": "Follow_gull_sigils_to_Shanty_Alley",
-      "Label": "Follow gull sigils to Shanty Alley."
+      "Label": "Follow gull sigils to Shanty Alley.",
+      "Text": "Follow gull sigils to Shanty Alley."
     },
     {
       "Effects": [
@@ -34,7 +36,8 @@
         }
       ],
       "Id": "Keep_low_and_listen_smuggler_hint",
-      "Label": "Keep low and listen (smuggler hint)."
+      "Label": "Keep low and listen (smuggler hint).",
+      "Text": "Keep low and listen (smuggler hint)."
     }
   ],
   "Exits": [
@@ -48,4 +51,3 @@
     }
   ]
 }
-

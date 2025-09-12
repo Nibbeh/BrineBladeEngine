@@ -9,6 +9,7 @@
     {
       "Id": "O_CONTINUE",
       "Label": "Step into Harbor Town Square.",
+      "Text": "Step into Harbor Town Square.",
       "Effects": [
         {
           "Op": "goto",

@@ -1,8 +1,10 @@
-﻿{
+{
   "Id": "N_TRAINING_YARD",
   "Title": "Watch Training Yard",
   "Description": "A ring of battered dummies and scarred shields.",
-  "Paragraphs": [ "A sergeant barks, \"Show me you can hold your own.\"" ],
+  "Paragraphs": [
+    "A sergeant barks, \"Show me you can hold your own.\""
+  ],
   "Options": [
     {
       "Id": "SPAR_DUMMY",
@@ -12,7 +14,8 @@
           "Op": "combat",
           "Id": "ENEMY_PRACTICE_DUMMY"
         }
-      ]
+      ],
+      "Text": "Spar a practice dummy"
     }
   ],
   "Exits": [

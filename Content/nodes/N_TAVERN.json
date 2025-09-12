@@ -1,4 +1,4 @@
-﻿{
+{
   "Id": "N_TAVERN",
   "Title": "The Salted Keel Tavern",
   "Description": "Warm air, spilled ale, a knucklebones game rattling on a barrel.",
@@ -14,7 +14,8 @@
         }
       ],
       "Id": "Play_knucklebones_stake_2g",
-      "Label": "Play knucklebones (stake 2g)."
+      "Label": "Play knucklebones (stake 2g).",
+      "Text": "Play knucklebones (stake 2g)."
     },
     {
       "Effects": [
@@ -24,7 +25,8 @@
         }
       ],
       "Id": "Ask_for_rumors",
-      "Label": "Ask for rumors."
+      "Label": "Ask for rumors.",
+      "Text": "Ask for rumors."
     }
   ],
   "Exits": [
@@ -34,4 +36,3 @@
     }
   ]
 }
-

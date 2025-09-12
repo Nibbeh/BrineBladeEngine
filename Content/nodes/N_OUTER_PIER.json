@@ -1,4 +1,4 @@
-﻿{
+{
   "Id": "N_OUTER_PIER",
   "Title": "Outer Pier",
   "Description": "Tarred ropes sing in the wind. Lanterns draw wet halos over timber and salt.",
@@ -20,7 +20,8 @@
           "Id": "ITM_BREAD",
           "Qty": 2
         }
-      ]
+      ],
+      "Text": "Collect dockside supplies (2x minor potion, 2x bread)"
     },
     {
       "Id": "O_DOCKMASTER",
@@ -30,7 +31,8 @@
           "Op": "startDialogue",
           "Id": "D_DOCKMASTER"
         }
-      ]
+      ],
+      "Text": "Speak to the Dockmaster about papers"
     },
     {
       "Id": "O_SMUGGLER_HINT",
@@ -40,7 +42,8 @@
           "Op": "startDialogue",
           "Id": "D_SMUGGLER_HINT"
         }
-      ]
+      ],
+      "Text": "Ask around for quiet work (smugglers?)"
     }
   ],
   "Exits": [

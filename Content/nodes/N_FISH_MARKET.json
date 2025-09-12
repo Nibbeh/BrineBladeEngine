@@ -1,37 +1,33 @@
 ﻿{
   "Id": "N_FISH_MARKET",
   "Title": "Fish Market Rows",
-  "Description": "Brine, blood, and rotting catch. Refugees barter scraps here.",
-  "Paragraphs": [
-    "A shady corner whispers of faster ways in. An enforcer shakes down a debtor."
-  ],
+  "EnterText": "Slabs drip; gulls argue from beam to beam.",
   "Options": [
     {
+      "Label": "Smuggler's corner—ask about faster ways.",
+      "Text": "Smuggler's corner—ask about faster ways.",
       "Effects": [
         {
-          "Op": "startDialogue",
-          "Id": "D_SMUGGLER_CONTACT"
+          "Op": "setFlag",
+          "Flag": "route.smuggler"
         }
-      ],
-      "Id": "Smugglers_cornerask_about_faster_ways",
-      "Label": "Smuggler\u2019s corner\u2014ask about faster ways."
+      ]
     },
     {
+      "Label": "Break up the brawl.",
+      "Text": "Break up the brawl.",
       "Effects": [
         {
           "Op": "combat",
-          "Id": "ENEMY_CUTPURSE"
+          "Id": "ENEMY_WHARF_THUG"
         }
-      ],
-      "Id": "Break_up_the_brawl_scripted_combat",
-      "Label": "Break up the brawl."
+      ]
     }
   ],
   "Exits": [
     {
-      "Text": "Back to Harbor Town Square",
+      "Text": "To Harbor Town Square",
       "To": "N_HARBOR_SQUARE"
     }
   ]
 }
-

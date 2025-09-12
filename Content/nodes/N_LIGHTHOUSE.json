@@ -1,4 +1,4 @@
-﻿{
+{
   "Id": "N_LIGHTHOUSE",
   "Title": "Stormlight Tower",
   "Description": "Wind lashes the tower. The keeper peers like he hears the sea think.",
@@ -14,7 +14,8 @@
         }
       ],
       "Id": "Speak_with_the_keeper",
-      "Label": "Speak with the keeper."
+      "Label": "Speak with the keeper.",
+      "Text": "Speak with the keeper."
     },
     {
       "Effects": [
@@ -24,7 +25,8 @@
         }
       ],
       "Id": "Climb_the_broken_stair_cost_1hp",
-      "Label": "Climb the broken stair (cost 1hp)."
+      "Label": "Climb the broken stair (cost 1hp).",
+      "Text": "Climb the broken stair (cost 1hp)."
     }
   ],
   "Exits": [
@@ -33,7 +35,4 @@
       "To": "N_HARBOR_SQUARE"
     }
   ]
-
-
 }
-
