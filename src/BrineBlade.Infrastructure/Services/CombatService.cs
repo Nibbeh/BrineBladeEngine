@@ -22,19 +22,24 @@ namespace BrineBlade.Infrastructure.Services
 
         public CombatResult StartCombat(GameState state, EnemyDef enemy)
         {
+            // --- Effective stats (kept from your code) ---
             var pStats = BuildPlayerEffectiveStats(state);
             var eStats = enemy.BaseStats ?? new Stats(8, 8, 8, 8, 8, 8, 8);
 
+            // --- HP (kept) ---
             var playerHp = Math.Max(1, state.CurrentHp);
             var enemyHp = Math.Max(1, enemy.Hp ?? (eStats.MaxHp / 2 + 4));
 
+            // --- Player equipment & defenses (kept) ---
             var (pWType, pDie, pAttr) = GetPlayerWeapon(state);
             var pAC = ComputePlayerAC(state, pStats);
             var pDR = ComputePlayerDR(state);
 
+            // --- Enemy defenses (kept) ---
             var eAC = 10 + Mod(eStats.Dexterity) + enemy.Level;
             var eDR = Math.Max(0, eStats.Vitality / 5);
 
+            // --- Attack bonuses (kept) ---
             var profBonus = IsProficient(state, pWType) ? 2 : 0;
             var pAtkBonus = profBonus + Mod(pAttr switch
             {
@@ -42,27 +47,62 @@ namespace BrineBlade.Infrastructure.Services
                 "INT" => pStats.Intelligence,
                 _ => pStats.Strength
             });
-
             var eAtkBonus = enemy.Level + Mod(eStats.Strength);
 
-            bool playerTurn = RollD20() + Mod(pStats.Dexterity) >= RollD20() + Mod(eStats.Dexterity);
-            int roundGuard = 0;
+            // --- Champion features (NEW) ---
+            // Flag your Warrior as Champion somewhere in seed: state.Flags.Add("spec.champion");
+            bool isChampion = state.Flags.Contains("spec.champion", StringComparer.OrdinalIgnoreCase);
 
+            // Champion crits on 19–20; others on 20
+            int critMin = isChampion ? 19 : 20;
+
+            // Extra crit chance from Luck (e.g., Luck 14 → +4%), capped; Champion gets +5% flat
+            double extraCritChance = Math.Clamp(((pStats.Luck - 10) * 0.01) + (isChampion ? 0.05 : 0.0), 0.0, 0.30);
+
+            // Second Wind: once per combat, auto when at/below 50% HP
+            bool secondWindUsed = false;
+            int ConMod(int v) => (v - 10) / 2;
+
+            // --- Initiative (kept) ---
+            bool playerTurn = RollD20() + Mod(pStats.Dexterity) >= RollD20() + Mod(eStats.Dexterity);
+
+            // Hard cap to avoid stalemates (kept)
+            int roundGuard = 0;
             while (playerHp > 0 && enemyHp > 0 && roundGuard++ < 100)
             {
                 if (playerTurn)
                 {
+                    // Auto Second Wind safety valve (NEW)
+                    if (!secondWindUsed && pStats.MaxHp > 0 && playerHp <= (pStats.MaxHp / 2))
+                    {
+                        int heal = Math.Max(1, RollDamage(8) + ConMod(pStats.Vitality)); // 1d8 + CON
+                        playerHp = Math.Min(playerHp + heal, pStats.MaxHp);
+                        secondWindUsed = true;
+                    }
+
+                    // Player attack (augmented crit logic)
                     var roll = RollD20();
-                    if (roll != 1)
+                    if (roll != 1) // nat 1 misses
                     {
                         var total = roll + pAtkBonus;
-                        if (roll == 20 || total >= eAC)
+                        bool crit = roll >= critMin;
+                        bool hit = crit || total >= eAC;
+
+                        if (hit)
                         {
-                            var dmg = RollDamage(pDie)
-                                    + (pAttr == "DEX" ? Mod(pStats.Dexterity)
-                                      : pAttr == "INT" ? Mod(pStats.Intelligence)
-                                      : Mod(pStats.Strength));
-                            if (roll == 20) dmg *= 2;
+                            if (!crit && _rng.NextDouble() < extraCritChance) crit = true;
+
+                            int mod = pAttr switch
+                            {
+                                "DEX" => Mod(pStats.Dexterity),
+                                "INT" => Mod(pStats.Intelligence),
+                                _ => Mod(pStats.Strength)
+                            };
+
+                            int dmg = RollDamage(pDie) + mod;
+                            if (dmg < 1) dmg = 1;
+                            if (crit) dmg *= 2;
+
                             dmg -= eDR;
                             enemyHp -= Math.Max(1, dmg);
                         }
@@ -70,14 +110,20 @@ namespace BrineBlade.Infrastructure.Services
                 }
                 else
                 {
+                    // Enemy attack (kept simple; nat 20 crits)
                     var roll = RollD20();
                     if (roll != 1)
                     {
                         var total = roll + eAtkBonus;
-                        if (roll == 20 || total >= pAC)
+                        bool crit = roll == 20;
+                        bool hit = crit || total >= pAC;
+
+                        if (hit)
                         {
-                            var dmg = RollDamage(6) + Mod(eStats.Strength); // simple enemy “claw/club”
-                            if (roll == 20) dmg *= 2;
+                            int dmg = RollDamage(6) + Mod(eStats.Strength); // simple "claw/club"
+                            if (dmg < 1) dmg = 1;
+                            if (crit) dmg *= 2;
+
                             dmg -= pDR;
                             playerHp -= Math.Max(1, dmg);
                         }
@@ -88,9 +134,10 @@ namespace BrineBlade.Infrastructure.Services
             }
 
             bool playerWon = playerHp > 0 && enemyHp <= 0;
-            var loot = playerWon && enemy.LootTable is not null ? enemy.LootTable : new List<string>();
+            var loot = (playerWon && enemy.LootTable is not null) ? enemy.LootTable : new List<string>();
             return new CombatResult(playerWon, Math.Max(playerHp, 0), Math.Max(enemyHp, 0), loot);
         }
+
 
         private int Mod(int stat) => (stat - 10) / 2;
         private int RollD20() => _rng.Next(1, 21);
