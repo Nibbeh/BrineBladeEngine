@@ -14,7 +14,9 @@
           "Op": "goto",
           "To": "N_CITY_INTRO"
         }
-      ]
+      ],
+      "Label": "(Show Work Permit) — enter as a hired hand.",
+      "Id": "O_SHOW_WORK_PERMIT_ENTER_AS_A_HIRED_HAND"
     },
     {
       "Text": "(Pay 20g) — bribe the clerk for a fast stamp.",
@@ -27,7 +29,9 @@
           "Op": "goto",
           "To": "N_CITY_INTRO"
         }
-      ]
+      ],
+      "Label": "(Pay 20g) — bribe the clerk for a fast stamp.",
+      "Id": "O_PAY_20G_BRIBE_THE_CLERK_FOR_A_FAST_STAMP"
     },
     {
       "Text": "(Smuggler's wave) — take the river-gate side stair.",
@@ -40,7 +44,9 @@
           "Op": "goto",
           "To": "N_CITY_INTRO"
         }
-      ]
+      ],
+      "Label": "(Smuggler's wave) — take the river-gate side stair.",
+      "Id": "O_SMUGGLER_S_WAVE_TAKE_THE_RIVER_GATE_SIDE_STAIR"
     },
     {
       "Id": "O_EAVESDROP",
@@ -61,13 +67,15 @@
           "Op": "startDialogue",
           "Id": "D_GATE_GUARD_TUT"
         }
-      ]
+      ],
+      "Label": "Speak to the gate guard."
     }
   ],
   "Exits": [
     {
       "Text": "To Harbor Town Square",
-      "To": "N_HARBOR_SQUARE"
+      "To": "N_HARBOR_SQUARE",
+      "Label": "To Harbor Town Square"
     }
   ],
   "Description": "The city's throat: steel, stamps, and watchful halberds.",

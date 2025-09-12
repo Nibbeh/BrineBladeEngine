@@ -1,4 +1,4 @@
-﻿{
+{
   "Id": "ITM_ARMOR_LEATHER",
   "Name": "Leather Jerkin",
   "Type": "Armor",
@@ -8,6 +8,7 @@
   "MaxStack": 1,
   "Slot": "Chest",
   "ArmorType": "Leather",
-  "AllowedClasses": [ "CLASS_WARRIOR" ]
+  "AllowedClasses": [
+    "CLASS_WARRIOR"
+  ]
 }
-

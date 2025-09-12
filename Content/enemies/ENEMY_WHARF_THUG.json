@@ -1,4 +1,4 @@
-﻿{
+{
   "Id": "ENEMY_WHARF_THUG",
   "Name": "Wharf Thug",
   "BaseStats": {
@@ -16,4 +16,3 @@
     "ITM_DOCK_HOOK"
   ]
 }
-

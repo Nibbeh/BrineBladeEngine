@@ -59,17 +59,20 @@
           "Op": "startDialogue",
           "Id": "D_SMUGGLER_CONTACT"
         }
-      ]
+      ],
+      "Label": "Tap the beam twice - wait for the smuggler's reply."
     }
   ],
   "Exits": [
     {
       "Text": "Up to the Outer Pier",
-      "To": "N_OUTER_PIER"
+      "To": "N_OUTER_PIER",
+      "Label": "Up to the Outer Pier"
     },
     {
       "Text": "Along the slick catwalk to the Old Sea Bell",
-      "To": "N_OLD_SEA_BELL"
+      "To": "N_OLD_SEA_BELL",
+      "Label": "Along the slick catwalk to the Old Sea Bell"
     }
   ]
 }

@@ -26,65 +26,80 @@
           "Op": "startDialogue",
           "Id": "D_PREACHER"
         }
-      ]
+      ],
+      "Label": "Hear a preacher railing about the coming tide."
     }
   ],
   "Exits": [
     {
       "Text": "To Construct Pen (Dock Gantries)",
-      "To": "N_CONSTRUCT_PEN"
+      "To": "N_CONSTRUCT_PEN",
+      "Label": "To Construct Pen (Dock Gantries)"
     },
     {
       "Text": "To Customs House",
-      "To": "N_CUSTOMS_HOUSE"
+      "To": "N_CUSTOMS_HOUSE",
+      "Label": "To Customs House"
     },
     {
       "Text": "To Dockside Chapel",
-      "To": "N_DOCKSIDE_CHAPEL"
+      "To": "N_DOCKSIDE_CHAPEL",
+      "Label": "To Dockside Chapel"
     },
     {
       "Text": "To Fish Market Rows",
-      "To": "N_FISH_MARKET"
+      "To": "N_FISH_MARKET",
+      "Label": "To Fish Market Rows"
     },
     {
       "Text": "To Goods Stall",
-      "To": "N_GOODS_STALL"
+      "To": "N_GOODS_STALL",
+      "Label": "To Goods Stall"
     },
     {
       "Text": "To Harbor Watch Barracks",
-      "To": "N_HARBOR_WATCH"
+      "To": "N_HARBOR_WATCH",
+      "Label": "To Harbor Watch Barracks"
     },
     {
       "Text": "To Lighthouse",
-      "To": "N_LIGHTHOUSE"
+      "To": "N_LIGHTHOUSE",
+      "Label": "To Lighthouse"
     },
     {
       "Text": "To Main Gate Bridge",
-      "To": "N_MAIN_GATE_BRIDGE"
+      "To": "N_MAIN_GATE_BRIDGE",
+      "Label": "To Main Gate Bridge"
     },
     {
       "Text": "To Outer Pier",
-      "To": "N_OUTER_PIER"
+      "To": "N_OUTER_PIER",
+      "Label": "To Outer Pier"
     },
     {
       "Text": "To Refugee Camp (Quayside Tents)",
-      "To": "N_REFUGEE_CAMP"
+      "To": "N_REFUGEE_CAMP",
+      "Label": "To Refugee Camp (Quayside Tents)"
     },
     {
       "Text": "To Smugglers' Den (Net Loft)",
-      "To": "N_SMUGGLERS_DEN"
+      "To": "N_SMUGGLERS_DEN",
+      "Label": "To Smugglers' Den (Net Loft)"
     },
     {
       "Text": "To The Salted Keel Tavern",
-      "To": "N_TAVERN"
+      "To": "N_TAVERN",
+      "Label": "To The Salted Keel Tavern"
     },
     {
       "Text": "To Watch Training Yard",
-      "To": "N_TRAINING_YARD"
+      "To": "N_TRAINING_YARD",
+      "Label": "To Watch Training Yard"
     },
     {
       "Text": "To Warehouse Row",
-      "To": "N_WAREHOUSE_ROW"
+      "To": "N_WAREHOUSE_ROW",
+      "Label": "To Warehouse Row"
     }
   ]
 }

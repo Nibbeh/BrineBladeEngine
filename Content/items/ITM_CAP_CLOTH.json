@@ -1,4 +1,4 @@
-﻿{
+{
   "Id": "ITM_CAP_CLOTH",
   "Name": "Cloth Cap",
   "Type": "Armor",
@@ -8,5 +8,7 @@
   "MaxStack": 1,
   "Slot": "Head",
   "ArmorType": "Cloth",
-  "AllowedClasses": [ "CLASS_WARRIOR" ]
+  "AllowedClasses": [
+    "CLASS_WARRIOR"
+  ]
 }

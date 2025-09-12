@@ -33,7 +33,8 @@
   "Exits": [
     {
       "Text": "Back to Harbor Town Square",
-      "To": "N_HARBOR_SQUARE"
+      "To": "N_HARBOR_SQUARE",
+      "Label": "Back to Harbor Town Square"
     }
   ]
 }

@@ -1,10 +1,9 @@
-﻿{
+{
   "Id": "ITM_SMUGGLER_TOKEN",
-  "Name": "Smuggler\u2019s Mark",
+  "Name": "Smuggler’s Mark",
   "Type": "Quest",
   "Weight": 0,
   "Value": 0,
   "Stackable": false,
   "MaxStack": 1
 }
-

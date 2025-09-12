@@ -1,4 +1,4 @@
-﻿{
+{
   "Id": "ITM_SWORD_SHORT",
   "Name": "Short Sword",
   "Type": "Weapon",
@@ -8,7 +8,10 @@
   "MaxStack": 1,
   "Slot": "Weapon",
   "WeaponType": "OneHanded",
-  "AllowedClasses": [ "CLASS_WARRIOR" ],
-  "Bonuses": { "Strength": 1 }
+  "AllowedClasses": [
+    "CLASS_WARRIOR"
+  ],
+  "Bonuses": {
+    "Strength": 1
+  }
 }
-

@@ -22,7 +22,8 @@
   "Exits": [
     {
       "Text": "To the Outer Pier",
-      "To": "N_OUTER_PIER"
+      "To": "N_OUTER_PIER",
+      "Label": "To the Outer Pier"
     }
   ]
 }

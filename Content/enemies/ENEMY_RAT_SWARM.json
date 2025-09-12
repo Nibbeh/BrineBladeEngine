@@ -1,4 +1,4 @@
-﻿{
+{
   "Id": "ENEMY_RAT_SWARM",
   "Name": "Rat Swarm",
   "BaseStats": {
@@ -16,4 +16,3 @@
     "ITM_HERB_SALVE"
   ]
 }
-

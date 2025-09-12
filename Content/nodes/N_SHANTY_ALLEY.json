@@ -22,19 +22,23 @@
   "Exits": [
     {
       "Text": "To Warehouse Row",
-      "To": "N_WAREHOUSE_ROW"
+      "To": "N_WAREHOUSE_ROW",
+      "Label": "To Warehouse Row"
     },
     {
       "Text": "To Refugee Camp (Quayside Tents)",
-      "To": "N_REFUGEE_CAMP"
+      "To": "N_REFUGEE_CAMP",
+      "Label": "To Refugee Camp (Quayside Tents)"
     },
     {
       "Text": "To Under-Pier Catwalk",
-      "To": "N_UNDER_PIER"
+      "To": "N_UNDER_PIER",
+      "Label": "To Under-Pier Catwalk"
     },
     {
       "Text": "To Harbor Town Square",
-      "To": "N_HARBOR_SQUARE"
+      "To": "N_HARBOR_SQUARE",
+      "Label": "To Harbor Town Square"
     }
   ]
 }

@@ -17,7 +17,7 @@
           "Effects": [
             {
               "Op": "advanceTime",
-              "Minutes": 20
+              "Hours": 0.3333333333333333
             },
             {
               "Op": "addGold",

@@ -16,9 +16,11 @@
         },
         {
           "Op": "advanceTime",
-          "Amount": 1
+          "Hours": 1
         }
-      ]
+      ],
+      "Label": "Carry crates under the foreman's eye (earn coin).",
+      "Id": "O_CARRY_CRATES_UNDER_THE_FOREMAN_S_EYE_EARN_COIN"
     },
     {
       "Text": "Adjust a jammed gantry (help the dock crew).",
@@ -29,10 +31,12 @@
         },
         {
           "Op": "addItem",
-          "Item": "ITM_CONSTRUCT_BOLT",
-          "Amount": 1
+          "Amount": 1,
+          "Id": "ITM_CONSTRUCT_BOLT"
         }
-      ]
+      ],
+      "Label": "Adjust a jammed gantry (help the dock crew).",
+      "Id": "O_ADJUST_A_JAMMED_GANTRY_HELP_THE_DOCK_CREW"
     },
     {
       "Text": "Carry a note to the Ropewalk foreman (future favor).",
@@ -41,7 +45,9 @@
           "Op": "setFlag",
           "Flag": "smuggler.msg"
         }
-      ]
+      ],
+      "Label": "Carry a note to the Ropewalk foreman (future favor).",
+      "Id": "O_CARRY_A_NOTE_TO_THE_ROPEWALK_FOREMAN_FUTURE_FAVOR"
     },
     {
       "Id": "O_EAVESDROP",
@@ -58,11 +64,13 @@
   "Exits": [
     {
       "Text": "To Under-Pier Catwalk",
-      "To": "N_UNDER_PIER"
+      "To": "N_UNDER_PIER",
+      "Label": "To Under-Pier Catwalk"
     },
     {
       "Text": "To Harbor Town Square",
-      "To": "N_HARBOR_SQUARE"
+      "To": "N_HARBOR_SQUARE",
+      "Label": "To Harbor Town Square"
     }
   ],
   "Description": "The construct pens thrum with iron patience and the creak of brine-slick gantries.",

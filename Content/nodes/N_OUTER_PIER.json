@@ -61,15 +61,18 @@
   "Exits": [
     {
       "Text": "Up into Harbor Town Square",
-      "To": "N_HARBOR_SQUARE"
+      "To": "N_HARBOR_SQUARE",
+      "Label": "Up into Harbor Town Square"
     },
     {
       "Text": "Down to the slick catwalk under the pier",
-      "To": "N_UNDER_PIER"
+      "To": "N_UNDER_PIER",
+      "Label": "Down to the slick catwalk under the pier"
     },
     {
       "Text": "Toward the fish market",
-      "To": "N_FISH_MARKET"
+      "To": "N_FISH_MARKET",
+      "Label": "Toward the fish market"
     }
   ]
 }

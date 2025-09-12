@@ -52,7 +52,8 @@
           "Op": "startDialogue",
           "Id": "D_PREACHER"
         }
-      ]
+      ],
+      "Label": "Listen to the street preacher by the bell."
     },
     {
       "Id": "O_TALK_MONK_AT_BELL",
@@ -62,13 +63,15 @@
           "Op": "startDialogue",
           "Id": "D_MONK"
         }
-      ]
+      ],
+      "Label": "Speak with the visiting monk."
     }
   ],
   "Exits": [
     {
       "Text": "Imperial Wharf",
-      "To": "N_IMPERIAL_WHARF"
+      "To": "N_IMPERIAL_WHARF",
+      "Label": "Imperial Wharf"
     }
   ]
 }

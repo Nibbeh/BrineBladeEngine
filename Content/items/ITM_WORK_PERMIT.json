@@ -1,4 +1,4 @@
-﻿{
+{
   "Id": "ITM_WORK_PERMIT",
   "Name": "Harbor Work Permit",
   "Type": "Quest",
@@ -7,4 +7,3 @@
   "Stackable": false,
   "MaxStack": 1
 }
-
