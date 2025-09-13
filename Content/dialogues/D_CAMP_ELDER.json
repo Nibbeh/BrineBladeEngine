@@ -18,18 +18,17 @@
           ],
           "Effects": [
             {
-              "Op": "addItem",
+              "Op": "removeItemByName",
               "Id": "ITM_BREAD",
-              "Qty": -1
+              "Qty": 1
             },
             {
               "Op": "setFlag",
               "Id": "help.camp"
             },
-            {
-              "Op": "endDialogue"
-            }
+            { "Op": "endDialogue" }
           ]
+
         },
         {
           "Label": "Contribute your soup pot to the communal stew.",

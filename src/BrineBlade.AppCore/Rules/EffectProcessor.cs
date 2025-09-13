@@ -58,9 +58,18 @@ public sealed class EffectProcessor
                     break;
 
                 case "addGold" when e.Amount is not null:
-                    _state.Gold += e.Amount.Value;
-                    _ui.Notice($"+{e.Amount} gold (total {_state.Gold})");
-                    break;
+                    {
+                        int amt = e.Amount.Value;
+                        if (amt < 0 && _state.Gold + amt < 0)
+                        {
+                            _ui.Notice("Not enough gold.");
+                            return new Outcome(endDialogue); // abort remaining effects in this choice
+                        }
+                        _state.Gold += amt;
+                        _ui.Notice($"{(amt >= 0 ? "+" : "")}{amt} gold (total {_state.Gold})");
+                        break;
+                    }
+
 
                 case "advanceTime" when e.Minutes is not null:
                     _state.AdvanceMinutes(e.Minutes.Value);
@@ -84,7 +93,8 @@ public sealed class EffectProcessor
 
                 case "addItem" when !string.IsNullOrWhiteSpace(e.Id):
                     {
-                        var qty = e.Qty.GetValueOrDefault(1);
+                        var qty = e.Qty ?? e.Amount ?? 1;
+                        if (qty <= 0) { _ui.Notice("Invalid quantity."); break; }
                         var r = _inv.TryAdd(_state, e.Id!, qty);
                         _ui.Notice(r.Success ? $"Picked up {e.Id} x{qty}." : $"Cannot add item: {r.Reason}");
                         break;
@@ -92,11 +102,13 @@ public sealed class EffectProcessor
 
                 case "removeItemByName" when !string.IsNullOrWhiteSpace(e.Id):
                     {
-                        var qty = e.Qty.GetValueOrDefault(1);
+                        var qty = e.Qty ?? e.Amount ?? 1;
+                        if (qty <= 0) { _ui.Notice("Invalid quantity."); break; }
                         var r = _inv.TryRemove(_state, e.Id!, qty);
                         _ui.Notice(r.Success ? $"Removed {e.Id} x{qty}." : $"Cannot remove item: {r.Reason}");
                         break;
                     }
+
 
                 // ---------- NEW ----------
                 case "equip" when !string.IsNullOrWhiteSpace(e.Id):

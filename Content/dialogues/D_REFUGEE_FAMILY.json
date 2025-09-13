@@ -34,12 +34,15 @@
         {
           "Effects": [
             {
-              "Op": "setFlag",
-              "Id": "promise.bread"
+              "Op": "removeItemByName",
+              "Id": "ITM_BREAD",
+              "Qty": 1
             },
             {
-              "Op": "endDialogue"
-            }
+              "Op": "setFlag",
+              "Id": "help.refugee"
+            },
+            { "Op": "endDialogue" }
           ],
           "Label": "Promise to help later."
         },

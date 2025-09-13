@@ -1,5 +1,4 @@
-﻿
-// src/BrineBlade.AppCore/Flows/PlayerMenuFlow.cs
+﻿// src/BrineBlade.AppCore/Flows/PlayerMenuFlow.cs
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -125,6 +124,7 @@ namespace BrineBlade.AppCore.Flows
                 {
                     if (cmd.ChoiceIndex == 2)
                     {
+                        // Sort underlying stacks by ItemId; grouped view will follow.
                         _state.Inventory.Sort((a, b) => string.Compare(a.ItemId, b.ItemId, StringComparison.OrdinalIgnoreCase));
                         continue;
                     }
@@ -140,10 +140,28 @@ namespace BrineBlade.AppCore.Flows
             }
         }
 
+        /// <summary>
+        /// Builds a grouped, case-insensitive inventory table:
+        /// - Groups duplicate stacks by ItemId
+        /// - Sums quantities
+        /// - Sorts by friendly label A→Z
+        /// Returns printable lines and parallel lists of ids/qtys for selection.
+        /// </summary>
         private List<string> BuildInventoryTable(out List<string> ids, out List<int> qtys)
         {
-            ids = _state.Inventory.Select(i => i.ItemId).ToList();
-            qtys = _state.Inventory.Select(i => i.Quantity).ToList();
+            var rows = _state.Inventory
+                .GroupBy(s => s.ItemId, StringComparer.OrdinalIgnoreCase)
+                .Select(g => new
+                {
+                    ItemId = g.Key,
+                    Qty = g.Sum(x => x.Quantity),
+                    Label = FriendlyName(g.Key)
+                })
+                .OrderBy(r => r.Label, StringComparer.OrdinalIgnoreCase)
+                .ToList();
+
+            ids = rows.Select(r => r.ItemId).ToList();
+            qtys = rows.Select(r => r.Qty).ToList();
 
             var lines = new List<string>
             {
@@ -151,11 +169,8 @@ namespace BrineBlade.AppCore.Flows
                 "─────┼─────────────────────────┼─────┼────────────────────────────"
             };
 
-            for (int i = 0; i < ids.Count; i++)
-            {
-                string label = FriendlyName(ids[i]);
-                lines.Add($"{i + 1,3}  │ {Trunc(ids[i], 25),-25} │ {qtys[i],3} │ {label}");
-            }
+            for (int i = 0; i < rows.Count; i++)
+                lines.Add($"{i + 1,3}  │ {Trunc(rows[i].ItemId, 25),-25} │ {rows[i].Qty,3} │ {rows[i].Label}");
 
             return lines;
         }
