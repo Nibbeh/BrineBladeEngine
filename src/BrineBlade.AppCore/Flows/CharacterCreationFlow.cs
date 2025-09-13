@@ -1,4 +1,4 @@
-﻿// REPLACE ENTIRE FILE WITH THIS
+﻿
 using BrineBlade.Domain.Entities;
 using BrineBlade.Domain.Game;
 

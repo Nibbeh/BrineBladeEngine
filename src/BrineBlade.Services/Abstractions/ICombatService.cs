@@ -1,4 +1,4 @@
-﻿// REPLACE ENTIRE FILE
+﻿
 // src/BrineBlade.Services/Abstractions/ICombatService.cs
 using BrineBlade.Domain.Entities;
 using BrineBlade.Domain.Game;

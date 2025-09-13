@@ -1,4 +1,4 @@
-﻿// REPLACE ENTIRE FILE
+﻿
 // src/BrineBlade.AppCore/Orchestration/GameSession.cs
 using System;
 using BrineBlade.AppCore.ConsoleUI;

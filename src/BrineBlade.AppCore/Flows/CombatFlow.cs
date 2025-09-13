@@ -1,4 +1,4 @@
-﻿// REPLACE ENTIRE FILE
+﻿
 // src/BrineBlade.AppCore/Flows/CombatFlow.cs
 using System;
 using System.Collections.Generic;
