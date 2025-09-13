@@ -40,7 +40,7 @@ public static class ServiceCollectionExtensions
 
         // Services (rules layer)
         // src/BrineBlade.Infrastructure/DI/ServiceCollectionExtensions.cs
-        // ...
+    
         // services.TryAddSingleton<ICombatService, CombatService>();
         services.TryAddSingleton<ICombatService>(sp =>
             new CombatService(sp.GetRequiredService<IRandom>(), sp.GetRequiredService<ItemCatalog>()));
