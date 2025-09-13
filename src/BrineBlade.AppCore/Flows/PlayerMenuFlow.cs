@@ -1,4 +1,4 @@
-﻿// REPLACE ENTIRE FILE
+﻿
 // src/BrineBlade.AppCore/Flows/PlayerMenuFlow.cs
 using System;
 using System.Collections.Generic;

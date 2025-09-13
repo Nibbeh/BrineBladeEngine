@@ -1,4 +1,4 @@
-﻿// REPLACE ENTIRE FILE
+﻿
 // src/BrineBlade.Infrastructure/Services/CombatService.cs
 using System;
 using System.Collections.Generic;

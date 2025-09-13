@@ -1,4 +1,4 @@
-﻿// REPLACE ENTIRE FILE
+﻿
 // src/BrineBlade.AppCore/ConsoleUI/ConsoleGameUI.cs
 using System;
 using System.Collections.Generic;
