@@ -1,10 +1,8 @@
 {
   "Id": "N_CONSTRUCT_PEN",
   "Title": "Construct Pen (Dock Gantries)",
-  "EnterText": "Stone constructs stand in rows like patient oxen; yokes bite into gouged shoulders while a foreman stamps chits.",
   "Options": [
     {
-      "Text": "Carry crates under the foreman's eye (earn coin).",
       "Effects": [
         {
           "Op": "addGold",
@@ -12,22 +10,21 @@
         },
         {
           "Op": "setFlag",
-          "Flag": "work.crates"
+          "Id": "work.crates"
         },
         {
           "Op": "advanceTime",
-          "Hours": 1
+          "Minutes": 60
         }
       ],
       "Label": "Carry crates under the foreman's eye (earn coin).",
       "Id": "O_CARRY_CRATES_UNDER_THE_FOREMAN_S_EYE_EARN_COIN"
     },
     {
-      "Text": "Adjust a jammed gantry (help the dock crew).",
       "Effects": [
         {
           "Op": "setFlag",
-          "Flag": "construct.helped"
+          "Id": "construct.helped"
         },
         {
           "Op": "addItem",
@@ -39,11 +36,10 @@
       "Id": "O_ADJUST_A_JAMMED_GANTRY_HELP_THE_DOCK_CREW"
     },
     {
-      "Text": "Carry a note to the Ropewalk foreman (future favor).",
       "Effects": [
         {
           "Op": "setFlag",
-          "Flag": "smuggler.msg"
+          "Id": "smuggler.msg"
         }
       ],
       "Label": "Carry a note to the Ropewalk foreman (future favor).",
@@ -52,7 +48,6 @@
     {
       "Id": "O_EAVESDROP",
       "Label": "Eavesdrop on the crowd.",
-      "Text": "Eavesdrop on the crowd.",
       "Effects": [
         {
           "Op": "startDialogue",
@@ -64,17 +59,16 @@
   "Exits": [
     {
       "Text": "To Under-Pier Catwalk",
-      "To": "N_UNDER_PIER",
-      "Label": "To Under-Pier Catwalk"
+      "To": "N_UNDER_PIER"
     },
     {
       "Text": "To Harbor Town Square",
-      "To": "N_HARBOR_SQUARE",
-      "Label": "To Harbor Town Square"
+      "To": "N_HARBOR_SQUARE"
     }
   ],
   "Description": "The construct pens thrum with iron patience and the creak of brine-slick gantries.",
   "Paragraphs": [
+    "Stone constructs stand in rows like patient oxen; yokes bite into gouged shoulders while a foreman stamps chits.",
     "Stone-boned laborers stand yoked along the rail, chiselled faces unreadable as tides. Grease, pitch, and amber dust make a paste that darkens every groove.",
     "A foreman in a split leather coat stamps chits and barks quotas; docklings scurry between pallets as the harbor bell marks another hour sold to the sea."
   ]

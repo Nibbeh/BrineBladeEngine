@@ -9,13 +9,11 @@
         {
           "Label": "Ask about the amber trade.",
           "Effects": [],
-          "Text": "Ask about the amber trade.",
           "Goto": "L_AMBER"
         },
         {
           "Label": "Ask about the Watch.",
           "Effects": [],
-          "Text": "Ask about the Watch.",
           "Goto": "L_WATCH"
         },
         {
@@ -24,8 +22,7 @@
             {
               "Op": "endDialogue"
             }
-          ],
-          "Text": "Enough for now."
+          ]
         }
       ]
     },
@@ -35,7 +32,6 @@
         {
           "Label": "Back.",
           "Effects": [],
-          "Text": "Back.",
           "Goto": "L1"
         }
       ]
@@ -46,7 +42,6 @@
         {
           "Label": "Back.",
           "Effects": [],
-          "Text": "Back.",
           "Goto": "L1"
         }
       ]

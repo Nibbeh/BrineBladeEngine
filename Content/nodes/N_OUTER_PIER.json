@@ -21,8 +21,7 @@
           "Id": "ITM_BREAD",
           "Qty": 2
         }
-      ],
-      "Text": "Collect dockside supplies (2x minor potion, 2x bread)"
+      ]
     },
     {
       "Id": "O_DOCKMASTER",
@@ -32,8 +31,7 @@
           "Op": "startDialogue",
           "Id": "D_DOCKMASTER"
         }
-      ],
-      "Text": "Speak to the Dockmaster about papers"
+      ]
     },
     {
       "Id": "O_SMUGGLER_HINT",
@@ -43,13 +41,11 @@
           "Op": "startDialogue",
           "Id": "D_SMUGGLER_HINT"
         }
-      ],
-      "Text": "Ask around for quiet work (smugglers?)"
+      ]
     },
     {
       "Id": "O_EAVESDROP",
       "Label": "Eavesdrop on the crowd.",
-      "Text": "Eavesdrop on the crowd.",
       "Effects": [
         {
           "Op": "startDialogue",
@@ -61,18 +57,15 @@
   "Exits": [
     {
       "Text": "Up into Harbor Town Square",
-      "To": "N_HARBOR_SQUARE",
-      "Label": "Up into Harbor Town Square"
+      "To": "N_HARBOR_SQUARE"
     },
     {
       "Text": "Down to the slick catwalk under the pier",
-      "To": "N_UNDER_PIER",
-      "Label": "Down to the slick catwalk under the pier"
+      "To": "N_UNDER_PIER"
     },
     {
       "Text": "Toward the fish market",
-      "To": "N_FISH_MARKET",
-      "Label": "Toward the fish market"
+      "To": "N_FISH_MARKET"
     }
   ]
 }

@@ -9,7 +9,6 @@
         {
           "Label": "Ask about the city.",
           "Effects": [],
-          "Text": "Ask about the city.",
           "Goto": "L_INFO"
         },
         {
@@ -26,8 +25,7 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Work a shift for 5g.",
-          "Text": "Work a shift for 5g."
+          "Label": "Work a shift for 5g."
         },
         {
           "Effects": [
@@ -39,8 +37,7 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Report skimming to the Watch later.",
-          "Text": "Report skimming to the Watch later."
+          "Label": "Report skimming to the Watch later."
         },
         {
           "Effects": [
@@ -48,13 +45,11 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Walk away.",
-          "Text": "Walk away."
+          "Label": "Walk away."
         },
         {
           "Label": "Any honest work going?",
           "Effects": [],
-          "Text": "Any honest work going?",
           "Goto": "L_WORK"
         }
       ]
@@ -68,8 +63,7 @@
             {
               "Op": "endDialogue"
             }
-          ],
-          "Text": "Thanks. That helps."
+          ]
         }
       ]
     },
@@ -82,8 +76,7 @@
             {
               "Op": "endDialogue"
             }
-          ],
-          "Text": "I'll keep that in mind."
+          ]
         }
       ]
     }

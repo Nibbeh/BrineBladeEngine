@@ -9,7 +9,6 @@
         {
           "Label": "Ask about the city.",
           "Effects": [],
-          "Text": "Ask about the city.",
           "Goto": "L_INFO"
         },
         {
@@ -22,8 +21,7 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Challenge him.",
-          "Text": "Challenge him."
+          "Label": "Challenge him."
         },
         {
           "Effects": [
@@ -35,8 +33,7 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Agree loudly.",
-          "Text": "Agree loudly."
+          "Label": "Agree loudly."
         },
         {
           "Effects": [
@@ -44,13 +41,11 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Slip away.",
-          "Text": "Slip away."
+          "Label": "Slip away."
         },
         {
           "Label": "Any honest work going?",
           "Effects": [],
-          "Text": "Any honest work going?",
           "Goto": "L_WORK"
         }
       ]
@@ -64,8 +59,7 @@
             {
               "Op": "endDialogue"
             }
-          ],
-          "Text": "Thanks. That helps."
+          ]
         }
       ]
     },
@@ -78,8 +72,7 @@
             {
               "Op": "endDialogue"
             }
-          ],
-          "Text": "I'll keep that in mind."
+          ]
         }
       ]
     }

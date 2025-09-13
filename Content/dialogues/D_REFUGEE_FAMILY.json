@@ -9,7 +9,6 @@
         {
           "Label": "Ask about the city.",
           "Effects": [],
-          "Text": "Ask about the city.",
           "Goto": "L_INFO"
         },
         {
@@ -30,8 +29,7 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Give bread.",
-          "Text": "Give bread."
+          "Label": "Give bread."
         },
         {
           "Effects": [
@@ -43,8 +41,7 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Promise to help later.",
-          "Text": "Promise to help later."
+          "Label": "Promise to help later."
         },
         {
           "Effects": [
@@ -52,13 +49,11 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Sorry. I can't.",
-          "Text": "Sorry. I can't."
+          "Label": "Sorry. I can't."
         },
         {
           "Label": "Any honest work going?",
           "Effects": [],
-          "Text": "Any honest work going?",
           "Goto": "L_WORK"
         }
       ]
@@ -72,8 +67,7 @@
             {
               "Op": "endDialogue"
             }
-          ],
-          "Text": "Thanks. That helps."
+          ]
         }
       ]
     },
@@ -86,8 +80,7 @@
             {
               "Op": "endDialogue"
             }
-          ],
-          "Text": "I'll keep that in mind."
+          ]
         }
       ]
     }

@@ -15,8 +15,7 @@
         }
       ],
       "Id": "Play_knucklebones_stake_2g",
-      "Label": "Play knucklebones (stake 2g).",
-      "Text": "Play knucklebones (stake 2g)."
+      "Label": "Play knucklebones (stake 2g)."
     },
     {
       "Effects": [
@@ -26,13 +25,11 @@
         }
       ],
       "Id": "Ask_for_rumors",
-      "Label": "Ask for rumors.",
-      "Text": "Ask for rumors."
+      "Label": "Ask for rumors."
     },
     {
       "Id": "O_EAVESDROP",
       "Label": "Eavesdrop on the crowd.",
-      "Text": "Eavesdrop on the crowd.",
       "Effects": [
         {
           "Op": "startDialogue",
@@ -44,8 +41,7 @@
   "Exits": [
     {
       "Text": "Back to Harbor Town Square",
-      "To": "N_HARBOR_SQUARE",
-      "Label": "Back to Harbor Town Square"
+      "To": "N_HARBOR_SQUARE"
     }
   ]
 }

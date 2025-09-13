@@ -9,7 +9,6 @@
         {
           "Label": "Ask about the city.",
           "Effects": [],
-          "Text": "Ask about the city.",
           "Goto": "L_INFO"
         },
         {
@@ -26,8 +25,7 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Leave a coin (1g).",
-          "Text": "Leave a coin (1g)."
+          "Label": "Leave a coin (1g)."
         },
         {
           "Effects": [
@@ -35,13 +33,11 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Nod and depart.",
-          "Text": "Nod and depart."
+          "Label": "Nod and depart."
         },
         {
           "Label": "Any honest work going?",
           "Effects": [],
-          "Text": "Any honest work going?",
           "Goto": "L_WORK"
         }
       ]
@@ -55,8 +51,7 @@
             {
               "Op": "endDialogue"
             }
-          ],
-          "Text": "Thanks. That helps."
+          ]
         }
       ]
     },
@@ -69,8 +64,7 @@
             {
               "Op": "endDialogue"
             }
-          ],
-          "Text": "I'll keep that in mind."
+          ]
         }
       ]
     }

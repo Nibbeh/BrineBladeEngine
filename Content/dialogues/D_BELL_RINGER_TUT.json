@@ -9,7 +9,6 @@
         {
           "Label": "Ask about the city.",
           "Effects": [],
-          "Text": "Ask about the city.",
           "Goto": "L_INFO"
         },
         {
@@ -22,8 +21,7 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Ring the bell.",
-          "Text": "Ring the bell."
+          "Label": "Ring the bell."
         },
         {
           "Effects": [
@@ -31,13 +29,11 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Not today.",
-          "Text": "Not today."
+          "Label": "Not today."
         },
         {
           "Label": "Any honest work going?",
           "Effects": [],
-          "Text": "Any honest work going?",
           "Goto": "L_WORK"
         }
       ]
@@ -51,8 +47,7 @@
             {
               "Op": "endDialogue"
             }
-          ],
-          "Text": "Thanks. That helps."
+          ]
         }
       ]
     },
@@ -65,8 +60,7 @@
             {
               "Op": "endDialogue"
             }
-          ],
-          "Text": "I'll keep that in mind."
+          ]
         }
       ]
     }

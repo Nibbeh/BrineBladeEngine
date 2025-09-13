@@ -9,7 +9,6 @@
         {
           "Label": "Ask about the city.",
           "Effects": [],
-          "Text": "Ask about the city.",
           "Goto": "L_INFO"
         },
         {
@@ -17,7 +16,7 @@
           "Effects": [
             {
               "Op": "advanceTime",
-              "Hours": 0.3333333333333333
+              "Minutes": 0
             },
             {
               "Op": "addGold",
@@ -26,8 +25,7 @@
             {
               "Op": "endDialogue"
             }
-          ],
-          "Text": "Coin. No questions."
+          ]
         },
         {
           "Label": "Standing. Speak for me at Customs.",
@@ -39,8 +37,7 @@
             {
               "Op": "endDialogue"
             }
-          ],
-          "Text": "Standing. Speak for me at Customs."
+          ]
         },
         {
           "Label": "Another time.",
@@ -48,13 +45,11 @@
             {
               "Op": "endDialogue"
             }
-          ],
-          "Text": "Another time."
+          ]
         },
         {
           "Label": "Any honest work going?",
           "Effects": [],
-          "Text": "Any honest work going?",
           "Goto": "L_WORK"
         }
       ]
@@ -68,8 +63,7 @@
             {
               "Op": "endDialogue"
             }
-          ],
-          "Text": "Thanks. That helps."
+          ]
         }
       ]
     },
@@ -82,8 +76,7 @@
             {
               "Op": "endDialogue"
             }
-          ],
-          "Text": "I'll keep that in mind."
+          ]
         }
       ]
     }

@@ -15,8 +15,7 @@
         }
       ],
       "Id": "Search_the_beams_find_2g",
-      "Label": "Search the beams (find 2g).",
-      "Text": "Search the beams (find 2g)."
+      "Label": "Search the beams (find 2g)."
     },
     {
       "Effects": [
@@ -26,8 +25,7 @@
         }
       ],
       "Id": "Follow_gull_sigils_to_Shanty_Alley",
-      "Label": "Follow gull sigils to Shanty Alley.",
-      "Text": "Follow gull sigils to Shanty Alley."
+      "Label": "Follow gull sigils to Shanty Alley."
     },
     {
       "Effects": [
@@ -37,13 +35,11 @@
         }
       ],
       "Id": "Keep_low_and_listen_smuggler_hint",
-      "Label": "Keep low and listen (smuggler hint).",
-      "Text": "Keep low and listen (smuggler hint)."
+      "Label": "Keep low and listen (smuggler hint)."
     },
     {
       "Id": "O_EAVESDROP",
       "Label": "Eavesdrop on the crowd.",
-      "Text": "Eavesdrop on the crowd.",
       "Effects": [
         {
           "Op": "startDialogue",
@@ -53,7 +49,6 @@
     },
     {
       "Id": "O_CONTACT_SMUGGLER_UNDERPIER",
-      "Text": "Tap the beam twice - wait for the smuggler's reply.",
       "Effects": [
         {
           "Op": "startDialogue",
@@ -66,13 +61,11 @@
   "Exits": [
     {
       "Text": "Up to the Outer Pier",
-      "To": "N_OUTER_PIER",
-      "Label": "Up to the Outer Pier"
+      "To": "N_OUTER_PIER"
     },
     {
       "Text": "Along the slick catwalk to the Old Sea Bell",
-      "To": "N_OLD_SEA_BELL",
-      "Label": "Along the slick catwalk to the Old Sea Bell"
+      "To": "N_OLD_SEA_BELL"
     }
   ]
 }

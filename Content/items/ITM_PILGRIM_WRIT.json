@@ -1,7 +1,6 @@
 {
   "Id": "ITM_PILGRIM_WRIT",
   "Name": "Pilgrim's Writ",
-  "Description": "Lighthouse-keeper's paper granting passage for pious duties.",
   "Type": "Quest",
   "Weight": 0,
   "Value": 0,

@@ -10,7 +10,6 @@
     {
       "Id": "O_EAVESDROP",
       "Label": "Eavesdrop on the crowd.",
-      "Text": "Eavesdrop on the crowd.",
       "Effects": [
         {
           "Op": "startDialogue",
@@ -20,7 +19,6 @@
     },
     {
       "Id": "O_TALK_GUILD_FACTOR_MARKET",
-      "Text": "Ask the Factor about market dues.",
       "Effects": [
         {
           "Op": "startDialogue",
@@ -33,8 +31,7 @@
   "Exits": [
     {
       "Text": "To Harbor Town Square",
-      "To": "N_HARBOR_SQUARE",
-      "Label": "To Harbor Town Square"
+      "To": "N_HARBOR_SQUARE"
     }
   ]
 }

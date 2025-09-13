@@ -15,8 +15,7 @@
         }
       ],
       "Id": "Talk_to_the_Guard_Captain",
-      "Label": "Talk to the Guard Captain.",
-      "Text": "Talk to the Guard Captain."
+      "Label": "Talk to the Guard Captain."
     },
     {
       "Effects": [
@@ -26,13 +25,11 @@
         }
       ],
       "Id": "Study_the_recruitment_board",
-      "Label": "Study the recruitment board.",
-      "Text": "Study the recruitment board."
+      "Label": "Study the recruitment board."
     },
     {
       "Id": "O_EAVESDROP",
       "Label": "Eavesdrop on the crowd.",
-      "Text": "Eavesdrop on the crowd.",
       "Effects": [
         {
           "Op": "startDialogue",
@@ -44,13 +41,11 @@
   "Exits": [
     {
       "Text": "To Main Gate Bridge",
-      "To": "N_MAIN_GATE_BRIDGE",
-      "Label": "To Main Gate Bridge"
+      "To": "N_MAIN_GATE_BRIDGE"
     },
     {
       "Text": "Back to Harbor Town Square",
-      "To": "N_HARBOR_SQUARE",
-      "Label": "Back to Harbor Town Square"
+      "To": "N_HARBOR_SQUARE"
     }
   ]
 }

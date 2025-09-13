@@ -1,10 +1,8 @@
 {
   "Id": "N_REFUGEE_CAMP",
   "Title": "Refugee Camp (Quayside Tents)",
-  "EnterText": "Canvas groans and stove-smoke stings. A bell rings somewhere up the quay.",
   "Options": [
     {
-      "Text": "Share a little coin for bread (1g).",
       "Effects": [
         {
           "Op": "addGold",
@@ -12,18 +10,17 @@
         },
         {
           "Op": "setFlag",
-          "Flag": "camp.helped"
+          "Id": "camp.helped"
         },
         {
           "Op": "advanceTime",
-          "Hours": 1
+          "Minutes": 60
         }
       ],
       "Label": "Share a little coin for bread (1g).",
       "Id": "O_SHARE_A_LITTLE_COIN_FOR_BREAD_1G"
     },
     {
-      "Text": "Trade odd jobs for a hot drink.",
       "Effects": [
         {
           "Op": "addGold",
@@ -31,14 +28,13 @@
         },
         {
           "Op": "setFlag",
-          "Flag": "camp.traded"
+          "Id": "camp.traded"
         }
       ],
       "Label": "Trade odd jobs for a hot drink.",
       "Id": "O_TRADE_ODD_JOBS_FOR_A_HOT_DRINK"
     },
     {
-      "Text": "Spar with the roughs to pass the time.",
       "Effects": [
         {
           "Op": "combat",
@@ -51,7 +47,6 @@
     {
       "Id": "O_EAVESDROP",
       "Label": "Eavesdrop on the crowd.",
-      "Text": "Eavesdrop on the crowd.",
       "Effects": [
         {
           "Op": "startDialogue",
@@ -61,7 +56,6 @@
     },
     {
       "Id": "O_TALK_CAMP_ELDER",
-      "Text": "Speak with the camp elder.",
       "Effects": [
         {
           "Op": "startDialogue",
@@ -72,7 +66,6 @@
     },
     {
       "Id": "O_TALK_REFUGEE_FAMILY",
-      "Text": "Check on a refugee family.",
       "Effects": [
         {
           "Op": "startDialogue",
@@ -85,22 +78,20 @@
   "Exits": [
     {
       "Text": "To Harbor Town Square",
-      "To": "N_HARBOR_SQUARE",
-      "Label": "To Harbor Town Square"
+      "To": "N_HARBOR_SQUARE"
     },
     {
       "Text": "To Ropewalk Lane",
-      "To": "N_ROPEWALK",
-      "Label": "To Ropewalk Lane"
+      "To": "N_ROPEWALK"
     },
     {
       "Text": "To Shanty Alley",
-      "To": "N_SHANTY_ALLEY",
-      "Label": "To Shanty Alley"
+      "To": "N_SHANTY_ALLEY"
     }
   ],
   "Description": "Canvas lanes, cookfire smoke, and the patience of people with nowhere left to go.",
   "Paragraphs": [
+    "Canvas groans and stove-smoke stings. A bell rings somewhere up the quay.",
     "Ropes creak in the wind and tin stoves tick as they cool. Children chalk games in the dust; a bell somewhere upriver counts the day's last bread.",
     "Aid wagons rattle through with thin blankets and thinner mercy. Between tents, a grey-bearded elder keeps a ledger of names that is mostly crossings-out."
   ]

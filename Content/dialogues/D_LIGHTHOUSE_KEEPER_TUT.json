@@ -9,7 +9,6 @@
         {
           "Label": "Ask about the city.",
           "Effects": [],
-          "Text": "Ask about the city.",
           "Goto": "L_INFO"
         },
         {
@@ -22,8 +21,7 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Any pilgrims pass?",
-          "Text": "Any pilgrims pass?"
+          "Label": "Any pilgrims pass?"
         },
         {
           "Effects": [
@@ -31,13 +29,11 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "I'll go.",
-          "Text": "I'll go."
+          "Label": "I'll go."
         },
         {
           "Label": "Any honest work going?",
           "Effects": [],
-          "Text": "Any honest work going?",
           "Goto": "L_WORK"
         }
       ]
@@ -51,8 +47,7 @@
             {
               "Op": "endDialogue"
             }
-          ],
-          "Text": "Thanks. That helps."
+          ]
         }
       ]
     },
@@ -65,8 +60,7 @@
             {
               "Op": "endDialogue"
             }
-          ],
-          "Text": "I'll keep that in mind."
+          ]
         }
       ]
     }

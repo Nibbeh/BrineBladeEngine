@@ -1,10 +1,8 @@
 {
   "Id": "N_SMUGGLERS_DEN",
   "Title": "Smugglers' Den (Net Loft)",
-  "EnterText": "Netting hangs like cobwebs; a whispering ladder dips into shadow.",
   "Options": [
     {
-      "Text": "Buy a gull-token (5g).",
       "Effects": [
         {
           "Op": "addGold",
@@ -17,14 +15,13 @@
         },
         {
           "Op": "setFlag",
-          "Flag": "route.smuggler"
+          "Id": "route.smuggler"
         }
       ],
       "Label": "Buy a gull-token (5g).",
       "Id": "O_BUY_A_GULL_TOKEN_5G"
     },
     {
-      "Text": "Hand over a construct bolt (they pay in coin).",
       "Effects": [
         {
           "Op": "removeItemByName",
@@ -37,7 +34,7 @@
         },
         {
           "Op": "setFlag",
-          "Flag": "smuggler.msg"
+          "Id": "smuggler.msg"
         }
       ],
       "Label": "Hand over a construct bolt (they pay in coin).",
@@ -46,7 +43,6 @@
     {
       "Id": "O_EAVESDROP",
       "Label": "Eavesdrop on the crowd.",
-      "Text": "Eavesdrop on the crowd.",
       "Effects": [
         {
           "Op": "startDialogue",
@@ -56,7 +52,6 @@
     },
     {
       "Id": "O_CONTACT_SMUGGLER",
-      "Text": "Give the dock-sign and ask for a contact.",
       "Effects": [
         {
           "Op": "startDialogue",
@@ -69,17 +64,16 @@
   "Exits": [
     {
       "Text": "To Under-Pier Catwalk",
-      "To": "N_UNDER_PIER",
-      "Label": "To Under-Pier Catwalk"
+      "To": "N_UNDER_PIER"
     },
     {
       "Text": "To Harbor Town Square",
-      "To": "N_HARBOR_SQUARE",
-      "Label": "To Harbor Town Square"
+      "To": "N_HARBOR_SQUARE"
     }
   ],
   "Description": "A net loft that smells of pitch, tar, and quiet arrangements.",
   "Paragraphs": [
+    "Netting hangs like cobwebs; a whispering ladder dips into shadow.",
     "The rafters are a forest of ropes and hooks; lantern light beads on the lines like amber caught in webbing.",
     "Conversations run under the floorboards - soft as the tide, sharp as a hook. A ladder vanishes into a slit that leads nowhere anyone speaks of openly."
   ]

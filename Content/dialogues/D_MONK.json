@@ -9,7 +9,6 @@
         {
           "Label": "Ask about the city.",
           "Effects": [],
-          "Text": "Ask about the city.",
           "Goto": "L_INFO"
         },
         {
@@ -26,8 +25,7 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Ask for mercy of passage.",
-          "Text": "Ask for mercy of passage."
+          "Label": "Ask for mercy of passage."
         },
         {
           "Requires": [
@@ -43,8 +41,7 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Accept bread.",
-          "Text": "Accept bread."
+          "Label": "Accept bread."
         },
         {
           "Effects": [
@@ -52,13 +49,11 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Thank him.",
-          "Text": "Thank him."
+          "Label": "Thank him."
         },
         {
           "Label": "Any honest work going?",
           "Effects": [],
-          "Text": "Any honest work going?",
           "Goto": "L_WORK"
         }
       ]
@@ -72,8 +67,7 @@
             {
               "Op": "endDialogue"
             }
-          ],
-          "Text": "Thanks. That helps."
+          ]
         }
       ]
     },
@@ -86,8 +80,7 @@
             {
               "Op": "endDialogue"
             }
-          ],
-          "Text": "I'll keep that in mind."
+          ]
         }
       ]
     }

@@ -9,13 +9,11 @@
         {
           "Label": "Ask about the city.",
           "Effects": [],
-          "Text": "Ask about the city.",
           "Goto": "L_INFO"
         },
         {
           "Label": "What papers would do?",
           "Goto": "L2",
-          "Text": "What papers would do?",
           "Effects": []
         },
         {
@@ -31,8 +29,7 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "(Show Temporary Pass)",
-          "Text": "(Show Temporary Pass)"
+          "Label": "(Show Temporary Pass)"
         },
         {
           "Requires": [
@@ -47,8 +44,7 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "(Show Work Permit)",
-          "Text": "(Show Work Permit)"
+          "Label": "(Show Work Permit)"
         },
         {
           "Requires": [
@@ -63,8 +59,7 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "(Show Pilgrim's Writ)",
-          "Text": "(Show Pilgrim's Writ)"
+          "Label": "(Show Pilgrim's Writ)"
         },
         {
           "Requires": [
@@ -79,8 +74,7 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "(Smuggler's arrangement)",
-          "Text": "(Smuggler's arrangement)"
+          "Label": "(Smuggler's arrangement)"
         },
         {
           "Effects": [
@@ -96,8 +90,7 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "(Bribe) 20g.",
-          "Text": "(Bribe) 20g."
+          "Label": "(Bribe) 20g."
         },
         {
           "Effects": [
@@ -105,13 +98,11 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Nevermind.",
-          "Text": "Nevermind."
+          "Label": "Nevermind."
         },
         {
           "Label": "Any honest work going?",
           "Effects": [],
-          "Text": "Any honest work going?",
           "Goto": "L_WORK"
         }
       ]
@@ -125,8 +116,7 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Thanks.",
-          "Text": "Thanks."
+          "Label": "Thanks."
         }
       ]
     },
@@ -139,8 +129,7 @@
             {
               "Op": "endDialogue"
             }
-          ],
-          "Text": "Thanks. That helps."
+          ]
         }
       ]
     },
@@ -153,8 +142,7 @@
             {
               "Op": "endDialogue"
             }
-          ],
-          "Text": "I'll keep that in mind."
+          ]
         }
       ]
     }

@@ -9,7 +9,6 @@
         {
           "Label": "Ask about the city.",
           "Effects": [],
-          "Text": "Ask about the city.",
           "Goto": "L_INFO"
         },
         {
@@ -25,8 +24,7 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Report merc skimming at the docks.",
-          "Text": "Report merc skimming at the docks."
+          "Label": "Report merc skimming at the docks."
         },
         {
           "Effects": [
@@ -38,8 +36,7 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "Any legal way through?",
-          "Text": "Any legal way through?"
+          "Label": "Any legal way through?"
         },
         {
           "Effects": [
@@ -47,13 +44,11 @@
               "Op": "endDialogue"
             }
           ],
-          "Label": "I'll go.",
-          "Text": "I'll go."
+          "Label": "I'll go."
         },
         {
           "Label": "Any honest work going?",
           "Effects": [],
-          "Text": "Any honest work going?",
           "Goto": "L_WORK"
         }
       ]
@@ -67,8 +62,7 @@
             {
               "Op": "endDialogue"
             }
-          ],
-          "Text": "Thanks. That helps."
+          ]
         }
       ]
     },
@@ -81,8 +75,7 @@
             {
               "Op": "endDialogue"
             }
-          ],
-          "Text": "I'll keep that in mind."
+          ]
         }
       ]
     }
