@@ -12,25 +12,22 @@
           "Goto": "L_INFO"
         },
         {
-          "Requires": [
-            "flag:inv.ITM_BREAD"
-          ],
+          "Requires": [ "flag:inv.ITM_BREAD" ],
           "Effects": [
             {
-              "Op": "addItem",
+              "Op": "removeItemByName",
               "Id": "ITM_BREAD",
-              "Qty": -1
+              "Qty": 1
             },
             {
               "Op": "setFlag",
               "Id": "moral.kind.refugee"
             },
-            {
-              "Op": "endDialogue"
-            }
+            { "Op": "endDialogue" }
           ],
           "Label": "Give bread."
-        },
+        }
+,
         {
           "Effects": [
             {
