@@ -17,6 +17,7 @@
           "Effects": []
         },
         {
+          "Label": "(Show Temporary Pass)",
           "Requires": [
             "flag:permit.temp"
           ],
@@ -28,10 +29,10 @@
             {
               "Op": "endDialogue"
             }
-          ],
-          "Label": "(Show Temporary Pass)"
+          ]
         },
         {
+          "Label": "(Show Work Permit)",
           "Requires": [
             "flag:permit.worker"
           ],
@@ -43,10 +44,10 @@
             {
               "Op": "endDialogue"
             }
-          ],
-          "Label": "(Show Work Permit)"
+          ]
         },
         {
+          "Label": "(Show Pilgrim's Writ)",
           "Requires": [
             "flag:writ.pilgrim"
           ],
@@ -58,10 +59,10 @@
             {
               "Op": "endDialogue"
             }
-          ],
-          "Label": "(Show Pilgrim's Writ)"
+          ]
         },
         {
+          "Label": "(Smuggler's arrangement)",
           "Requires": [
             "flag:route.smuggler"
           ],
@@ -73,10 +74,10 @@
             {
               "Op": "endDialogue"
             }
-          ],
-          "Label": "(Smuggler's arrangement)"
+          ]
         },
         {
+          "Label": "(Bribe) 20g.",
           "Effects": [
             {
               "Op": "addGold",
@@ -89,21 +90,50 @@
             {
               "Op": "endDialogue"
             }
-          ],
-          "Label": "(Bribe) 20g."
+          ]
         },
         {
+          "Label": "Nevermind.",
           "Effects": [
             {
               "Op": "endDialogue"
             }
-          ],
-          "Label": "Nevermind."
+          ]
         },
         {
           "Label": "Any honest work going?",
           "Effects": [],
           "Goto": "L_WORK"
+        },
+        {
+          "Label": "(Show Temporary Pass)",
+          "Requires": [
+            "flag:inv.ITM_TEMP_PASS"
+          ],
+          "Effects": [
+            {
+              "Op": "setFlag",
+              "Id": "pass.accepted"
+            },
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        },
+        {
+          "Label": "(Show Work Permit)",
+          "Requires": [
+            "flag:inv.ITM_WORK_PERMIT"
+          ],
+          "Effects": [
+            {
+              "Op": "setFlag",
+              "Id": "pass.accepted"
+            },
+            {
+              "Op": "endDialogue"
+            }
+          ]
         }
       ]
     },
@@ -111,12 +141,12 @@
       "Text": "Temporary pass, work permit, pilgrim's writ—or a letter from someone richer than me.",
       "Choices": [
         {
+          "Label": "Right. Thanks.",
           "Effects": [
             {
               "Op": "endDialogue"
             }
-          ],
-          "Label": "Thanks."
+          ]
         }
       ]
     },

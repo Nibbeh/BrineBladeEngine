@@ -12,6 +12,7 @@
           "Goto": "L_INFO"
         },
         {
+          "Label": "Pay 10g for a Temporary Pass.",
           "Effects": [
             {
               "Op": "addGold",
@@ -22,30 +23,22 @@
               "Id": "permit.temp"
             },
             {
-              "Op": "endDialogue"
-            }
-          ],
-          "Label": "Pay 10g for a Temporary Pass."
-        },
-        {
-          "Effects": [
-            {
-              "Op": "setFlag",
-              "Id": "dockmaster.suspicious"
+              "Op": "addItem",
+              "Id": "ITM_TEMP_PASS",
+              "Amount": 1
             },
             {
               "Op": "endDialogue"
             }
-          ],
-          "Label": "Claim you're contracted crew."
+          ]
         },
         {
+          "Label": "Nevermind.",
           "Effects": [
             {
               "Op": "endDialogue"
             }
-          ],
-          "Label": "Leave."
+          ]
         },
         {
           "Label": "Any honest work going?",

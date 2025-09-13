@@ -15,12 +15,12 @@
           "Label": "Coin. No questions.",
           "Effects": [
             {
-              "Op": "advanceTime",
-              "Minutes": 0
-            },
-            {
               "Op": "addGold",
               "Amount": 2
+            },
+            {
+              "Op": "advanceTime",
+              "Minutes": 60
             },
             {
               "Op": "endDialogue"
@@ -33,6 +33,32 @@
             {
               "Op": "setFlag",
               "Id": "permit.temp"
+            },
+            {
+              "Op": "addItem",
+              "Id": "ITM_TEMP_PASS",
+              "Amount": 1
+            },
+            {
+              "Op": "endDialogue"
+            }
+          ]
+        },
+        {
+          "Label": "Hire me properly (pay 8g) — issue Work Permit.",
+          "Effects": [
+            {
+              "Op": "addGold",
+              "Amount": -8
+            },
+            {
+              "Op": "setFlag",
+              "Id": "permit.worker"
+            },
+            {
+              "Op": "addItem",
+              "Id": "ITM_WORK_PERMIT",
+              "Amount": 1
             },
             {
               "Op": "endDialogue"

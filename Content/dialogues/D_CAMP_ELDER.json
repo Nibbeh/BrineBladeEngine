@@ -12,6 +12,7 @@
           "Goto": "L_INFO"
         },
         {
+          "Label": "Distribute bread.",
           "Requires": [
             "flag:inv.ITM_BREAD"
           ],
@@ -28,28 +29,38 @@
             {
               "Op": "endDialogue"
             }
-          ],
-          "Label": "Distribute bread."
+          ]
         },
         {
+          "Label": "Contribute your soup pot to the communal stew.",
+          "Requires": [
+            "flag:inv.ITM_SOUP_POT"
+          ],
           "Effects": [
             {
               "Op": "setFlag",
-              "Id": "lie.camp"
+              "Id": "help.camp"
             },
             {
               "Op": "endDialogue"
             }
-          ],
-          "Label": "Lie—pretend you tried."
+          ]
         },
         {
+          "Label": "Lie—pretend you tried.",
           "Effects": [
             {
               "Op": "endDialogue"
             }
-          ],
-          "Label": "Leave."
+          ]
+        },
+        {
+          "Label": "Leave.",
+          "Effects": [
+            {
+              "Op": "endDialogue"
+            }
+          ]
         },
         {
           "Label": "Any honest work going?",

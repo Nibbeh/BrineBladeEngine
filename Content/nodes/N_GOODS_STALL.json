@@ -18,14 +18,104 @@
       ]
     },
     {
-      "Id": "O_TALK_GUILD_FACTOR_MARKET",
+      "Id": "O_TALK_FACTOR",
+      "Label": "Ask the Factor about market dues.",
       "Effects": [
         {
           "Op": "startDialogue",
           "Id": "D_GUILD_FACTOR"
         }
-      ],
-      "Label": "Ask the Factor about market dues."
+      ]
+    },
+    {
+      "Id": "BUY_LANTERN",
+      "Label": "Buy Lantern (3g)",
+      "Effects": [
+        {
+          "Op": "addGold",
+          "Amount": -3
+        },
+        {
+          "Op": "addItem",
+          "Id": "ITM_LANTERN",
+          "Amount": 1
+        }
+      ]
+    },
+    {
+      "Id": "BUY_SWORD",
+      "Label": "Buy Short Sword (10g)",
+      "Effects": [
+        {
+          "Op": "addGold",
+          "Amount": -10
+        },
+        {
+          "Op": "addItem",
+          "Id": "ITM_SWORD_SHORT",
+          "Amount": 1
+        }
+      ]
+    },
+    {
+      "Id": "BUY_LEATHER",
+      "Label": "Buy Leather Armor (8g)",
+      "Effects": [
+        {
+          "Op": "addGold",
+          "Amount": -8
+        },
+        {
+          "Op": "addItem",
+          "Id": "ITM_ARMOR_LEATHER",
+          "Amount": 1
+        }
+      ]
+    },
+    {
+      "Id": "BUY_SHIELD",
+      "Label": "Buy Wooden Shield (6g)",
+      "Effects": [
+        {
+          "Op": "addGold",
+          "Amount": -6
+        },
+        {
+          "Op": "addItem",
+          "Id": "ITM_SHIELD_WOOD",
+          "Amount": 1
+        }
+      ]
+    },
+    {
+      "Id": "BUY_CAP",
+      "Label": "Buy Cloth Cap (1g)",
+      "Effects": [
+        {
+          "Op": "addGold",
+          "Amount": -1
+        },
+        {
+          "Op": "addItem",
+          "Id": "ITM_CAP_CLOTH",
+          "Amount": 1
+        }
+      ]
+    },
+    {
+      "Id": "BUY_SOUP_POT",
+      "Label": "Buy Soup Pot (2g)",
+      "Effects": [
+        {
+          "Op": "addGold",
+          "Amount": -2
+        },
+        {
+          "Op": "addItem",
+          "Id": "ITM_SOUP_POT",
+          "Amount": 1
+        }
+      ]
     }
   ],
   "Exits": [

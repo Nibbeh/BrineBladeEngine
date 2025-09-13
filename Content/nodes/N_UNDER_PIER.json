@@ -8,34 +8,37 @@
   ],
   "Options": [
     {
+      "Id": "Search_the_beams_find_2g",
+      "Label": "Search the beams (find 2g).",
+      "Requires": [
+        "flag:inv.ITM_LANTERN"
+      ],
       "Effects": [
         {
           "Op": "addGold",
           "Amount": 2
         }
-      ],
-      "Id": "Search_the_beams_find_2g",
-      "Label": "Search the beams (find 2g)."
+      ]
     },
     {
+      "Id": "Follow_gull_sigils_to_Shanty_Alley",
+      "Label": "Follow gull sigils to Shanty Alley.",
       "Effects": [
         {
           "Op": "goto",
           "To": "N_SHANTY_ALLEY"
         }
-      ],
-      "Id": "Follow_gull_sigils_to_Shanty_Alley",
-      "Label": "Follow gull sigils to Shanty Alley."
+      ]
     },
     {
+      "Id": "Keep_low_and_listen_smuggler_hint",
+      "Label": "Keep low and listen (smuggler hint).",
       "Effects": [
         {
           "Op": "startDialogue",
           "Id": "D_SMUGGLER_HINT"
         }
-      ],
-      "Id": "Keep_low_and_listen_smuggler_hint",
-      "Label": "Keep low and listen (smuggler hint)."
+      ]
     },
     {
       "Id": "O_EAVESDROP",
@@ -49,13 +52,13 @@
     },
     {
       "Id": "O_CONTACT_SMUGGLER_UNDERPIER",
+      "Label": "Tap the beam twice - wait for the smuggler's reply.",
       "Effects": [
         {
           "Op": "startDialogue",
           "Id": "D_SMUGGLER_CONTACT"
         }
-      ],
-      "Label": "Tap the beam twice - wait for the smuggler's reply."
+      ]
     }
   ],
   "Exits": [

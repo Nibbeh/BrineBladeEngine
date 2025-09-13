@@ -3,6 +3,11 @@
   "Title": "Main Gate Bridge",
   "Options": [
     {
+      "Id": "O_SHOW_WORK_PERMIT_ENTER_AS_A_HIRED_HAND",
+      "Label": "(Show Work Permit) — enter as a hired hand.",
+      "Requires": [
+        "flag:inv.ITM_WORK_PERMIT"
+      ],
       "Effects": [
         {
           "Op": "setFlag",
@@ -12,11 +17,11 @@
           "Op": "goto",
           "To": "N_CITY_INTRO"
         }
-      ],
-      "Label": "(Show Work Permit) — enter as a hired hand.",
-      "Id": "O_SHOW_WORK_PERMIT_ENTER_AS_A_HIRED_HAND"
+      ]
     },
     {
+      "Id": "O_PAY_20G_BRIBE_THE_CLERK_FOR_A_FAST_STAMP",
+      "Label": "(Pay 20g) — bribe the clerk for a fast stamp.",
       "Effects": [
         {
           "Op": "addGold",
@@ -26,11 +31,14 @@
           "Op": "goto",
           "To": "N_CITY_INTRO"
         }
-      ],
-      "Label": "(Pay 20g) — bribe the clerk for a fast stamp.",
-      "Id": "O_PAY_20G_BRIBE_THE_CLERK_FOR_A_FAST_STAMP"
+      ]
     },
     {
+      "Id": "O_SMUGGLER_S_WAVE_TAKE_THE_RIVER_GATE_SIDE_STAIR",
+      "Label": "(Smuggler's wave) — take the river-gate side stair.",
+      "Requires": [
+        "flag:token.smuggler"
+      ],
       "Effects": [
         {
           "Op": "setFlag",
@@ -40,9 +48,7 @@
           "Op": "goto",
           "To": "N_CITY_INTRO"
         }
-      ],
-      "Label": "(Smuggler's wave) — take the river-gate side stair.",
-      "Id": "O_SMUGGLER_S_WAVE_TAKE_THE_RIVER_GATE_SIDE_STAIR"
+      ]
     },
     {
       "Id": "O_EAVESDROP",
@@ -56,13 +62,13 @@
     },
     {
       "Id": "O_TALK_GATE_GUARD",
+      "Label": "Speak to the gate guard.",
       "Effects": [
         {
           "Op": "startDialogue",
           "Id": "D_GATE_GUARD_TUT"
         }
-      ],
-      "Label": "Speak to the gate guard."
+      ]
     }
   ],
   "Exits": [
@@ -75,6 +81,6 @@
   "Paragraphs": [
     "Bridge chains creak; Watch-halberds glitter in the mist. A clerk's desk squats beneath a salt-faded banner.",
     "Chains bite into the draw as the river yawns below. A clerk's desk, scarred by rain and ink, sits beneath a salt-faded banner.",
-    "Queue lines knot with carters, pilgrims, and old soldiers. The Watch read faces like writs; the wrong expression costs more than twenty coin."
+    "Queue lines knot with carters, pilgrims, and old soldiers. Papers move like writs; the wrong expression costs more than twenty coin."
   ]
 }

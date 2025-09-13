@@ -12,39 +12,29 @@
           "Goto": "L_INFO"
         },
         {
-          "Requires": [
-            "flag:permit.temp"
-          ],
-          "Effects": [
-            {
-              "Op": "setFlag",
-              "Id": "letter.guild"
-            },
-            {
-              "Op": "endDialogue"
-            }
-          ],
-          "Label": "Present Temporary Pass."
-        },
-        {
+          "Label": "Ask for a letter of introduction.",
           "Effects": [
             {
               "Op": "setFlag",
               "Id": "note.elven"
             },
             {
+              "Op": "addItem",
+              "Id": "ITM_ELVEN_NOTE",
+              "Amount": 1
+            },
+            {
               "Op": "endDialogue"
             }
-          ],
-          "Label": "Ask for a letter of introduction."
+          ]
         },
         {
+          "Label": "Nevermind.",
           "Effects": [
             {
               "Op": "endDialogue"
             }
-          ],
-          "Label": "Nevermind."
+          ]
         },
         {
           "Label": "Any honest work going?",
