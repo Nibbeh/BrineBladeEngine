@@ -1,0 +1,60 @@
+{
+  "$id": "Class.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "Id",
+    "Name",
+    "Resource"
+  ],
+  "properties": {
+    "Id": {
+      "type": "string"
+    },
+    "Name": {
+      "type": "string"
+    },
+    "Resource": {
+      "type": "string"
+    },
+    "StartGold": {
+      "type": "integer"
+    },
+    "StartFlags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "Tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "AllowedArmorTypes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Cloth",
+          "Leather",
+          "Plate"
+        ]
+      }
+    },
+    "AllowedWeaponTypes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "OneHanded",
+          "TwoHanded",
+          "Ranged",
+          "Staff",
+          "Dagger"
+        ]
+      }
+    }
+  }
+}

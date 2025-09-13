@@ -1,0 +1,56 @@
+{
+  "$id": "EffectSpec.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "Op"
+  ],
+  "properties": {
+    "Op": {
+      "type": "string",
+      "enum": [
+        "endDialogue",
+        "setFlag",
+        "addGold",
+        "advanceTime",
+        "goto",
+        "startDialogue",
+        "combat",
+        "addItem",
+        "removeItemByName",
+        "equip",
+        "unequip"
+      ]
+    },
+    "Id": {
+      "type": "string"
+    },
+    "To": {
+      "type": "string"
+    },
+    "Minutes": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "Amount": {
+      "type": "integer"
+    },
+    "Qty": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "Slot": {
+      "type": "string",
+      "enum": [
+        "Head",
+        "Chest",
+        "Legs",
+        "Feet",
+        "Hands",
+        "Weapon",
+        "Offhand",
+        "Accessory"
+      ]
+    }
+  }
+}

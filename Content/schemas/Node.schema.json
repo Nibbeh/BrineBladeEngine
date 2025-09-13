@@ -1,0 +1,135 @@
+{
+  "$id": "Node.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "Id",
+    "Title",
+    "Description"
+  ],
+  "properties": {
+    "Id": {
+      "type": "string"
+    },
+    "Title": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "string"
+    },
+    "Paragraphs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "Exits": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "To"
+        ],
+        "properties": {
+          "To": {
+            "type": "string"
+          },
+          "Requires": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "Text": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Options": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "Id",
+          "Label"
+        ],
+        "properties": {
+          "Id": {
+            "type": "string"
+          },
+          "Label": {
+            "type": "string"
+          },
+          "Requires": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "Effects": {
+            "type": "array",
+            "items": {
+              "$id": "EffectSpec.schema.json",
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "Op"
+              ],
+              "properties": {
+                "Op": {
+                  "type": "string",
+                  "enum": [
+                    "endDialogue",
+                    "setFlag",
+                    "addGold",
+                    "advanceTime",
+                    "goto",
+                    "startDialogue",
+                    "combat",
+                    "addItem",
+                    "removeItemByName",
+                    "equip",
+                    "unequip"
+                  ]
+                },
+                "Id": {
+                  "type": "string"
+                },
+                "To": {
+                  "type": "string"
+                },
+                "Minutes": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "Amount": {
+                  "type": "integer"
+                },
+                "Qty": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "Slot": {
+                  "type": "string",
+                  "enum": [
+                    "Head",
+                    "Chest",
+                    "Legs",
+                    "Feet",
+                    "Hands",
+                    "Weapon",
+                    "Offhand",
+                    "Accessory"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -89,14 +89,16 @@ if (cli.Any(a => a.Equals("--scan-encoding", StringComparison.OrdinalIgnoreCase)
 Console.WriteLine($"[INFO] Using Content: {contentRoot}");
 Console.WriteLine($"[INFO] Using Saves:   {saveRoot}");
 
-// --- Content preflight (fail fast during authoring) ---
+// --- Content preflight (counts) ---
+var summary = ContentLinter.Preflight(contentRoot);
+Console.WriteLine($"[CHK] Nodes={summary.NodeCount} Dialogues={summary.DialogueCount} Items={summary.ItemCount} Enemies={summary.EnemyCount} Classes={summary.ClassCount}");
+
+// --- Strict validation (fail fast) ---
+var schemaRoot = Path.Combine(contentRoot, "schemas"); // expects Content/schemas/*
 try
 {
-    var summary = ContentLinter.Preflight(
-        contentRoot,
-        EffectProcessor.KnownOps // central list of allowed effect ops
-    );
-    Console.WriteLine($"[CHK] Nodes={summary.NodeCount} Dialogues={summary.DialogueCount} Items={summary.ItemCount} Enemies={summary.EnemyCount}");
+    ContentLinter.ValidateOrThrow(contentRoot, schemaRoot);
+    Console.WriteLine("[CHK] Schema + content validation: OK");
 }
 catch (ContentValidationException ex)
 {

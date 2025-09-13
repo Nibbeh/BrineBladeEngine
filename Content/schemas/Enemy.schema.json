@@ -1,0 +1,75 @@
+{
+  "$id": "Enemy.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "Id",
+    "Name",
+    "BaseStats"
+  ],
+  "properties": {
+    "Id": {
+      "type": "string"
+    },
+    "Name": {
+      "type": "string"
+    },
+    "BaseStats": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "Strength",
+        "Dexterity",
+        "Intelligence",
+        "Vitality",
+        "Charisma",
+        "Perception",
+        "Luck"
+      ],
+      "properties": {
+        "Strength": {
+          "type": "integer"
+        },
+        "Dexterity": {
+          "type": "integer"
+        },
+        "Intelligence": {
+          "type": "integer"
+        },
+        "Vitality": {
+          "type": "integer"
+        },
+        "Charisma": {
+          "type": "integer"
+        },
+        "Perception": {
+          "type": "integer"
+        },
+        "Luck": {
+          "type": "integer"
+        }
+      }
+    },
+    "Abilities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "Level": {
+      "type": "integer"
+    },
+    "Hp": {
+      "type": "integer"
+    },
+    "Mana": {
+      "type": "integer"
+    },
+    "LootTable": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
