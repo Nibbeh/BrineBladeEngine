@@ -90,7 +90,7 @@ Console.WriteLine($"[INFO] Using Content: {contentRoot}");
 Console.WriteLine($"[INFO] Using Saves:   {saveRoot}");
 
 // --- Content preflight (counts) ---
-var summary = ContentLinter.Preflight(contentRoot);
+var summary = ContentLinter.Summarize(contentRoot);
 Console.WriteLine($"[CHK] Nodes={summary.NodeCount} Dialogues={summary.DialogueCount} Items={summary.ItemCount} Enemies={summary.EnemyCount} Classes={summary.ClassCount}");
 
 // --- Strict validation (fail fast) ---

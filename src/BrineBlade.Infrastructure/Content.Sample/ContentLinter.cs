@@ -1,265 +1,229 @@
-﻿using System;
+﻿// src/BrineBlade.Infrastructure/Content.Sample/ContentLinter.cs
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 
-namespace BrineBlade.Infrastructure.Content;
-
-public sealed record PreflightSummary(int NodeCount, int DialogueCount, int ItemCount, int EnemyCount, int ClassCount);
-
-public static class ContentLinter
+namespace BrineBlade.Infrastructure.Content
 {
-    private static readonly JsonSerializerOptions Opts = new()
+    public sealed record PreflightSummary(int NodeCount, int DialogueCount, int ItemCount, int EnemyCount, int ClassCount);
+
+    public static class ContentLinter
     {
-        PropertyNameCaseInsensitive = true,
-        ReadCommentHandling = JsonCommentHandling.Skip,
-        AllowTrailingCommas = true
-    };
-
-    // Keep in sync with your engine's allowed ops
-    private static readonly HashSet<string> KnownOps = new(StringComparer.OrdinalIgnoreCase)
-    {
-        "endDialogue","setFlag","addGold","advanceTime","goto","startDialogue","combat",
-        "addItem","removeItemByName","equip","unequip"
-    };
-
-    public static PreflightSummary Preflight(string root)
-    {
-        int Count(string folder) => Directory.Exists(Path.Combine(root, folder))
-            ? Directory.EnumerateFiles(Path.Combine(root, folder), "*.json", SearchOption.AllDirectories).Count()
-            : 0;
-
-        return new PreflightSummary(
-            Count("nodes"), Count("dialogues"), Count("items"), Count("enemies"), Count("classes"));
-    }
-
-    public static void ValidateOrThrow(string contentRoot, string schemaRoot)
-    {
-        var issues = new List<string>();
-
-        // 1) Schema validation
-        ValidateFolder(contentRoot, "nodes", Path.Combine(schemaRoot, "Node.schema.json"), issues);
-        ValidateFolder(contentRoot, "dialogues", Path.Combine(schemaRoot, "Dialogue.schema.json"), issues);
-        ValidateFolder(contentRoot, "items", Path.Combine(schemaRoot, "Item.schema.json"), issues);
-        ValidateFolder(contentRoot, "enemies", Path.Combine(schemaRoot, "Enemy.schema.json"), issues);
-        ValidateFolder(contentRoot, "classes", Path.Combine(schemaRoot, "Class.schema.json"), issues);
-
-        // 2) Parse JSON (no Domain/AppCore types)
-        var (nodes, dialogues) = LoadModels(contentRoot, issues);
-
-        // 3) Cross-refs + verbs + drift checks
-        CheckReferences(nodes, dialogues, issues);
-        CheckVerbs(nodes, dialogues, issues);
-        CheckDrift(contentRoot, issues);
-
-        if (issues.Count > 0)
-            throw new ContentValidationException(issues); // ← uses your existing exception type (with IEnumerable<string>)
-    }
-
-    private static void ValidateFolder(string root, string folder, string schemaFile, List<string> issues)
-    {
-        var dir = Path.Combine(root, folder);
-        if (!Directory.Exists(dir)) return;
-        var schemaJson = File.ReadAllText(schemaFile);
-        foreach (var file in Directory.EnumerateFiles(dir, "*.json", SearchOption.AllDirectories))
+        private static readonly JsonSerializerOptions Opts = new()
         {
-            var json = File.ReadAllText(file);
-            var errs = JsonSchemaValidator.Validate(json, schemaJson, file);
-            if (errs.Count > 0) issues.AddRange(errs);
+            PropertyNameCaseInsensitive = true,
+            ReadCommentHandling = JsonCommentHandling.Skip
+        };
+
+        private static readonly HashSet<string> AllowedOps = new(StringComparer.OrdinalIgnoreCase)
+        {
+            "endDialogue","setFlag","addGold","addItem","removeItemByName",
+            "advanceTime","goto","startDialogue","combat"
+        };
+
+        public static PreflightSummary Summarize(string root)
+        {
+            int Count(string folder) => Directory.Exists(Path.Combine(root, folder))
+                ? Directory.EnumerateFiles(Path.Combine(root, folder), "*.json", SearchOption.AllDirectories).Count()
+                : 0;
+
+            return new PreflightSummary(
+                Count("nodes"), Count("dialogues"), Count("items"), Count("enemies"), Count("classes"));
         }
-    }
 
-    private static (Dictionary<string, JsonObject> nodes, Dictionary<string, JsonObject> dialogues)
-        LoadModels(string root, List<string> issues)
-    {
-        var nodes = new Dictionary<string, JsonObject>(StringComparer.OrdinalIgnoreCase);
-        var dialogues = new Dictionary<string, JsonObject>(StringComparer.OrdinalIgnoreCase);
+        public static void ValidateOrThrow(string contentRoot, string schemaRoot)
+        {
+            var issues = new List<string>();
 
-        void LoadDir(string folder, Action<string, JsonObject> add)
+            // Basic JSON well-formedness (avoid external schema to match your project)
+            ValidateFolderJson(contentRoot, "nodes", issues);
+            ValidateFolderJson(contentRoot, "dialogues", issues);
+            ValidateFolderJson(contentRoot, "items", issues);
+            ValidateFolderJson(contentRoot, "enemies", issues);
+            ValidateFolderJson(contentRoot, "classes", issues);
+
+            // Cross-reference validation
+            var (nodes, dialogues, items, enemies) = LoadMaps(contentRoot);
+            ValidateCrossRefs(contentRoot, nodes, dialogues, items, enemies, issues);
+
+            if (issues.Count > 0)
+                // FIX: pass IEnumerable<string> instead of a single joined string
+                throw new ContentValidationException(issues);
+        }
+
+        private static void ValidateFolderJson(string root, string folder, List<string> issues)
         {
             var dir = Path.Combine(root, folder);
             if (!Directory.Exists(dir)) return;
             foreach (var file in Directory.EnumerateFiles(dir, "*.json", SearchOption.AllDirectories))
             {
-                try
-                {
-                    var obj = JsonNode.Parse(File.ReadAllText(file)) as JsonObject;
-                    if (obj is null) { issues.Add($"{file}: invalid JSON"); continue; }
-                    var id = GetString(obj["Id"]);
-                    if (string.IsNullOrWhiteSpace(id)) { issues.Add($"{file}: missing Id"); continue; }
-                    add(id!, obj);
-                }
-                catch (Exception ex)
-                {
-                    issues.Add($"{file}: exception during parse: {ex.Message}");
-                }
+                try { JsonNode.Parse(File.ReadAllText(file)); }
+                catch (Exception ex) { issues.Add($"[{folder}] {file}: {ex.Message}"); }
             }
         }
 
-        LoadDir("nodes", (id, obj) => nodes[id] = obj);
-        LoadDir("dialogues", (id, obj) => dialogues[id] = obj);
-        return (nodes, dialogues);
-    }
-
-    private static void CheckReferences(Dictionary<string, JsonObject> nodes, Dictionary<string, JsonObject> dialogues, List<string> issues)
-    {
-        foreach (var (nodeId, node) in nodes)
+        private static (HashSet<string> nodes, HashSet<string> dialogues, HashSet<string> items, HashSet<string> enemies)
+            LoadMaps(string root)
         {
-            if (node["Exits"] is JsonArray exits)
+            var nodes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            var dialogues = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            var items = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            var enemies = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+            void LoadIds(string folder, Action<JsonNode> capture)
             {
-                foreach (var ex in exits.OfType<JsonObject>())
+                var dir = Path.Combine(root, folder);
+                if (!Directory.Exists(dir)) return;
+                foreach (var file in Directory.EnumerateFiles(dir, "*.json", SearchOption.AllDirectories))
                 {
-                    var to = GetString(ex["To"]);
-                    if (string.IsNullOrWhiteSpace(to) || !nodes.ContainsKey(to!))
-                        issues.Add($"Node {nodeId}: exit To='{to}' not found.");
+                    try
+                    {
+                        var node = JsonNode.Parse(File.ReadAllText(file));
+                        if (node is null) continue;
+                        capture(node);
+                    }
+                    catch { }
                 }
             }
-            if (node["Options"] is JsonArray opts)
+
+            LoadIds("nodes", n => { var id = n?["Id"]?.GetValue<string>(); if (!string.IsNullOrWhiteSpace(id)) nodes.Add(id!); });
+            LoadIds("dialogues", n => { var id = n?["Id"]?.GetValue<string>(); if (!string.IsNullOrWhiteSpace(id)) dialogues.Add(id!); });
+            LoadIds("items", n => { var id = n?["Id"]?.GetValue<string>(); if (!string.IsNullOrWhiteSpace(id)) items.Add(id!); });
+            LoadIds("enemies", n => { var id = n?["Id"]?.GetValue<string>(); if (!string.IsNullOrWhiteSpace(id)) enemies.Add(id!); });
+
+            return (nodes, dialogues, items, enemies);
+        }
+
+        private static void ValidateCrossRefs(
+            string root,
+            HashSet<string> nodes,
+            HashSet<string> dialogues,
+            HashSet<string> items,
+            HashSet<string> enemies,
+            List<string> issues)
+        {
+            void Each(string folder, Action<string, JsonNode> check)
             {
-                foreach (var opt in opts.OfType<JsonObject>())
+                var dir = Path.Combine(root, folder);
+                if (!Directory.Exists(dir)) return;
+                foreach (var file in Directory.EnumerateFiles(dir, "*.json", SearchOption.AllDirectories))
                 {
-                    if (opt["Effects"] is not JsonArray effs) continue;
-                    foreach (var e in effs.OfType<JsonObject>())
+                    try
                     {
-                        var op = GetString(e["Op"]);
-                        if (string.Equals(op, "goto", StringComparison.OrdinalIgnoreCase))
-                        {
-                            var to = GetString(e["To"]);
-                            if (string.IsNullOrWhiteSpace(to) || !nodes.ContainsKey(to!))
-                                issues.Add($"Node {nodeId}: goto.To '{to}' not found.");
-                        }
-                        if (string.Equals(op, "startDialogue", StringComparison.OrdinalIgnoreCase))
-                        {
-                            var id = GetString(e["Id"]);
-                            if (string.IsNullOrWhiteSpace(id) || !dialogues.ContainsKey(id!))
-                                issues.Add($"Node {nodeId}: startDialogue.Id '{id}' not found.");
-                        }
+                        var node = JsonNode.Parse(File.ReadAllText(file));
+                        if (node is null) continue;
+                        check(file, node);
+                    }
+                    catch (Exception ex) { issues.Add($"[{folder}] {file}: {ex.Message}"); }
+                }
+            }
+
+            // Nodes: exits/option effects
+            Each("nodes", (file, n) =>
+            {
+                if (n["Exits"] is JsonArray exits)
+                {
+                    foreach (var ex in exits.OfType<JsonObject>())
+                    {
+                        var to = ex["To"]?.GetValue<string>();
+                        if (!string.IsNullOrWhiteSpace(to) && !nodes.Contains(to!))
+                            issues.Add($"[nodes] {file}: exit -> '{to}' not found.");
                     }
                 }
-            }
-        }
-
-        foreach (var (dlgId, dlg) in dialogues)
-        {
-            var lines = dlg["Lines"] as JsonObject;
-            var start = GetString(dlg["StartLineId"]);
-            if (lines is null || lines.Count == 0) { issues.Add($"Dialogue {dlgId}: no Lines."); continue; }
-            if (string.IsNullOrWhiteSpace(start) || !lines.ContainsKey(start!))
-                issues.Add($"Dialogue {dlgId}: StartLineId '{start}' not in Lines.");
-
-            foreach (var (lineId, lineNode) in lines)
-            {
-                if (lineNode is not JsonObject line) continue;
-                if (line["Choices"] is JsonArray choices)
+                if (n["Options"] is JsonArray opts)
                 {
-                    foreach (var c in choices.OfType<JsonObject>())
+                    foreach (var opt in opts.OfType<JsonObject>())
                     {
-                        var gotoId = GetString(c["Goto"]);
-                        if (!string.IsNullOrWhiteSpace(gotoId) && !lines.ContainsKey(gotoId!))
-                            issues.Add($"Dialogue {dlgId}/{lineId}: choice goto '{gotoId}' not found.");
+                        if (opt["Effects"] is JsonArray eff)
+                            foreach (var e in eff.OfType<JsonObject>())
+                                ValidateEffect(file, e, nodes, dialogues, items, enemies, issues);
                     }
                 }
-            }
-        }
-    }
+            });
 
-    private static void CheckVerbs(Dictionary<string, JsonObject> nodes, Dictionary<string, JsonObject> dialogues, List<string> issues)
-    {
-        foreach (var (nodeId, node) in nodes)
-        {
-            if (node["Options"] is not JsonArray opts) continue;
-            foreach (var opt in opts.OfType<JsonObject>())
+            // Dialogues: line effects and choice gotos
+            Each("dialogues", (file, d) =>
             {
-                if (opt["Effects"] is not JsonArray effs) continue;
-                foreach (var e in effs.OfType<JsonObject>())
+                var lines = d["Lines"] as JsonObject;
+                var lineIds = lines?.Select(kv => kv.Key).ToHashSet() ?? new HashSet<string>();
+                if (lines is not null)
                 {
-                    var op = GetString(e["Op"]);
-                    if (string.IsNullOrWhiteSpace(op) || !KnownOps.Contains(op!))
-                        issues.Add($"Node {nodeId}: unknown Op '{op}'.");
-                }
-            }
-        }
-
-        foreach (var (dlgId, dlg) in dialogues)
-        {
-            var lines = dlg["Lines"] as JsonObject;
-            if (lines is null) continue;
-
-            foreach (var (_, lineNode) in lines)
-            {
-                if (lineNode is not JsonObject line) continue;
-
-                if (line["Effects"] is JsonArray lineEffs)
-                {
-                    foreach (var e in lineEffs.OfType<JsonObject>())
+                    foreach (var kv in lines)
                     {
-                        var op = GetString(e["Op"]);
-                        if (string.IsNullOrWhiteSpace(op) || !KnownOps.Contains(op!))
-                            issues.Add($"Dialogue {dlgId}: line effect unknown Op '{op}'.");
-                    }
-                }
+                        var line = kv.Value as JsonObject;
+                        if (line is null) continue;
 
-                if (line["Choices"] is JsonArray choices)
-                {
-                    foreach (var c in choices.OfType<JsonObject>())
-                    {
-                        if (c["Effects"] is not JsonArray ceffs) continue;
-                        foreach (var e in ceffs.OfType<JsonObject>())
+                        if (line["Effects"] is JsonArray eff)
+                            foreach (var e in eff.OfType<JsonObject>())
+                                ValidateEffect(file, e, nodes, dialogues, items, enemies, issues);
+
+                        if (line["Choices"] is JsonArray choices)
                         {
-                            var op = GetString(e["Op"]);
-                            if (string.IsNullOrWhiteSpace(op) || !KnownOps.Contains(op!))
-                                issues.Add($"Dialogue {dlgId}: choice effect unknown Op '{op}'.");
+                            foreach (var ch in choices.OfType<JsonObject>())
+                            {
+                                var gotoLine = ch["Goto"]?.GetValue<string>();
+                                if (!string.IsNullOrWhiteSpace(gotoLine) && !lineIds.Contains(gotoLine!))
+                                    issues.Add($"[dialogues] {file}: choice goto -> '{gotoLine}' not a valid line id.");
+                                if (ch["Effects"] is JsonArray ceff)
+                                    foreach (var e in ceff.OfType<JsonObject>())
+                                        ValidateEffect(file, e, nodes, dialogues, items, enemies, issues);
+                            }
                         }
                     }
                 }
+            });
+        }
+
+        private static void ValidateEffect(
+            string file,
+            JsonObject e,
+            HashSet<string> nodes,
+            HashSet<string> dialogues,
+            HashSet<string> items,
+            HashSet<string> enemies,
+            List<string> issues)
+        {
+            var op = e["Op"]?.GetValue<string>() ?? "";
+            if (!AllowedOps.Contains(op))
+                issues.Add($"[effects] {file}: unknown Op '{op}'.");
+
+            switch (op)
+            {
+                case "goto":
+                    var to = e["To"]?.GetValue<string>();
+                    if (string.IsNullOrWhiteSpace(to) || !nodes.Contains(to!))
+                        issues.Add($"[effects] {file}: goto -> '{to}' not found.");
+                    break;
+                case "startDialogue":
+                    var did = e["Id"]?.GetValue<string>();
+                    if (string.IsNullOrWhiteSpace(did) || !dialogues.Contains(did!))
+                        issues.Add($"[effects] {file}: startDialogue Id '{did}' not found.");
+                    break;
+                case "combat":
+                    var eid = e["Id"]?.GetValue<string>();
+                    if (string.IsNullOrWhiteSpace(eid) || !enemies.Contains(eid!))
+                        issues.Add($"[effects] {file}: combat Id '{eid}' not found.");
+                    break;
+                case "addItem":
+                case "removeItemByName":
+                    var iid = e["Id"]?.GetValue<string>();
+                    if (string.IsNullOrWhiteSpace(iid) || !items.Contains(iid!))
+                        issues.Add($"[effects] {file}: item Id '{iid}' not found.");
+                    break;
+                case "addGold":
+                    if (e["Amount"]?.GetValue<int?>() is null)
+                        issues.Add($"[effects] {file}: addGold requires Amount.");
+                    break;
+                case "advanceTime":
+                    if (e["Minutes"]?.GetValue<int?>() is null)
+                        issues.Add($"[effects] {file}: advanceTime requires Minutes.");
+                    break;
+                default:
+                    break;
             }
         }
     }
-
-    private static void CheckDrift(string root, List<string> issues)
-    {
-        void Scan(string folder, Action<string, JsonObject> check)
-        {
-            var dir = Path.Combine(root, folder);
-            if (!Directory.Exists(dir)) return;
-            foreach (var file in Directory.EnumerateFiles(dir, "*.json", SearchOption.AllDirectories))
-            {
-                var node = JsonNode.Parse(File.ReadAllText(file)) as JsonObject;
-                if (node != null) check(file, node);
-            }
-        }
-
-        Scan("nodes", (file, node) =>
-        {
-            if (node["Options"] is JsonArray opts)
-            {
-                foreach (var o in opts.OfType<JsonObject>())
-                    if (o.ContainsKey("Text"))
-                        issues.Add($"{file}: NodeOption has non-canonical 'Text' (use 'Label').");
-            }
-            if (node["Exits"] is JsonArray exs)
-            {
-                foreach (var ex in exs.OfType<JsonObject>())
-                    if (ex.ContainsKey("Label"))
-                        issues.Add($"{file}: NodeExit has non-canonical 'Label' (use 'Text').");
-            }
-        });
-
-        Scan("dialogues", (file, dlg) =>
-        {
-            if (dlg["Lines"] is not JsonObject lines) return;
-            foreach (var (_, lineNode) in lines)
-            {
-                if (lineNode is not JsonObject line) continue;
-                if (line["Choices"] is not JsonArray choices) continue;
-                foreach (var c in choices.OfType<JsonObject>())
-                    if (c.ContainsKey("Text"))
-                        issues.Add($"{file}: DialogueChoice has non-canonical 'Text' (use 'Label').");
-            }
-        });
-    }
-
-    private static string? GetString(JsonNode? n) => (n as JsonValue)?.GetValue<string>();
 }

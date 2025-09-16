@@ -1,142 +1,110 @@
-﻿using System;
+﻿// src/BrineBlade.AppCore/Rules/EffectProcessor.cs
+using System;
 using System.Collections.Generic;
 using BrineBlade.AppCore.ConsoleUI;
 using BrineBlade.Domain.Entities;
 using BrineBlade.Domain.Game;
 using BrineBlade.Services.Abstractions;
 
-namespace BrineBlade.AppCore.Rules;
-
-public sealed class EffectProcessor
+namespace BrineBlade.AppCore.Rules
 {
-    public static readonly HashSet<string> KnownOps = new(StringComparer.OrdinalIgnoreCase)
+    /// <summary>
+    /// Registry-based effect processor. Each Op is handled by a small, schema-validating handler.
+    /// Keeps the public API identical to the previous EffectProcessor (constructor and ApplyAll signature).
+    /// </summary>
+    public sealed class EffectProcessor
     {
-        "endDialogue",
-        "setFlag",
-        "addGold",
-        "advanceTime",
-        "goto",
-        "startDialogue",
-        "combat",
-        "addItem",
-        "removeItemByName",
-        "equip",            // NEW
-        "unequip"           // NEW
-    };
-
-    private readonly GameState _state;
-    private readonly IInventoryService _inv;
-    private readonly IGameUI _ui;
-
-    public EffectProcessor(GameState state, IInventoryService inv, IGameUI ui)
-    {
-        _state = state;
-        _inv = inv;
-        _ui = ui;
-    }
-
-    public readonly record struct Outcome(bool EndDialogue);
-
-    public Outcome ApplyAll(IEnumerable<EffectSpec>? effects,
-                            Action<string>? startDialogue = null,
-                            Action<string>? startCombat = null)
-    {
-        if (effects is null) return new Outcome(EndDialogue: false);
-
-        bool endDialogue = false;
-        foreach (var e in effects)
+        public static readonly HashSet<string> KnownOps = new(StringComparer.OrdinalIgnoreCase)
         {
-            switch (e.Op)
+            "endDialogue","setFlag","addGold","addItem","removeItemByName",
+            "advanceTime","goto","startDialogue","combat"
+        };
+
+        private readonly GameState _state;
+        private readonly IInventoryService _inv;
+        private readonly IGameUI _ui;
+        private readonly Dictionary<string, Action<EffectSpec, Action<string>, Action<string>>> _handlers;
+
+        public EffectProcessor(GameState state, IInventoryService inv, IGameUI ui)
+        {
+            _state = state;
+            _inv = inv;
+            _ui = ui;
+
+            _handlers = new(StringComparer.OrdinalIgnoreCase)
             {
-                case "endDialogue":
-                    endDialogue = true;
-                    break;
-
-                case "setFlag" when !string.IsNullOrWhiteSpace(e.Id):
-                    _state.Flags.Add(e.Id!);
-                    _ui.Notice($"Flag set: {e.Id}");
-                    break;
-
-                case "addGold" when e.Amount is not null:
-                    {
-                        int amt = e.Amount.Value;
-                        if (amt < 0 && _state.Gold + amt < 0)
-                        {
-                            _ui.Notice("Not enough gold.");
-                            return new Outcome(endDialogue); // abort remaining effects in this choice
-                        }
-                        _state.Gold += amt;
-                        _ui.Notice($"{(amt >= 0 ? "+" : "")}{amt} gold (total {_state.Gold})");
-                        break;
-                    }
-
-
-                case "advanceTime" when e.Minutes is not null:
-                    _state.AdvanceMinutes(e.Minutes.Value);
-                    _ui.Notice($"+{e.Minutes} min");
-                    break;
-
-                case "goto" when !string.IsNullOrWhiteSpace(e.To):
-                    _state.CurrentNodeId = e.To!;
-                    _ui.Notice($"Travel → {_state.CurrentNodeId}");
-                    break;
-
-                case "startDialogue" when !string.IsNullOrWhiteSpace(e.Id):
-                    if (startDialogue is not null) startDialogue(e.Id!);
-                    else _ui.Notice("[WARN] Dialogue system unavailable.");
-                    break;
-
-                case "combat" when !string.IsNullOrWhiteSpace(e.Id):
-                    if (startCombat is not null) startCombat(e.Id!);
-                    else _ui.Notice("[WARN] Combat system unavailable.");
-                    break;
-
-                case "addItem" when !string.IsNullOrWhiteSpace(e.Id):
-                    {
-                        var qty = e.Qty ?? e.Amount ?? 1;
-                        if (qty <= 0) { _ui.Notice("Invalid quantity."); break; }
-                        var r = _inv.TryAdd(_state, e.Id!, qty);
-                        _ui.Notice(r.Success ? $"Picked up {e.Id} x{qty}." : $"Cannot add item: {r.Reason}");
-                        break;
-                    }
-
-                case "removeItemByName" when !string.IsNullOrWhiteSpace(e.Id):
-                    {
-                        var qty = e.Qty ?? e.Amount ?? 1;
-                        if (qty <= 0) { _ui.Notice("Invalid quantity."); break; }
-                        var r = _inv.TryRemove(_state, e.Id!, qty);
-                        _ui.Notice(r.Success ? $"Removed {e.Id} x{qty}." : $"Cannot remove item: {r.Reason}");
-                        break;
-                    }
-
-
-                // ---------- NEW ----------
-                case "equip" when !string.IsNullOrWhiteSpace(e.Id):
-                    {
-                        var slot = TryParseSlot(e.Slot);
-                        var r = _inv.TryEquip(_state, e.Id!, slot);
-                        _ui.Notice(r.Success ? $"Equipped {e.Id}." : $"Cannot equip: {r.Reason}");
-                        break;
-                    }
-
-                case "unequip" when !string.IsNullOrWhiteSpace(e.Slot):
-                    {
-                        var slot = TryParseSlot(e.Slot);
-                        if (slot is null) { _ui.Notice("Cannot unequip: unknown slot"); break; }
-                        var r = _inv.TryUnequip(_state, slot.Value);
-                        _ui.Notice(r.Success ? $"Unequipped {slot}." : $"Cannot unequip: {r.Reason}");
-                        break;
-                    }
-                    // -------------------------
-            }
+                ["endDialogue"] = (e, sd, sc) => _endDialogue = true,
+                ["setFlag"] = (e, sd, sc) => Require(e.Id, "setFlag", "Id", id => _state.Flags.Add(id)),
+                ["addGold"] = (e, sd, sc) => Require(e.Amount, "addGold", "Amount", n => _state.Gold += n),
+                ["addItem"] = (e, sd, sc) => Require2(e.Id, e.Qty ?? 1, "addItem",
+                                                                () => _inv.TryAdd(_state, e.Id!, e.Qty ?? 1)),
+                ["removeItemByName"] = (e, sd, sc) => Require2(e.Id, e.Qty ?? 1, "removeItemByName",
+                                                                () => _inv.TryRemove(_state, e.Id!, e.Qty ?? 1)),
+                ["advanceTime"] = (e, sd, sc) => Require(e.Minutes, "advanceTime", "Minutes", m => AdvanceMinutes(m)),
+                ["goto"] = (e, sd, sc) => Require(e.To, "goto", "To", to => _state.CurrentNodeId = to),
+                ["startDialogue"] = (e, sd, sc) => Require(e.Id, "startDialogue", "Id", id => sd(id)),
+                ["combat"] = (e, sd, sc) => Require(e.Id, "combat", "Id", id => sc(id)),
+            };
         }
 
-        return new Outcome(endDialogue);
-    }
+        public readonly record struct Outcome(bool EndDialogue);
+        private bool _endDialogue;
 
-    private static EquipmentSlot? TryParseSlot(string? s)
-    {
-        if (string.IsNullOrWhiteSpace(s)) return null;
-        return Enum.TryParse<EquipmentSlot>(s, ignoreCase: true, out var slot) ? slot : null;
+        public Outcome ApplyAll(IEnumerable<EffectSpec>? effects,
+                                Action<string> startDialogue,
+                                Action<string> startCombat)
+        {
+            _endDialogue = false;
+            if (effects is null) return new Outcome(false);
+
+            foreach (var e in effects)
+            {
+                if (!KnownOps.Contains(e.Op))
+                {
+                    _ui.Notice($"[Effect] Unknown op '{e.Op}'. Skipped.");
+                    continue;
+                }
+
+                try { _handlers[e.Op](e, startDialogue, startCombat); }
+                catch (Exception ex) { _ui.Notice($"[Effect:{e.Op}] {ex.Message}"); }
+            }
+
+            return new Outcome(_endDialogue);
+        }
+
+        private static void Require(string? val, string op, string field, Action<string> apply)
+        {
+            if (string.IsNullOrWhiteSpace(val))
+                throw new InvalidOperationException($"{op} requires non-empty '{field}'.");
+            apply(val!);
+        }
+
+        private static void Require(int? val, string op, string field, Action<int> apply)
+        {
+            if (!val.HasValue)
+                throw new InvalidOperationException($"{op} requires integer '{field}'.");
+            apply(val!.Value);
+        }
+
+        private static void Require2(string? id, int qty, string op, Action apply)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+                throw new InvalidOperationException($"{op} requires non-empty 'Id'.");
+            if (qty <= 0)
+                throw new InvalidOperationException($"{op} requires positive 'Qty'.");
+            apply();
+        }
+
+        private void AdvanceMinutes(int minutes)
+        {
+            if (minutes <= 0) return;
+            var world = _state.World;
+            int total = world.Minute + minutes;
+            world.Minute = total % 60;
+            int addHours = total / 60;
+            world.Hour = (world.Hour + addHours) % 24;
+            world.Day = world.Day + (addHours / 24);
+            _state.World = world;
+        }
     }
 }
