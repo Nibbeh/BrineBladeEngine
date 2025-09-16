@@ -10,6 +10,9 @@
     "Value"
   ],
   "properties": {
+    "Version": {
+      "type": "integer"
+    },
     "Id": {
       "type": "string"
     },
@@ -102,6 +105,12 @@
         "Luck": {
           "type": "integer"
         }
+      }
+    },
+    "AllowedTags": {
+      "type": "array",
+      "items": {
+        "type": "string"
       }
     }
   }

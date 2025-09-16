@@ -1,0 +1,8 @@
+{
+  "Id": "SPEC_MAGE_ELEMENTAL",
+  "ClassId": "CLASS_MAGE",
+  "Name": "Elementalist",
+  "StartFlags": [
+    "spec.elemental"
+  ]
+}

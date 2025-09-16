@@ -1,0 +1,18 @@
+{
+  "Id": "ITM_DAGGER_KEEN",
+  "Name": "Keen Dagger",
+  "Type": "Weapon",
+  "Weight": 1,
+  "Value": 9,
+  "Stackable": false,
+  "MaxStack": 1,
+  "Slot": "Weapon",
+  "WeaponType": "Dagger",
+  "AllowedClasses": [
+    "CLASS_ROGUE",
+    "CLASS_WARRIOR"
+  ],
+  "Bonuses": {
+    "Dexterity": 1
+  }
+}

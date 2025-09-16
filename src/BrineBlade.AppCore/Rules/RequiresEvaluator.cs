@@ -36,18 +36,23 @@ namespace BrineBlade.AppCore.Rules
                 return state.Flags.Contains(flag);
             }
 
-            if (requirement.StartsWith("race:", StringComparison.OrdinalIgnoreCase))
-                return state.Player.Race.Equals(requirement[5..].Trim(), StringComparison.OrdinalIgnoreCase);
-
-            if (requirement.StartsWith("archetype:", StringComparison.OrdinalIgnoreCase) ||
-                requirement.StartsWith("class:", StringComparison.OrdinalIgnoreCase))
+            if (requirement.StartsWith("race:", StringComparison.OrdinalIgnoreCase) || requirement.StartsWith("race.", StringComparison.OrdinalIgnoreCase))
             {
-                var val = requirement.Split(':', 2)[1].Trim();
-                return state.Player.Archetype.Equals(val, StringComparison.OrdinalIgnoreCase);
+                var val = requirement.Contains(':') ? requirement.Split(':',2)[1].Trim() : requirement.Split('.',2)[1].Trim();
+                return state.Flags.Contains($"race.{val}", StringComparer.OrdinalIgnoreCase) || state.Player.Race.Equals(val, StringComparison.OrdinalIgnoreCase);
             }
 
-            if (requirement.StartsWith("spec:", StringComparison.OrdinalIgnoreCase))
-                return state.Flags.Contains($"spec.{requirement[5..].Trim()}");
+            if (requirement.StartsWith("class:", StringComparison.OrdinalIgnoreCase) || requirement.StartsWith("class.", StringComparison.OrdinalIgnoreCase) || requirement.StartsWith("archetype:", StringComparison.OrdinalIgnoreCase))
+            {
+                var val = requirement.Contains(':') ? requirement.Split(':',2)[1].Trim() : (requirement.StartsWith("class.", StringComparison.OrdinalIgnoreCase) ? requirement.Split('.',2)[1].Trim() : requirement.Split(':',2)[1].Trim());
+                return state.Flags.Contains($"class.{val}", StringComparer.OrdinalIgnoreCase) || state.Player.Archetype.Equals(val, StringComparison.OrdinalIgnoreCase);
+            }
+
+            if (requirement.StartsWith("spec:", StringComparison.OrdinalIgnoreCase) || requirement.StartsWith("spec.", StringComparison.OrdinalIgnoreCase))
+            {
+                var val = requirement.Contains(':') ? requirement.Split(':',2)[1].Trim() : requirement.Split('.',2)[1].Trim();
+                return state.Flags.Contains($"spec.{val}", StringComparer.OrdinalIgnoreCase);
+            }
 
             if (requirement.StartsWith("stat:", StringComparison.OrdinalIgnoreCase))
             {
@@ -59,7 +64,33 @@ namespace BrineBlade.AppCore.Rules
             return false;
         }
 
-        private static Stats PlayerStats(this GameState s) => new Stats(10, 10, 10, 10, 10, 10, 10);
+        private static Stats PlayerStats(this GameState s)
+        {
+            int str=10, dex=10, intl=10, vit=10, cha=10, per=10, luck=10;
+            bool Has(string t) => s.Flags.Contains(t, StringComparer.OrdinalIgnoreCase);
+
+            // Race seasoning
+            if (Has("race.elf")) { dex += 2; intl += 2; per += 1; str -= 1; vit -= 1; }
+            if (Has("race.human")) { str += 1; vit += 1; luck += 1; }
+
+            // Class seasoning
+            if (Has("class.mage")) intl += 2;
+            if (Has("class.rogue")) dex += 2;
+            if (Has("class.warrior")) str += 2;
+
+            // Spec light touches (non-breaking)
+            if (Has("spec.champion")) vit += 1;
+            if (Has("spec.berserker")) str += 1;
+            if (Has("spec.templar")) per += 1;
+            if (Has("spec.elemental")) intl += 1;
+            if (Has("spec.druid")) per += 1;
+            if (Has("spec.warlock")) luck += 1;
+            if (Has("spec.ranger")) dex += 1;
+            if (Has("spec.thief")) dex += 1;
+            if (Has("spec.trickster")) cha += 1;
+
+            return new Stats(str, dex, intl, vit, cha, per, luck);
+        }
 
         private static bool EvaluateStatExpr(Stats stats, string expr)
         {

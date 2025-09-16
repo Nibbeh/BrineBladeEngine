@@ -1,0 +1,17 @@
+{
+  "Id": "ITM_STAFF_OAK",
+  "Name": "Oak Staff",
+  "Type": "Weapon",
+  "Weight": 4,
+  "Value": 12,
+  "Stackable": false,
+  "MaxStack": 1,
+  "Slot": "Weapon",
+  "WeaponType": "Staff",
+  "AllowedClasses": [
+    "CLASS_MAGE"
+  ],
+  "Bonuses": {
+    "Intelligence": 1
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "Id": "SPEC_MAGE_DRUIDIC",
+  "ClassId": "CLASS_MAGE",
+  "Name": "Druidic",
+  "StartFlags": [
+    "spec.druid"
+  ]
+}

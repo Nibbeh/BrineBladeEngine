@@ -30,8 +30,11 @@ namespace BrineBlade.AppCore.Flows
             {
                 var snap = _combat.GetPlayerSnapshot(_state);
 
+                string race = _state.Flags.FirstOrDefault(f => f.StartsWith("race.", StringComparison.OrdinalIgnoreCase))?.Split('.',2)[1] ?? _state.Player.Race;
+                string klass = _state.Flags.FirstOrDefault(f => f.StartsWith("class.", StringComparison.OrdinalIgnoreCase))?.Split('.',2)[1] ?? _state.Player.Archetype;
+                string spec  = _state.Flags.FirstOrDefault(f => f.StartsWith("spec.", StringComparison.OrdinalIgnoreCase))?.Split('.',2)[1] ?? string.Empty;
                 string header =
-                    $"{_state.Player.Name} — Human Warrior (Champion)\n" +
+                    $"{_state.Player.Name} — {race.ToUpperInvariant()} {klass.ToUpperInvariant()}" + (string.IsNullOrEmpty(spec) ? "" : $" ({spec})") + "\n" +
                     $"HP {snap.CurrentHp}/{snap.MaxHp}  |  AC {snap.ArmorClass}  DR {snap.DamageReduction}  |  " +
                     $"Weapon {snap.WeaponLabel} d{snap.WeaponDie}  crit {snap.CritMin}+  pen {snap.Penetration}" +
                     (snap.HasShield ? $"  |  Shield block {Math.Round(snap.ShieldBlockChance * 100)}%" : "");

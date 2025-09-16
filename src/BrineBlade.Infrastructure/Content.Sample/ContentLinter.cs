@@ -8,7 +8,13 @@ using System.Text.Json.Nodes;
 
 namespace BrineBlade.Infrastructure.Content
 {
-    public sealed record PreflightSummary(int NodeCount, int DialogueCount, int ItemCount, int EnemyCount, int ClassCount);
+    public sealed record PreflightSummary(
+        int NodeCount,
+        int DialogueCount,
+        int ItemCount,
+        int EnemyCount,
+        int ClassCount,
+        int SpecCount);
 
     public static class ContentLinter
     {
@@ -31,26 +37,32 @@ namespace BrineBlade.Infrastructure.Content
                 : 0;
 
             return new PreflightSummary(
-                Count("nodes"), Count("dialogues"), Count("items"), Count("enemies"), Count("classes"));
+                Count("nodes"),
+                Count("dialogues"),
+                Count("items"),
+                Count("enemies"),
+                Count("classes"),
+                Count("specs"));
         }
 
         public static void ValidateOrThrow(string contentRoot, string schemaRoot)
         {
             var issues = new List<string>();
 
-            // Basic JSON well-formedness (avoid external schema to match your project)
+            // Basic JSON well-formedness (schema check is kept project-local)
             ValidateFolderJson(contentRoot, "nodes", issues);
             ValidateFolderJson(contentRoot, "dialogues", issues);
             ValidateFolderJson(contentRoot, "items", issues);
             ValidateFolderJson(contentRoot, "enemies", issues);
             ValidateFolderJson(contentRoot, "classes", issues);
+            ValidateFolderJson(contentRoot, "specs", issues);
 
             // Cross-reference validation
-            var (nodes, dialogues, items, enemies) = LoadMaps(contentRoot);
-            ValidateCrossRefs(contentRoot, nodes, dialogues, items, enemies, issues);
+            var (nodes, dialogues, items, enemies, classes, specs) = LoadMaps(contentRoot);
+            ValidateCrossRefs(contentRoot, nodes, dialogues, items, enemies, classes, specs, issues);
 
             if (issues.Count > 0)
-                // FIX: pass IEnumerable<string> instead of a single joined string
+                // Ensure we pass the collection (your exception should accept IEnumerable<string>)
                 throw new ContentValidationException(issues);
         }
 
@@ -58,6 +70,7 @@ namespace BrineBlade.Infrastructure.Content
         {
             var dir = Path.Combine(root, folder);
             if (!Directory.Exists(dir)) return;
+
             foreach (var file in Directory.EnumerateFiles(dir, "*.json", SearchOption.AllDirectories))
             {
                 try { JsonNode.Parse(File.ReadAllText(file)); }
@@ -65,18 +78,26 @@ namespace BrineBlade.Infrastructure.Content
             }
         }
 
-        private static (HashSet<string> nodes, HashSet<string> dialogues, HashSet<string> items, HashSet<string> enemies)
+        private static (HashSet<string> nodes,
+                        HashSet<string> dialogues,
+                        HashSet<string> items,
+                        HashSet<string> enemies,
+                        HashSet<string> classes,
+                        HashSet<string> specs)
             LoadMaps(string root)
         {
             var nodes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             var dialogues = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             var items = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             var enemies = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            var classes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            var specs = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
             void LoadIds(string folder, Action<JsonNode> capture)
             {
                 var dir = Path.Combine(root, folder);
                 if (!Directory.Exists(dir)) return;
+
                 foreach (var file in Directory.EnumerateFiles(dir, "*.json", SearchOption.AllDirectories))
                 {
                     try
@@ -85,16 +106,21 @@ namespace BrineBlade.Infrastructure.Content
                         if (node is null) continue;
                         capture(node);
                     }
-                    catch { }
+                    catch
+                    {
+                        // best-effort: malformed file already reported in ValidateFolderJson
+                    }
                 }
             }
 
             LoadIds("nodes", n => { var id = n?["Id"]?.GetValue<string>(); if (!string.IsNullOrWhiteSpace(id)) nodes.Add(id!); });
             LoadIds("dialogues", n => { var id = n?["Id"]?.GetValue<string>(); if (!string.IsNullOrWhiteSpace(id)) dialogues.Add(id!); });
             LoadIds("items", n => { var id = n?["Id"]?.GetValue<string>(); if (!string.IsNullOrWhiteSpace(id)) items.Add(id!); });
+            LoadIds("classes", n => { var id = n?["Id"]?.GetValue<string>(); if (!string.IsNullOrWhiteSpace(id)) classes.Add(id!); });
+            LoadIds("specs", n => { var id = n?["Id"]?.GetValue<string>(); if (!string.IsNullOrWhiteSpace(id)) specs.Add(id!); });
             LoadIds("enemies", n => { var id = n?["Id"]?.GetValue<string>(); if (!string.IsNullOrWhiteSpace(id)) enemies.Add(id!); });
 
-            return (nodes, dialogues, items, enemies);
+            return (nodes, dialogues, items, enemies, classes, specs);
         }
 
         private static void ValidateCrossRefs(
@@ -103,12 +129,15 @@ namespace BrineBlade.Infrastructure.Content
             HashSet<string> dialogues,
             HashSet<string> items,
             HashSet<string> enemies,
+            HashSet<string> classes,
+            HashSet<string> specs,
             List<string> issues)
         {
             void Each(string folder, Action<string, JsonNode> check)
             {
                 var dir = Path.Combine(root, folder);
                 if (!Directory.Exists(dir)) return;
+
                 foreach (var file in Directory.EnumerateFiles(dir, "*.json", SearchOption.AllDirectories))
                 {
                     try
@@ -133,13 +162,18 @@ namespace BrineBlade.Infrastructure.Content
                             issues.Add($"[nodes] {file}: exit -> '{to}' not found.");
                     }
                 }
+
                 if (n["Options"] is JsonArray opts)
                 {
                     foreach (var opt in opts.OfType<JsonObject>())
                     {
                         if (opt["Effects"] is JsonArray eff)
+                        {
                             foreach (var e in eff.OfType<JsonObject>())
+                            {
                                 ValidateEffect(file, e, nodes, dialogues, items, enemies, issues);
+                            }
+                        }
                     }
                 }
             });
@@ -149,6 +183,7 @@ namespace BrineBlade.Infrastructure.Content
             {
                 var lines = d["Lines"] as JsonObject;
                 var lineIds = lines?.Select(kv => kv.Key).ToHashSet() ?? new HashSet<string>();
+
                 if (lines is not null)
                 {
                     foreach (var kv in lines)
@@ -157,8 +192,10 @@ namespace BrineBlade.Infrastructure.Content
                         if (line is null) continue;
 
                         if (line["Effects"] is JsonArray eff)
+                        {
                             foreach (var e in eff.OfType<JsonObject>())
                                 ValidateEffect(file, e, nodes, dialogues, items, enemies, issues);
+                        }
 
                         if (line["Choices"] is JsonArray choices)
                         {
@@ -167,13 +204,24 @@ namespace BrineBlade.Infrastructure.Content
                                 var gotoLine = ch["Goto"]?.GetValue<string>();
                                 if (!string.IsNullOrWhiteSpace(gotoLine) && !lineIds.Contains(gotoLine!))
                                     issues.Add($"[dialogues] {file}: choice goto -> '{gotoLine}' not a valid line id.");
+
                                 if (ch["Effects"] is JsonArray ceff)
+                                {
                                     foreach (var e in ceff.OfType<JsonObject>())
                                         ValidateEffect(file, e, nodes, dialogues, items, enemies, issues);
+                                }
                             }
                         }
                     }
                 }
+            });
+
+            // Specs: ensure ClassId exists
+            Each("specs", (file, n) =>
+            {
+                var classId = n["ClassId"]?.GetValue<string>();
+                if (string.IsNullOrWhiteSpace(classId) || !classes.Contains(classId!))
+                    issues.Add($"[specs] {file}: ClassId '{classId}' not found.");
             });
         }
 
@@ -188,39 +236,54 @@ namespace BrineBlade.Infrastructure.Content
         {
             var op = e["Op"]?.GetValue<string>() ?? "";
             if (!AllowedOps.Contains(op))
+            {
                 issues.Add($"[effects] {file}: unknown Op '{op}'.");
+                return;
+            }
 
             switch (op)
             {
                 case "goto":
-                    var to = e["To"]?.GetValue<string>();
-                    if (string.IsNullOrWhiteSpace(to) || !nodes.Contains(to!))
-                        issues.Add($"[effects] {file}: goto -> '{to}' not found.");
-                    break;
+                    {
+                        var to = e["To"]?.GetValue<string>();
+                        if (string.IsNullOrWhiteSpace(to) || !nodes.Contains(to!))
+                            issues.Add($"[effects] {file}: goto -> '{to}' not found.");
+                        break;
+                    }
                 case "startDialogue":
-                    var did = e["Id"]?.GetValue<string>();
-                    if (string.IsNullOrWhiteSpace(did) || !dialogues.Contains(did!))
-                        issues.Add($"[effects] {file}: startDialogue Id '{did}' not found.");
-                    break;
+                    {
+                        var did = e["Id"]?.GetValue<string>();
+                        if (string.IsNullOrWhiteSpace(did) || !dialogues.Contains(did!))
+                            issues.Add($"[effects] {file}: startDialogue Id '{did}' not found.");
+                        break;
+                    }
                 case "combat":
-                    var eid = e["Id"]?.GetValue<string>();
-                    if (string.IsNullOrWhiteSpace(eid) || !enemies.Contains(eid!))
-                        issues.Add($"[effects] {file}: combat Id '{eid}' not found.");
-                    break;
+                    {
+                        var eid = e["Id"]?.GetValue<string>();
+                        if (string.IsNullOrWhiteSpace(eid) || !enemies.Contains(eid!))
+                            issues.Add($"[effects] {file}: combat Id '{eid}' not found.");
+                        break;
+                    }
                 case "addItem":
                 case "removeItemByName":
-                    var iid = e["Id"]?.GetValue<string>();
-                    if (string.IsNullOrWhiteSpace(iid) || !items.Contains(iid!))
-                        issues.Add($"[effects] {file}: item Id '{iid}' not found.");
-                    break;
+                    {
+                        var iid = e["Id"]?.GetValue<string>();
+                        if (string.IsNullOrWhiteSpace(iid) || !items.Contains(iid!))
+                            issues.Add($"[effects] {file}: item Id '{iid}' not found.");
+                        break;
+                    }
                 case "addGold":
-                    if (e["Amount"]?.GetValue<int?>() is null)
-                        issues.Add($"[effects] {file}: addGold requires Amount.");
-                    break;
+                    {
+                        if (e["Amount"]?.GetValue<int?>() is null)
+                            issues.Add($"[effects] {file}: addGold requires Amount.");
+                        break;
+                    }
                 case "advanceTime":
-                    if (e["Minutes"]?.GetValue<int?>() is null)
-                        issues.Add($"[effects] {file}: advanceTime requires Minutes.");
-                    break;
+                    {
+                        if (e["Minutes"]?.GetValue<int?>() is null)
+                            issues.Add($"[effects] {file}: advanceTime requires Minutes.");
+                        break;
+                    }
                 default:
                     break;
             }

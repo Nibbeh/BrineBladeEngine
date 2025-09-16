@@ -6,6 +6,9 @@
     "Op"
   ],
   "properties": {
+    "Version": {
+      "type": "integer"
+    },
     "Op": {
       "type": "string",
       "enum": [

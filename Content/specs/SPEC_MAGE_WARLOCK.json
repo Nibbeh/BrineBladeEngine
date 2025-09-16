@@ -1,0 +1,8 @@
+{
+  "Id": "SPEC_MAGE_WARLOCK",
+  "ClassId": "CLASS_MAGE",
+  "Name": "Warlock",
+  "StartFlags": [
+    "spec.warlock"
+  ]
+}

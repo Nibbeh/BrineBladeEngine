@@ -1,0 +1,17 @@
+{
+  "Id": "CLASS_MAGE",
+  "Name": "Mage",
+  "Resource": "Mana",
+  "AllowedArmorTypes": [
+    "Cloth"
+  ],
+  "AllowedWeaponTypes": [
+    "Staff",
+    "Dagger",
+    "Ranged"
+  ],
+  "StartGold": 8,
+  "StartFlags": [
+    "class.mage"
+  ]
+}

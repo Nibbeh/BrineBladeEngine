@@ -1,0 +1,14 @@
+{
+  "Id": "ITM_ROBE_APPRENTICE",
+  "Name": "Apprentice Robe",
+  "Type": "Armor",
+  "Weight": 2,
+  "Value": 6,
+  "Stackable": false,
+  "MaxStack": 1,
+  "Slot": "Chest",
+  "ArmorType": "Cloth",
+  "Bonuses": {
+    "Intelligence": 1
+  }
+}

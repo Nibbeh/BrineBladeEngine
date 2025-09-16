@@ -32,6 +32,11 @@ public static class CharacterCreationFlow
         state.Equipment[EquipmentSlot.Chest] = "ITM_ARMOR_LEATHER";
         state.Equipment[EquipmentSlot.Head] = "ITM_CAP_CLOTH";
 
+        // Canonical identity flags for tutorial (used by Requires/Combat/Content)
+        state.Flags.Add("race.human");
+        state.Flags.Add("class.warrior");
+        state.Flags.Add("spec.champion");
+
         return state;
     }
 }

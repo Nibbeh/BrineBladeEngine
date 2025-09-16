@@ -1,0 +1,8 @@
+{
+  "Id": "SPEC_WARRIOR_CHAMPION",
+  "ClassId": "CLASS_WARRIOR",
+  "Name": "Champion",
+  "StartFlags": [
+    "spec.champion"
+  ]
+}

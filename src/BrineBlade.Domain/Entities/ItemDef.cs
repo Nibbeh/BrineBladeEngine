@@ -15,6 +15,7 @@ public sealed record ItemDef(
     ArmorType? ArmorType = null,
     WeaponType? WeaponType = null,
     IReadOnlyList<string>? AllowedClasses = null,
+    IReadOnlyList<string>? AllowedTags = null,
     StatDelta? Bonuses = null
 );
 

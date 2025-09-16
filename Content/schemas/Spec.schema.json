@@ -1,0 +1,36 @@
+{
+  "$id": "Spec.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "Id",
+    "ClassId",
+    "Name"
+  ],
+  "properties": {
+    "Version": {
+      "type": "integer"
+    },
+    "Id": {
+      "type": "string"
+    },
+    "ClassId": {
+      "type": "string"
+    },
+    "Name": {
+      "type": "string"
+    },
+    "StartFlags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "Tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

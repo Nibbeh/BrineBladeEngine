@@ -481,8 +481,37 @@ namespace BrineBlade.Infrastructure.Services
 
         private Stats BuildPlayerEffectiveStats(GameState s)
         {
-            // Base for Human Warrior; future classes can override
-            var baseStats = new Stats(12, 10, 8, 12, 8, 10, 10);
+            // Keep tutorial default perfectly stable (Human Warrior Champion)
+            bool isDefault = s.Flags.Contains("race.human", StringComparer.OrdinalIgnoreCase)
+                          && s.Flags.Contains("class.warrior", StringComparer.OrdinalIgnoreCase)
+                          && s.Flags.Contains("spec.champion", StringComparer.OrdinalIgnoreCase);
+
+            var baseStats = isDefault
+                ? new Stats(12, 10, 8, 12, 8, 10, 10)   // legacy tutorial baseline
+                : new Stats(10, 10, 10, 10, 10, 10, 10);
+
+            // Lightweight race/class/spec seasoning (non-breaking)
+            bool Has(string t) => s.Flags.Contains(t, StringComparer.OrdinalIgnoreCase);
+            if (!isDefault)
+            {
+                if (Has("race.elf")) { baseStats = baseStats with { Dexterity = baseStats.Dexterity + 2, Intelligence = baseStats.Intelligence + 2, Perception = baseStats.Perception + 1, Strength = baseStats.Strength - 1, Vitality = baseStats.Vitality - 1 }; }
+                if (Has("race.human")) { baseStats = baseStats with { Strength = baseStats.Strength + 1, Vitality = baseStats.Vitality + 1, Luck = baseStats.Luck + 1 }; }
+
+                if (Has("class.mage"))   baseStats = baseStats with { Intelligence = baseStats.Intelligence + 2 };
+                if (Has("class.rogue"))  baseStats = baseStats with { Dexterity    = baseStats.Dexterity    + 2 };
+                if (Has("class.warrior"))baseStats = baseStats with { Strength     = baseStats.Strength     + 2 };
+
+                if (Has("spec.champion"))  baseStats = baseStats with { Vitality = baseStats.Vitality + 1 };
+                if (Has("spec.berserker")) baseStats = baseStats with { Strength = baseStats.Strength + 1 };
+                if (Has("spec.templar"))   baseStats = baseStats with { Perception = baseStats.Perception + 1 };
+                if (Has("spec.elemental")) baseStats = baseStats with { Intelligence = baseStats.Intelligence + 1 };
+                if (Has("spec.druid"))     baseStats = baseStats with { Perception = baseStats.Perception + 1 };
+                if (Has("spec.warlock"))   baseStats = baseStats with { Luck = baseStats.Luck + 1 };
+                if (Has("spec.ranger"))    baseStats = baseStats with { Dexterity = baseStats.Dexterity + 1 };
+                if (Has("spec.thief"))     baseStats = baseStats with { Dexterity = baseStats.Dexterity + 1 };
+                if (Has("spec.trickster")) baseStats = baseStats with { Charisma = baseStats.Charisma + 1 };
+            }
+
             var bonus = new StatDelta();
 
             foreach (var kv in s.Equipment)
@@ -504,7 +533,7 @@ namespace BrineBlade.Infrastructure.Services
                 baseStats.Perception + bonus.Perception,
                 baseStats.Luck + bonus.Luck
             );
-        }
+}
 
         private static bool IsProficient(GameState s, WeaponType? wtype)
         {

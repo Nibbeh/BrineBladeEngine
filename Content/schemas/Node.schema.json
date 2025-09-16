@@ -8,6 +8,9 @@
     "Description"
   ],
   "properties": {
+    "Version": {
+      "type": "integer"
+    },
     "Id": {
       "type": "string"
     },

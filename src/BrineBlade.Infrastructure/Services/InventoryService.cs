@@ -120,6 +120,13 @@ namespace BrineBlade.Infrastructure.Services
                 !def.AllowedClasses.Contains(classId, StringComparer.OrdinalIgnoreCase))
                 return new(false, "class cannot equip");
 
+            // Optional tag-based restriction (e.g., race.elf, class.mage, spec.templar)
+            if (def.AllowedTags is { Count: > 0 })
+            {
+                bool any = def.AllowedTags.Any(t => state.Flags.Contains(t, StringComparer.OrdinalIgnoreCase));
+                if (!any) return new(false, "tags cannot equip");
+            }
+
             if (classId is not null && _classes.All.TryGetValue(classId, out var klass))
             {
                 if (def.ArmorType.HasValue &&

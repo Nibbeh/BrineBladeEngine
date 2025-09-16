@@ -1,0 +1,8 @@
+{
+  "Id": "SPEC_ROGUE_RANGER",
+  "ClassId": "CLASS_ROGUE",
+  "Name": "Ranger",
+  "StartFlags": [
+    "spec.ranger"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "Id": "CLASS_ROGUE",
+  "Name": "Rogue",
+  "Resource": "Energy",
+  "AllowedArmorTypes": [
+    "Leather"
+  ],
+  "AllowedWeaponTypes": [
+    "Dagger",
+    "Ranged",
+    "OneHanded"
+  ],
+  "StartGold": 9,
+  "StartFlags": [
+    "class.rogue"
+  ]
+}

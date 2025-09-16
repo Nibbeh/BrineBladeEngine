@@ -1,0 +1,8 @@
+{
+  "Id": "SPEC_ROGUE_TRICKSTER",
+  "ClassId": "CLASS_ROGUE",
+  "Name": "Trickster",
+  "StartFlags": [
+    "spec.trickster"
+  ]
+}
