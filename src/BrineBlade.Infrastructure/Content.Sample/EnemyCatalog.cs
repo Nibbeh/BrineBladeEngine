@@ -9,7 +9,8 @@ namespace BrineBlade.Infrastructure.Content
     public sealed class EnemyCatalog : IEnemyCatalog
     {
         public IReadOnlyDictionary<string, EnemyDef> All => _all;
-        private readonly Dictionary<string, EnemyDef> _all = new(StringComparer.Ordinal);
+        private readonly Dictionary<string, EnemyDef> _all = new(StringComparer.OrdinalIgnoreCase);
+
 
         public EnemyCatalog(string contentRoot)
         {

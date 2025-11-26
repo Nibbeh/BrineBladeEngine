@@ -10,7 +10,8 @@ public sealed class GameState
     public WorldState World { get; set; }
     public string CurrentNodeId { get; set; }
     public int Gold { get; set; } = 0;
-    public HashSet<string> Flags { get; } = new();
+    public HashSet<string> Flags { get; } = new(StringComparer.OrdinalIgnoreCase);
+
 
     // Storage-only; logic lives in services
     public List<ItemStack> Inventory { get; } = new();

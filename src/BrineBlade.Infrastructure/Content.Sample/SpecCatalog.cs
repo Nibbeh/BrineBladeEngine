@@ -19,8 +19,9 @@ public sealed class SpecCatalog
 
     private static Dictionary<string, SpecDef> Load(string dir)
     {
-        var map = new Dictionary<string, SpecDef>(StringComparer.Ordinal);
+        var map = new Dictionary<string, SpecDef>(StringComparer.OrdinalIgnoreCase);
         if (!Directory.Exists(dir)) return map;
+
 
         foreach (var file in Directory.EnumerateFiles(dir, "*.json", SearchOption.AllDirectories))
         {

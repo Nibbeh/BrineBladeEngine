@@ -19,8 +19,8 @@ public sealed class ClassCatalog
 
     private static Dictionary<string, ClassDef> Load(string dir)
     {
-        var map = new Dictionary<string, ClassDef>(StringComparer.Ordinal);
-        if (!Directory.Exists(dir)) return map;
+        var map = new Dictionary<string, ClassDef>(StringComparer.OrdinalIgnoreCase);
+        if (!Directory.Exists(dir)) return map; ;
 
         foreach (var file in Directory.EnumerateFiles(dir, "*.json", SearchOption.AllDirectories))
         {
@@ -30,7 +30,13 @@ public sealed class ClassCatalog
                 var def = JsonSerializer.Deserialize<ClassDef>(json, JsonOpts);
                 if (def is { Id.Length: > 0 }) map[def.Id] = def;
             }
-            catch { /* authoring-safe */ }
+            catch (Exception ex)
+            {
+#if DEBUG
+                Console.Error.WriteLine($"[CLASS LOAD ERROR] {file}: {ex.Message}");
+#endif
+            }
+
         }
         return map;
     }
